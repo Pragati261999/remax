@@ -15,7 +15,7 @@
                                     v-if="property.images.length > 0"
                                     :src="property.images[0].image"
                                     class="card-img-top"
-                                    alt=""
+                                    alt="Property image not found"
                                 />
                                 <img
                                     v-else
