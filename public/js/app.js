@@ -2989,6 +2989,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
     name: "home",
     component: _pages_Home_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }, {
+    path: "/remax-laravel/",
+    name: "home",
+    component: _pages_Home_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }, {
+    path: "/public/",
+    name: "home",
+    component: _pages_Home_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }, {
     path: "/about",
     name: "about",
     component: _pages_About_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -39886,7 +39894,10 @@ var render = function() {
                         property.images.length > 0
                           ? _c("img", {
                               staticClass: "card-img-top",
-                              attrs: { src: property.images[0].image, alt: "" }
+                              attrs: {
+                                src: property.images[0].image,
+                                alt: "Property image not found"
+                              }
                             })
                           : _c("img", {
                               staticClass: "card-img-top",

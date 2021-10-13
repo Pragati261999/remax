@@ -16,6 +16,11 @@ const router = new VueRouter({
             component: Home
         },
         {
+            path: "/remax-laravel/",
+            name: "home",
+            component: Home
+        },
+        {
             path: "/public/",
             name: "home",
             component: Home
