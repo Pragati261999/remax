@@ -16,7 +16,7 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: "/public",
+            path: "/public/",
             name: "home",
             component: Home
         },
