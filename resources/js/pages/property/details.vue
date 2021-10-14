@@ -4,7 +4,7 @@
         <div v-if="!loadingProperty">
             <div>
                 <carousel :per-page="3" :loop="true" :autoplay="true">
-                    <slide v>
+                    <slide>
                         <img src="" alt="" />
                     </slide>
                 </carousel>
