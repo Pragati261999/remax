@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\PropertyController;
 // Property
 Route::prefix('property')->group(function () {
     Route::get('/properties', [PropertyController::class, 'getProperties']);
+    Route::get('/get-details', [PropertyController::class, 'getDetails']);
 });
 
 Route::get('/', function () {

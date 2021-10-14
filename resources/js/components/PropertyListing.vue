@@ -11,18 +11,25 @@
                     >
                         <div class="card">
                             <div class="card-img position-relative">
-                                <img
-                                    v-if="property.images.length > 0"
-                                    :src="property.images[0].image"
-                                    class="card-img-top"
-                                    alt="Property image not found"
-                                />
-                                <img
-                                    v-else
-                                    src="assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg"
-                                    class="card-img-top"
-                                    alt="Not Found"
-                                />
+                                <router-link
+                                    :to="{
+                                        name: 'view-details',
+                                        params: { ml_num: property.Ml_num }
+                                    }"
+                                >
+                                    <img
+                                        v-if="property.images.length > 0"
+                                        :src="property.images[0].image"
+                                        class="card-img-top"
+                                        alt="Property image not found"
+                                    />
+                                    <img
+                                        v-else
+                                        src="assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg"
+                                        class="card-img-top"
+                                        alt="Not Found"
+                                    />
+                                </router-link>
                                 <div class="star">
                                     <img
                                         src="assets/images/icons/star.png"
@@ -141,7 +148,7 @@ export default {
             await axios
                 .get("api/property/properties")
                 .then(res => {
-                    self.properties = res.data.data;
+                    self.properties = res.data.data.data;
                     self.loadingProperties = false;
                 })
                 .catch(err => {

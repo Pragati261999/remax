@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Home from "./pages/Home.vue";
-import About from "./pages/About.vue";
+import PropertyDetails from "./pages/property/details.vue";
 
 Vue.use(VueRouter);
 
@@ -16,19 +16,14 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: "/remax-laravel/",
-            name: "home",
-            component: Home
-        },
-        {
             path: "/public/",
             name: "home",
             component: Home
         },
         {
-            path: "/about",
-            name: "about",
-            component: About
+            path: "/property/:ml_num",
+            name: "view-details",
+            component: PropertyDetails
         }
     ]
 });
