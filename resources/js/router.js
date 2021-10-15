@@ -16,11 +16,6 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: "/public/",
-            name: "home",
-            component: Home
-        },
-        {
             path: "/property/:ml_num",
             name: "view-details",
             component: PropertyDetails
