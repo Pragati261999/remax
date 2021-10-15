@@ -11,7 +11,7 @@ class PropertyController extends AppBaseController
     public function getProperties(Request $request)
     {
         $msg = 'Property fetched successfully.';
-        $response = Property::with('images')->paginate('15');
+        $response = Property::with('images')->paginate('500');
         return $this->sendResponse($msg, $response);
     }
 
