@@ -28,6 +28,11 @@ class PropertyController extends AppBaseController
 
         $data = $request->all();
 
+        // vars
+        $bedRoom = !empty($data['bedRoom']) ? (float) $data['bedRoom'] : '';
+        $min_price = !empty($data['minPrice']) ? (float) $data['minPrice'] : '';
+        $max_price = !empty($data['maxPrice']) ? (float) $data['maxPrice'] : '';
+
         $msg = 'Property fetched successfully.';
 
         $response = Property::with('images')
@@ -40,25 +45,25 @@ class PropertyController extends AppBaseController
                         });
             })
 
-            // ->when(!empty($data['bedRoom']), function ($query) use ($data) {
-            //     $br = $data['bedRoom'];
-            //     return $query->where('Rms', '>=', $br);
-            // })
+            ->when($bedRoom, function ($query) use ($data) {
+                $br = (float) $data['bedRoom'];
+                return $query->where('Rms', '>=', $br);
+            })
 
-            // ->when(!empty($data['listedFor']), function ($query) use ($data) {
-            //     $S_r = $data['listedFor'];
-            //     return $query->where('S_r', $S_r);
-            // })
+            ->when($min_price, function ($query) use ($data) {
+                $minp = (float) $data['minPrice'];
+                return $query->where('Lp_dol', '>=', $minp);
+            })
 
-            // ->when(!empty($data['minPrice']), function ($query) use ($data) {
-            //     $Lp_dol = $data['minPrice'];
-            //     return $query->where('Lp_dol', '>=', $Lp_dol);
-            // })
+            ->when($max_price, function ($query) use ($data) {
+                $mxp = (float) $data['maxPrice'];
+                return $query->where('Lp_dol', '<=', $mxp);
+            })
 
-            // ->when(!empty($data['maxPrice']), function ($query) use ($data) {
-            //     $Lp_dol = $data['minPrice'];
-            //     return $query->where('Lp_dol', '<=', $Lp_dol);
-            // })
+            ->when(!empty($data['listedFor']), function ($query) use ($data) {
+                $S_r = $data['listedFor'];
+                return $query->where('S_r', $S_r);
+            })
 
             ->when(!empty($data['propertyType']), function ($query) use ($data) {
                 $propertyType = $data['propertyType'];
