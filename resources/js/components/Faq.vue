@@ -11,7 +11,7 @@
                 <div class="row py-5">
                     <div class="col-5">
                         <img
-                            src="assets/images/cards/pexels-olya-kobruseva-5428829.jpg"
+                            src="/assets/images/cards/pexels-olya-kobruseva-5428829.jpg"
                             class="img-fluid h-100"
                             alt=""
                         />

@@ -3,6 +3,8 @@
 /public/storage
 /public/sync-rets
 /public/sync-rets/
+public/sync-rets
+public/sync-rets/
 /storage/*.key
 /vendor
 .env

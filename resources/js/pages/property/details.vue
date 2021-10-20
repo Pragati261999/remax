@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item">
                       <router-link to="/"
                         ><img
-                          src="assets/images/icons/Mask Group.svg"
+                          src="/assets/images/icons/Mask Group.svg"
                           width="14"
                           class="img-fluid align-middle pb-1"
                           alt=""
@@ -82,7 +82,7 @@
                       <li class="float-start">
                         <small class="pe-3"
                           ><img
-                            src="assets/images/icons/bathTab.png"
+                            src="/assets/images/icons/bathTab.png"
                             alt="BathRoom"
                             width="24px"
                           />
@@ -94,7 +94,7 @@
                       <li class="float-start">
                         <small class="pe-3"
                           ><img
-                            src="assets/images/icons/bedDark.png"
+                            src="/assets/images/icons/bedDark.png"
                             alt="Washroom"
                             width="24px"
                           />
@@ -121,7 +121,7 @@
                         />
                         <label for="tab-1" class="tab-label"
                           ><img
-                            src="assets/images/icons/bookmark.png"
+                            src="/assets/images/icons/bookmark.png"
                             alt=""
                             width="18px"
                           />
@@ -137,7 +137,7 @@
                         />
                         <label for="tab-1" class="tab-label"
                           ><img
-                            src="assets/images/icons/share.png"
+                            src="/assets/images/icons/share.png"
                             alt=""
                             width="18px"
                           />
@@ -153,7 +153,7 @@
                         />
                         <label for="tab-1" class="tab-label"
                           ><img
-                            src="assets/images/icons/book_showing.png"
+                            src="/assets/images/icons/book_showing.png"
                             alt=""
                             width="18px"
                           />
@@ -218,7 +218,11 @@
       </div>
     </div>
     <div v-else>
-      <p class="p-5 text-center">Please wait! Loading details...</p>
+      <section>
+        <div class="text-center">
+          <loader :text="'Please wait... Loading details'"/>
+        </div>
+      </section>
     </div>
   </div>
 </template>

@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\PropertyController;
 Route::prefix('property')->group(function () {
     Route::get('/properties', [PropertyController::class, 'getProperties']);
     Route::get('/get-details', [PropertyController::class, 'getDetails']);
+    Route::post('/search', [PropertyController::class, 'searchProperty']);
 });
 
 Route::get('/', function () {

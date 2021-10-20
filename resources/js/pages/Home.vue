@@ -6,112 +6,7 @@
                 <h6>
                     Easy to buy, sell or rent your property through homeplore.
                 </h6>
-                <div class="wrapper">
-                    <div class="tabs">
-                        <div class="tab">
-                            <input
-                                type="radio"
-                                name="css-tabs"
-                                id="tab-1"
-                                checked
-                                class="tab-switch"
-                            />
-                            <label for="tab-1" class="tab-label">Buy</label>
-                            <div class="tab-content">
-                                <div class="row g-3">
-                                    <div class="input-width">
-                                        <label for="">Location</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            aria-label="First name"
-                                        />
-                                    </div>
-                                    <div class="input-width">
-                                        <label for="">Property Type</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            aria-label="Last name"
-                                        />
-                                    </div>
-                                    <div class="input-width">
-                                        <label for="">Pricing</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            aria-label="Last name"
-                                        />
-                                    </div>
-                                    <div class="input-width">
-                                        <label for=""></label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            aria-label="Last name"
-                                        />
-                                    </div>
-                                    <div class="input-width">
-                                        <label for="">Beds</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            aria-label="Last name"
-                                        />
-                                    </div>
-                                    <div
-                                        class="col p-0 d-flex align-items-end justify-content-center"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-theme-color"
-                                        >
-                                            <img
-                                                src="assets/images/icons/menu_bar.svg"
-                                                alt=""
-                                            />
-                                            More
-                                        </button>
-                                    </div>
-                                    <div
-                                        class="col p-0 d-flex align-items-end justify-content-center"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-theme-color"
-                                        >
-                                            Search
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab">
-                            <input
-                                type="radio"
-                                name="css-tabs"
-                                id="tab-2"
-                                class="tab-switch"
-                            />
-                            <label for="tab-2" class="tab-label">Sell</label>
-                            <div class="tab-content">
-                                Same as first tab content
-                            </div>
-                        </div>
-                        <div class="tab">
-                            <input
-                                type="radio"
-                                name="css-tabs"
-                                id="tab-3"
-                                class="tab-switch"
-                            />
-                            <label for="tab-3" class="tab-label">Rent</label>
-                            <div class="tab-content">
-                                Same as first tab content
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <property-search></property-search>
             </div>
         </section>
 
@@ -160,7 +55,7 @@
                     </div>
                     <div class="col-7 p-0">
                         <img
-                            src="assets/images/cards/pexels-andres-ayrton-6578879.jpg"
+                            src="/assets/images/cards/pexels-andres-ayrton-6578879.jpg"
                             class="img-responsive img-fluid"
                             alt=""
                         />
@@ -177,7 +72,7 @@
                             Market Report and states
                         </h2>
                         <img
-                            src="assets/images/cards/pexels-burst-373912 1.png"
+                            src="/assets/images/cards/pexels-burst-373912 1.png"
                             class="img-fluid my-4"
                             width="450px"
                             alt=""

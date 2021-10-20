@@ -12,21 +12,21 @@
                         <ul class="list-unstyled">
                             <li class="social-icons">
                                 <img
-                                    src="assets/images/icons/twitter.png"
+                                    src="/assets/images/icons/twitter.png"
                                     class="img-fluid m-auto"
                                     alt=""
                                 />
                             </li>
                             <li class="social-icons">
                                 <img
-                                    src="assets/images/icons/google.png"
+                                    src="/assets/images/icons/google.png"
                                     class="img-fluid m-auto"
                                     alt=""
                                 />
                             </li>
                             <li class="social-icons">
                                 <img
-                                    src="assets/images/icons/facebook-logo.png"
+                                    src="/assets/images/icons/facebook-logo.png"
                                     class="img-fluid m-auto"
                                     alt=""
                                 />

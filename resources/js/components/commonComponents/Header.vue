@@ -26,7 +26,7 @@
                                 <div class="input-group bg-white input-bar">
                                     <button class="btn bg-transparent p-0">
                                         <img
-                                            src="assets/images/icons/search.png"
+                                            src="/assets/images/icons/search.png"
                                             alt=""
                                         />
                                     </button>
@@ -40,19 +40,19 @@
                             </form>
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a
+                                    <router-link
                                         class="nav-link active"
                                         aria-current="home"
-                                        href="#"
-                                        >Home</a
+                                        to="/"
+                                        >Home</router-link
                                     >
                                 </li>
                                 <li class="nav-item">
-                                    <a
+                                    <router-link
                                         class="nav-link"
                                         aria-current="properties"
-                                        href="#"
-                                        >Properties</a
+                                        :to="{name: 'search-property'}"
+                                        >Properties</router-link
                                     >
                                 </li>
                                 <li class="nav-item">
@@ -73,7 +73,7 @@
                                         aria-current="favourate"
                                         href="#"
                                         ><img
-                                            src="assets/images/icons/bookmark.svg"
+                                            src="/assets/images/icons/bookmark.svg"
                                             alt=""
                                     /></a>
                                 </li>
@@ -83,14 +83,14 @@
                                         aria-current="favourate"
                                         href="#"
                                         ><img
-                                            src="assets/images/icons/alarm.svg"
+                                            src="/assets/images/icons/alarm.svg"
                                             alt=""
                                     /></a>
                                 </li>
                                 <li class="nav-item">
                                     <button>
                                         <img
-                                            src="assets/images/icons/refer.svg"
+                                            src="/assets/images/icons/refer.svg"
                                             alt=""
                                         /><a
                                             href="login.html"

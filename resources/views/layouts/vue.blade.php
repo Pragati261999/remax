@@ -9,6 +9,9 @@
   <link href="/assets/css/style.css" rel="stylesheet">
   <link href="/assets/css/responsive.css" rel="stylesheet">
   <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
 </head>
 
 <body>

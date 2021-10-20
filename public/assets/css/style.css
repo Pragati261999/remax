@@ -32,6 +32,19 @@ a {
     text-decoration: none !important;
 }
 
+.nav-link.router-link-exact-active.router-link-active::after{
+    content: '';
+    height: 1px;
+    width: 50%;
+    background: #032646;
+    display: block;
+    margin: 0 auto;
+}
+
+.home-header .nav-link.router-link-exact-active.router-link-active::after{
+    background: #f7f7f7;
+}
+
 .text-color {
     color: #032646 !important;
 }
@@ -507,7 +520,8 @@ nav .breadcrumb .active {
 
 .properties {
     background-image: url(../images/cards/pexels-jessica-bryant-1370704.jpg);
-    background-size: 100% 100%;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     padding: 168px;
     display: flex;
@@ -517,8 +531,6 @@ nav .breadcrumb .active {
 
 .properties-filter .tab-content {
     opacity: 1;
-    top: 0;
-    position: relative;
 }
 
 /* Properties */
