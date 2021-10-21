@@ -2079,7 +2079,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./commonComponents/Loader.vue */ "./resources/js/components/commonComponents/Loader.vue");
-/* harmony import */ var _property_cards_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./property/cards.vue */ "./resources/js/components/property/cards.vue");
+/* harmony import */ var _commonComponents_NoData_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./commonComponents/NoData.vue */ "./resources/js/components/commonComponents/NoData.vue");
+/* harmony import */ var _property_cards_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./property/cards.vue */ "./resources/js/components/property/cards.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2110,12 +2111,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     Loader: _commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PropCard: _property_cards_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    PropCard: _property_cards_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    NoData: _commonComponents_NoData_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -3316,7 +3327,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_property_cards_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/property/cards.vue */ "./resources/js/components/property/cards.vue");
+/* harmony import */ var _components_commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/commonComponents/Loader.vue */ "./resources/js/components/commonComponents/Loader.vue");
+/* harmony import */ var _components_property_cards_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/property/cards.vue */ "./resources/js/components/property/cards.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3418,16 +3430,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    PropCard: _components_property_cards_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PropCard: _components_property_cards_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Loader: _components_commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
       form: {},
       properties: null,
-      loadingProperties: true
+      loadingProperties: true,
+      nextPageUrl: null,
+      loadingMoreProperties: false
     };
   },
   mounted: function mounted() {
@@ -3453,8 +3491,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 self = _this;
                 self.loadingProperties = true;
                 _context.next = 4;
-                return axios.post("/api/property/search", data).then(function (res) {
+                return axios.post("/api/property/search", null, {
+                  params: data
+                }).then(function (res) {
                   self.properties = res.data.data.data;
+                  self.nextPageUrl = res.data.data.next_page_url;
                   self.loadingProperties = false;
                 })["catch"](function (err) {
                   self.loadingProperties = false;
@@ -3467,6 +3508,77 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    loadMore: function loadMore() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var self;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                self = _this2;
+                self.loadingMoreProperties = true;
+                _context3.next = 4;
+                return axios.post(self.nextPageUrl, null, {
+                  params: self.form
+                }).then( /*#__PURE__*/function () {
+                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(res) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            _context2.next = 2;
+                            return self.updateProperties(res.data.data.data);
+
+                          case 2:
+                            self.nextPageUrl = res.data.data.next_page_url;
+                            self.loadingMoreProperties = false;
+
+                          case 4:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  }));
+
+                  return function (_x) {
+                    return _ref.apply(this, arguments);
+                  };
+                }())["catch"](function (err) {
+                  self.loadingMoreProperties = false;
+                  console.log(err);
+                });
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    updateProperties: function updateProperties(arr) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                arr.forEach(function (element) {
+                  _this3.properties.push(element);
+                });
+
+              case 1:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -41403,22 +41515,44 @@ var render = function() {
         ]),
         _vm._v(" "),
         !_vm.loadingProperties
-          ? _c(
-              "div",
-              { staticClass: "row" },
-              _vm._l(_vm.properties, function(property) {
-                return _c(
-                  "div",
-                  {
-                    key: property.Ml_num,
-                    staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5"
-                  },
-                  [_c("PropCard", { attrs: { property: property } })],
-                  1
-                )
-              }),
-              0
-            )
+          ? _c("div", [
+              _vm.properties.length > 0
+                ? _c(
+                    "div",
+                    { staticClass: "row" },
+                    [
+                      _vm._l(_vm.properties, function(property) {
+                        return _c(
+                          "div",
+                          {
+                            key: property.Ml_num,
+                            staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5"
+                          },
+                          [_c("PropCard", { attrs: { property: property } })],
+                          1
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "mt-4 text-center" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-theme-color px-5",
+                              attrs: { to: { name: "search-property" } }
+                            },
+                            [_vm._v("View All")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    2
+                  )
+                : _c("div", [_c("no-data")], 1)
+            ])
           : _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "p-5 text-center" }, [_c("loader")], 1)
             ])
@@ -42185,7 +42319,7 @@ var render = function() {
           _c("div", { staticClass: "tab-content d-block" }, [
             _c("div", { staticClass: "row g-3" }, [
               _c("div", { staticClass: "input-width" }, [
-                _c("label", { attrs: { for: "" } }, [_vm._v("Location/MLS")]),
+                _c("label", { attrs: { for: "" } }, [_vm._v("Location/MLS#")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -43768,18 +43902,66 @@ var render = function() {
                   ? _c(
                       "div",
                       { staticClass: "row" },
-                      _vm._l(_vm.properties, function(property) {
-                        return _c(
-                          "div",
-                          {
-                            key: property.Ml_num,
-                            staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5"
-                          },
-                          [_c("PropCard", { attrs: { property: property } })],
-                          1
-                        )
-                      }),
-                      0
+                      [
+                        _vm._l(_vm.properties, function(property) {
+                          return _c(
+                            "div",
+                            {
+                              key: property.Ml_num,
+                              staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5"
+                            },
+                            [_c("PropCard", { attrs: { property: property } })],
+                            1
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("div", [
+                          !_vm.loadingMoreProperties
+                            ? _c("div", [
+                                _vm.nextPageUrl
+                                  ? _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "load-more-button mt-4 text-center"
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-theme-color px-5",
+                                            on: { click: _vm.loadMore }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                    Load More\n                    "
+                                            ),
+                                            _vm._m(2)
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ])
+                            : _c("div", [
+                                _c(
+                                  "div",
+                                  { staticClass: "mt-5 text-center" },
+                                  [
+                                    _c("loader", {
+                                      attrs: {
+                                        text:
+                                          "Please wait, Loading More Properties for you..."
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                        ])
+                      ],
+                      2
                     )
                   : _c(
                       "div",
@@ -43816,6 +43998,14 @@ var staticRenderFns = [
       _c("div", { staticClass: "container" }, [
         _c("hr", { staticClass: "m-0" })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", { staticClass: "ps-2" }, [
+      _c("i", { staticClass: "fas fa-arrow-right" })
     ])
   }
 ]

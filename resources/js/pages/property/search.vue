@@ -76,9 +76,31 @@
               >
                 <PropCard :property="property" />
               </div>
+              <div>
+                <div v-if="!loadingMoreProperties">
+                  <div
+                    v-if="nextPageUrl"
+                    class="load-more-button mt-4 text-center"
+                  >
+                    <button class="btn btn-theme-color px-5" @click="loadMore">
+                      Load More
+                      <small class="ps-2"
+                        ><i class="fas fa-arrow-right"></i
+                      ></small>
+                    </button>
+                  </div>
+                </div>
+                <div v-else>
+                  <div class="mt-5 text-center">
+                    <loader
+                      :text="'Please wait, Loading More Properties for you...'"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             <div v-else>
-              <NoData :text="'No matched property found.'"/>
+              <NoData :text="'No matched property found.'" />
             </div>
           </div>
           <div v-else class="row">
@@ -94,14 +116,17 @@
 </template>
 
 <script>
+import Loader from "../../components/commonComponents/Loader.vue";
 import PropCard from "../../components/property/cards.vue";
 export default {
-  components: { PropCard },
+  components: { PropCard, Loader },
   data() {
     return {
       form: {},
       properties: null,
       loadingProperties: true,
+      nextPageUrl: null,
+      loadingMoreProperties: false,
     };
   },
   mounted() {
@@ -120,15 +145,42 @@ export default {
       const self = this;
       self.loadingProperties = true;
       await axios
-        .post("/api/property/search", data)
+        .post("/api/property/search", null, {
+          params: data,
+        })
         .then((res) => {
           self.properties = res.data.data.data;
+          self.nextPageUrl = res.data.data.next_page_url;
           self.loadingProperties = false;
         })
         .catch((err) => {
           self.loadingProperties = false;
           console.log(err);
         });
+    },
+
+    async loadMore() {
+      const self = this;
+      self.loadingMoreProperties = true;
+      await axios
+        .post(self.nextPageUrl, null, {
+          params: self.form,
+        })
+        .then(async (res) => {
+          await self.updateProperties(res.data.data.data);
+          self.nextPageUrl = res.data.data.next_page_url;
+          self.loadingMoreProperties = false;
+        })
+        .catch((err) => {
+          self.loadingMoreProperties = false;
+          console.log(err);
+        });
+    },
+
+    async updateProperties(arr) {
+      arr.forEach((element) => {
+        this.properties.push(element);
+      });
     },
   },
 };

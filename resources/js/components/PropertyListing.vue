@@ -3,13 +3,21 @@
     <section class="property bg-theme-light">
       <div class="container p-0">
         <h2 class="theme-title">Featured Properties in Toronto</h2>
-        <div v-if="!loadingProperties" class="row">
-          <div
-            v-for="property in properties"
-            :key="property.Ml_num"
-            class="col-lg-4 col-md-6 col-sm-12 mt-5"
-          >
-            <PropCard :property="property"/>
+        <div v-if="!loadingProperties">
+          <div v-if="properties.length > 0" class="row">
+            <div
+              v-for="property in properties"
+              :key="property.Ml_num"
+              class="col-lg-4 col-md-6 col-sm-12 mt-5"
+            >
+              <PropCard :property="property" />
+            </div>
+            <div class="mt-4 text-center">
+              <router-link class="btn btn-theme-color px-5" :to="{name: 'search-property'}">View All</router-link>
+            </div>
+          </div>
+          <div v-else>
+            <no-data />
           </div>
         </div>
         <div v-else class="row">
@@ -23,10 +31,11 @@
 </template>
 
 <script>
-import Loader from './commonComponents/Loader.vue';
-import PropCard from './property/cards.vue';
+import Loader from "./commonComponents/Loader.vue";
+import NoData from './commonComponents/NoData.vue';
+import PropCard from "./property/cards.vue";
 export default {
-  components: { Loader, PropCard },
+  components: { Loader, PropCard, NoData },
   data() {
     return {
       properties: [],

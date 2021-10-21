@@ -30,7 +30,7 @@
           <div class="tab-content d-block">
             <div class="row g-3">
               <div class="input-width">
-                <label for="">Location/MLS</label>
+                <label for="">Location/MLS#</label>
                 <input
                   v-model="form.addr"
                   type="text"
