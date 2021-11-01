@@ -3265,6 +3265,1006 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -8212,7 +9212,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.badge[data-v-2a4b0d1e] {\r\n  background-color: #9ffdd4;\r\n  padding: 4px;\r\n  width: 4.5rem;\r\n  height: 1.8rem;\r\n  line-height: 1.3rem;\r\n  border-radius: 4px;\r\n  display: block;\r\n  margin-left: auto;\n}\n.details[data-v-2a4b0d1e] {\r\n  background-color: rgba(215, 219, 218, 1);\r\n  background-color: rgba(215, 219, 218, 1);\r\n  width: 100%;\r\n  padding: 40px;\r\n  border-radius: 0px 0px 0px 74px;\n}\n.crouse-image[data-v-2a4b0d1e] {\r\n  height: 300px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.badge[data-v-2a4b0d1e] {\r\n    background-color: #9ffdd4;\r\n    padding: 4px 10px;\r\n    width: auto;\r\n    height: 1.8rem;\r\n    line-height: 1.3rem;\r\n    border-radius: 4px;\r\n    display: inline-block;\r\n    margin-left: auto;\n}\n.details[data-v-2a4b0d1e] {\r\n    background-color: rgba(215, 219, 218, 1);\r\n    background-color: rgba(215, 219, 218, 1);\r\n    width: 100%;\r\n    padding: 40px;\r\n    border-radius: 0px 0px 0px 74px;\n}\n.craousel-image-outer[data-v-2a4b0d1e] {\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.crouse-image[data-v-2a4b0d1e] {\r\n    height: 350px;\r\n    width: 100%;\n}\n.middle-banner-image[data-v-2a4b0d1e] {\r\n    width: 100%;\r\n    max-height: 500px;\r\n    border-radius: 0px 212px 0px 0px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.mid-content[data-v-2a4b0d1e] {\r\n    max-width: 620px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43421,7 +44421,9 @@ var render = function() {
                       _c("div", { staticClass: "row py-0" }, [
                         _c("div", { staticClass: "col-12" }, [
                           _c("h2", { staticClass: "theme-title text-start" }, [
-                            _vm._v("Property Details")
+                            _vm._v(
+                              "\n                                Property Details\n                            "
+                            )
                           ]),
                           _vm._v(" "),
                           _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
@@ -43441,7 +44443,9 @@ var render = function() {
                                         alt: ""
                                       }
                                     }),
-                                    _vm._v("\n                      Home")
+                                    _vm._v(
+                                      "\n                                            Home"
+                                    )
                                   ])
                                 ],
                                 1
@@ -43467,59 +44471,71 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  [
-                    _c(
-                      "Carousel",
-                      {
-                        attrs: {
-                          "per-page": 4,
-                          autoplay: true,
-                          centerMode: true,
-                          paginationEnabled: false,
-                          loop: true
-                        }
-                      },
-                      _vm._l(_vm.property.images, function(img) {
-                        return _c(
-                          "Slide",
-                          { key: img.property_ml_num + "_" + img.id },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "carousel-outer border bg-light text-center"
-                              },
+                _vm.property.images
+                  ? _c(
+                      "div",
+                      [
+                        _c(
+                          "Carousel",
+                          {
+                            attrs: {
+                              "per-page": 4,
+                              autoplay: true,
+                              centerMode: true,
+                              paginationEnabled: false
+                            }
+                          },
+                          _vm._l(_vm.property.images, function(img) {
+                            return _c(
+                              "Slide",
+                              { key: img.property_ml_num + "_" + img.id },
                               [
-                                _c("img", {
-                                  staticClass: "crouse-image",
-                                  attrs: { src: img.image, alt: "Not Found" }
-                                })
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "carousel-outer border bg-light text-center craousel-image-outer"
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticClass: "crouse-image",
+                                      attrs: {
+                                        src: img.image,
+                                        alt: "Not Found"
+                                      }
+                                    })
+                                  ]
+                                )
                               ]
                             )
-                          ]
+                          }),
+                          1
                         )
-                      }),
+                      ],
                       1
                     )
-                  ],
-                  1
-                ),
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("section", { staticClass: "bg-theme-light" }, [
                   _c("div", { staticClass: "container p-0" }, [
                     _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-6" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
                         _c("div", { staticClass: "row property" }, [
                           _c("div", { staticClass: "col-6" }, [
                             _c("h4", { staticClass: "text-color fw-bold" }, [
-                              _vm._v(_vm._s(_vm.property.Addr))
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.property.Addr) +
+                                  "\n                                    "
+                              )
                             ]),
                             _vm._v(" "),
                             _c("h6", { staticClass: "text-color fw-light" }, [
-                              _vm._v(_vm._s(_vm.property.Rltr))
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.property.Rltr) +
+                                  "\n                                    "
+                              )
                             ])
                           ]),
                           _vm._v(" "),
@@ -43529,16 +44545,20 @@ var render = function() {
                               { staticClass: "text-color fw-bold mb-1" },
                               [
                                 _vm._v(
-                                  "\n                    $" +
+                                  "\n                                        $" +
                                     _vm._s(_vm.property.Lp_dol) +
-                                    "\n                  "
+                                    "\n                                    "
                                 )
                               ]
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "badge" }, [
-                              _c("p", { staticClass: "text-color me-5" }, [
-                                _vm._v("For " + _vm._s(_vm.property.S_r))
+                              _c("p", { staticClass: "text-color" }, [
+                                _vm._v(
+                                  "\n                                            For " +
+                                    _vm._s(_vm.property.S_r) +
+                                    "\n                                        "
+                                )
                               ])
                             ])
                           ]),
@@ -43560,7 +44580,7 @@ var render = function() {
                                     { staticClass: "count card-title" },
                                     [
                                       _vm._v(
-                                        "\n                          " +
+                                        "\n                                                    " +
                                           _vm._s(_vm.property.Bath_tot)
                                       )
                                     ]
@@ -43572,7 +44592,7 @@ var render = function() {
                                 _c("small", { staticClass: "pe-3" }, [
                                   _c("img", {
                                     attrs: {
-                                      src: "/assets/images/icons/bedDark.png",
+                                      src: "/assets/images/icons/bed.png",
                                       alt: "Washroom",
                                       width: "24px"
                                     }
@@ -43590,7 +44610,12 @@ var render = function() {
                                 _c(
                                   "small",
                                   { staticClass: "pe-3 card-title" },
-                                  [_vm._v("MLS " + _vm._s(_vm.property.Ml_num))]
+                                  [
+                                    _vm._v(
+                                      "MLS\n                                                " +
+                                        _vm._s(_vm.property.Ml_num)
+                                    )
+                                  ]
                                 )
                               ])
                             ])
@@ -43601,11 +44626,13 @@ var render = function() {
                         _vm._v(" "),
                         _c("hr"),
                         _vm._v(" "),
-                        _c("p", { staticClass: "text-color me-5" }, [
+                        _c("span", { staticClass: "text-color me-5" }, [
                           _vm._v(_vm._s(_vm.property.Ad_text))
                         ]),
                         _vm._v(" "),
-                        _c("p", { staticClass: "text-color me-5" }, [
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "text-color me-5" }, [
                           _vm._v(_vm._s(_vm.property.Extras))
                         ])
                       ]),
@@ -43613,7 +44640,8 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "col-6 d-flex justify-content-center p-0"
+                          staticClass:
+                            "col-md-6 d-flex justify-content-center p-0"
                         },
                         [
                           _c("div", { staticClass: "row details" }, [
@@ -43625,26 +44653,200 @@ var render = function() {
                                   _c("li", { staticClass: "col-6 py-2" }, [
                                     _c(
                                       "h6",
-                                      { staticClass: "text-dark fw-bold" },
-                                      [_vm._v("Property Type")]
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Property Type\n                                            "
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c("small", [
-                                      _vm._v(_vm._s(_vm.property.property_type))
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(
+                                            _vm.property.property_type.replace(
+                                              "Property",
+                                              " Property"
+                                            )
+                                          ) +
+                                          "\n                                            "
+                                      )
                                     ])
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
                                     _c(
                                       "h6",
-                                      { staticClass: "text-dark fw-bold" },
-                                      [_vm._v("Listed for")]
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Walk Score\n                                            "
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c("small", [
-                                      _vm._v(_vm._s(_vm.property.S_r))
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(_vm.property.Sqft || "N/A") +
+                                          "\n                                            "
+                                      )
                                     ])
-                                  ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "col-6 py-2" }, [
+                                    _c(
+                                      "h6",
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Style\n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("small", [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(_vm.property.Style || "N/A") +
+                                          "\n                                            "
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "col-6 py-2" }, [
+                                    _c(
+                                      "h6",
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Added\n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("small", [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(
+                                            _vm.property.Timestamp_sql ||
+                                              _vm.property.Idx_dt
+                                          ) +
+                                          "\n                                            "
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "col-6 py-2" }, [
+                                    _c(
+                                      "h6",
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Size\n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("small", [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(
+                                            _vm.property.Tot_area || "N/A"
+                                          ) +
+                                          "\n                                            "
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "col-6 py-2" }, [
+                                    _c(
+                                      "h6",
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Lot Size\n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("small", [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(
+                                            _vm.property.Lotsz_code || "N/A"
+                                          ) +
+                                          "\n                                            "
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(2),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "col-6 py-2" }, [
+                                    _c(
+                                      "h6",
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Age\n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("small", [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(
+                                            _vm.property.Yr_built || "N/A"
+                                          ) +
+                                          "\n                                            "
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "col-6 py-2" }, [
+                                    _c(
+                                      "h6",
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                MLS\n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("small", [
+                                      _vm._v(
+                                        "\n                                                #\n                                                " +
+                                          _vm._s(_vm.property.Ml_num || "NA") +
+                                          "\n                                            "
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "col-6 py-2" }, [
+                                    _c(
+                                      "h6",
+                                      { staticClass: "text-dark fw-bold mb-0" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Taxes\n                                            "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("small", [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(_vm.property.Yr || "N/A") +
+                                          "\n                                            "
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(3)
                                 ]
                               )
                             ])
@@ -43655,7 +44857,56 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(2),
+                _vm.property.images
+                  ? _c(
+                      "div",
+                      { staticClass: "container-fluid pb-5 bg-theme" },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-6 ps-0 mt-5" }, [
+                            _c("img", {
+                              staticClass: "middle-banner-image",
+                              attrs: {
+                                src: _vm.property.images[0].image,
+                                alt: "Not Found"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "col-md-6 mt-5 text-white mid-content ps-md-5 pe-sm-2"
+                            },
+                            [
+                              _c("h3", { staticClass: "text-white" }, [
+                                _vm._v("Home Value")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "text-muted" }, [
+                                _vm._v(
+                                  "Price estimate and comparrables near 114 High\n                            park Avenue The approximate value of a 4 bedroom\n                            house in the area is"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("h3", { staticClass: "mt-2" }, [
+                                _vm._v("$" + _vm._s(_vm.property.Lp_dol))
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(4)
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _vm._m(6),
+                _vm._v(" "),
+                _vm._m(7),
                 _vm._v(" "),
                 _c("section", [
                   _c("div", { staticClass: "container" }, [
@@ -43670,9 +44921,9 @@ var render = function() {
                             key != "images" && value != null && value != ""
                               ? _c("div", { staticClass: "border p-2" }, [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                                " +
                                       _vm._s(key + " : " + value) +
-                                      "\n              "
+                                      "\n                            "
                                   )
                                 ])
                               : _vm._e()
@@ -43729,13 +44980,14 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("label", { staticClass: "tab-label", attrs: { for: "tab-1" } }, [
             _c("img", {
+              staticClass: " me-2",
               attrs: {
                 src: "/assets/images/icons/bookmark.png",
                 alt: "",
                 width: "18px"
               }
             }),
-            _vm._v("\n                        Bookmark")
+            _vm._v("\n                                                Bookmark")
           ])
         ]),
         _vm._v(" "),
@@ -43747,13 +44999,14 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("label", { staticClass: "tab-label", attrs: { for: "tab-1" } }, [
             _c("img", {
+              staticClass: "me-2",
               attrs: {
                 src: "/assets/images/icons/share.png",
                 alt: "",
                 width: "18px"
               }
             }),
-            _vm._v("\n                        Share")
+            _vm._v("\n                                                Share")
           ])
         ]),
         _vm._v(" "),
@@ -43765,13 +45018,1268 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("label", { staticClass: "tab-label", attrs: { for: "tab-1" } }, [
             _c("img", {
+              staticClass: "me-2",
               attrs: {
                 src: "/assets/images/icons/book_showing.png",
                 alt: "",
                 width: "18px"
               }
             }),
-            _vm._v("\n                        Book Showing")
+            _vm._v(
+              "\n\n                                                Book Showing"
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-6 py-2" }, [
+      _c("h6", { staticClass: "text-dark fw-bold mb-0" }, [
+        _vm._v(
+          "\n                                                Last Checked\n                                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("small", [
+        _vm._v(
+          "\n                                                Now (Today)\n                                            "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "col-6 py-2" }, [
+      _c("h6", { staticClass: "text-dark fw-bold mb-0" }, [
+        _vm._v(
+          "\n                                                Listed by\n                                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("small", [
+        _vm._v(
+          "\n                                                Remax Real Estate\n                                            "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("table", { staticClass: "table mt-5 table-borderless" }, [
+        _c("tbody", [
+          _c("tr", [
+            _c("td", { staticClass: "p-3 text-white" }, [
+              _c("img", {
+                attrs: { src: "/assets/images/icons/calender-ico.png", alt: "" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-3 text-white" }, [
+              _c("h5", [
+                _vm._v(
+                  "\n                                                Schedule a tour immediately.\n                                            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-muted" }, [
+                _vm._v(
+                  "Homes like this sell on\n                                                avarage in 6 days. There in\n                                                an 73% chance that this home\n                                                will be sold within one week\n                                                of listing"
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { staticClass: "p-3 text-white" }, [
+              _c("img", {
+                attrs: { src: "/assets/images/icons/share-market.png", alt: "" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-3 text-white" }, [
+              _c("h5", [_vm._v("Expect to bid higher.")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-muted" }, [
+                _vm._v(
+                  "6 out of 10 homes like this\n                                                one have sold over\n                                                asking"
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tr", [
+            _c("td", { staticClass: "p-3 text-white" }, [
+              _c("img", {
+                attrs: { src: "/assets/images/icons/dolor.png", alt: "" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-3 text-white" }, [
+              _c("h5", [
+                _vm._v(
+                  "\n                                                you're unlikely to get a\n                                                deal.\n                                            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-muted" }, [
+                _vm._v(
+                  "Only 3 in 100 homes like\n                                                this sell bellow 93% of\n                                                asking"
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "p-0" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("hr", { staticClass: "m-0" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c("table", { staticClass: "table table-bordered border mb-2" }, [
+            _c("tr", [
+              _c(
+                "th",
+                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
+                [
+                  _vm._v(
+                    "\n                                    Property\n                                "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Property Type")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("property_type")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("MLS#")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Ml_num")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Status")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Status")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Parcel of Tied Land")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Potl")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [
+                _vm._v("Total Parking Spaces")
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Tot_park_spcs")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Link")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Link_yn")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Link Comment")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Link_Comment")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat1")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat2")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat3")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features4")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat4")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features5")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat5")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Shoreline1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Shoreline1")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Shoreline2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Shoreline2")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Shoreline Allowance")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Shore_allow")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Shoreline Exposure")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Shoreline_exp")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("SAlternative Power1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Alt_power1")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("SAlternative Power2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Alt_power2")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Retirement")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Retirement")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("List Brokerage")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rltr")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "p-3" }, [_vm._v("Room 3 Desc 1")]),
+              _vm._v(" "),
+              _c("th", { staticClass: "p-3" }, [_vm._v("Rm3_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Heat Type")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Heating")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Hydro Included")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Hydro_inc")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Lot Irregularities")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Irreg")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Kitchens Plus")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Kit_plus")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Laundry Access")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Laundry")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Laundry Level")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Laundry_lev")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Legal Description")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Legal_desc")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level1")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 10")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level10")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 11")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level11")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 12")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level12")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level2")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level3")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 4")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level4")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 5")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level5")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 6")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level6")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 7")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level7")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 8")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level8")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Level 9")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Level9")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Lot Size Code")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Lotsz_code")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("List Price")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Lp_dol")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Leased Terms")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Lse_terms")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Map Column #")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Mmap_col")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Map #")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Mmap_page")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Map Row")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Mmap_row")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { staticClass: "p-3" }, [_vm._v("Acreage")]),
+              _vm._v(" "),
+              _c("th", { staticClass: "p-3" }, [_vm._v("Acres")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Remarks For Clients")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Ad_text")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Addl Monthly Fees")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Addl_mo_fee")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Address")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Addr")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("All Inclusive")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("All_inc")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Apt/Unit")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Apt_num")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Assessment Year")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Ass_year")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Washrooms")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Bath_tot")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [
+                _vm._v("PortionPropertyLease1")
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [
+                _vm._v(
+                  "\n                                    Portion_property_lease1_out\n                                "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [
+                _vm._v("PortionPropertyLease2")
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [
+                _vm._v(
+                  "\n                                    Portion_property_lease2_out\n                                "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [
+                _vm._v("PortionPropertyLease3")
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [
+                _vm._v(
+                  "\n                                    Portion_property_lease3_out\n                                "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [
+                _vm._v("PortionPropertyLease4")
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [
+                _vm._v(
+                  "\n                                    Portion_property_lease4_out\n                                "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [
+                _vm._v(
+                  "\n                                    PortionPropertyLeaseSrch\n                                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [
+                _vm._v(
+                  "\n                                    Portion_property_lease_srch\n                                "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [
+                _vm._v("Portion Lease Comments")
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [
+                _vm._v("Portion_lease_comments")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Assignment")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Assignment")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("FractionalOwnership")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Fractional_ownership")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_len")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7 Width")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8 Desc 1")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_dc1_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8 Desc 2")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_dc2_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8 Desc 3")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_dc3_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8 Length")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_out")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_wth")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-bordered border mt-4" }, [
+            _c("tr", [
+              _c(
+                "th",
+                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
+                [
+                  _vm._v(
+                    "\n                                    Inside\n                                "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c("table", { staticClass: "table table-bordered border" }, [
+            _c("tr", [
+              _c(
+                "th",
+                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
+                [
+                  _vm._v(
+                    "\n                                    Building\n                                "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-bordered border" }, [
+            _c("tr", [
+              _c(
+                "th",
+                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
+                [
+                  _vm._v(
+                    "\n                                    Parking\n                                "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-bordered border" }, [
+            _c("tr", [
+              _c(
+                "th",
+                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
+                [
+                  _vm._v(
+                    "\n                                    Highlights\n                                "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c("table", { staticClass: "table table-bordered border" }, [
+            _c("tr", [
+              _c(
+                "th",
+                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
+                [
+                  _vm._v(
+                    "\n                                    Land\n                                "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("table", { staticClass: "table table-bordered border" }, [
+            _c("tr", [
+              _c(
+                "th",
+                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
+                [
+                  _vm._v(
+                    "\n                                    Condo\n                                "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
+              _vm._v(" "),
+              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
+            ])
           ])
         ])
       ])
