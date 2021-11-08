@@ -24,7 +24,7 @@
         <img src="/assets/images/icons/star.png" alt="" />
       </div>
       <div class="badge">
-        <p class="text-color me-5">{{ property.S_r }}</p>
+        <p class="text-color">{{ property.S_r }}</p>
       </div>
     </div>
     <div class="card-body pb-0">

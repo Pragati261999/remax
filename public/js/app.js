@@ -1,13 +1,777 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@babel/runtime/node_modules/regenerator-runtime/runtime.js":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/node_modules/regenerator-runtime/runtime.js ***!
+  \*********************************************************************************/
+/***/ ((module) => {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = GeneratorFunctionPrototype;
+  define(Gp, "constructor", GeneratorFunctionPrototype);
+  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  });
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  define(Gp, iteratorSymbol, function() {
+    return this;
+  });
+
+  define(Gp, "toString", function() {
+    return "[object Generator]";
+  });
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : 0
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, in modern engines
+  // we can explicitly access globalThis. In older engines we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/@babel/runtime/node_modules/regenerator-runtime/runtime.js");
 
 
 /***/ }),
@@ -4265,6 +5029,813 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -4713,14 +6284,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap v4.6.0 (https://getbootstrap.com/)
+  * Bootstrap v4.6.1 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
    true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
   0;
-}(this, (function (exports, $, Popper) { 'use strict';
+})(this, (function (exports, $, Popper) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -4764,19 +6335,27 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   function _inheritsLoose(subClass, superClass) {
     subClass.prototype = Object.create(superClass.prototype);
     subClass.prototype.constructor = subClass;
-    subClass.__proto__ = superClass;
+
+    _setPrototypeOf(subClass, superClass);
+  }
+
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
   }
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.6.0): util.js
+   * Bootstrap (v4.6.1): util.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
   /**
-   * ------------------------------------------------------------------------
    * Private TransitionEnd Helpers
-   * ------------------------------------------------------------------------
    */
 
   var TRANSITION_END = 'transitionend';
@@ -4796,7 +6375,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       bindType: TRANSITION_END,
       delegateType: TRANSITION_END,
       handle: function handle(event) {
-        if ($__default['default'](event.target).is(this)) {
+        if ($__default["default"](event.target).is(this)) {
           return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
         }
 
@@ -4809,7 +6388,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     var _this = this;
 
     var called = false;
-    $__default['default'](this).one(Util.TRANSITION_END, function () {
+    $__default["default"](this).one(Util.TRANSITION_END, function () {
       called = true;
     });
     setTimeout(function () {
@@ -4821,13 +6400,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   }
 
   function setTransitionEndSupport() {
-    $__default['default'].fn.emulateTransitionEnd = transitionEndEmulator;
-    $__default['default'].event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
+    $__default["default"].fn.emulateTransitionEnd = transitionEndEmulator;
+    $__default["default"].event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
   }
   /**
-   * --------------------------------------------------------------------------
-   * Public Util Api
-   * --------------------------------------------------------------------------
+   * Public Util API
    */
 
 
@@ -4835,6 +6412,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     TRANSITION_END: 'bsTransitionEnd',
     getUID: function getUID(prefix) {
       do {
+        // eslint-disable-next-line no-bitwise
         prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
       } while (document.getElementById(prefix));
 
@@ -4860,8 +6438,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       } // Get transition-duration of the element
 
 
-      var transitionDuration = $__default['default'](element).css('transition-duration');
-      var transitionDelay = $__default['default'](element).css('transition-delay');
+      var transitionDuration = $__default["default"](element).css('transition-duration');
+      var transitionDelay = $__default["default"](element).css('transition-delay');
       var floatTransitionDuration = parseFloat(transitionDuration);
       var floatTransitionDelay = parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
 
@@ -4878,7 +6456,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       return element.offsetHeight;
     },
     triggerTransitionEnd: function triggerTransitionEnd(element) {
-      $__default['default'](element).trigger(TRANSITION_END);
+      $__default["default"](element).trigger(TRANSITION_END);
     },
     supportsTransitionEnd: function supportsTransitionEnd() {
       return Boolean(TRANSITION_END);
@@ -4922,11 +6500,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       return Util.findShadowRoot(element.parentNode);
     },
     jQueryDetection: function jQueryDetection() {
-      if (typeof $__default['default'] === 'undefined') {
+      if (typeof $__default["default"] === 'undefined') {
         throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
       }
 
-      var version = $__default['default'].fn.jquery.split(' ')[0].split('.');
+      var version = $__default["default"].fn.jquery.split(' ')[0].split('.');
       var minMajor = 1;
       var ltMajor = 2;
       var minMinor = 9;
@@ -4942,28 +6520,24 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   setTransitionEndSupport();
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME = 'alert';
-  var VERSION = '4.6.0';
-  var DATA_KEY = 'bs.alert';
-  var EVENT_KEY = "." + DATA_KEY;
-  var DATA_API_KEY = '.data-api';
-  var JQUERY_NO_CONFLICT = $__default['default'].fn[NAME];
-  var SELECTOR_DISMISS = '[data-dismiss="alert"]';
-  var EVENT_CLOSE = "close" + EVENT_KEY;
-  var EVENT_CLOSED = "closed" + EVENT_KEY;
-  var EVENT_CLICK_DATA_API = "click" + EVENT_KEY + DATA_API_KEY;
+  var NAME$a = 'alert';
+  var VERSION$a = '4.6.1';
+  var DATA_KEY$a = 'bs.alert';
+  var EVENT_KEY$a = "." + DATA_KEY$a;
+  var DATA_API_KEY$7 = '.data-api';
+  var JQUERY_NO_CONFLICT$a = $__default["default"].fn[NAME$a];
   var CLASS_NAME_ALERT = 'alert';
-  var CLASS_NAME_FADE = 'fade';
-  var CLASS_NAME_SHOW = 'show';
+  var CLASS_NAME_FADE$5 = 'fade';
+  var CLASS_NAME_SHOW$7 = 'show';
+  var EVENT_CLOSE = "close" + EVENT_KEY$a;
+  var EVENT_CLOSED = "closed" + EVENT_KEY$a;
+  var EVENT_CLICK_DATA_API$6 = "click" + EVENT_KEY$a + DATA_API_KEY$7;
+  var SELECTOR_DISMISS = '[data-dismiss="alert"]';
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Alert = /*#__PURE__*/function () {
@@ -4992,7 +6566,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto.dispose = function dispose() {
-      $__default['default'].removeData(this._element, DATA_KEY);
+      $__default["default"].removeData(this._element, DATA_KEY$a);
       this._element = null;
     } // Private
     ;
@@ -5006,48 +6580,48 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       }
 
       if (!parent) {
-        parent = $__default['default'](element).closest("." + CLASS_NAME_ALERT)[0];
+        parent = $__default["default"](element).closest("." + CLASS_NAME_ALERT)[0];
       }
 
       return parent;
     };
 
     _proto._triggerCloseEvent = function _triggerCloseEvent(element) {
-      var closeEvent = $__default['default'].Event(EVENT_CLOSE);
-      $__default['default'](element).trigger(closeEvent);
+      var closeEvent = $__default["default"].Event(EVENT_CLOSE);
+      $__default["default"](element).trigger(closeEvent);
       return closeEvent;
     };
 
     _proto._removeElement = function _removeElement(element) {
       var _this = this;
 
-      $__default['default'](element).removeClass(CLASS_NAME_SHOW);
+      $__default["default"](element).removeClass(CLASS_NAME_SHOW$7);
 
-      if (!$__default['default'](element).hasClass(CLASS_NAME_FADE)) {
+      if (!$__default["default"](element).hasClass(CLASS_NAME_FADE$5)) {
         this._destroyElement(element);
 
         return;
       }
 
       var transitionDuration = Util.getTransitionDurationFromElement(element);
-      $__default['default'](element).one(Util.TRANSITION_END, function (event) {
+      $__default["default"](element).one(Util.TRANSITION_END, function (event) {
         return _this._destroyElement(element, event);
       }).emulateTransitionEnd(transitionDuration);
     };
 
     _proto._destroyElement = function _destroyElement(element) {
-      $__default['default'](element).detach().trigger(EVENT_CLOSED).remove();
+      $__default["default"](element).detach().trigger(EVENT_CLOSED).remove();
     } // Static
     ;
 
     Alert._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $element = $__default['default'](this);
-        var data = $element.data(DATA_KEY);
+        var $element = $__default["default"](this);
+        var data = $element.data(DATA_KEY$a);
 
         if (!data) {
           data = new Alert(this);
-          $element.data(DATA_KEY, data);
+          $element.data(DATA_KEY$a, data);
         }
 
         if (config === 'close') {
@@ -5069,63 +6643,55 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(Alert, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION;
+        return VERSION$a;
       }
     }]);
 
     return Alert;
   }();
   /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
+   * Data API implementation
    */
 
 
-  $__default['default'](document).on(EVENT_CLICK_DATA_API, SELECTOR_DISMISS, Alert._handleDismiss(new Alert()));
+  $__default["default"](document).on(EVENT_CLICK_DATA_API$6, SELECTOR_DISMISS, Alert._handleDismiss(new Alert()));
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
-  $__default['default'].fn[NAME] = Alert._jQueryInterface;
-  $__default['default'].fn[NAME].Constructor = Alert;
+  $__default["default"].fn[NAME$a] = Alert._jQueryInterface;
+  $__default["default"].fn[NAME$a].Constructor = Alert;
 
-  $__default['default'].fn[NAME].noConflict = function () {
-    $__default['default'].fn[NAME] = JQUERY_NO_CONFLICT;
+  $__default["default"].fn[NAME$a].noConflict = function () {
+    $__default["default"].fn[NAME$a] = JQUERY_NO_CONFLICT$a;
     return Alert._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$1 = 'button';
-  var VERSION$1 = '4.6.0';
-  var DATA_KEY$1 = 'bs.button';
-  var EVENT_KEY$1 = "." + DATA_KEY$1;
-  var DATA_API_KEY$1 = '.data-api';
-  var JQUERY_NO_CONFLICT$1 = $__default['default'].fn[NAME$1];
-  var CLASS_NAME_ACTIVE = 'active';
+  var NAME$9 = 'button';
+  var VERSION$9 = '4.6.1';
+  var DATA_KEY$9 = 'bs.button';
+  var EVENT_KEY$9 = "." + DATA_KEY$9;
+  var DATA_API_KEY$6 = '.data-api';
+  var JQUERY_NO_CONFLICT$9 = $__default["default"].fn[NAME$9];
+  var CLASS_NAME_ACTIVE$3 = 'active';
   var CLASS_NAME_BUTTON = 'btn';
   var CLASS_NAME_FOCUS = 'focus';
+  var EVENT_CLICK_DATA_API$5 = "click" + EVENT_KEY$9 + DATA_API_KEY$6;
+  var EVENT_FOCUS_BLUR_DATA_API = "focus" + EVENT_KEY$9 + DATA_API_KEY$6 + " " + ("blur" + EVENT_KEY$9 + DATA_API_KEY$6);
+  var EVENT_LOAD_DATA_API$2 = "load" + EVENT_KEY$9 + DATA_API_KEY$6;
   var SELECTOR_DATA_TOGGLE_CARROT = '[data-toggle^="button"]';
   var SELECTOR_DATA_TOGGLES = '[data-toggle="buttons"]';
-  var SELECTOR_DATA_TOGGLE = '[data-toggle="button"]';
+  var SELECTOR_DATA_TOGGLE$4 = '[data-toggle="button"]';
   var SELECTOR_DATA_TOGGLES_BUTTONS = '[data-toggle="buttons"] .btn';
   var SELECTOR_INPUT = 'input:not([type="hidden"])';
-  var SELECTOR_ACTIVE = '.active';
+  var SELECTOR_ACTIVE$2 = '.active';
   var SELECTOR_BUTTON = '.btn';
-  var EVENT_CLICK_DATA_API$1 = "click" + EVENT_KEY$1 + DATA_API_KEY$1;
-  var EVENT_FOCUS_BLUR_DATA_API = "focus" + EVENT_KEY$1 + DATA_API_KEY$1 + " " + ("blur" + EVENT_KEY$1 + DATA_API_KEY$1);
-  var EVENT_LOAD_DATA_API = "load" + EVENT_KEY$1 + DATA_API_KEY$1;
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Button = /*#__PURE__*/function () {
@@ -5141,20 +6707,20 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto.toggle = function toggle() {
       var triggerChangeEvent = true;
       var addAriaPressed = true;
-      var rootElement = $__default['default'](this._element).closest(SELECTOR_DATA_TOGGLES)[0];
+      var rootElement = $__default["default"](this._element).closest(SELECTOR_DATA_TOGGLES)[0];
 
       if (rootElement) {
         var input = this._element.querySelector(SELECTOR_INPUT);
 
         if (input) {
           if (input.type === 'radio') {
-            if (input.checked && this._element.classList.contains(CLASS_NAME_ACTIVE)) {
+            if (input.checked && this._element.classList.contains(CLASS_NAME_ACTIVE$3)) {
               triggerChangeEvent = false;
             } else {
-              var activeElement = rootElement.querySelector(SELECTOR_ACTIVE);
+              var activeElement = rootElement.querySelector(SELECTOR_ACTIVE$2);
 
               if (activeElement) {
-                $__default['default'](activeElement).removeClass(CLASS_NAME_ACTIVE);
+                $__default["default"](activeElement).removeClass(CLASS_NAME_ACTIVE$3);
               }
             }
           }
@@ -5162,11 +6728,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
           if (triggerChangeEvent) {
             // if it's not a radio button or checkbox don't add a pointless/invalid checked property to the input
             if (input.type === 'checkbox' || input.type === 'radio') {
-              input.checked = !this._element.classList.contains(CLASS_NAME_ACTIVE);
+              input.checked = !this._element.classList.contains(CLASS_NAME_ACTIVE$3);
             }
 
             if (!this.shouldAvoidTriggerChange) {
-              $__default['default'](input).trigger('change');
+              $__default["default"](input).trigger('change');
             }
           }
 
@@ -5177,29 +6743,29 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       if (!(this._element.hasAttribute('disabled') || this._element.classList.contains('disabled'))) {
         if (addAriaPressed) {
-          this._element.setAttribute('aria-pressed', !this._element.classList.contains(CLASS_NAME_ACTIVE));
+          this._element.setAttribute('aria-pressed', !this._element.classList.contains(CLASS_NAME_ACTIVE$3));
         }
 
         if (triggerChangeEvent) {
-          $__default['default'](this._element).toggleClass(CLASS_NAME_ACTIVE);
+          $__default["default"](this._element).toggleClass(CLASS_NAME_ACTIVE$3);
         }
       }
     };
 
     _proto.dispose = function dispose() {
-      $__default['default'].removeData(this._element, DATA_KEY$1);
+      $__default["default"].removeData(this._element, DATA_KEY$9);
       this._element = null;
     } // Static
     ;
 
     Button._jQueryInterface = function _jQueryInterface(config, avoidTriggerChange) {
       return this.each(function () {
-        var $element = $__default['default'](this);
-        var data = $element.data(DATA_KEY$1);
+        var $element = $__default["default"](this);
+        var data = $element.data(DATA_KEY$9);
 
         if (!data) {
           data = new Button(this);
-          $element.data(DATA_KEY$1, data);
+          $element.data(DATA_KEY$9, data);
         }
 
         data.shouldAvoidTriggerChange = avoidTriggerChange;
@@ -5213,25 +6779,23 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(Button, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION$1;
+        return VERSION$9;
       }
     }]);
 
     return Button;
   }();
   /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
+   * Data API implementation
    */
 
 
-  $__default['default'](document).on(EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE_CARROT, function (event) {
+  $__default["default"](document).on(EVENT_CLICK_DATA_API$5, SELECTOR_DATA_TOGGLE_CARROT, function (event) {
     var button = event.target;
     var initialButton = button;
 
-    if (!$__default['default'](button).hasClass(CLASS_NAME_BUTTON)) {
-      button = $__default['default'](button).closest(SELECTOR_BUTTON)[0];
+    if (!$__default["default"](button).hasClass(CLASS_NAME_BUTTON)) {
+      button = $__default["default"](button).closest(SELECTOR_BUTTON)[0];
     }
 
     if (!button || button.hasAttribute('disabled') || button.classList.contains('disabled')) {
@@ -5246,14 +6810,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       }
 
       if (initialButton.tagName === 'INPUT' || button.tagName !== 'LABEL') {
-        Button._jQueryInterface.call($__default['default'](button), 'toggle', initialButton.tagName === 'INPUT');
+        Button._jQueryInterface.call($__default["default"](button), 'toggle', initialButton.tagName === 'INPUT');
       }
     }
   }).on(EVENT_FOCUS_BLUR_DATA_API, SELECTOR_DATA_TOGGLE_CARROT, function (event) {
-    var button = $__default['default'](event.target).closest(SELECTOR_BUTTON)[0];
-    $__default['default'](button).toggleClass(CLASS_NAME_FOCUS, /^focus(in)?$/.test(event.type));
+    var button = $__default["default"](event.target).closest(SELECTOR_BUTTON)[0];
+    $__default["default"](button).toggleClass(CLASS_NAME_FOCUS, /^focus(in)?$/.test(event.type));
   });
-  $__default['default'](window).on(EVENT_LOAD_DATA_API, function () {
+  $__default["default"](window).on(EVENT_LOAD_DATA_API$2, function () {
     // ensure correct active class is set to match the controls' actual values/states
     // find all checkboxes/readio buttons inside data-toggle groups
     var buttons = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLES_BUTTONS));
@@ -5263,51 +6827,47 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       var input = button.querySelector(SELECTOR_INPUT);
 
       if (input.checked || input.hasAttribute('checked')) {
-        button.classList.add(CLASS_NAME_ACTIVE);
+        button.classList.add(CLASS_NAME_ACTIVE$3);
       } else {
-        button.classList.remove(CLASS_NAME_ACTIVE);
+        button.classList.remove(CLASS_NAME_ACTIVE$3);
       }
     } // find all button toggles
 
 
-    buttons = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLE));
+    buttons = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLE$4));
 
     for (var _i = 0, _len = buttons.length; _i < _len; _i++) {
       var _button = buttons[_i];
 
       if (_button.getAttribute('aria-pressed') === 'true') {
-        _button.classList.add(CLASS_NAME_ACTIVE);
+        _button.classList.add(CLASS_NAME_ACTIVE$3);
       } else {
-        _button.classList.remove(CLASS_NAME_ACTIVE);
+        _button.classList.remove(CLASS_NAME_ACTIVE$3);
       }
     }
   });
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
-  $__default['default'].fn[NAME$1] = Button._jQueryInterface;
-  $__default['default'].fn[NAME$1].Constructor = Button;
+  $__default["default"].fn[NAME$9] = Button._jQueryInterface;
+  $__default["default"].fn[NAME$9].Constructor = Button;
 
-  $__default['default'].fn[NAME$1].noConflict = function () {
-    $__default['default'].fn[NAME$1] = JQUERY_NO_CONFLICT$1;
+  $__default["default"].fn[NAME$9].noConflict = function () {
+    $__default["default"].fn[NAME$9] = JQUERY_NO_CONFLICT$9;
     return Button._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$2 = 'carousel';
-  var VERSION$2 = '4.6.0';
-  var DATA_KEY$2 = 'bs.carousel';
-  var EVENT_KEY$2 = "." + DATA_KEY$2;
-  var DATA_API_KEY$2 = '.data-api';
-  var JQUERY_NO_CONFLICT$2 = $__default['default'].fn[NAME$2];
+  var NAME$8 = 'carousel';
+  var VERSION$8 = '4.6.1';
+  var DATA_KEY$8 = 'bs.carousel';
+  var EVENT_KEY$8 = "." + DATA_KEY$8;
+  var DATA_API_KEY$5 = '.data-api';
+  var JQUERY_NO_CONFLICT$8 = $__default["default"].fn[NAME$8];
   var ARROW_LEFT_KEYCODE = 37; // KeyboardEvent.which value for left arrow key
 
   var ARROW_RIGHT_KEYCODE = 39; // KeyboardEvent.which value for right arrow key
@@ -5315,47 +6875,31 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   var TOUCHEVENT_COMPAT_WAIT = 500; // Time for mouse compat events to fire after touch
 
   var SWIPE_THRESHOLD = 40;
-  var Default = {
-    interval: 5000,
-    keyboard: true,
-    slide: false,
-    pause: 'hover',
-    wrap: true,
-    touch: true
-  };
-  var DefaultType = {
-    interval: '(number|boolean)',
-    keyboard: 'boolean',
-    slide: '(boolean|string)',
-    pause: '(string|boolean)',
-    wrap: 'boolean',
-    touch: 'boolean'
-  };
-  var DIRECTION_NEXT = 'next';
-  var DIRECTION_PREV = 'prev';
-  var DIRECTION_LEFT = 'left';
-  var DIRECTION_RIGHT = 'right';
-  var EVENT_SLIDE = "slide" + EVENT_KEY$2;
-  var EVENT_SLID = "slid" + EVENT_KEY$2;
-  var EVENT_KEYDOWN = "keydown" + EVENT_KEY$2;
-  var EVENT_MOUSEENTER = "mouseenter" + EVENT_KEY$2;
-  var EVENT_MOUSELEAVE = "mouseleave" + EVENT_KEY$2;
-  var EVENT_TOUCHSTART = "touchstart" + EVENT_KEY$2;
-  var EVENT_TOUCHMOVE = "touchmove" + EVENT_KEY$2;
-  var EVENT_TOUCHEND = "touchend" + EVENT_KEY$2;
-  var EVENT_POINTERDOWN = "pointerdown" + EVENT_KEY$2;
-  var EVENT_POINTERUP = "pointerup" + EVENT_KEY$2;
-  var EVENT_DRAG_START = "dragstart" + EVENT_KEY$2;
-  var EVENT_LOAD_DATA_API$1 = "load" + EVENT_KEY$2 + DATA_API_KEY$2;
-  var EVENT_CLICK_DATA_API$2 = "click" + EVENT_KEY$2 + DATA_API_KEY$2;
   var CLASS_NAME_CAROUSEL = 'carousel';
-  var CLASS_NAME_ACTIVE$1 = 'active';
+  var CLASS_NAME_ACTIVE$2 = 'active';
   var CLASS_NAME_SLIDE = 'slide';
   var CLASS_NAME_RIGHT = 'carousel-item-right';
   var CLASS_NAME_LEFT = 'carousel-item-left';
   var CLASS_NAME_NEXT = 'carousel-item-next';
   var CLASS_NAME_PREV = 'carousel-item-prev';
   var CLASS_NAME_POINTER_EVENT = 'pointer-event';
+  var DIRECTION_NEXT = 'next';
+  var DIRECTION_PREV = 'prev';
+  var DIRECTION_LEFT = 'left';
+  var DIRECTION_RIGHT = 'right';
+  var EVENT_SLIDE = "slide" + EVENT_KEY$8;
+  var EVENT_SLID = "slid" + EVENT_KEY$8;
+  var EVENT_KEYDOWN = "keydown" + EVENT_KEY$8;
+  var EVENT_MOUSEENTER = "mouseenter" + EVENT_KEY$8;
+  var EVENT_MOUSELEAVE = "mouseleave" + EVENT_KEY$8;
+  var EVENT_TOUCHSTART = "touchstart" + EVENT_KEY$8;
+  var EVENT_TOUCHMOVE = "touchmove" + EVENT_KEY$8;
+  var EVENT_TOUCHEND = "touchend" + EVENT_KEY$8;
+  var EVENT_POINTERDOWN = "pointerdown" + EVENT_KEY$8;
+  var EVENT_POINTERUP = "pointerup" + EVENT_KEY$8;
+  var EVENT_DRAG_START = "dragstart" + EVENT_KEY$8;
+  var EVENT_LOAD_DATA_API$1 = "load" + EVENT_KEY$8 + DATA_API_KEY$5;
+  var EVENT_CLICK_DATA_API$4 = "click" + EVENT_KEY$8 + DATA_API_KEY$5;
   var SELECTOR_ACTIVE$1 = '.active';
   var SELECTOR_ACTIVE_ITEM = '.active.carousel-item';
   var SELECTOR_ITEM = '.carousel-item';
@@ -5364,14 +6908,28 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   var SELECTOR_INDICATORS = '.carousel-indicators';
   var SELECTOR_DATA_SLIDE = '[data-slide], [data-slide-to]';
   var SELECTOR_DATA_RIDE = '[data-ride="carousel"]';
+  var Default$7 = {
+    interval: 5000,
+    keyboard: true,
+    slide: false,
+    pause: 'hover',
+    wrap: true,
+    touch: true
+  };
+  var DefaultType$7 = {
+    interval: '(number|boolean)',
+    keyboard: 'boolean',
+    slide: '(boolean|string)',
+    pause: '(string|boolean)',
+    wrap: 'boolean',
+    touch: 'boolean'
+  };
   var PointerType = {
     TOUCH: 'touch',
     PEN: 'pen'
   };
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Carousel = /*#__PURE__*/function () {
@@ -5404,7 +6962,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto.nextWhenVisible = function nextWhenVisible() {
-      var $element = $__default['default'](this._element); // Don't call next when the page isn't visible
+      var $element = $__default["default"](this._element); // Don't call next when the page isn't visible
       // or the carousel or its parent isn't visible
 
       if (!document.hidden && $element.is(':visible') && $element.css('visibility') !== 'hidden') {
@@ -5461,7 +7019,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       }
 
       if (this._isSliding) {
-        $__default['default'](this._element).one(EVENT_SLID, function () {
+        $__default["default"](this._element).one(EVENT_SLID, function () {
           return _this.to(index);
         });
         return;
@@ -5479,8 +7037,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto.dispose = function dispose() {
-      $__default['default'](this._element).off(EVENT_KEY$2);
-      $__default['default'].removeData(this._element, DATA_KEY$2);
+      $__default["default"](this._element).off(EVENT_KEY$8);
+      $__default["default"].removeData(this._element, DATA_KEY$8);
       this._items = null;
       this._config = null;
       this._element = null;
@@ -5493,8 +7051,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default, config);
-      Util.typeCheckConfig(NAME$2, config, DefaultType);
+      config = _extends({}, Default$7, config);
+      Util.typeCheckConfig(NAME$8, config, DefaultType$7);
       return config;
     };
 
@@ -5522,13 +7080,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       var _this2 = this;
 
       if (this._config.keyboard) {
-        $__default['default'](this._element).on(EVENT_KEYDOWN, function (event) {
+        $__default["default"](this._element).on(EVENT_KEYDOWN, function (event) {
           return _this2._keydown(event);
         });
       }
 
       if (this._config.pause === 'hover') {
-        $__default['default'](this._element).on(EVENT_MOUSEENTER, function (event) {
+        $__default["default"](this._element).on(EVENT_MOUSEENTER, function (event) {
           return _this2.pause(event);
         }).on(EVENT_MOUSELEAVE, function (event) {
           return _this2.cycle(event);
@@ -5557,11 +7115,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       var move = function move(event) {
         // ensure swiping with one touch and not pinching
-        if (event.originalEvent.touches && event.originalEvent.touches.length > 1) {
-          _this3.touchDeltaX = 0;
-        } else {
-          _this3.touchDeltaX = event.originalEvent.touches[0].clientX - _this3.touchStartX;
-        }
+        _this3.touchDeltaX = event.originalEvent.touches && event.originalEvent.touches.length > 1 ? 0 : event.originalEvent.touches[0].clientX - _this3.touchStartX;
       };
 
       var end = function end(event) {
@@ -5591,27 +7145,27 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         }
       };
 
-      $__default['default'](this._element.querySelectorAll(SELECTOR_ITEM_IMG)).on(EVENT_DRAG_START, function (e) {
+      $__default["default"](this._element.querySelectorAll(SELECTOR_ITEM_IMG)).on(EVENT_DRAG_START, function (e) {
         return e.preventDefault();
       });
 
       if (this._pointerEvent) {
-        $__default['default'](this._element).on(EVENT_POINTERDOWN, function (event) {
+        $__default["default"](this._element).on(EVENT_POINTERDOWN, function (event) {
           return start(event);
         });
-        $__default['default'](this._element).on(EVENT_POINTERUP, function (event) {
+        $__default["default"](this._element).on(EVENT_POINTERUP, function (event) {
           return end(event);
         });
 
         this._element.classList.add(CLASS_NAME_POINTER_EVENT);
       } else {
-        $__default['default'](this._element).on(EVENT_TOUCHSTART, function (event) {
+        $__default["default"](this._element).on(EVENT_TOUCHSTART, function (event) {
           return start(event);
         });
-        $__default['default'](this._element).on(EVENT_TOUCHMOVE, function (event) {
+        $__default["default"](this._element).on(EVENT_TOUCHMOVE, function (event) {
           return move(event);
         });
-        $__default['default'](this._element).on(EVENT_TOUCHEND, function (event) {
+        $__default["default"](this._element).on(EVENT_TOUCHEND, function (event) {
           return end(event);
         });
       }
@@ -5663,25 +7217,25 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       var fromIndex = this._getItemIndex(this._element.querySelector(SELECTOR_ACTIVE_ITEM));
 
-      var slideEvent = $__default['default'].Event(EVENT_SLIDE, {
+      var slideEvent = $__default["default"].Event(EVENT_SLIDE, {
         relatedTarget: relatedTarget,
         direction: eventDirectionName,
         from: fromIndex,
         to: targetIndex
       });
-      $__default['default'](this._element).trigger(slideEvent);
+      $__default["default"](this._element).trigger(slideEvent);
       return slideEvent;
     };
 
     _proto._setActiveIndicatorElement = function _setActiveIndicatorElement(element) {
       if (this._indicatorsElement) {
         var indicators = [].slice.call(this._indicatorsElement.querySelectorAll(SELECTOR_ACTIVE$1));
-        $__default['default'](indicators).removeClass(CLASS_NAME_ACTIVE$1);
+        $__default["default"](indicators).removeClass(CLASS_NAME_ACTIVE$2);
 
         var nextIndicator = this._indicatorsElement.children[this._getItemIndex(element)];
 
         if (nextIndicator) {
-          $__default['default'](nextIndicator).addClass(CLASS_NAME_ACTIVE$1);
+          $__default["default"](nextIndicator).addClass(CLASS_NAME_ACTIVE$2);
         }
       }
     };
@@ -5729,7 +7283,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         eventDirectionName = DIRECTION_RIGHT;
       }
 
-      if (nextElement && $__default['default'](nextElement).hasClass(CLASS_NAME_ACTIVE$1)) {
+      if (nextElement && $__default["default"](nextElement).hasClass(CLASS_NAME_ACTIVE$2)) {
         this._isSliding = false;
         return;
       }
@@ -5754,32 +7308,32 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       this._setActiveIndicatorElement(nextElement);
 
       this._activeElement = nextElement;
-      var slidEvent = $__default['default'].Event(EVENT_SLID, {
+      var slidEvent = $__default["default"].Event(EVENT_SLID, {
         relatedTarget: nextElement,
         direction: eventDirectionName,
         from: activeElementIndex,
         to: nextElementIndex
       });
 
-      if ($__default['default'](this._element).hasClass(CLASS_NAME_SLIDE)) {
-        $__default['default'](nextElement).addClass(orderClassName);
+      if ($__default["default"](this._element).hasClass(CLASS_NAME_SLIDE)) {
+        $__default["default"](nextElement).addClass(orderClassName);
         Util.reflow(nextElement);
-        $__default['default'](activeElement).addClass(directionalClassName);
-        $__default['default'](nextElement).addClass(directionalClassName);
+        $__default["default"](activeElement).addClass(directionalClassName);
+        $__default["default"](nextElement).addClass(directionalClassName);
         var transitionDuration = Util.getTransitionDurationFromElement(activeElement);
-        $__default['default'](activeElement).one(Util.TRANSITION_END, function () {
-          $__default['default'](nextElement).removeClass(directionalClassName + " " + orderClassName).addClass(CLASS_NAME_ACTIVE$1);
-          $__default['default'](activeElement).removeClass(CLASS_NAME_ACTIVE$1 + " " + orderClassName + " " + directionalClassName);
+        $__default["default"](activeElement).one(Util.TRANSITION_END, function () {
+          $__default["default"](nextElement).removeClass(directionalClassName + " " + orderClassName).addClass(CLASS_NAME_ACTIVE$2);
+          $__default["default"](activeElement).removeClass(CLASS_NAME_ACTIVE$2 + " " + orderClassName + " " + directionalClassName);
           _this4._isSliding = false;
           setTimeout(function () {
-            return $__default['default'](_this4._element).trigger(slidEvent);
+            return $__default["default"](_this4._element).trigger(slidEvent);
           }, 0);
         }).emulateTransitionEnd(transitionDuration);
       } else {
-        $__default['default'](activeElement).removeClass(CLASS_NAME_ACTIVE$1);
-        $__default['default'](nextElement).addClass(CLASS_NAME_ACTIVE$1);
+        $__default["default"](activeElement).removeClass(CLASS_NAME_ACTIVE$2);
+        $__default["default"](nextElement).addClass(CLASS_NAME_ACTIVE$2);
         this._isSliding = false;
-        $__default['default'](this._element).trigger(slidEvent);
+        $__default["default"](this._element).trigger(slidEvent);
       }
 
       if (isCycling) {
@@ -5790,9 +7344,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     Carousel._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $__default['default'](this).data(DATA_KEY$2);
+        var data = $__default["default"](this).data(DATA_KEY$8);
 
-        var _config = _extends({}, Default, $__default['default'](this).data());
+        var _config = _extends({}, Default$7, $__default["default"](this).data());
 
         if (typeof config === 'object') {
           _config = _extends({}, _config, config);
@@ -5802,7 +7356,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
         if (!data) {
           data = new Carousel(this, _config);
-          $__default['default'](this).data(DATA_KEY$2, data);
+          $__default["default"](this).data(DATA_KEY$8, data);
         }
 
         if (typeof config === 'number') {
@@ -5827,13 +7381,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         return;
       }
 
-      var target = $__default['default'](selector)[0];
+      var target = $__default["default"](selector)[0];
 
-      if (!target || !$__default['default'](target).hasClass(CLASS_NAME_CAROUSEL)) {
+      if (!target || !$__default["default"](target).hasClass(CLASS_NAME_CAROUSEL)) {
         return;
       }
 
-      var config = _extends({}, $__default['default'](target).data(), $__default['default'](this).data());
+      var config = _extends({}, $__default["default"](target).data(), $__default["default"](this).data());
 
       var slideIndex = this.getAttribute('data-slide-to');
 
@@ -5841,10 +7395,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         config.interval = false;
       }
 
-      Carousel._jQueryInterface.call($__default['default'](target), config);
+      Carousel._jQueryInterface.call($__default["default"](target), config);
 
       if (slideIndex) {
-        $__default['default'](target).data(DATA_KEY$2).to(slideIndex);
+        $__default["default"](target).data(DATA_KEY$8).to(slideIndex);
       }
 
       event.preventDefault();
@@ -5853,85 +7407,77 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(Carousel, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION$2;
+        return VERSION$8;
       }
     }, {
       key: "Default",
       get: function get() {
-        return Default;
+        return Default$7;
       }
     }]);
 
     return Carousel;
   }();
   /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
+   * Data API implementation
    */
 
 
-  $__default['default'](document).on(EVENT_CLICK_DATA_API$2, SELECTOR_DATA_SLIDE, Carousel._dataApiClickHandler);
-  $__default['default'](window).on(EVENT_LOAD_DATA_API$1, function () {
+  $__default["default"](document).on(EVENT_CLICK_DATA_API$4, SELECTOR_DATA_SLIDE, Carousel._dataApiClickHandler);
+  $__default["default"](window).on(EVENT_LOAD_DATA_API$1, function () {
     var carousels = [].slice.call(document.querySelectorAll(SELECTOR_DATA_RIDE));
 
     for (var i = 0, len = carousels.length; i < len; i++) {
-      var $carousel = $__default['default'](carousels[i]);
+      var $carousel = $__default["default"](carousels[i]);
 
       Carousel._jQueryInterface.call($carousel, $carousel.data());
     }
   });
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
-  $__default['default'].fn[NAME$2] = Carousel._jQueryInterface;
-  $__default['default'].fn[NAME$2].Constructor = Carousel;
+  $__default["default"].fn[NAME$8] = Carousel._jQueryInterface;
+  $__default["default"].fn[NAME$8].Constructor = Carousel;
 
-  $__default['default'].fn[NAME$2].noConflict = function () {
-    $__default['default'].fn[NAME$2] = JQUERY_NO_CONFLICT$2;
+  $__default["default"].fn[NAME$8].noConflict = function () {
+    $__default["default"].fn[NAME$8] = JQUERY_NO_CONFLICT$8;
     return Carousel._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$3 = 'collapse';
-  var VERSION$3 = '4.6.0';
-  var DATA_KEY$3 = 'bs.collapse';
-  var EVENT_KEY$3 = "." + DATA_KEY$3;
-  var DATA_API_KEY$3 = '.data-api';
-  var JQUERY_NO_CONFLICT$3 = $__default['default'].fn[NAME$3];
-  var Default$1 = {
-    toggle: true,
-    parent: ''
-  };
-  var DefaultType$1 = {
-    toggle: 'boolean',
-    parent: '(string|element)'
-  };
-  var EVENT_SHOW = "show" + EVENT_KEY$3;
-  var EVENT_SHOWN = "shown" + EVENT_KEY$3;
-  var EVENT_HIDE = "hide" + EVENT_KEY$3;
-  var EVENT_HIDDEN = "hidden" + EVENT_KEY$3;
-  var EVENT_CLICK_DATA_API$3 = "click" + EVENT_KEY$3 + DATA_API_KEY$3;
-  var CLASS_NAME_SHOW$1 = 'show';
+  var NAME$7 = 'collapse';
+  var VERSION$7 = '4.6.1';
+  var DATA_KEY$7 = 'bs.collapse';
+  var EVENT_KEY$7 = "." + DATA_KEY$7;
+  var DATA_API_KEY$4 = '.data-api';
+  var JQUERY_NO_CONFLICT$7 = $__default["default"].fn[NAME$7];
+  var CLASS_NAME_SHOW$6 = 'show';
   var CLASS_NAME_COLLAPSE = 'collapse';
   var CLASS_NAME_COLLAPSING = 'collapsing';
   var CLASS_NAME_COLLAPSED = 'collapsed';
   var DIMENSION_WIDTH = 'width';
   var DIMENSION_HEIGHT = 'height';
+  var EVENT_SHOW$4 = "show" + EVENT_KEY$7;
+  var EVENT_SHOWN$4 = "shown" + EVENT_KEY$7;
+  var EVENT_HIDE$4 = "hide" + EVENT_KEY$7;
+  var EVENT_HIDDEN$4 = "hidden" + EVENT_KEY$7;
+  var EVENT_CLICK_DATA_API$3 = "click" + EVENT_KEY$7 + DATA_API_KEY$4;
   var SELECTOR_ACTIVES = '.show, .collapsing';
-  var SELECTOR_DATA_TOGGLE$1 = '[data-toggle="collapse"]';
+  var SELECTOR_DATA_TOGGLE$3 = '[data-toggle="collapse"]';
+  var Default$6 = {
+    toggle: true,
+    parent: ''
+  };
+  var DefaultType$6 = {
+    toggle: 'boolean',
+    parent: '(string|element)'
+  };
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Collapse = /*#__PURE__*/function () {
@@ -5940,7 +7486,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       this._element = element;
       this._config = this._getConfig(config);
       this._triggerArray = [].slice.call(document.querySelectorAll("[data-toggle=\"collapse\"][href=\"#" + element.id + "\"]," + ("[data-toggle=\"collapse\"][data-target=\"#" + element.id + "\"]")));
-      var toggleList = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLE$1));
+      var toggleList = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLE$3));
 
       for (var i = 0, len = toggleList.length; i < len; i++) {
         var elem = toggleList[i];
@@ -5972,7 +7518,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     // Public
     _proto.toggle = function toggle() {
-      if ($__default['default'](this._element).hasClass(CLASS_NAME_SHOW$1)) {
+      if ($__default["default"](this._element).hasClass(CLASS_NAME_SHOW$6)) {
         this.hide();
       } else {
         this.show();
@@ -5982,7 +7528,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto.show = function show() {
       var _this = this;
 
-      if (this._isTransitioning || $__default['default'](this._element).hasClass(CLASS_NAME_SHOW$1)) {
+      if (this._isTransitioning || $__default["default"](this._element).hasClass(CLASS_NAME_SHOW$6)) {
         return;
       }
 
@@ -6004,64 +7550,64 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       }
 
       if (actives) {
-        activesData = $__default['default'](actives).not(this._selector).data(DATA_KEY$3);
+        activesData = $__default["default"](actives).not(this._selector).data(DATA_KEY$7);
 
         if (activesData && activesData._isTransitioning) {
           return;
         }
       }
 
-      var startEvent = $__default['default'].Event(EVENT_SHOW);
-      $__default['default'](this._element).trigger(startEvent);
+      var startEvent = $__default["default"].Event(EVENT_SHOW$4);
+      $__default["default"](this._element).trigger(startEvent);
 
       if (startEvent.isDefaultPrevented()) {
         return;
       }
 
       if (actives) {
-        Collapse._jQueryInterface.call($__default['default'](actives).not(this._selector), 'hide');
+        Collapse._jQueryInterface.call($__default["default"](actives).not(this._selector), 'hide');
 
         if (!activesData) {
-          $__default['default'](actives).data(DATA_KEY$3, null);
+          $__default["default"](actives).data(DATA_KEY$7, null);
         }
       }
 
       var dimension = this._getDimension();
 
-      $__default['default'](this._element).removeClass(CLASS_NAME_COLLAPSE).addClass(CLASS_NAME_COLLAPSING);
+      $__default["default"](this._element).removeClass(CLASS_NAME_COLLAPSE).addClass(CLASS_NAME_COLLAPSING);
       this._element.style[dimension] = 0;
 
       if (this._triggerArray.length) {
-        $__default['default'](this._triggerArray).removeClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', true);
+        $__default["default"](this._triggerArray).removeClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', true);
       }
 
       this.setTransitioning(true);
 
       var complete = function complete() {
-        $__default['default'](_this._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$1);
+        $__default["default"](_this._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$6);
         _this._element.style[dimension] = '';
 
         _this.setTransitioning(false);
 
-        $__default['default'](_this._element).trigger(EVENT_SHOWN);
+        $__default["default"](_this._element).trigger(EVENT_SHOWN$4);
       };
 
       var capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
       var scrollSize = "scroll" + capitalizedDimension;
       var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-      $__default['default'](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      $__default["default"](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       this._element.style[dimension] = this._element[scrollSize] + "px";
     };
 
     _proto.hide = function hide() {
       var _this2 = this;
 
-      if (this._isTransitioning || !$__default['default'](this._element).hasClass(CLASS_NAME_SHOW$1)) {
+      if (this._isTransitioning || !$__default["default"](this._element).hasClass(CLASS_NAME_SHOW$6)) {
         return;
       }
 
-      var startEvent = $__default['default'].Event(EVENT_HIDE);
-      $__default['default'](this._element).trigger(startEvent);
+      var startEvent = $__default["default"].Event(EVENT_HIDE$4);
+      $__default["default"](this._element).trigger(startEvent);
 
       if (startEvent.isDefaultPrevented()) {
         return;
@@ -6071,7 +7617,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       this._element.style[dimension] = this._element.getBoundingClientRect()[dimension] + "px";
       Util.reflow(this._element);
-      $__default['default'](this._element).addClass(CLASS_NAME_COLLAPSING).removeClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$1);
+      $__default["default"](this._element).addClass(CLASS_NAME_COLLAPSING).removeClass(CLASS_NAME_COLLAPSE + " " + CLASS_NAME_SHOW$6);
       var triggerArrayLength = this._triggerArray.length;
 
       if (triggerArrayLength > 0) {
@@ -6080,10 +7626,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
           var selector = Util.getSelectorFromElement(trigger);
 
           if (selector !== null) {
-            var $elem = $__default['default']([].slice.call(document.querySelectorAll(selector)));
+            var $elem = $__default["default"]([].slice.call(document.querySelectorAll(selector)));
 
-            if (!$elem.hasClass(CLASS_NAME_SHOW$1)) {
-              $__default['default'](trigger).addClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', false);
+            if (!$elem.hasClass(CLASS_NAME_SHOW$6)) {
+              $__default["default"](trigger).addClass(CLASS_NAME_COLLAPSED).attr('aria-expanded', false);
             }
           }
         }
@@ -6094,12 +7640,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       var complete = function complete() {
         _this2.setTransitioning(false);
 
-        $__default['default'](_this2._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE).trigger(EVENT_HIDDEN);
+        $__default["default"](_this2._element).removeClass(CLASS_NAME_COLLAPSING).addClass(CLASS_NAME_COLLAPSE).trigger(EVENT_HIDDEN$4);
       };
 
       this._element.style[dimension] = '';
       var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-      $__default['default'](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+      $__default["default"](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
     };
 
     _proto.setTransitioning = function setTransitioning(isTransitioning) {
@@ -6107,7 +7653,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto.dispose = function dispose() {
-      $__default['default'].removeData(this._element, DATA_KEY$3);
+      $__default["default"].removeData(this._element, DATA_KEY$7);
       this._config = null;
       this._parent = null;
       this._element = null;
@@ -6117,15 +7663,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$1, config);
+      config = _extends({}, Default$6, config);
       config.toggle = Boolean(config.toggle); // Coerce string values
 
-      Util.typeCheckConfig(NAME$3, config, DefaultType$1);
+      Util.typeCheckConfig(NAME$7, config, DefaultType$6);
       return config;
     };
 
     _proto._getDimension = function _getDimension() {
-      var hasWidth = $__default['default'](this._element).hasClass(DIMENSION_WIDTH);
+      var hasWidth = $__default["default"](this._element).hasClass(DIMENSION_WIDTH);
       return hasWidth ? DIMENSION_WIDTH : DIMENSION_HEIGHT;
     };
 
@@ -6146,17 +7692,17 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       var selector = "[data-toggle=\"collapse\"][data-parent=\"" + this._config.parent + "\"]";
       var children = [].slice.call(parent.querySelectorAll(selector));
-      $__default['default'](children).each(function (i, element) {
+      $__default["default"](children).each(function (i, element) {
         _this3._addAriaAndCollapsedClass(Collapse._getTargetFromElement(element), [element]);
       });
       return parent;
     };
 
     _proto._addAriaAndCollapsedClass = function _addAriaAndCollapsedClass(element, triggerArray) {
-      var isOpen = $__default['default'](element).hasClass(CLASS_NAME_SHOW$1);
+      var isOpen = $__default["default"](element).hasClass(CLASS_NAME_SHOW$6);
 
       if (triggerArray.length) {
-        $__default['default'](triggerArray).toggleClass(CLASS_NAME_COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
+        $__default["default"](triggerArray).toggleClass(CLASS_NAME_COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
       }
     } // Static
     ;
@@ -6168,10 +7714,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     Collapse._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $element = $__default['default'](this);
-        var data = $element.data(DATA_KEY$3);
+        var $element = $__default["default"](this);
+        var data = $element.data(DATA_KEY$7);
 
-        var _config = _extends({}, Default$1, $element.data(), typeof config === 'object' && config ? config : {});
+        var _config = _extends({}, Default$6, $element.data(), typeof config === 'object' && config ? config : {});
 
         if (!data && _config.toggle && typeof config === 'string' && /show|hide/.test(config)) {
           _config.toggle = false;
@@ -6179,7 +7725,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
         if (!data) {
           data = new Collapse(this, _config);
-          $element.data(DATA_KEY$3, data);
+          $element.data(DATA_KEY$7, data);
         }
 
         if (typeof config === 'string') {
@@ -6195,68 +7741,62 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(Collapse, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION$3;
+        return VERSION$7;
       }
     }, {
       key: "Default",
       get: function get() {
-        return Default$1;
+        return Default$6;
       }
     }]);
 
     return Collapse;
   }();
   /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
+   * Data API implementation
    */
 
 
-  $__default['default'](document).on(EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$1, function (event) {
+  $__default["default"](document).on(EVENT_CLICK_DATA_API$3, SELECTOR_DATA_TOGGLE$3, function (event) {
     // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
     if (event.currentTarget.tagName === 'A') {
       event.preventDefault();
     }
 
-    var $trigger = $__default['default'](this);
+    var $trigger = $__default["default"](this);
     var selector = Util.getSelectorFromElement(this);
     var selectors = [].slice.call(document.querySelectorAll(selector));
-    $__default['default'](selectors).each(function () {
-      var $target = $__default['default'](this);
-      var data = $target.data(DATA_KEY$3);
+    $__default["default"](selectors).each(function () {
+      var $target = $__default["default"](this);
+      var data = $target.data(DATA_KEY$7);
       var config = data ? 'toggle' : $trigger.data();
 
       Collapse._jQueryInterface.call($target, config);
     });
   });
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
-  $__default['default'].fn[NAME$3] = Collapse._jQueryInterface;
-  $__default['default'].fn[NAME$3].Constructor = Collapse;
+  $__default["default"].fn[NAME$7] = Collapse._jQueryInterface;
+  $__default["default"].fn[NAME$7].Constructor = Collapse;
 
-  $__default['default'].fn[NAME$3].noConflict = function () {
-    $__default['default'].fn[NAME$3] = JQUERY_NO_CONFLICT$3;
+  $__default["default"].fn[NAME$7].noConflict = function () {
+    $__default["default"].fn[NAME$7] = JQUERY_NO_CONFLICT$7;
     return Collapse._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$4 = 'dropdown';
-  var VERSION$4 = '4.6.0';
-  var DATA_KEY$4 = 'bs.dropdown';
-  var EVENT_KEY$4 = "." + DATA_KEY$4;
-  var DATA_API_KEY$4 = '.data-api';
-  var JQUERY_NO_CONFLICT$4 = $__default['default'].fn[NAME$4];
-  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
+  var NAME$6 = 'dropdown';
+  var VERSION$6 = '4.6.1';
+  var DATA_KEY$6 = 'bs.dropdown';
+  var EVENT_KEY$6 = "." + DATA_KEY$6;
+  var DATA_API_KEY$3 = '.data-api';
+  var JQUERY_NO_CONFLICT$6 = $__default["default"].fn[NAME$6];
+  var ESCAPE_KEYCODE$1 = 27; // KeyboardEvent.which value for Escape (Esc) key
 
   var SPACE_KEYCODE = 32; // KeyboardEvent.which value for space key
 
@@ -6268,22 +7808,22 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
   var RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseEvent.which value for the right button (assuming a right-handed mouse)
 
-  var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE);
-  var EVENT_HIDE$1 = "hide" + EVENT_KEY$4;
-  var EVENT_HIDDEN$1 = "hidden" + EVENT_KEY$4;
-  var EVENT_SHOW$1 = "show" + EVENT_KEY$4;
-  var EVENT_SHOWN$1 = "shown" + EVENT_KEY$4;
-  var EVENT_CLICK = "click" + EVENT_KEY$4;
-  var EVENT_CLICK_DATA_API$4 = "click" + EVENT_KEY$4 + DATA_API_KEY$4;
-  var EVENT_KEYDOWN_DATA_API = "keydown" + EVENT_KEY$4 + DATA_API_KEY$4;
-  var EVENT_KEYUP_DATA_API = "keyup" + EVENT_KEY$4 + DATA_API_KEY$4;
-  var CLASS_NAME_DISABLED = 'disabled';
-  var CLASS_NAME_SHOW$2 = 'show';
+  var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE$1);
+  var CLASS_NAME_DISABLED$1 = 'disabled';
+  var CLASS_NAME_SHOW$5 = 'show';
   var CLASS_NAME_DROPUP = 'dropup';
   var CLASS_NAME_DROPRIGHT = 'dropright';
   var CLASS_NAME_DROPLEFT = 'dropleft';
   var CLASS_NAME_MENURIGHT = 'dropdown-menu-right';
   var CLASS_NAME_POSITION_STATIC = 'position-static';
+  var EVENT_HIDE$3 = "hide" + EVENT_KEY$6;
+  var EVENT_HIDDEN$3 = "hidden" + EVENT_KEY$6;
+  var EVENT_SHOW$3 = "show" + EVENT_KEY$6;
+  var EVENT_SHOWN$3 = "shown" + EVENT_KEY$6;
+  var EVENT_CLICK = "click" + EVENT_KEY$6;
+  var EVENT_CLICK_DATA_API$2 = "click" + EVENT_KEY$6 + DATA_API_KEY$3;
+  var EVENT_KEYDOWN_DATA_API = "keydown" + EVENT_KEY$6 + DATA_API_KEY$3;
+  var EVENT_KEYUP_DATA_API = "keyup" + EVENT_KEY$6 + DATA_API_KEY$3;
   var SELECTOR_DATA_TOGGLE$2 = '[data-toggle="dropdown"]';
   var SELECTOR_FORM_CHILD = '.dropdown form';
   var SELECTOR_MENU = '.dropdown-menu';
@@ -6295,7 +7835,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   var PLACEMENT_BOTTOMEND = 'bottom-end';
   var PLACEMENT_RIGHT = 'right-start';
   var PLACEMENT_LEFT = 'left-start';
-  var Default$2 = {
+  var Default$5 = {
     offset: 0,
     flip: true,
     boundary: 'scrollParent',
@@ -6303,7 +7843,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     display: 'dynamic',
     popperConfig: null
   };
-  var DefaultType$2 = {
+  var DefaultType$5 = {
     offset: '(number|string|function)',
     flip: 'boolean',
     boundary: '(string|element)',
@@ -6312,9 +7852,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     popperConfig: '(null|object)'
   };
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Dropdown = /*#__PURE__*/function () {
@@ -6333,11 +7871,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     // Public
     _proto.toggle = function toggle() {
-      if (this._element.disabled || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED)) {
+      if (this._element.disabled || $__default["default"](this._element).hasClass(CLASS_NAME_DISABLED$1)) {
         return;
       }
 
-      var isActive = $__default['default'](this._menu).hasClass(CLASS_NAME_SHOW$2);
+      var isActive = $__default["default"](this._menu).hasClass(CLASS_NAME_SHOW$5);
 
       Dropdown._clearMenus();
 
@@ -6353,18 +7891,18 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         usePopper = false;
       }
 
-      if (this._element.disabled || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED) || $__default['default'](this._menu).hasClass(CLASS_NAME_SHOW$2)) {
+      if (this._element.disabled || $__default["default"](this._element).hasClass(CLASS_NAME_DISABLED$1) || $__default["default"](this._menu).hasClass(CLASS_NAME_SHOW$5)) {
         return;
       }
 
       var relatedTarget = {
         relatedTarget: this._element
       };
-      var showEvent = $__default['default'].Event(EVENT_SHOW$1, relatedTarget);
+      var showEvent = $__default["default"].Event(EVENT_SHOW$3, relatedTarget);
 
       var parent = Dropdown._getParentFromElement(this._element);
 
-      $__default['default'](parent).trigger(showEvent);
+      $__default["default"](parent).trigger(showEvent);
 
       if (showEvent.isDefaultPrevented()) {
         return;
@@ -6372,11 +7910,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
 
       if (!this._inNavbar && usePopper) {
-        /**
-         * Check for Popper dependency
-         * Popper - https://popper.js.org
-         */
-        if (typeof Popper__default['default'] === 'undefined') {
+        // Check for Popper dependency
+        if (typeof Popper__default["default"] === 'undefined') {
           throw new TypeError('Bootstrap\'s dropdowns require Popper (https://popper.js.org)');
         }
 
@@ -6396,41 +7931,41 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
 
         if (this._config.boundary !== 'scrollParent') {
-          $__default['default'](parent).addClass(CLASS_NAME_POSITION_STATIC);
+          $__default["default"](parent).addClass(CLASS_NAME_POSITION_STATIC);
         }
 
-        this._popper = new Popper__default['default'](referenceElement, this._menu, this._getPopperConfig());
+        this._popper = new Popper__default["default"](referenceElement, this._menu, this._getPopperConfig());
       } // If this is a touch-enabled device we add extra
       // empty mouseover listeners to the body's immediate children;
       // only needed because of broken event delegation on iOS
       // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
 
-      if ('ontouchstart' in document.documentElement && $__default['default'](parent).closest(SELECTOR_NAVBAR_NAV).length === 0) {
-        $__default['default'](document.body).children().on('mouseover', null, $__default['default'].noop);
+      if ('ontouchstart' in document.documentElement && $__default["default"](parent).closest(SELECTOR_NAVBAR_NAV).length === 0) {
+        $__default["default"](document.body).children().on('mouseover', null, $__default["default"].noop);
       }
 
       this._element.focus();
 
       this._element.setAttribute('aria-expanded', true);
 
-      $__default['default'](this._menu).toggleClass(CLASS_NAME_SHOW$2);
-      $__default['default'](parent).toggleClass(CLASS_NAME_SHOW$2).trigger($__default['default'].Event(EVENT_SHOWN$1, relatedTarget));
+      $__default["default"](this._menu).toggleClass(CLASS_NAME_SHOW$5);
+      $__default["default"](parent).toggleClass(CLASS_NAME_SHOW$5).trigger($__default["default"].Event(EVENT_SHOWN$3, relatedTarget));
     };
 
     _proto.hide = function hide() {
-      if (this._element.disabled || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED) || !$__default['default'](this._menu).hasClass(CLASS_NAME_SHOW$2)) {
+      if (this._element.disabled || $__default["default"](this._element).hasClass(CLASS_NAME_DISABLED$1) || !$__default["default"](this._menu).hasClass(CLASS_NAME_SHOW$5)) {
         return;
       }
 
       var relatedTarget = {
         relatedTarget: this._element
       };
-      var hideEvent = $__default['default'].Event(EVENT_HIDE$1, relatedTarget);
+      var hideEvent = $__default["default"].Event(EVENT_HIDE$3, relatedTarget);
 
       var parent = Dropdown._getParentFromElement(this._element);
 
-      $__default['default'](parent).trigger(hideEvent);
+      $__default["default"](parent).trigger(hideEvent);
 
       if (hideEvent.isDefaultPrevented()) {
         return;
@@ -6440,13 +7975,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         this._popper.destroy();
       }
 
-      $__default['default'](this._menu).toggleClass(CLASS_NAME_SHOW$2);
-      $__default['default'](parent).toggleClass(CLASS_NAME_SHOW$2).trigger($__default['default'].Event(EVENT_HIDDEN$1, relatedTarget));
+      $__default["default"](this._menu).toggleClass(CLASS_NAME_SHOW$5);
+      $__default["default"](parent).toggleClass(CLASS_NAME_SHOW$5).trigger($__default["default"].Event(EVENT_HIDDEN$3, relatedTarget));
     };
 
     _proto.dispose = function dispose() {
-      $__default['default'].removeData(this._element, DATA_KEY$4);
-      $__default['default'](this._element).off(EVENT_KEY$4);
+      $__default["default"].removeData(this._element, DATA_KEY$6);
+      $__default["default"](this._element).off(EVENT_KEY$6);
       this._element = null;
       this._menu = null;
 
@@ -6469,7 +8004,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto._addEventListeners = function _addEventListeners() {
       var _this = this;
 
-      $__default['default'](this._element).on(EVENT_CLICK, function (event) {
+      $__default["default"](this._element).on(EVENT_CLICK, function (event) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -6478,8 +8013,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, this.constructor.Default, $__default['default'](this._element).data(), config);
-      Util.typeCheckConfig(NAME$4, config, this.constructor.DefaultType);
+      config = _extends({}, this.constructor.Default, $__default["default"](this._element).data(), config);
+      Util.typeCheckConfig(NAME$6, config, this.constructor.DefaultType);
       return config;
     };
 
@@ -6496,16 +8031,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto._getPlacement = function _getPlacement() {
-      var $parentDropdown = $__default['default'](this._element.parentNode);
+      var $parentDropdown = $__default["default"](this._element.parentNode);
       var placement = PLACEMENT_BOTTOM; // Handle dropup
 
       if ($parentDropdown.hasClass(CLASS_NAME_DROPUP)) {
-        placement = $__default['default'](this._menu).hasClass(CLASS_NAME_MENURIGHT) ? PLACEMENT_TOPEND : PLACEMENT_TOP;
+        placement = $__default["default"](this._menu).hasClass(CLASS_NAME_MENURIGHT) ? PLACEMENT_TOPEND : PLACEMENT_TOP;
       } else if ($parentDropdown.hasClass(CLASS_NAME_DROPRIGHT)) {
         placement = PLACEMENT_RIGHT;
       } else if ($parentDropdown.hasClass(CLASS_NAME_DROPLEFT)) {
         placement = PLACEMENT_LEFT;
-      } else if ($__default['default'](this._menu).hasClass(CLASS_NAME_MENURIGHT)) {
+      } else if ($__default["default"](this._menu).hasClass(CLASS_NAME_MENURIGHT)) {
         placement = PLACEMENT_BOTTOMEND;
       }
 
@@ -6513,7 +8048,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto._detectNavbar = function _detectNavbar() {
-      return $__default['default'](this._element).closest('.navbar').length > 0;
+      return $__default["default"](this._element).closest('.navbar').length > 0;
     };
 
     _proto._getOffset = function _getOffset() {
@@ -6523,7 +8058,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       if (typeof this._config.offset === 'function') {
         offset.fn = function (data) {
-          data.offsets = _extends({}, data.offsets, _this2._config.offset(data.offsets, _this2._element) || {});
+          data.offsets = _extends({}, data.offsets, _this2._config.offset(data.offsets, _this2._element));
           return data;
         };
       } else {
@@ -6559,13 +8094,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     Dropdown._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $__default['default'](this).data(DATA_KEY$4);
+        var data = $__default["default"](this).data(DATA_KEY$6);
 
         var _config = typeof config === 'object' ? config : null;
 
         if (!data) {
           data = new Dropdown(this, _config);
-          $__default['default'](this).data(DATA_KEY$4, data);
+          $__default["default"](this).data(DATA_KEY$6, data);
         }
 
         if (typeof config === 'string') {
@@ -6588,7 +8123,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       for (var i = 0, len = toggles.length; i < len; i++) {
         var parent = Dropdown._getParentFromElement(toggles[i]);
 
-        var context = $__default['default'](toggles[i]).data(DATA_KEY$4);
+        var context = $__default["default"](toggles[i]).data(DATA_KEY$6);
         var relatedTarget = {
           relatedTarget: toggles[i]
         };
@@ -6603,16 +8138,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
         var dropdownMenu = context._menu;
 
-        if (!$__default['default'](parent).hasClass(CLASS_NAME_SHOW$2)) {
+        if (!$__default["default"](parent).hasClass(CLASS_NAME_SHOW$5)) {
           continue;
         }
 
-        if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) && $__default['default'].contains(parent, event.target)) {
+        if (event && (event.type === 'click' && /input|textarea/i.test(event.target.tagName) || event.type === 'keyup' && event.which === TAB_KEYCODE) && $__default["default"].contains(parent, event.target)) {
           continue;
         }
 
-        var hideEvent = $__default['default'].Event(EVENT_HIDE$1, relatedTarget);
-        $__default['default'](parent).trigger(hideEvent);
+        var hideEvent = $__default["default"].Event(EVENT_HIDE$3, relatedTarget);
+        $__default["default"](parent).trigger(hideEvent);
 
         if (hideEvent.isDefaultPrevented()) {
           continue;
@@ -6621,7 +8156,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
 
         if ('ontouchstart' in document.documentElement) {
-          $__default['default'](document.body).children().off('mouseover', null, $__default['default'].noop);
+          $__default["default"](document.body).children().off('mouseover', null, $__default["default"].noop);
         }
 
         toggles[i].setAttribute('aria-expanded', 'false');
@@ -6630,8 +8165,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
           context._popper.destroy();
         }
 
-        $__default['default'](dropdownMenu).removeClass(CLASS_NAME_SHOW$2);
-        $__default['default'](parent).removeClass(CLASS_NAME_SHOW$2).trigger($__default['default'].Event(EVENT_HIDDEN$1, relatedTarget));
+        $__default["default"](dropdownMenu).removeClass(CLASS_NAME_SHOW$5);
+        $__default["default"](parent).removeClass(CLASS_NAME_SHOW$5).trigger($__default["default"].Event(EVENT_HIDDEN$3, relatedTarget));
       }
     };
 
@@ -6655,36 +8190,36 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       //  - If key is other than escape
       //    - If key is not up or down => not a dropdown command
       //    - If trigger inside the menu => not a dropdown command
-      if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $__default['default'](event.target).closest(SELECTOR_MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
+      if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE$1 && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $__default["default"](event.target).closest(SELECTOR_MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
         return;
       }
 
-      if (this.disabled || $__default['default'](this).hasClass(CLASS_NAME_DISABLED)) {
+      if (this.disabled || $__default["default"](this).hasClass(CLASS_NAME_DISABLED$1)) {
         return;
       }
 
       var parent = Dropdown._getParentFromElement(this);
 
-      var isActive = $__default['default'](parent).hasClass(CLASS_NAME_SHOW$2);
+      var isActive = $__default["default"](parent).hasClass(CLASS_NAME_SHOW$5);
 
-      if (!isActive && event.which === ESCAPE_KEYCODE) {
+      if (!isActive && event.which === ESCAPE_KEYCODE$1) {
         return;
       }
 
       event.preventDefault();
       event.stopPropagation();
 
-      if (!isActive || event.which === ESCAPE_KEYCODE || event.which === SPACE_KEYCODE) {
-        if (event.which === ESCAPE_KEYCODE) {
-          $__default['default'](parent.querySelector(SELECTOR_DATA_TOGGLE$2)).trigger('focus');
+      if (!isActive || event.which === ESCAPE_KEYCODE$1 || event.which === SPACE_KEYCODE) {
+        if (event.which === ESCAPE_KEYCODE$1) {
+          $__default["default"](parent.querySelector(SELECTOR_DATA_TOGGLE$2)).trigger('focus');
         }
 
-        $__default['default'](this).trigger('click');
+        $__default["default"](this).trigger('click');
         return;
       }
 
       var items = [].slice.call(parent.querySelectorAll(SELECTOR_VISIBLE_ITEMS)).filter(function (item) {
-        return $__default['default'](item).is(':visible');
+        return $__default["default"](item).is(':visible');
       });
 
       if (items.length === 0) {
@@ -6713,77 +8248,66 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(Dropdown, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION$4;
+        return VERSION$6;
       }
     }, {
       key: "Default",
       get: function get() {
-        return Default$2;
+        return Default$5;
       }
     }, {
       key: "DefaultType",
       get: function get() {
-        return DefaultType$2;
+        return DefaultType$5;
       }
     }]);
 
     return Dropdown;
   }();
   /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
+   * Data API implementation
    */
 
 
-  $__default['default'](document).on(EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$2, Dropdown._dataApiKeydownHandler).on(EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown._dataApiKeydownHandler).on(EVENT_CLICK_DATA_API$4 + " " + EVENT_KEYUP_DATA_API, Dropdown._clearMenus).on(EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$2, function (event) {
+  $__default["default"](document).on(EVENT_KEYDOWN_DATA_API, SELECTOR_DATA_TOGGLE$2, Dropdown._dataApiKeydownHandler).on(EVENT_KEYDOWN_DATA_API, SELECTOR_MENU, Dropdown._dataApiKeydownHandler).on(EVENT_CLICK_DATA_API$2 + " " + EVENT_KEYUP_DATA_API, Dropdown._clearMenus).on(EVENT_CLICK_DATA_API$2, SELECTOR_DATA_TOGGLE$2, function (event) {
     event.preventDefault();
     event.stopPropagation();
 
-    Dropdown._jQueryInterface.call($__default['default'](this), 'toggle');
-  }).on(EVENT_CLICK_DATA_API$4, SELECTOR_FORM_CHILD, function (e) {
+    Dropdown._jQueryInterface.call($__default["default"](this), 'toggle');
+  }).on(EVENT_CLICK_DATA_API$2, SELECTOR_FORM_CHILD, function (e) {
     e.stopPropagation();
   });
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
-  $__default['default'].fn[NAME$4] = Dropdown._jQueryInterface;
-  $__default['default'].fn[NAME$4].Constructor = Dropdown;
+  $__default["default"].fn[NAME$6] = Dropdown._jQueryInterface;
+  $__default["default"].fn[NAME$6].Constructor = Dropdown;
 
-  $__default['default'].fn[NAME$4].noConflict = function () {
-    $__default['default'].fn[NAME$4] = JQUERY_NO_CONFLICT$4;
+  $__default["default"].fn[NAME$6].noConflict = function () {
+    $__default["default"].fn[NAME$6] = JQUERY_NO_CONFLICT$6;
     return Dropdown._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
   var NAME$5 = 'modal';
-  var VERSION$5 = '4.6.0';
+  var VERSION$5 = '4.6.1';
   var DATA_KEY$5 = 'bs.modal';
   var EVENT_KEY$5 = "." + DATA_KEY$5;
-  var DATA_API_KEY$5 = '.data-api';
-  var JQUERY_NO_CONFLICT$5 = $__default['default'].fn[NAME$5];
-  var ESCAPE_KEYCODE$1 = 27; // KeyboardEvent.which value for Escape (Esc) key
+  var DATA_API_KEY$2 = '.data-api';
+  var JQUERY_NO_CONFLICT$5 = $__default["default"].fn[NAME$5];
+  var ESCAPE_KEYCODE = 27; // KeyboardEvent.which value for Escape (Esc) key
 
-  var Default$3 = {
-    backdrop: true,
-    keyboard: true,
-    focus: true,
-    show: true
-  };
-  var DefaultType$3 = {
-    backdrop: '(boolean|string)',
-    keyboard: 'boolean',
-    focus: 'boolean',
-    show: 'boolean'
-  };
+  var CLASS_NAME_SCROLLABLE = 'modal-dialog-scrollable';
+  var CLASS_NAME_SCROLLBAR_MEASURER = 'modal-scrollbar-measure';
+  var CLASS_NAME_BACKDROP = 'modal-backdrop';
+  var CLASS_NAME_OPEN = 'modal-open';
+  var CLASS_NAME_FADE$4 = 'fade';
+  var CLASS_NAME_SHOW$4 = 'show';
+  var CLASS_NAME_STATIC = 'modal-static';
   var EVENT_HIDE$2 = "hide" + EVENT_KEY$5;
   var EVENT_HIDE_PREVENTED = "hidePrevented" + EVENT_KEY$5;
   var EVENT_HIDDEN$2 = "hidden" + EVENT_KEY$5;
@@ -6791,28 +8315,31 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   var EVENT_SHOWN$2 = "shown" + EVENT_KEY$5;
   var EVENT_FOCUSIN = "focusin" + EVENT_KEY$5;
   var EVENT_RESIZE = "resize" + EVENT_KEY$5;
-  var EVENT_CLICK_DISMISS = "click.dismiss" + EVENT_KEY$5;
+  var EVENT_CLICK_DISMISS$1 = "click.dismiss" + EVENT_KEY$5;
   var EVENT_KEYDOWN_DISMISS = "keydown.dismiss" + EVENT_KEY$5;
   var EVENT_MOUSEUP_DISMISS = "mouseup.dismiss" + EVENT_KEY$5;
   var EVENT_MOUSEDOWN_DISMISS = "mousedown.dismiss" + EVENT_KEY$5;
-  var EVENT_CLICK_DATA_API$5 = "click" + EVENT_KEY$5 + DATA_API_KEY$5;
-  var CLASS_NAME_SCROLLABLE = 'modal-dialog-scrollable';
-  var CLASS_NAME_SCROLLBAR_MEASURER = 'modal-scrollbar-measure';
-  var CLASS_NAME_BACKDROP = 'modal-backdrop';
-  var CLASS_NAME_OPEN = 'modal-open';
-  var CLASS_NAME_FADE$1 = 'fade';
-  var CLASS_NAME_SHOW$3 = 'show';
-  var CLASS_NAME_STATIC = 'modal-static';
+  var EVENT_CLICK_DATA_API$1 = "click" + EVENT_KEY$5 + DATA_API_KEY$2;
   var SELECTOR_DIALOG = '.modal-dialog';
   var SELECTOR_MODAL_BODY = '.modal-body';
-  var SELECTOR_DATA_TOGGLE$3 = '[data-toggle="modal"]';
-  var SELECTOR_DATA_DISMISS = '[data-dismiss="modal"]';
+  var SELECTOR_DATA_TOGGLE$1 = '[data-toggle="modal"]';
+  var SELECTOR_DATA_DISMISS$1 = '[data-dismiss="modal"]';
   var SELECTOR_FIXED_CONTENT = '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top';
   var SELECTOR_STICKY_CONTENT = '.sticky-top';
+  var Default$4 = {
+    backdrop: true,
+    keyboard: true,
+    focus: true,
+    show: true
+  };
+  var DefaultType$4 = {
+    backdrop: '(boolean|string)',
+    keyboard: 'boolean',
+    focus: 'boolean',
+    show: 'boolean'
+  };
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Modal = /*#__PURE__*/function () {
@@ -6843,20 +8370,20 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         return;
       }
 
-      if ($__default['default'](this._element).hasClass(CLASS_NAME_FADE$1)) {
-        this._isTransitioning = true;
-      }
-
-      var showEvent = $__default['default'].Event(EVENT_SHOW$2, {
+      var showEvent = $__default["default"].Event(EVENT_SHOW$2, {
         relatedTarget: relatedTarget
       });
-      $__default['default'](this._element).trigger(showEvent);
+      $__default["default"](this._element).trigger(showEvent);
 
-      if (this._isShown || showEvent.isDefaultPrevented()) {
+      if (showEvent.isDefaultPrevented()) {
         return;
       }
 
       this._isShown = true;
+
+      if ($__default["default"](this._element).hasClass(CLASS_NAME_FADE$4)) {
+        this._isTransitioning = true;
+      }
 
       this._checkScrollbar();
 
@@ -6868,12 +8395,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       this._setResizeEvent();
 
-      $__default['default'](this._element).on(EVENT_CLICK_DISMISS, SELECTOR_DATA_DISMISS, function (event) {
+      $__default["default"](this._element).on(EVENT_CLICK_DISMISS$1, SELECTOR_DATA_DISMISS$1, function (event) {
         return _this.hide(event);
       });
-      $__default['default'](this._dialog).on(EVENT_MOUSEDOWN_DISMISS, function () {
-        $__default['default'](_this._element).one(EVENT_MOUSEUP_DISMISS, function (event) {
-          if ($__default['default'](event.target).is(_this._element)) {
+      $__default["default"](this._dialog).on(EVENT_MOUSEDOWN_DISMISS, function () {
+        $__default["default"](_this._element).one(EVENT_MOUSEUP_DISMISS, function (event) {
+          if ($__default["default"](event.target).is(_this._element)) {
             _this._ignoreBackdropClick = true;
           }
         });
@@ -6895,15 +8422,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         return;
       }
 
-      var hideEvent = $__default['default'].Event(EVENT_HIDE$2);
-      $__default['default'](this._element).trigger(hideEvent);
+      var hideEvent = $__default["default"].Event(EVENT_HIDE$2);
+      $__default["default"](this._element).trigger(hideEvent);
 
       if (!this._isShown || hideEvent.isDefaultPrevented()) {
         return;
       }
 
       this._isShown = false;
-      var transition = $__default['default'](this._element).hasClass(CLASS_NAME_FADE$1);
+      var transition = $__default["default"](this._element).hasClass(CLASS_NAME_FADE$4);
 
       if (transition) {
         this._isTransitioning = true;
@@ -6913,14 +8440,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       this._setResizeEvent();
 
-      $__default['default'](document).off(EVENT_FOCUSIN);
-      $__default['default'](this._element).removeClass(CLASS_NAME_SHOW$3);
-      $__default['default'](this._element).off(EVENT_CLICK_DISMISS);
-      $__default['default'](this._dialog).off(EVENT_MOUSEDOWN_DISMISS);
+      $__default["default"](document).off(EVENT_FOCUSIN);
+      $__default["default"](this._element).removeClass(CLASS_NAME_SHOW$4);
+      $__default["default"](this._element).off(EVENT_CLICK_DISMISS$1);
+      $__default["default"](this._dialog).off(EVENT_MOUSEDOWN_DISMISS);
 
       if (transition) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $__default['default'](this._element).one(Util.TRANSITION_END, function (event) {
+        $__default["default"](this._element).one(Util.TRANSITION_END, function (event) {
           return _this2._hideModal(event);
         }).emulateTransitionEnd(transitionDuration);
       } else {
@@ -6930,7 +8457,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     _proto.dispose = function dispose() {
       [window, this._element, this._dialog].forEach(function (htmlElement) {
-        return $__default['default'](htmlElement).off(EVENT_KEY$5);
+        return $__default["default"](htmlElement).off(EVENT_KEY$5);
       });
       /**
        * `document` has 2 events `EVENT_FOCUSIN` and `EVENT_CLICK_DATA_API`
@@ -6938,8 +8465,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
        * It will remove `EVENT_CLICK_DATA_API` event that should remain
        */
 
-      $__default['default'](document).off(EVENT_FOCUSIN);
-      $__default['default'].removeData(this._element, DATA_KEY$5);
+      $__default["default"](document).off(EVENT_FOCUSIN);
+      $__default["default"].removeData(this._element, DATA_KEY$5);
       this._config = null;
       this._element = null;
       this._dialog = null;
@@ -6957,16 +8484,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$3, config);
-      Util.typeCheckConfig(NAME$5, config, DefaultType$3);
+      config = _extends({}, Default$4, config);
+      Util.typeCheckConfig(NAME$5, config, DefaultType$4);
       return config;
     };
 
     _proto._triggerBackdropTransition = function _triggerBackdropTransition() {
       var _this3 = this;
 
-      var hideEventPrevented = $__default['default'].Event(EVENT_HIDE_PREVENTED);
-      $__default['default'](this._element).trigger(hideEventPrevented);
+      var hideEventPrevented = $__default["default"].Event(EVENT_HIDE_PREVENTED);
+      $__default["default"](this._element).trigger(hideEventPrevented);
 
       if (hideEventPrevented.isDefaultPrevented()) {
         return;
@@ -6981,12 +8508,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       this._element.classList.add(CLASS_NAME_STATIC);
 
       var modalTransitionDuration = Util.getTransitionDurationFromElement(this._dialog);
-      $__default['default'](this._element).off(Util.TRANSITION_END);
-      $__default['default'](this._element).one(Util.TRANSITION_END, function () {
+      $__default["default"](this._element).off(Util.TRANSITION_END);
+      $__default["default"](this._element).one(Util.TRANSITION_END, function () {
         _this3._element.classList.remove(CLASS_NAME_STATIC);
 
         if (!isModalOverflowing) {
-          $__default['default'](_this3._element).one(Util.TRANSITION_END, function () {
+          $__default["default"](_this3._element).one(Util.TRANSITION_END, function () {
             _this3._element.style.overflowY = '';
           }).emulateTransitionEnd(_this3._element, modalTransitionDuration);
         }
@@ -6998,7 +8525,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto._showElement = function _showElement(relatedTarget) {
       var _this4 = this;
 
-      var transition = $__default['default'](this._element).hasClass(CLASS_NAME_FADE$1);
+      var transition = $__default["default"](this._element).hasClass(CLASS_NAME_FADE$4);
       var modalBody = this._dialog ? this._dialog.querySelector(SELECTOR_MODAL_BODY) : null;
 
       if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
@@ -7014,7 +8541,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       this._element.setAttribute('role', 'dialog');
 
-      if ($__default['default'](this._dialog).hasClass(CLASS_NAME_SCROLLABLE) && modalBody) {
+      if ($__default["default"](this._dialog).hasClass(CLASS_NAME_SCROLLABLE) && modalBody) {
         modalBody.scrollTop = 0;
       } else {
         this._element.scrollTop = 0;
@@ -7024,13 +8551,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         Util.reflow(this._element);
       }
 
-      $__default['default'](this._element).addClass(CLASS_NAME_SHOW$3);
+      $__default["default"](this._element).addClass(CLASS_NAME_SHOW$4);
 
       if (this._config.focus) {
         this._enforceFocus();
       }
 
-      var shownEvent = $__default['default'].Event(EVENT_SHOWN$2, {
+      var shownEvent = $__default["default"].Event(EVENT_SHOWN$2, {
         relatedTarget: relatedTarget
       });
 
@@ -7040,12 +8567,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         }
 
         _this4._isTransitioning = false;
-        $__default['default'](_this4._element).trigger(shownEvent);
+        $__default["default"](_this4._element).trigger(shownEvent);
       };
 
       if (transition) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._dialog);
-        $__default['default'](this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
+        $__default["default"](this._dialog).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
       } else {
         transitionComplete();
       }
@@ -7054,9 +8581,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto._enforceFocus = function _enforceFocus() {
       var _this5 = this;
 
-      $__default['default'](document).off(EVENT_FOCUSIN) // Guard against infinite focus loop
+      $__default["default"](document).off(EVENT_FOCUSIN) // Guard against infinite focus loop
       .on(EVENT_FOCUSIN, function (event) {
-        if (document !== event.target && _this5._element !== event.target && $__default['default'](_this5._element).has(event.target).length === 0) {
+        if (document !== event.target && _this5._element !== event.target && $__default["default"](_this5._element).has(event.target).length === 0) {
           _this5._element.focus();
         }
       });
@@ -7066,17 +8593,17 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       var _this6 = this;
 
       if (this._isShown) {
-        $__default['default'](this._element).on(EVENT_KEYDOWN_DISMISS, function (event) {
-          if (_this6._config.keyboard && event.which === ESCAPE_KEYCODE$1) {
+        $__default["default"](this._element).on(EVENT_KEYDOWN_DISMISS, function (event) {
+          if (_this6._config.keyboard && event.which === ESCAPE_KEYCODE) {
             event.preventDefault();
 
             _this6.hide();
-          } else if (!_this6._config.keyboard && event.which === ESCAPE_KEYCODE$1) {
+          } else if (!_this6._config.keyboard && event.which === ESCAPE_KEYCODE) {
             _this6._triggerBackdropTransition();
           }
         });
       } else if (!this._isShown) {
-        $__default['default'](this._element).off(EVENT_KEYDOWN_DISMISS);
+        $__default["default"](this._element).off(EVENT_KEYDOWN_DISMISS);
       }
     };
 
@@ -7084,11 +8611,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       var _this7 = this;
 
       if (this._isShown) {
-        $__default['default'](window).on(EVENT_RESIZE, function (event) {
+        $__default["default"](window).on(EVENT_RESIZE, function (event) {
           return _this7.handleUpdate(event);
         });
       } else {
-        $__default['default'](window).off(EVENT_RESIZE);
+        $__default["default"](window).off(EVENT_RESIZE);
       }
     };
 
@@ -7106,19 +8633,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       this._isTransitioning = false;
 
       this._showBackdrop(function () {
-        $__default['default'](document.body).removeClass(CLASS_NAME_OPEN);
+        $__default["default"](document.body).removeClass(CLASS_NAME_OPEN);
 
         _this8._resetAdjustments();
 
         _this8._resetScrollbar();
 
-        $__default['default'](_this8._element).trigger(EVENT_HIDDEN$2);
+        $__default["default"](_this8._element).trigger(EVENT_HIDDEN$2);
       });
     };
 
     _proto._removeBackdrop = function _removeBackdrop() {
       if (this._backdrop) {
-        $__default['default'](this._backdrop).remove();
+        $__default["default"](this._backdrop).remove();
         this._backdrop = null;
       }
     };
@@ -7126,7 +8653,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto._showBackdrop = function _showBackdrop(callback) {
       var _this9 = this;
 
-      var animate = $__default['default'](this._element).hasClass(CLASS_NAME_FADE$1) ? CLASS_NAME_FADE$1 : '';
+      var animate = $__default["default"](this._element).hasClass(CLASS_NAME_FADE$4) ? CLASS_NAME_FADE$4 : '';
 
       if (this._isShown && this._config.backdrop) {
         this._backdrop = document.createElement('div');
@@ -7136,8 +8663,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
           this._backdrop.classList.add(animate);
         }
 
-        $__default['default'](this._backdrop).appendTo(document.body);
-        $__default['default'](this._element).on(EVENT_CLICK_DISMISS, function (event) {
+        $__default["default"](this._backdrop).appendTo(document.body);
+        $__default["default"](this._element).on(EVENT_CLICK_DISMISS$1, function (event) {
           if (_this9._ignoreBackdropClick) {
             _this9._ignoreBackdropClick = false;
             return;
@@ -7158,7 +8685,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
           Util.reflow(this._backdrop);
         }
 
-        $__default['default'](this._backdrop).addClass(CLASS_NAME_SHOW$3);
+        $__default["default"](this._backdrop).addClass(CLASS_NAME_SHOW$4);
 
         if (!callback) {
           return;
@@ -7170,9 +8697,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         }
 
         var backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
-        $__default['default'](this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
+        $__default["default"](this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(backdropTransitionDuration);
       } else if (!this._isShown && this._backdrop) {
-        $__default['default'](this._backdrop).removeClass(CLASS_NAME_SHOW$3);
+        $__default["default"](this._backdrop).removeClass(CLASS_NAME_SHOW$4);
 
         var callbackRemove = function callbackRemove() {
           _this9._removeBackdrop();
@@ -7182,10 +8709,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
           }
         };
 
-        if ($__default['default'](this._element).hasClass(CLASS_NAME_FADE$1)) {
+        if ($__default["default"](this._element).hasClass(CLASS_NAME_FADE$4)) {
           var _backdropTransitionDuration = Util.getTransitionDurationFromElement(this._backdrop);
 
-          $__default['default'](this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
+          $__default["default"](this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(_backdropTransitionDuration);
         } else {
           callbackRemove();
         }
@@ -7230,46 +8757,46 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         var fixedContent = [].slice.call(document.querySelectorAll(SELECTOR_FIXED_CONTENT));
         var stickyContent = [].slice.call(document.querySelectorAll(SELECTOR_STICKY_CONTENT)); // Adjust fixed content padding
 
-        $__default['default'](fixedContent).each(function (index, element) {
+        $__default["default"](fixedContent).each(function (index, element) {
           var actualPadding = element.style.paddingRight;
-          var calculatedPadding = $__default['default'](element).css('padding-right');
-          $__default['default'](element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this10._scrollbarWidth + "px");
+          var calculatedPadding = $__default["default"](element).css('padding-right');
+          $__default["default"](element).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + _this10._scrollbarWidth + "px");
         }); // Adjust sticky content margin
 
-        $__default['default'](stickyContent).each(function (index, element) {
+        $__default["default"](stickyContent).each(function (index, element) {
           var actualMargin = element.style.marginRight;
-          var calculatedMargin = $__default['default'](element).css('margin-right');
-          $__default['default'](element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this10._scrollbarWidth + "px");
+          var calculatedMargin = $__default["default"](element).css('margin-right');
+          $__default["default"](element).data('margin-right', actualMargin).css('margin-right', parseFloat(calculatedMargin) - _this10._scrollbarWidth + "px");
         }); // Adjust body padding
 
         var actualPadding = document.body.style.paddingRight;
-        var calculatedPadding = $__default['default'](document.body).css('padding-right');
-        $__default['default'](document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
+        var calculatedPadding = $__default["default"](document.body).css('padding-right');
+        $__default["default"](document.body).data('padding-right', actualPadding).css('padding-right', parseFloat(calculatedPadding) + this._scrollbarWidth + "px");
       }
 
-      $__default['default'](document.body).addClass(CLASS_NAME_OPEN);
+      $__default["default"](document.body).addClass(CLASS_NAME_OPEN);
     };
 
     _proto._resetScrollbar = function _resetScrollbar() {
       // Restore fixed content padding
       var fixedContent = [].slice.call(document.querySelectorAll(SELECTOR_FIXED_CONTENT));
-      $__default['default'](fixedContent).each(function (index, element) {
-        var padding = $__default['default'](element).data('padding-right');
-        $__default['default'](element).removeData('padding-right');
+      $__default["default"](fixedContent).each(function (index, element) {
+        var padding = $__default["default"](element).data('padding-right');
+        $__default["default"](element).removeData('padding-right');
         element.style.paddingRight = padding ? padding : '';
       }); // Restore sticky content
 
       var elements = [].slice.call(document.querySelectorAll("" + SELECTOR_STICKY_CONTENT));
-      $__default['default'](elements).each(function (index, element) {
-        var margin = $__default['default'](element).data('margin-right');
+      $__default["default"](elements).each(function (index, element) {
+        var margin = $__default["default"](element).data('margin-right');
 
         if (typeof margin !== 'undefined') {
-          $__default['default'](element).css('margin-right', margin).removeData('margin-right');
+          $__default["default"](element).css('margin-right', margin).removeData('margin-right');
         }
       }); // Restore body padding
 
-      var padding = $__default['default'](document.body).data('padding-right');
-      $__default['default'](document.body).removeData('padding-right');
+      var padding = $__default["default"](document.body).data('padding-right');
+      $__default["default"](document.body).removeData('padding-right');
       document.body.style.paddingRight = padding ? padding : '';
     };
 
@@ -7286,13 +8813,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     Modal._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
       return this.each(function () {
-        var data = $__default['default'](this).data(DATA_KEY$5);
+        var data = $__default["default"](this).data(DATA_KEY$5);
 
-        var _config = _extends({}, Default$3, $__default['default'](this).data(), typeof config === 'object' && config ? config : {});
+        var _config = _extends({}, Default$4, $__default["default"](this).data(), typeof config === 'object' && config ? config : {});
 
         if (!data) {
           data = new Modal(this, _config);
-          $__default['default'](this).data(DATA_KEY$5, data);
+          $__default["default"](this).data(DATA_KEY$5, data);
         }
 
         if (typeof config === 'string') {
@@ -7315,20 +8842,18 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     }, {
       key: "Default",
       get: function get() {
-        return Default$3;
+        return Default$4;
       }
     }]);
 
     return Modal;
   }();
   /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
+   * Data API implementation
    */
 
 
-  $__default['default'](document).on(EVENT_CLICK_DATA_API$5, SELECTOR_DATA_TOGGLE$3, function (event) {
+  $__default["default"](document).on(EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE$1, function (event) {
     var _this11 = this;
 
     var target;
@@ -7338,44 +8863,42 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       target = document.querySelector(selector);
     }
 
-    var config = $__default['default'](target).data(DATA_KEY$5) ? 'toggle' : _extends({}, $__default['default'](target).data(), $__default['default'](this).data());
+    var config = $__default["default"](target).data(DATA_KEY$5) ? 'toggle' : _extends({}, $__default["default"](target).data(), $__default["default"](this).data());
 
     if (this.tagName === 'A' || this.tagName === 'AREA') {
       event.preventDefault();
     }
 
-    var $target = $__default['default'](target).one(EVENT_SHOW$2, function (showEvent) {
+    var $target = $__default["default"](target).one(EVENT_SHOW$2, function (showEvent) {
       if (showEvent.isDefaultPrevented()) {
         // Only register focus restorer if modal will actually get shown
         return;
       }
 
       $target.one(EVENT_HIDDEN$2, function () {
-        if ($__default['default'](_this11).is(':visible')) {
+        if ($__default["default"](_this11).is(':visible')) {
           _this11.focus();
         }
       });
     });
 
-    Modal._jQueryInterface.call($__default['default'](target), config, this);
+    Modal._jQueryInterface.call($__default["default"](target), config, this);
   });
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
-  $__default['default'].fn[NAME$5] = Modal._jQueryInterface;
-  $__default['default'].fn[NAME$5].Constructor = Modal;
+  $__default["default"].fn[NAME$5] = Modal._jQueryInterface;
+  $__default["default"].fn[NAME$5].Constructor = Modal;
 
-  $__default['default'].fn[NAME$5].noConflict = function () {
-    $__default['default'].fn[NAME$5] = JQUERY_NO_CONFLICT$5;
+  $__default["default"].fn[NAME$5].noConflict = function () {
+    $__default["default"].fn[NAME$5] = JQUERY_NO_CONFLICT$5;
     return Modal._jQueryInterface;
   };
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v4.6.0): tools/sanitizer.js
+   * Bootstrap (v4.6.1): tools/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -7417,14 +8940,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   /**
    * A pattern that recognizes a commonly useful subset of URLs that are safe.
    *
-   * Shoutout to Angular 7 https://github.com/angular/angular/blob/7.2.4/packages/core/src/sanitization/url_sanitizer.ts
+   * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
    */
 
-  var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file):|[^#&/:?]*(?:[#/?]|$))/gi;
+  var SAFE_URL_PATTERN = /^(?:(?:https?|mailto|ftp|tel|file|sms):|[^#&/:?]*(?:[#/?]|$))/i;
   /**
    * A pattern that matches safe data URLs. Only matches image, video and audio types.
    *
-   * Shoutout to Angular 7 https://github.com/angular/angular/blob/7.2.4/packages/core/src/sanitization/url_sanitizer.ts
+   * Shoutout to Angular https://github.com/angular/angular/blob/12.2.x/packages/core/src/sanitization/url_sanitizer.ts
    */
 
   var DATA_URL_PATTERN = /^data:(?:image\/(?:bmp|gif|jpeg|jpg|png|tiff|webp)|video\/(?:mpeg|mp4|ogg|webm)|audio\/(?:mp3|oga|ogg|opus));base64,[\d+/a-z]+=*$/i;
@@ -7434,7 +8957,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     if (allowedAttributeList.indexOf(attrName) !== -1) {
       if (uriAttrs.indexOf(attrName) !== -1) {
-        return Boolean(attr.nodeValue.match(SAFE_URL_PATTERN) || attr.nodeValue.match(DATA_URL_PATTERN));
+        return Boolean(SAFE_URL_PATTERN.test(attr.nodeValue) || DATA_URL_PATTERN.test(attr.nodeValue));
       }
 
       return true;
@@ -7445,7 +8968,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     }); // Check if a regular expression validates the attribute.
 
     for (var i = 0, len = regExp.length; i < len; i++) {
-      if (attrName.match(regExp[i])) {
+      if (regExp[i].test(attrName)) {
         return true;
       }
     }
@@ -7476,7 +8999,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         return "continue";
       }
 
-      var attributeList = [].slice.call(el.attributes);
+      var attributeList = [].slice.call(el.attributes); // eslint-disable-next-line unicorn/prefer-spread
+
       var whitelistedAttributes = [].concat(whiteList['*'] || [], whiteList[elName] || []);
       attributeList.forEach(function (attr) {
         if (!allowedAttribute(attr, whitelistedAttributes)) {
@@ -7495,38 +9019,27 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   }
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$6 = 'tooltip';
-  var VERSION$6 = '4.6.0';
-  var DATA_KEY$6 = 'bs.tooltip';
-  var EVENT_KEY$6 = "." + DATA_KEY$6;
-  var JQUERY_NO_CONFLICT$6 = $__default['default'].fn[NAME$6];
-  var CLASS_PREFIX = 'bs-tooltip';
-  var BSCLS_PREFIX_REGEX = new RegExp("(^|\\s)" + CLASS_PREFIX + "\\S+", 'g');
+  var NAME$4 = 'tooltip';
+  var VERSION$4 = '4.6.1';
+  var DATA_KEY$4 = 'bs.tooltip';
+  var EVENT_KEY$4 = "." + DATA_KEY$4;
+  var JQUERY_NO_CONFLICT$4 = $__default["default"].fn[NAME$4];
+  var CLASS_PREFIX$1 = 'bs-tooltip';
+  var BSCLS_PREFIX_REGEX$1 = new RegExp("(^|\\s)" + CLASS_PREFIX$1 + "\\S+", 'g');
   var DISALLOWED_ATTRIBUTES = ['sanitize', 'whiteList', 'sanitizeFn'];
-  var DefaultType$4 = {
-    animation: 'boolean',
-    template: 'string',
-    title: '(string|element|function)',
-    trigger: 'string',
-    delay: '(number|object)',
-    html: 'boolean',
-    selector: '(string|boolean)',
-    placement: '(string|function)',
-    offset: '(number|string|function)',
-    container: '(string|element|boolean)',
-    fallbackPlacement: '(string|array)',
-    boundary: '(string|element)',
-    customClass: '(string|function)',
-    sanitize: 'boolean',
-    sanitizeFn: '(null|function)',
-    whiteList: 'object',
-    popperConfig: '(null|object)'
-  };
+  var CLASS_NAME_FADE$3 = 'fade';
+  var CLASS_NAME_SHOW$3 = 'show';
+  var HOVER_STATE_SHOW = 'show';
+  var HOVER_STATE_OUT = 'out';
+  var SELECTOR_TOOLTIP_INNER = '.tooltip-inner';
+  var SELECTOR_ARROW = '.arrow';
+  var TRIGGER_HOVER = 'hover';
+  var TRIGGER_FOCUS = 'focus';
+  var TRIGGER_CLICK = 'click';
+  var TRIGGER_MANUAL = 'manual';
   var AttachmentMap = {
     AUTO: 'auto',
     TOP: 'top',
@@ -7534,7 +9047,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     BOTTOM: 'bottom',
     LEFT: 'left'
   };
-  var Default$4 = {
+  var Default$3 = {
     animation: true,
     template: '<div class="tooltip" role="tooltip">' + '<div class="arrow"></div>' + '<div class="tooltip-inner"></div></div>',
     trigger: 'hover focus',
@@ -7553,39 +9066,46 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     whiteList: DefaultWhitelist,
     popperConfig: null
   };
-  var HOVER_STATE_SHOW = 'show';
-  var HOVER_STATE_OUT = 'out';
-  var Event = {
-    HIDE: "hide" + EVENT_KEY$6,
-    HIDDEN: "hidden" + EVENT_KEY$6,
-    SHOW: "show" + EVENT_KEY$6,
-    SHOWN: "shown" + EVENT_KEY$6,
-    INSERTED: "inserted" + EVENT_KEY$6,
-    CLICK: "click" + EVENT_KEY$6,
-    FOCUSIN: "focusin" + EVENT_KEY$6,
-    FOCUSOUT: "focusout" + EVENT_KEY$6,
-    MOUSEENTER: "mouseenter" + EVENT_KEY$6,
-    MOUSELEAVE: "mouseleave" + EVENT_KEY$6
+  var DefaultType$3 = {
+    animation: 'boolean',
+    template: 'string',
+    title: '(string|element|function)',
+    trigger: 'string',
+    delay: '(number|object)',
+    html: 'boolean',
+    selector: '(string|boolean)',
+    placement: '(string|function)',
+    offset: '(number|string|function)',
+    container: '(string|element|boolean)',
+    fallbackPlacement: '(string|array)',
+    boundary: '(string|element)',
+    customClass: '(string|function)',
+    sanitize: 'boolean',
+    sanitizeFn: '(null|function)',
+    whiteList: 'object',
+    popperConfig: '(null|object)'
   };
-  var CLASS_NAME_FADE$2 = 'fade';
-  var CLASS_NAME_SHOW$4 = 'show';
-  var SELECTOR_TOOLTIP_INNER = '.tooltip-inner';
-  var SELECTOR_ARROW = '.arrow';
-  var TRIGGER_HOVER = 'hover';
-  var TRIGGER_FOCUS = 'focus';
-  var TRIGGER_CLICK = 'click';
-  var TRIGGER_MANUAL = 'manual';
+  var Event$1 = {
+    HIDE: "hide" + EVENT_KEY$4,
+    HIDDEN: "hidden" + EVENT_KEY$4,
+    SHOW: "show" + EVENT_KEY$4,
+    SHOWN: "shown" + EVENT_KEY$4,
+    INSERTED: "inserted" + EVENT_KEY$4,
+    CLICK: "click" + EVENT_KEY$4,
+    FOCUSIN: "focusin" + EVENT_KEY$4,
+    FOCUSOUT: "focusout" + EVENT_KEY$4,
+    MOUSEENTER: "mouseenter" + EVENT_KEY$4,
+    MOUSELEAVE: "mouseleave" + EVENT_KEY$4
+  };
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Tooltip = /*#__PURE__*/function () {
     function Tooltip(element, config) {
-      if (typeof Popper__default['default'] === 'undefined') {
+      if (typeof Popper__default["default"] === 'undefined') {
         throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)');
-      } // private
+      } // Private
 
 
       this._isEnabled = true;
@@ -7624,11 +9144,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       if (event) {
         var dataKey = this.constructor.DATA_KEY;
-        var context = $__default['default'](event.currentTarget).data(dataKey);
+        var context = $__default["default"](event.currentTarget).data(dataKey);
 
         if (!context) {
           context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-          $__default['default'](event.currentTarget).data(dataKey, context);
+          $__default["default"](event.currentTarget).data(dataKey, context);
         }
 
         context._activeTrigger.click = !context._activeTrigger.click;
@@ -7639,7 +9159,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
           context._leave(null, context);
         }
       } else {
-        if ($__default['default'](this.getTipElement()).hasClass(CLASS_NAME_SHOW$4)) {
+        if ($__default["default"](this.getTipElement()).hasClass(CLASS_NAME_SHOW$3)) {
           this._leave(null, this);
 
           return;
@@ -7651,12 +9171,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     _proto.dispose = function dispose() {
       clearTimeout(this._timeout);
-      $__default['default'].removeData(this.element, this.constructor.DATA_KEY);
-      $__default['default'](this.element).off(this.constructor.EVENT_KEY);
-      $__default['default'](this.element).closest('.modal').off('hide.bs.modal', this._hideModalHandler);
+      $__default["default"].removeData(this.element, this.constructor.DATA_KEY);
+      $__default["default"](this.element).off(this.constructor.EVENT_KEY);
+      $__default["default"](this.element).closest('.modal').off('hide.bs.modal', this._hideModalHandler);
 
       if (this.tip) {
-        $__default['default'](this.tip).remove();
+        $__default["default"](this.tip).remove();
       }
 
       this._isEnabled = null;
@@ -7677,16 +9197,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto.show = function show() {
       var _this = this;
 
-      if ($__default['default'](this.element).css('display') === 'none') {
+      if ($__default["default"](this.element).css('display') === 'none') {
         throw new Error('Please use show on visible elements');
       }
 
-      var showEvent = $__default['default'].Event(this.constructor.Event.SHOW);
+      var showEvent = $__default["default"].Event(this.constructor.Event.SHOW);
 
       if (this.isWithContent() && this._isEnabled) {
-        $__default['default'](this.element).trigger(showEvent);
+        $__default["default"](this.element).trigger(showEvent);
         var shadowRoot = Util.findShadowRoot(this.element);
-        var isInTheDom = $__default['default'].contains(shadowRoot !== null ? shadowRoot : this.element.ownerDocument.documentElement, this.element);
+        var isInTheDom = $__default["default"].contains(shadowRoot !== null ? shadowRoot : this.element.ownerDocument.documentElement, this.element);
 
         if (showEvent.isDefaultPrevented() || !isInTheDom) {
           return;
@@ -7699,7 +9219,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         this.setContent();
 
         if (this.config.animation) {
-          $__default['default'](tip).addClass(CLASS_NAME_FADE$2);
+          $__default["default"](tip).addClass(CLASS_NAME_FADE$3);
         }
 
         var placement = typeof this.config.placement === 'function' ? this.config.placement.call(this, tip, this.element) : this.config.placement;
@@ -7710,22 +9230,22 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
         var container = this._getContainer();
 
-        $__default['default'](tip).data(this.constructor.DATA_KEY, this);
+        $__default["default"](tip).data(this.constructor.DATA_KEY, this);
 
-        if (!$__default['default'].contains(this.element.ownerDocument.documentElement, this.tip)) {
-          $__default['default'](tip).appendTo(container);
+        if (!$__default["default"].contains(this.element.ownerDocument.documentElement, this.tip)) {
+          $__default["default"](tip).appendTo(container);
         }
 
-        $__default['default'](this.element).trigger(this.constructor.Event.INSERTED);
-        this._popper = new Popper__default['default'](this.element, tip, this._getPopperConfig(attachment));
-        $__default['default'](tip).addClass(CLASS_NAME_SHOW$4);
-        $__default['default'](tip).addClass(this.config.customClass); // If this is a touch-enabled device we add extra
+        $__default["default"](this.element).trigger(this.constructor.Event.INSERTED);
+        this._popper = new Popper__default["default"](this.element, tip, this._getPopperConfig(attachment));
+        $__default["default"](tip).addClass(CLASS_NAME_SHOW$3);
+        $__default["default"](tip).addClass(this.config.customClass); // If this is a touch-enabled device we add extra
         // empty mouseover listeners to the body's immediate children;
         // only needed because of broken event delegation on iOS
         // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
         if ('ontouchstart' in document.documentElement) {
-          $__default['default'](document.body).children().on('mouseover', null, $__default['default'].noop);
+          $__default["default"](document.body).children().on('mouseover', null, $__default["default"].noop);
         }
 
         var complete = function complete() {
@@ -7735,16 +9255,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
           var prevHoverState = _this._hoverState;
           _this._hoverState = null;
-          $__default['default'](_this.element).trigger(_this.constructor.Event.SHOWN);
+          $__default["default"](_this.element).trigger(_this.constructor.Event.SHOWN);
 
           if (prevHoverState === HOVER_STATE_OUT) {
             _this._leave(null, _this);
           }
         };
 
-        if ($__default['default'](this.tip).hasClass(CLASS_NAME_FADE$2)) {
+        if ($__default["default"](this.tip).hasClass(CLASS_NAME_FADE$3)) {
           var transitionDuration = Util.getTransitionDurationFromElement(this.tip);
-          $__default['default'](this.tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+          $__default["default"](this.tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
         } else {
           complete();
         }
@@ -7755,7 +9275,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       var _this2 = this;
 
       var tip = this.getTipElement();
-      var hideEvent = $__default['default'].Event(this.constructor.Event.HIDE);
+      var hideEvent = $__default["default"].Event(this.constructor.Event.HIDE);
 
       var complete = function complete() {
         if (_this2._hoverState !== HOVER_STATE_SHOW && tip.parentNode) {
@@ -7766,7 +9286,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
         _this2.element.removeAttribute('aria-describedby');
 
-        $__default['default'](_this2.element).trigger(_this2.constructor.Event.HIDDEN);
+        $__default["default"](_this2.element).trigger(_this2.constructor.Event.HIDDEN);
 
         if (_this2._popper !== null) {
           _this2._popper.destroy();
@@ -7777,26 +9297,26 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         }
       };
 
-      $__default['default'](this.element).trigger(hideEvent);
+      $__default["default"](this.element).trigger(hideEvent);
 
       if (hideEvent.isDefaultPrevented()) {
         return;
       }
 
-      $__default['default'](tip).removeClass(CLASS_NAME_SHOW$4); // If this is a touch-enabled device we remove the extra
+      $__default["default"](tip).removeClass(CLASS_NAME_SHOW$3); // If this is a touch-enabled device we remove the extra
       // empty mouseover listeners we added for iOS support
 
       if ('ontouchstart' in document.documentElement) {
-        $__default['default'](document.body).children().off('mouseover', null, $__default['default'].noop);
+        $__default["default"](document.body).children().off('mouseover', null, $__default["default"].noop);
       }
 
       this._activeTrigger[TRIGGER_CLICK] = false;
       this._activeTrigger[TRIGGER_FOCUS] = false;
       this._activeTrigger[TRIGGER_HOVER] = false;
 
-      if ($__default['default'](this.tip).hasClass(CLASS_NAME_FADE$2)) {
+      if ($__default["default"](this.tip).hasClass(CLASS_NAME_FADE$3)) {
         var transitionDuration = Util.getTransitionDurationFromElement(tip);
-        $__default['default'](tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+        $__default["default"](tip).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       } else {
         complete();
       }
@@ -7816,29 +9336,29 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-      $__default['default'](this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
+      $__default["default"](this.getTipElement()).addClass(CLASS_PREFIX$1 + "-" + attachment);
     };
 
     _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $__default['default'](this.config.template)[0];
+      this.tip = this.tip || $__default["default"](this.config.template)[0];
       return this.tip;
     };
 
     _proto.setContent = function setContent() {
       var tip = this.getTipElement();
-      this.setElementContent($__default['default'](tip.querySelectorAll(SELECTOR_TOOLTIP_INNER)), this.getTitle());
-      $__default['default'](tip).removeClass(CLASS_NAME_FADE$2 + " " + CLASS_NAME_SHOW$4);
+      this.setElementContent($__default["default"](tip.querySelectorAll(SELECTOR_TOOLTIP_INNER)), this.getTitle());
+      $__default["default"](tip).removeClass(CLASS_NAME_FADE$3 + " " + CLASS_NAME_SHOW$3);
     };
 
     _proto.setElementContent = function setElementContent($element, content) {
       if (typeof content === 'object' && (content.nodeType || content.jquery)) {
         // Content is a DOM node or a jQuery
         if (this.config.html) {
-          if (!$__default['default'](content).parent().is($element)) {
+          if (!$__default["default"](content).parent().is($element)) {
             $element.empty().append(content);
           }
         } else {
-          $element.text($__default['default'](content).text());
+          $element.text($__default["default"](content).text());
         }
 
         return;
@@ -7902,7 +9422,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       if (typeof this.config.offset === 'function') {
         offset.fn = function (data) {
-          data.offsets = _extends({}, data.offsets, _this4.config.offset(data.offsets, _this4.element) || {});
+          data.offsets = _extends({}, data.offsets, _this4.config.offset(data.offsets, _this4.element));
           return data;
         };
       } else {
@@ -7918,10 +9438,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       }
 
       if (Util.isElement(this.config.container)) {
-        return $__default['default'](this.config.container);
+        return $__default["default"](this.config.container);
       }
 
-      return $__default['default'](document).find(this.config.container);
+      return $__default["default"](document).find(this.config.container);
     };
 
     _proto._getAttachment = function _getAttachment(placement) {
@@ -7934,13 +9454,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       var triggers = this.config.trigger.split(' ');
       triggers.forEach(function (trigger) {
         if (trigger === 'click') {
-          $__default['default'](_this5.element).on(_this5.constructor.Event.CLICK, _this5.config.selector, function (event) {
+          $__default["default"](_this5.element).on(_this5.constructor.Event.CLICK, _this5.config.selector, function (event) {
             return _this5.toggle(event);
           });
         } else if (trigger !== TRIGGER_MANUAL) {
           var eventIn = trigger === TRIGGER_HOVER ? _this5.constructor.Event.MOUSEENTER : _this5.constructor.Event.FOCUSIN;
           var eventOut = trigger === TRIGGER_HOVER ? _this5.constructor.Event.MOUSELEAVE : _this5.constructor.Event.FOCUSOUT;
-          $__default['default'](_this5.element).on(eventIn, _this5.config.selector, function (event) {
+          $__default["default"](_this5.element).on(eventIn, _this5.config.selector, function (event) {
             return _this5._enter(event);
           }).on(eventOut, _this5.config.selector, function (event) {
             return _this5._leave(event);
@@ -7954,7 +9474,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         }
       };
 
-      $__default['default'](this.element).closest('.modal').on('hide.bs.modal', this._hideModalHandler);
+      $__default["default"](this.element).closest('.modal').on('hide.bs.modal', this._hideModalHandler);
 
       if (this.config.selector) {
         this.config = _extends({}, this.config, {
@@ -7977,18 +9497,18 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     _proto._enter = function _enter(event, context) {
       var dataKey = this.constructor.DATA_KEY;
-      context = context || $__default['default'](event.currentTarget).data(dataKey);
+      context = context || $__default["default"](event.currentTarget).data(dataKey);
 
       if (!context) {
         context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $__default['default'](event.currentTarget).data(dataKey, context);
+        $__default["default"](event.currentTarget).data(dataKey, context);
       }
 
       if (event) {
         context._activeTrigger[event.type === 'focusin' ? TRIGGER_FOCUS : TRIGGER_HOVER] = true;
       }
 
-      if ($__default['default'](context.getTipElement()).hasClass(CLASS_NAME_SHOW$4) || context._hoverState === HOVER_STATE_SHOW) {
+      if ($__default["default"](context.getTipElement()).hasClass(CLASS_NAME_SHOW$3) || context._hoverState === HOVER_STATE_SHOW) {
         context._hoverState = HOVER_STATE_SHOW;
         return;
       }
@@ -8010,11 +9530,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     _proto._leave = function _leave(event, context) {
       var dataKey = this.constructor.DATA_KEY;
-      context = context || $__default['default'](event.currentTarget).data(dataKey);
+      context = context || $__default["default"](event.currentTarget).data(dataKey);
 
       if (!context) {
         context = new this.constructor(event.currentTarget, this._getDelegateConfig());
-        $__default['default'](event.currentTarget).data(dataKey, context);
+        $__default["default"](event.currentTarget).data(dataKey, context);
       }
 
       if (event) {
@@ -8051,7 +9571,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto._getConfig = function _getConfig(config) {
-      var dataAttributes = $__default['default'](this.element).data();
+      var dataAttributes = $__default["default"](this.element).data();
       Object.keys(dataAttributes).forEach(function (dataAttr) {
         if (DISALLOWED_ATTRIBUTES.indexOf(dataAttr) !== -1) {
           delete dataAttributes[dataAttr];
@@ -8074,7 +9594,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         config.content = config.content.toString();
       }
 
-      Util.typeCheckConfig(NAME$6, config, this.constructor.DefaultType);
+      Util.typeCheckConfig(NAME$4, config, this.constructor.DefaultType);
 
       if (config.sanitize) {
         config.template = sanitizeHtml(config.template, config.whiteList, config.sanitizeFn);
@@ -8098,8 +9618,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto._cleanTipClass = function _cleanTipClass() {
-      var $tip = $__default['default'](this.getTipElement());
-      var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
+      var $tip = $__default["default"](this.getTipElement());
+      var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX$1);
 
       if (tabClass !== null && tabClass.length) {
         $tip.removeClass(tabClass.join(''));
@@ -8122,7 +9642,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         return;
       }
 
-      $__default['default'](tip).removeClass(CLASS_NAME_FADE$2);
+      $__default["default"](tip).removeClass(CLASS_NAME_FADE$3);
       this.config.animation = false;
       this.hide();
       this.show();
@@ -8132,8 +9652,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     Tooltip._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $element = $__default['default'](this);
-        var data = $element.data(DATA_KEY$6);
+        var $element = $__default["default"](this);
+        var data = $element.data(DATA_KEY$4);
 
         var _config = typeof config === 'object' && config;
 
@@ -8143,7 +9663,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
         if (!data) {
           data = new Tooltip(this, _config);
-          $element.data(DATA_KEY$6, data);
+          $element.data(DATA_KEY$4, data);
         }
 
         if (typeof config === 'string') {
@@ -8159,102 +9679,96 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(Tooltip, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION$6;
+        return VERSION$4;
       }
     }, {
       key: "Default",
       get: function get() {
-        return Default$4;
+        return Default$3;
       }
     }, {
       key: "NAME",
       get: function get() {
-        return NAME$6;
+        return NAME$4;
       }
     }, {
       key: "DATA_KEY",
       get: function get() {
-        return DATA_KEY$6;
+        return DATA_KEY$4;
       }
     }, {
       key: "Event",
       get: function get() {
-        return Event;
+        return Event$1;
       }
     }, {
       key: "EVENT_KEY",
       get: function get() {
-        return EVENT_KEY$6;
+        return EVENT_KEY$4;
       }
     }, {
       key: "DefaultType",
       get: function get() {
-        return DefaultType$4;
+        return DefaultType$3;
       }
     }]);
 
     return Tooltip;
   }();
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
 
-  $__default['default'].fn[NAME$6] = Tooltip._jQueryInterface;
-  $__default['default'].fn[NAME$6].Constructor = Tooltip;
+  $__default["default"].fn[NAME$4] = Tooltip._jQueryInterface;
+  $__default["default"].fn[NAME$4].Constructor = Tooltip;
 
-  $__default['default'].fn[NAME$6].noConflict = function () {
-    $__default['default'].fn[NAME$6] = JQUERY_NO_CONFLICT$6;
+  $__default["default"].fn[NAME$4].noConflict = function () {
+    $__default["default"].fn[NAME$4] = JQUERY_NO_CONFLICT$4;
     return Tooltip._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$7 = 'popover';
-  var VERSION$7 = '4.6.0';
-  var DATA_KEY$7 = 'bs.popover';
-  var EVENT_KEY$7 = "." + DATA_KEY$7;
-  var JQUERY_NO_CONFLICT$7 = $__default['default'].fn[NAME$7];
-  var CLASS_PREFIX$1 = 'bs-popover';
-  var BSCLS_PREFIX_REGEX$1 = new RegExp("(^|\\s)" + CLASS_PREFIX$1 + "\\S+", 'g');
+  var NAME$3 = 'popover';
+  var VERSION$3 = '4.6.1';
+  var DATA_KEY$3 = 'bs.popover';
+  var EVENT_KEY$3 = "." + DATA_KEY$3;
+  var JQUERY_NO_CONFLICT$3 = $__default["default"].fn[NAME$3];
+  var CLASS_PREFIX = 'bs-popover';
+  var BSCLS_PREFIX_REGEX = new RegExp("(^|\\s)" + CLASS_PREFIX + "\\S+", 'g');
+  var CLASS_NAME_FADE$2 = 'fade';
+  var CLASS_NAME_SHOW$2 = 'show';
+  var SELECTOR_TITLE = '.popover-header';
+  var SELECTOR_CONTENT = '.popover-body';
 
-  var Default$5 = _extends({}, Tooltip.Default, {
+  var Default$2 = _extends({}, Tooltip.Default, {
     placement: 'right',
     trigger: 'click',
     content: '',
     template: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div></div>'
   });
 
-  var DefaultType$5 = _extends({}, Tooltip.DefaultType, {
+  var DefaultType$2 = _extends({}, Tooltip.DefaultType, {
     content: '(string|element|function)'
   });
 
-  var CLASS_NAME_FADE$3 = 'fade';
-  var CLASS_NAME_SHOW$5 = 'show';
-  var SELECTOR_TITLE = '.popover-header';
-  var SELECTOR_CONTENT = '.popover-body';
-  var Event$1 = {
-    HIDE: "hide" + EVENT_KEY$7,
-    HIDDEN: "hidden" + EVENT_KEY$7,
-    SHOW: "show" + EVENT_KEY$7,
-    SHOWN: "shown" + EVENT_KEY$7,
-    INSERTED: "inserted" + EVENT_KEY$7,
-    CLICK: "click" + EVENT_KEY$7,
-    FOCUSIN: "focusin" + EVENT_KEY$7,
-    FOCUSOUT: "focusout" + EVENT_KEY$7,
-    MOUSEENTER: "mouseenter" + EVENT_KEY$7,
-    MOUSELEAVE: "mouseleave" + EVENT_KEY$7
+  var Event = {
+    HIDE: "hide" + EVENT_KEY$3,
+    HIDDEN: "hidden" + EVENT_KEY$3,
+    SHOW: "show" + EVENT_KEY$3,
+    SHOWN: "shown" + EVENT_KEY$3,
+    INSERTED: "inserted" + EVENT_KEY$3,
+    CLICK: "click" + EVENT_KEY$3,
+    FOCUSIN: "focusin" + EVENT_KEY$3,
+    FOCUSOUT: "focusout" + EVENT_KEY$3,
+    MOUSEENTER: "mouseenter" + EVENT_KEY$3,
+    MOUSELEAVE: "mouseleave" + EVENT_KEY$3
   };
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Popover = /*#__PURE__*/function (_Tooltip) {
@@ -8272,16 +9786,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto.addAttachmentClass = function addAttachmentClass(attachment) {
-      $__default['default'](this.getTipElement()).addClass(CLASS_PREFIX$1 + "-" + attachment);
+      $__default["default"](this.getTipElement()).addClass(CLASS_PREFIX + "-" + attachment);
     };
 
     _proto.getTipElement = function getTipElement() {
-      this.tip = this.tip || $__default['default'](this.config.template)[0];
+      this.tip = this.tip || $__default["default"](this.config.template)[0];
       return this.tip;
     };
 
     _proto.setContent = function setContent() {
-      var $tip = $__default['default'](this.getTipElement()); // We use append for html objects to maintain js events
+      var $tip = $__default["default"](this.getTipElement()); // We use append for html objects to maintain js events
 
       this.setElementContent($tip.find(SELECTOR_TITLE), this.getTitle());
 
@@ -8292,7 +9806,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       }
 
       this.setElementContent($tip.find(SELECTOR_CONTENT), content);
-      $tip.removeClass(CLASS_NAME_FADE$3 + " " + CLASS_NAME_SHOW$5);
+      $tip.removeClass(CLASS_NAME_FADE$2 + " " + CLASS_NAME_SHOW$2);
     } // Private
     ;
 
@@ -8301,8 +9815,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto._cleanTipClass = function _cleanTipClass() {
-      var $tip = $__default['default'](this.getTipElement());
-      var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX$1);
+      var $tip = $__default["default"](this.getTipElement());
+      var tabClass = $tip.attr('class').match(BSCLS_PREFIX_REGEX);
 
       if (tabClass !== null && tabClass.length > 0) {
         $tip.removeClass(tabClass.join(''));
@@ -8312,7 +9826,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     Popover._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $__default['default'](this).data(DATA_KEY$7);
+        var data = $__default["default"](this).data(DATA_KEY$3);
 
         var _config = typeof config === 'object' ? config : null;
 
@@ -8322,7 +9836,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
         if (!data) {
           data = new Popover(this, _config);
-          $__default['default'](this).data(DATA_KEY$7, data);
+          $__default["default"](this).data(DATA_KEY$3, data);
         }
 
         if (typeof config === 'string') {
@@ -8337,100 +9851,94 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     _createClass(Popover, null, [{
       key: "VERSION",
-      // Getters
-      get: function get() {
-        return VERSION$7;
+      get: // Getters
+      function get() {
+        return VERSION$3;
       }
     }, {
       key: "Default",
       get: function get() {
-        return Default$5;
+        return Default$2;
       }
     }, {
       key: "NAME",
       get: function get() {
-        return NAME$7;
+        return NAME$3;
       }
     }, {
       key: "DATA_KEY",
       get: function get() {
-        return DATA_KEY$7;
+        return DATA_KEY$3;
       }
     }, {
       key: "Event",
       get: function get() {
-        return Event$1;
+        return Event;
       }
     }, {
       key: "EVENT_KEY",
       get: function get() {
-        return EVENT_KEY$7;
+        return EVENT_KEY$3;
       }
     }, {
       key: "DefaultType",
       get: function get() {
-        return DefaultType$5;
+        return DefaultType$2;
       }
     }]);
 
     return Popover;
   }(Tooltip);
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
 
-  $__default['default'].fn[NAME$7] = Popover._jQueryInterface;
-  $__default['default'].fn[NAME$7].Constructor = Popover;
+  $__default["default"].fn[NAME$3] = Popover._jQueryInterface;
+  $__default["default"].fn[NAME$3].Constructor = Popover;
 
-  $__default['default'].fn[NAME$7].noConflict = function () {
-    $__default['default'].fn[NAME$7] = JQUERY_NO_CONFLICT$7;
+  $__default["default"].fn[NAME$3].noConflict = function () {
+    $__default["default"].fn[NAME$3] = JQUERY_NO_CONFLICT$3;
     return Popover._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$8 = 'scrollspy';
-  var VERSION$8 = '4.6.0';
-  var DATA_KEY$8 = 'bs.scrollspy';
-  var EVENT_KEY$8 = "." + DATA_KEY$8;
-  var DATA_API_KEY$6 = '.data-api';
-  var JQUERY_NO_CONFLICT$8 = $__default['default'].fn[NAME$8];
-  var Default$6 = {
+  var NAME$2 = 'scrollspy';
+  var VERSION$2 = '4.6.1';
+  var DATA_KEY$2 = 'bs.scrollspy';
+  var EVENT_KEY$2 = "." + DATA_KEY$2;
+  var DATA_API_KEY$1 = '.data-api';
+  var JQUERY_NO_CONFLICT$2 = $__default["default"].fn[NAME$2];
+  var CLASS_NAME_DROPDOWN_ITEM = 'dropdown-item';
+  var CLASS_NAME_ACTIVE$1 = 'active';
+  var EVENT_ACTIVATE = "activate" + EVENT_KEY$2;
+  var EVENT_SCROLL = "scroll" + EVENT_KEY$2;
+  var EVENT_LOAD_DATA_API = "load" + EVENT_KEY$2 + DATA_API_KEY$1;
+  var METHOD_OFFSET = 'offset';
+  var METHOD_POSITION = 'position';
+  var SELECTOR_DATA_SPY = '[data-spy="scroll"]';
+  var SELECTOR_NAV_LIST_GROUP$1 = '.nav, .list-group';
+  var SELECTOR_NAV_LINKS = '.nav-link';
+  var SELECTOR_NAV_ITEMS = '.nav-item';
+  var SELECTOR_LIST_ITEMS = '.list-group-item';
+  var SELECTOR_DROPDOWN$1 = '.dropdown';
+  var SELECTOR_DROPDOWN_ITEMS = '.dropdown-item';
+  var SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
+  var Default$1 = {
     offset: 10,
     method: 'auto',
     target: ''
   };
-  var DefaultType$6 = {
+  var DefaultType$1 = {
     offset: 'number',
     method: 'string',
     target: '(string|element)'
   };
-  var EVENT_ACTIVATE = "activate" + EVENT_KEY$8;
-  var EVENT_SCROLL = "scroll" + EVENT_KEY$8;
-  var EVENT_LOAD_DATA_API$2 = "load" + EVENT_KEY$8 + DATA_API_KEY$6;
-  var CLASS_NAME_DROPDOWN_ITEM = 'dropdown-item';
-  var CLASS_NAME_ACTIVE$2 = 'active';
-  var SELECTOR_DATA_SPY = '[data-spy="scroll"]';
-  var SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
-  var SELECTOR_NAV_LINKS = '.nav-link';
-  var SELECTOR_NAV_ITEMS = '.nav-item';
-  var SELECTOR_LIST_ITEMS = '.list-group-item';
-  var SELECTOR_DROPDOWN = '.dropdown';
-  var SELECTOR_DROPDOWN_ITEMS = '.dropdown-item';
-  var SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
-  var METHOD_OFFSET = 'offset';
-  var METHOD_POSITION = 'position';
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var ScrollSpy = /*#__PURE__*/function () {
@@ -8445,7 +9953,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       this._targets = [];
       this._activeTarget = null;
       this._scrollHeight = 0;
-      $__default['default'](this._scrollElement).on(EVENT_SCROLL, function (event) {
+      $__default["default"](this._scrollElement).on(EVENT_SCROLL, function (event) {
         return _this._process(event);
       });
       this.refresh();
@@ -8480,7 +9988,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
           if (targetBCR.width || targetBCR.height) {
             // TODO (fat): remove sketch reliance on jQuery position/offset
-            return [$__default['default'](target)[offsetMethod]().top + offsetBase, targetSelector];
+            return [$__default["default"](target)[offsetMethod]().top + offsetBase, targetSelector];
           }
         }
 
@@ -8497,8 +10005,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto.dispose = function dispose() {
-      $__default['default'].removeData(this._element, DATA_KEY$8);
-      $__default['default'](this._scrollElement).off(EVENT_KEY$8);
+      $__default["default"].removeData(this._element, DATA_KEY$2);
+      $__default["default"](this._scrollElement).off(EVENT_KEY$2);
       this._element = null;
       this._scrollElement = null;
       this._config = null;
@@ -8511,20 +10019,20 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$6, typeof config === 'object' && config ? config : {});
+      config = _extends({}, Default$1, typeof config === 'object' && config ? config : {});
 
       if (typeof config.target !== 'string' && Util.isElement(config.target)) {
-        var id = $__default['default'](config.target).attr('id');
+        var id = $__default["default"](config.target).attr('id');
 
         if (!id) {
-          id = Util.getUID(NAME$8);
-          $__default['default'](config.target).attr('id', id);
+          id = Util.getUID(NAME$2);
+          $__default["default"](config.target).attr('id', id);
         }
 
         config.target = "#" + id;
       }
 
-      Util.typeCheckConfig(NAME$8, config, DefaultType$6);
+      Util.typeCheckConfig(NAME$2, config, DefaultType$1);
       return config;
     };
 
@@ -8587,44 +10095,44 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         return selector + "[data-target=\"" + target + "\"]," + selector + "[href=\"" + target + "\"]";
       });
 
-      var $link = $__default['default']([].slice.call(document.querySelectorAll(queries.join(','))));
+      var $link = $__default["default"]([].slice.call(document.querySelectorAll(queries.join(','))));
 
       if ($link.hasClass(CLASS_NAME_DROPDOWN_ITEM)) {
-        $link.closest(SELECTOR_DROPDOWN).find(SELECTOR_DROPDOWN_TOGGLE).addClass(CLASS_NAME_ACTIVE$2);
-        $link.addClass(CLASS_NAME_ACTIVE$2);
+        $link.closest(SELECTOR_DROPDOWN$1).find(SELECTOR_DROPDOWN_TOGGLE$1).addClass(CLASS_NAME_ACTIVE$1);
+        $link.addClass(CLASS_NAME_ACTIVE$1);
       } else {
         // Set triggered link as active
-        $link.addClass(CLASS_NAME_ACTIVE$2); // Set triggered links parents as active
+        $link.addClass(CLASS_NAME_ACTIVE$1); // Set triggered links parents as active
         // With both <ul> and <nav> markup a parent is the previous sibling of any nav ancestor
 
-        $link.parents(SELECTOR_NAV_LIST_GROUP).prev(SELECTOR_NAV_LINKS + ", " + SELECTOR_LIST_ITEMS).addClass(CLASS_NAME_ACTIVE$2); // Handle special case when .nav-link is inside .nav-item
+        $link.parents(SELECTOR_NAV_LIST_GROUP$1).prev(SELECTOR_NAV_LINKS + ", " + SELECTOR_LIST_ITEMS).addClass(CLASS_NAME_ACTIVE$1); // Handle special case when .nav-link is inside .nav-item
 
-        $link.parents(SELECTOR_NAV_LIST_GROUP).prev(SELECTOR_NAV_ITEMS).children(SELECTOR_NAV_LINKS).addClass(CLASS_NAME_ACTIVE$2);
+        $link.parents(SELECTOR_NAV_LIST_GROUP$1).prev(SELECTOR_NAV_ITEMS).children(SELECTOR_NAV_LINKS).addClass(CLASS_NAME_ACTIVE$1);
       }
 
-      $__default['default'](this._scrollElement).trigger(EVENT_ACTIVATE, {
+      $__default["default"](this._scrollElement).trigger(EVENT_ACTIVATE, {
         relatedTarget: target
       });
     };
 
     _proto._clear = function _clear() {
       [].slice.call(document.querySelectorAll(this._selector)).filter(function (node) {
-        return node.classList.contains(CLASS_NAME_ACTIVE$2);
+        return node.classList.contains(CLASS_NAME_ACTIVE$1);
       }).forEach(function (node) {
-        return node.classList.remove(CLASS_NAME_ACTIVE$2);
+        return node.classList.remove(CLASS_NAME_ACTIVE$1);
       });
     } // Static
     ;
 
     ScrollSpy._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var data = $__default['default'](this).data(DATA_KEY$8);
+        var data = $__default["default"](this).data(DATA_KEY$2);
 
         var _config = typeof config === 'object' && config;
 
         if (!data) {
           data = new ScrollSpy(this, _config);
-          $__default['default'](this).data(DATA_KEY$8, data);
+          $__default["default"](this).data(DATA_KEY$2, data);
         }
 
         if (typeof config === 'string') {
@@ -8640,81 +10148,73 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(ScrollSpy, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION$8;
+        return VERSION$2;
       }
     }, {
       key: "Default",
       get: function get() {
-        return Default$6;
+        return Default$1;
       }
     }]);
 
     return ScrollSpy;
   }();
   /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
+   * Data API implementation
    */
 
 
-  $__default['default'](window).on(EVENT_LOAD_DATA_API$2, function () {
+  $__default["default"](window).on(EVENT_LOAD_DATA_API, function () {
     var scrollSpys = [].slice.call(document.querySelectorAll(SELECTOR_DATA_SPY));
     var scrollSpysLength = scrollSpys.length;
 
     for (var i = scrollSpysLength; i--;) {
-      var $spy = $__default['default'](scrollSpys[i]);
+      var $spy = $__default["default"](scrollSpys[i]);
 
       ScrollSpy._jQueryInterface.call($spy, $spy.data());
     }
   });
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
-  $__default['default'].fn[NAME$8] = ScrollSpy._jQueryInterface;
-  $__default['default'].fn[NAME$8].Constructor = ScrollSpy;
+  $__default["default"].fn[NAME$2] = ScrollSpy._jQueryInterface;
+  $__default["default"].fn[NAME$2].Constructor = ScrollSpy;
 
-  $__default['default'].fn[NAME$8].noConflict = function () {
-    $__default['default'].fn[NAME$8] = JQUERY_NO_CONFLICT$8;
+  $__default["default"].fn[NAME$2].noConflict = function () {
+    $__default["default"].fn[NAME$2] = JQUERY_NO_CONFLICT$2;
     return ScrollSpy._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$9 = 'tab';
-  var VERSION$9 = '4.6.0';
-  var DATA_KEY$9 = 'bs.tab';
-  var EVENT_KEY$9 = "." + DATA_KEY$9;
-  var DATA_API_KEY$7 = '.data-api';
-  var JQUERY_NO_CONFLICT$9 = $__default['default'].fn[NAME$9];
-  var EVENT_HIDE$3 = "hide" + EVENT_KEY$9;
-  var EVENT_HIDDEN$3 = "hidden" + EVENT_KEY$9;
-  var EVENT_SHOW$3 = "show" + EVENT_KEY$9;
-  var EVENT_SHOWN$3 = "shown" + EVENT_KEY$9;
-  var EVENT_CLICK_DATA_API$6 = "click" + EVENT_KEY$9 + DATA_API_KEY$7;
+  var NAME$1 = 'tab';
+  var VERSION$1 = '4.6.1';
+  var DATA_KEY$1 = 'bs.tab';
+  var EVENT_KEY$1 = "." + DATA_KEY$1;
+  var DATA_API_KEY = '.data-api';
+  var JQUERY_NO_CONFLICT$1 = $__default["default"].fn[NAME$1];
   var CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu';
-  var CLASS_NAME_ACTIVE$3 = 'active';
-  var CLASS_NAME_DISABLED$1 = 'disabled';
-  var CLASS_NAME_FADE$4 = 'fade';
-  var CLASS_NAME_SHOW$6 = 'show';
-  var SELECTOR_DROPDOWN$1 = '.dropdown';
-  var SELECTOR_NAV_LIST_GROUP$1 = '.nav, .list-group';
-  var SELECTOR_ACTIVE$2 = '.active';
+  var CLASS_NAME_ACTIVE = 'active';
+  var CLASS_NAME_DISABLED = 'disabled';
+  var CLASS_NAME_FADE$1 = 'fade';
+  var CLASS_NAME_SHOW$1 = 'show';
+  var EVENT_HIDE$1 = "hide" + EVENT_KEY$1;
+  var EVENT_HIDDEN$1 = "hidden" + EVENT_KEY$1;
+  var EVENT_SHOW$1 = "show" + EVENT_KEY$1;
+  var EVENT_SHOWN$1 = "shown" + EVENT_KEY$1;
+  var EVENT_CLICK_DATA_API = "click" + EVENT_KEY$1 + DATA_API_KEY;
+  var SELECTOR_DROPDOWN = '.dropdown';
+  var SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
+  var SELECTOR_ACTIVE = '.active';
   var SELECTOR_ACTIVE_UL = '> li > .active';
-  var SELECTOR_DATA_TOGGLE$4 = '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]';
-  var SELECTOR_DROPDOWN_TOGGLE$1 = '.dropdown-toggle';
+  var SELECTOR_DATA_TOGGLE = '[data-toggle="tab"], [data-toggle="pill"], [data-toggle="list"]';
+  var SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
   var SELECTOR_DROPDOWN_ACTIVE_CHILD = '> .dropdown-menu .active';
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Tab = /*#__PURE__*/function () {
@@ -8729,33 +10229,33 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto.show = function show() {
       var _this = this;
 
-      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && $__default['default'](this._element).hasClass(CLASS_NAME_ACTIVE$3) || $__default['default'](this._element).hasClass(CLASS_NAME_DISABLED$1)) {
+      if (this._element.parentNode && this._element.parentNode.nodeType === Node.ELEMENT_NODE && $__default["default"](this._element).hasClass(CLASS_NAME_ACTIVE) || $__default["default"](this._element).hasClass(CLASS_NAME_DISABLED)) {
         return;
       }
 
       var target;
       var previous;
-      var listElement = $__default['default'](this._element).closest(SELECTOR_NAV_LIST_GROUP$1)[0];
+      var listElement = $__default["default"](this._element).closest(SELECTOR_NAV_LIST_GROUP)[0];
       var selector = Util.getSelectorFromElement(this._element);
 
       if (listElement) {
-        var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE$2;
-        previous = $__default['default'].makeArray($__default['default'](listElement).find(itemSelector));
+        var itemSelector = listElement.nodeName === 'UL' || listElement.nodeName === 'OL' ? SELECTOR_ACTIVE_UL : SELECTOR_ACTIVE;
+        previous = $__default["default"].makeArray($__default["default"](listElement).find(itemSelector));
         previous = previous[previous.length - 1];
       }
 
-      var hideEvent = $__default['default'].Event(EVENT_HIDE$3, {
+      var hideEvent = $__default["default"].Event(EVENT_HIDE$1, {
         relatedTarget: this._element
       });
-      var showEvent = $__default['default'].Event(EVENT_SHOW$3, {
+      var showEvent = $__default["default"].Event(EVENT_SHOW$1, {
         relatedTarget: previous
       });
 
       if (previous) {
-        $__default['default'](previous).trigger(hideEvent);
+        $__default["default"](previous).trigger(hideEvent);
       }
 
-      $__default['default'](this._element).trigger(showEvent);
+      $__default["default"](this._element).trigger(showEvent);
 
       if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) {
         return;
@@ -8768,14 +10268,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       this._activate(this._element, listElement);
 
       var complete = function complete() {
-        var hiddenEvent = $__default['default'].Event(EVENT_HIDDEN$3, {
+        var hiddenEvent = $__default["default"].Event(EVENT_HIDDEN$1, {
           relatedTarget: _this._element
         });
-        var shownEvent = $__default['default'].Event(EVENT_SHOWN$3, {
+        var shownEvent = $__default["default"].Event(EVENT_SHOWN$1, {
           relatedTarget: previous
         });
-        $__default['default'](previous).trigger(hiddenEvent);
-        $__default['default'](_this._element).trigger(shownEvent);
+        $__default["default"](previous).trigger(hiddenEvent);
+        $__default["default"](_this._element).trigger(shownEvent);
       };
 
       if (target) {
@@ -8786,7 +10286,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     };
 
     _proto.dispose = function dispose() {
-      $__default['default'].removeData(this._element, DATA_KEY$9);
+      $__default["default"].removeData(this._element, DATA_KEY$1);
       this._element = null;
     } // Private
     ;
@@ -8794,9 +10294,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto._activate = function _activate(element, container, callback) {
       var _this2 = this;
 
-      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? $__default['default'](container).find(SELECTOR_ACTIVE_UL) : $__default['default'](container).children(SELECTOR_ACTIVE$2);
+      var activeElements = container && (container.nodeName === 'UL' || container.nodeName === 'OL') ? $__default["default"](container).find(SELECTOR_ACTIVE_UL) : $__default["default"](container).children(SELECTOR_ACTIVE);
       var active = activeElements[0];
-      var isTransitioning = callback && active && $__default['default'](active).hasClass(CLASS_NAME_FADE$4);
+      var isTransitioning = callback && active && $__default["default"](active).hasClass(CLASS_NAME_FADE$1);
 
       var complete = function complete() {
         return _this2._transitionComplete(element, active, callback);
@@ -8804,7 +10304,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       if (active && isTransitioning) {
         var transitionDuration = Util.getTransitionDurationFromElement(active);
-        $__default['default'](active).removeClass(CLASS_NAME_SHOW$6).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+        $__default["default"](active).removeClass(CLASS_NAME_SHOW$1).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       } else {
         complete();
       }
@@ -8812,11 +10312,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     _proto._transitionComplete = function _transitionComplete(element, active, callback) {
       if (active) {
-        $__default['default'](active).removeClass(CLASS_NAME_ACTIVE$3);
-        var dropdownChild = $__default['default'](active.parentNode).find(SELECTOR_DROPDOWN_ACTIVE_CHILD)[0];
+        $__default["default"](active).removeClass(CLASS_NAME_ACTIVE);
+        var dropdownChild = $__default["default"](active.parentNode).find(SELECTOR_DROPDOWN_ACTIVE_CHILD)[0];
 
         if (dropdownChild) {
-          $__default['default'](dropdownChild).removeClass(CLASS_NAME_ACTIVE$3);
+          $__default["default"](dropdownChild).removeClass(CLASS_NAME_ACTIVE);
         }
 
         if (active.getAttribute('role') === 'tab') {
@@ -8824,7 +10324,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
         }
       }
 
-      $__default['default'](element).addClass(CLASS_NAME_ACTIVE$3);
+      $__default["default"](element).addClass(CLASS_NAME_ACTIVE);
 
       if (element.getAttribute('role') === 'tab') {
         element.setAttribute('aria-selected', true);
@@ -8832,16 +10332,22 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       Util.reflow(element);
 
-      if (element.classList.contains(CLASS_NAME_FADE$4)) {
-        element.classList.add(CLASS_NAME_SHOW$6);
+      if (element.classList.contains(CLASS_NAME_FADE$1)) {
+        element.classList.add(CLASS_NAME_SHOW$1);
       }
 
-      if (element.parentNode && $__default['default'](element.parentNode).hasClass(CLASS_NAME_DROPDOWN_MENU)) {
-        var dropdownElement = $__default['default'](element).closest(SELECTOR_DROPDOWN$1)[0];
+      var parent = element.parentNode;
+
+      if (parent && parent.nodeName === 'LI') {
+        parent = parent.parentNode;
+      }
+
+      if (parent && $__default["default"](parent).hasClass(CLASS_NAME_DROPDOWN_MENU)) {
+        var dropdownElement = $__default["default"](element).closest(SELECTOR_DROPDOWN)[0];
 
         if (dropdownElement) {
-          var dropdownToggleList = [].slice.call(dropdownElement.querySelectorAll(SELECTOR_DROPDOWN_TOGGLE$1));
-          $__default['default'](dropdownToggleList).addClass(CLASS_NAME_ACTIVE$3);
+          var dropdownToggleList = [].slice.call(dropdownElement.querySelectorAll(SELECTOR_DROPDOWN_TOGGLE));
+          $__default["default"](dropdownToggleList).addClass(CLASS_NAME_ACTIVE);
         }
 
         element.setAttribute('aria-expanded', true);
@@ -8855,12 +10361,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     Tab._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $this = $__default['default'](this);
-        var data = $this.data(DATA_KEY$9);
+        var $this = $__default["default"](this);
+        var data = $this.data(DATA_KEY$1);
 
         if (!data) {
           data = new Tab(this);
-          $this.data(DATA_KEY$9, data);
+          $this.data(DATA_KEY$1, data);
         }
 
         if (typeof config === 'string') {
@@ -8876,73 +10382,65 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(Tab, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION$9;
+        return VERSION$1;
       }
     }]);
 
     return Tab;
   }();
   /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
+   * Data API implementation
    */
 
 
-  $__default['default'](document).on(EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$4, function (event) {
+  $__default["default"](document).on(EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
     event.preventDefault();
 
-    Tab._jQueryInterface.call($__default['default'](this), 'show');
+    Tab._jQueryInterface.call($__default["default"](this), 'show');
   });
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
-  $__default['default'].fn[NAME$9] = Tab._jQueryInterface;
-  $__default['default'].fn[NAME$9].Constructor = Tab;
+  $__default["default"].fn[NAME$1] = Tab._jQueryInterface;
+  $__default["default"].fn[NAME$1].Constructor = Tab;
 
-  $__default['default'].fn[NAME$9].noConflict = function () {
-    $__default['default'].fn[NAME$9] = JQUERY_NO_CONFLICT$9;
+  $__default["default"].fn[NAME$1].noConflict = function () {
+    $__default["default"].fn[NAME$1] = JQUERY_NO_CONFLICT$1;
     return Tab._jQueryInterface;
   };
 
   /**
-   * ------------------------------------------------------------------------
    * Constants
-   * ------------------------------------------------------------------------
    */
 
-  var NAME$a = 'toast';
-  var VERSION$a = '4.6.0';
-  var DATA_KEY$a = 'bs.toast';
-  var EVENT_KEY$a = "." + DATA_KEY$a;
-  var JQUERY_NO_CONFLICT$a = $__default['default'].fn[NAME$a];
-  var EVENT_CLICK_DISMISS$1 = "click.dismiss" + EVENT_KEY$a;
-  var EVENT_HIDE$4 = "hide" + EVENT_KEY$a;
-  var EVENT_HIDDEN$4 = "hidden" + EVENT_KEY$a;
-  var EVENT_SHOW$4 = "show" + EVENT_KEY$a;
-  var EVENT_SHOWN$4 = "shown" + EVENT_KEY$a;
-  var CLASS_NAME_FADE$5 = 'fade';
+  var NAME = 'toast';
+  var VERSION = '4.6.1';
+  var DATA_KEY = 'bs.toast';
+  var EVENT_KEY = "." + DATA_KEY;
+  var JQUERY_NO_CONFLICT = $__default["default"].fn[NAME];
+  var CLASS_NAME_FADE = 'fade';
   var CLASS_NAME_HIDE = 'hide';
-  var CLASS_NAME_SHOW$7 = 'show';
+  var CLASS_NAME_SHOW = 'show';
   var CLASS_NAME_SHOWING = 'showing';
-  var DefaultType$7 = {
-    animation: 'boolean',
-    autohide: 'boolean',
-    delay: 'number'
-  };
-  var Default$7 = {
+  var EVENT_CLICK_DISMISS = "click.dismiss" + EVENT_KEY;
+  var EVENT_HIDE = "hide" + EVENT_KEY;
+  var EVENT_HIDDEN = "hidden" + EVENT_KEY;
+  var EVENT_SHOW = "show" + EVENT_KEY;
+  var EVENT_SHOWN = "shown" + EVENT_KEY;
+  var SELECTOR_DATA_DISMISS = '[data-dismiss="toast"]';
+  var Default = {
     animation: true,
     autohide: true,
     delay: 500
   };
-  var SELECTOR_DATA_DISMISS$1 = '[data-dismiss="toast"]';
+  var DefaultType = {
+    animation: 'boolean',
+    autohide: 'boolean',
+    delay: 'number'
+  };
   /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
+   * Class definition
    */
 
   var Toast = /*#__PURE__*/function () {
@@ -8961,8 +10459,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto.show = function show() {
       var _this = this;
 
-      var showEvent = $__default['default'].Event(EVENT_SHOW$4);
-      $__default['default'](this._element).trigger(showEvent);
+      var showEvent = $__default["default"].Event(EVENT_SHOW);
+      $__default["default"](this._element).trigger(showEvent);
 
       if (showEvent.isDefaultPrevented()) {
         return;
@@ -8971,15 +10469,15 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       this._clearTimeout();
 
       if (this._config.animation) {
-        this._element.classList.add(CLASS_NAME_FADE$5);
+        this._element.classList.add(CLASS_NAME_FADE);
       }
 
       var complete = function complete() {
         _this._element.classList.remove(CLASS_NAME_SHOWING);
 
-        _this._element.classList.add(CLASS_NAME_SHOW$7);
+        _this._element.classList.add(CLASS_NAME_SHOW);
 
-        $__default['default'](_this._element).trigger(EVENT_SHOWN$4);
+        $__default["default"](_this._element).trigger(EVENT_SHOWN);
 
         if (_this._config.autohide) {
           _this._timeout = setTimeout(function () {
@@ -8996,19 +10494,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
       if (this._config.animation) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $__default['default'](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+        $__default["default"](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       } else {
         complete();
       }
     };
 
     _proto.hide = function hide() {
-      if (!this._element.classList.contains(CLASS_NAME_SHOW$7)) {
+      if (!this._element.classList.contains(CLASS_NAME_SHOW)) {
         return;
       }
 
-      var hideEvent = $__default['default'].Event(EVENT_HIDE$4);
-      $__default['default'](this._element).trigger(hideEvent);
+      var hideEvent = $__default["default"].Event(EVENT_HIDE);
+      $__default["default"](this._element).trigger(hideEvent);
 
       if (hideEvent.isDefaultPrevented()) {
         return;
@@ -9020,27 +10518,27 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _proto.dispose = function dispose() {
       this._clearTimeout();
 
-      if (this._element.classList.contains(CLASS_NAME_SHOW$7)) {
-        this._element.classList.remove(CLASS_NAME_SHOW$7);
+      if (this._element.classList.contains(CLASS_NAME_SHOW)) {
+        this._element.classList.remove(CLASS_NAME_SHOW);
       }
 
-      $__default['default'](this._element).off(EVENT_CLICK_DISMISS$1);
-      $__default['default'].removeData(this._element, DATA_KEY$a);
+      $__default["default"](this._element).off(EVENT_CLICK_DISMISS);
+      $__default["default"].removeData(this._element, DATA_KEY);
       this._element = null;
       this._config = null;
     } // Private
     ;
 
     _proto._getConfig = function _getConfig(config) {
-      config = _extends({}, Default$7, $__default['default'](this._element).data(), typeof config === 'object' && config ? config : {});
-      Util.typeCheckConfig(NAME$a, config, this.constructor.DefaultType);
+      config = _extends({}, Default, $__default["default"](this._element).data(), typeof config === 'object' && config ? config : {});
+      Util.typeCheckConfig(NAME, config, this.constructor.DefaultType);
       return config;
     };
 
     _proto._setListeners = function _setListeners() {
       var _this2 = this;
 
-      $__default['default'](this._element).on(EVENT_CLICK_DISMISS$1, SELECTOR_DATA_DISMISS$1, function () {
+      $__default["default"](this._element).on(EVENT_CLICK_DISMISS, SELECTOR_DATA_DISMISS, function () {
         return _this2.hide();
       });
     };
@@ -9051,14 +10549,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
       var complete = function complete() {
         _this3._element.classList.add(CLASS_NAME_HIDE);
 
-        $__default['default'](_this3._element).trigger(EVENT_HIDDEN$4);
+        $__default["default"](_this3._element).trigger(EVENT_HIDDEN);
       };
 
-      this._element.classList.remove(CLASS_NAME_SHOW$7);
+      this._element.classList.remove(CLASS_NAME_SHOW);
 
       if (this._config.animation) {
         var transitionDuration = Util.getTransitionDurationFromElement(this._element);
-        $__default['default'](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
+        $__default["default"](this._element).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
       } else {
         complete();
       }
@@ -9072,14 +10570,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
     Toast._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var $element = $__default['default'](this);
-        var data = $element.data(DATA_KEY$a);
+        var $element = $__default["default"](this);
+        var data = $element.data(DATA_KEY);
 
         var _config = typeof config === 'object' && config;
 
         if (!data) {
           data = new Toast(this, _config);
-          $element.data(DATA_KEY$a, data);
+          $element.data(DATA_KEY, data);
         }
 
         if (typeof config === 'string') {
@@ -9095,34 +10593,32 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
     _createClass(Toast, null, [{
       key: "VERSION",
       get: function get() {
-        return VERSION$a;
+        return VERSION;
       }
     }, {
       key: "DefaultType",
       get: function get() {
-        return DefaultType$7;
+        return DefaultType;
       }
     }, {
       key: "Default",
       get: function get() {
-        return Default$7;
+        return Default;
       }
     }]);
 
     return Toast;
   }();
   /**
-   * ------------------------------------------------------------------------
    * jQuery
-   * ------------------------------------------------------------------------
    */
 
 
-  $__default['default'].fn[NAME$a] = Toast._jQueryInterface;
-  $__default['default'].fn[NAME$a].Constructor = Toast;
+  $__default["default"].fn[NAME] = Toast._jQueryInterface;
+  $__default["default"].fn[NAME].Constructor = Toast;
 
-  $__default['default'].fn[NAME$a].noConflict = function () {
-    $__default['default'].fn[NAME$a] = JQUERY_NO_CONFLICT$a;
+  $__default["default"].fn[NAME].noConflict = function () {
+    $__default["default"].fn[NAME] = JQUERY_NO_CONFLICT;
     return Toast._jQueryInterface;
   };
 
@@ -9141,7 +10637,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
 //# sourceMappingURL=bootstrap.js.map
 
 
@@ -9164,7 +10660,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.sk-fading-circle[data-v-ab9ce4b4] {\r\n  margin: 0 auto;\r\n  width: 40px;\r\n  height: 40px;\r\n  position: relative;\n}\n.sk-fading-circle .sk-circle[data-v-ab9ce4b4] {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  left: 0;\r\n  top: 0;\n}\n.sk-fading-circle .sk-circle[data-v-ab9ce4b4]::before {\r\n  content: \"\";\r\n  display: block;\r\n  margin: 0 auto;\r\n  width: 15%;\r\n  height: 15%;\r\n  background-color: #032646;\r\n  border-radius: 100%;\r\n  -webkit-animation: sk-circlefadedelay-data-v-ab9ce4b4 1.2s infinite ease-in-out both;\r\n  animation: sk-circlefadedelay-data-v-ab9ce4b4 1.2s infinite ease-in-out both;\n}\n.sk-fading-circle .sk-circle2[data-v-ab9ce4b4] {\r\n  transform: rotate(30deg);\n}\n.sk-fading-circle .sk-circle3[data-v-ab9ce4b4] {\r\n  transform: rotate(60deg);\n}\n.sk-fading-circle .sk-circle4[data-v-ab9ce4b4] {\r\n  transform: rotate(90deg);\n}\n.sk-fading-circle .sk-circle5[data-v-ab9ce4b4] {\r\n  transform: rotate(120deg);\n}\n.sk-fading-circle .sk-circle6[data-v-ab9ce4b4] {\r\n  transform: rotate(150deg);\n}\n.sk-fading-circle .sk-circle7[data-v-ab9ce4b4] {\r\n  transform: rotate(180deg);\n}\n.sk-fading-circle .sk-circle8[data-v-ab9ce4b4] {\r\n  transform: rotate(210deg);\n}\n.sk-fading-circle .sk-circle9[data-v-ab9ce4b4] {\r\n  transform: rotate(240deg);\n}\n.sk-fading-circle .sk-circle10[data-v-ab9ce4b4] {\r\n  transform: rotate(270deg);\n}\n.sk-fading-circle .sk-circle11[data-v-ab9ce4b4] {\r\n  transform: rotate(300deg);\n}\n.sk-fading-circle .sk-circle12[data-v-ab9ce4b4] {\r\n  transform: rotate(330deg);\n}\n.sk-fading-circle .sk-circle2[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -1.1s;\r\n  animation-delay: -1.1s;\n}\n.sk-fading-circle .sk-circle3[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -1s;\r\n  animation-delay: -1s;\n}\n.sk-fading-circle .sk-circle4[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.9s;\r\n  animation-delay: -0.9s;\n}\n.sk-fading-circle .sk-circle5[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.8s;\r\n  animation-delay: -0.8s;\n}\n.sk-fading-circle .sk-circle6[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.7s;\r\n  animation-delay: -0.7s;\n}\n.sk-fading-circle .sk-circle7[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.6s;\r\n  animation-delay: -0.6s;\n}\n.sk-fading-circle .sk-circle8[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.5s;\r\n  animation-delay: -0.5s;\n}\n.sk-fading-circle .sk-circle9[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.4s;\r\n  animation-delay: -0.4s;\n}\n.sk-fading-circle .sk-circle10[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.3s;\r\n  animation-delay: -0.3s;\n}\n.sk-fading-circle .sk-circle11[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.2s;\r\n  animation-delay: -0.2s;\n}\n.sk-fading-circle .sk-circle12[data-v-ab9ce4b4]::before {\r\n  -webkit-animation-delay: -0.1s;\r\n  animation-delay: -0.1s;\n}\n@-webkit-keyframes sk-circlefadedelay-data-v-ab9ce4b4 {\n0%,\r\n  39%,\r\n  100% {\r\n    opacity: 0;\n}\n40% {\r\n    opacity: 1;\n}\n}\n@keyframes sk-circlefadedelay-data-v-ab9ce4b4 {\n0%,\r\n  39%,\r\n  100% {\r\n    opacity: 0;\n}\n40% {\r\n    opacity: 1;\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sk-fading-circle[data-v-ab9ce4b4] {\n  margin: 0 auto;\n  width: 40px;\n  height: 40px;\n  position: relative;\n}\n.sk-fading-circle .sk-circle[data-v-ab9ce4b4] {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n.sk-fading-circle .sk-circle[data-v-ab9ce4b4]::before {\n  content: \"\";\n  display: block;\n  margin: 0 auto;\n  width: 15%;\n  height: 15%;\n  background-color: #032646;\n  border-radius: 100%;\n  -webkit-animation: sk-circlefadedelay-data-v-ab9ce4b4 1.2s infinite ease-in-out both;\n  animation: sk-circlefadedelay-data-v-ab9ce4b4 1.2s infinite ease-in-out both;\n}\n.sk-fading-circle .sk-circle2[data-v-ab9ce4b4] {\n  transform: rotate(30deg);\n}\n.sk-fading-circle .sk-circle3[data-v-ab9ce4b4] {\n  transform: rotate(60deg);\n}\n.sk-fading-circle .sk-circle4[data-v-ab9ce4b4] {\n  transform: rotate(90deg);\n}\n.sk-fading-circle .sk-circle5[data-v-ab9ce4b4] {\n  transform: rotate(120deg);\n}\n.sk-fading-circle .sk-circle6[data-v-ab9ce4b4] {\n  transform: rotate(150deg);\n}\n.sk-fading-circle .sk-circle7[data-v-ab9ce4b4] {\n  transform: rotate(180deg);\n}\n.sk-fading-circle .sk-circle8[data-v-ab9ce4b4] {\n  transform: rotate(210deg);\n}\n.sk-fading-circle .sk-circle9[data-v-ab9ce4b4] {\n  transform: rotate(240deg);\n}\n.sk-fading-circle .sk-circle10[data-v-ab9ce4b4] {\n  transform: rotate(270deg);\n}\n.sk-fading-circle .sk-circle11[data-v-ab9ce4b4] {\n  transform: rotate(300deg);\n}\n.sk-fading-circle .sk-circle12[data-v-ab9ce4b4] {\n  transform: rotate(330deg);\n}\n.sk-fading-circle .sk-circle2[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n.sk-fading-circle .sk-circle3[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -1s;\n  animation-delay: -1s;\n}\n.sk-fading-circle .sk-circle4[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n.sk-fading-circle .sk-circle5[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n.sk-fading-circle .sk-circle6[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.7s;\n  animation-delay: -0.7s;\n}\n.sk-fading-circle .sk-circle7[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.6s;\n  animation-delay: -0.6s;\n}\n.sk-fading-circle .sk-circle8[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.5s;\n  animation-delay: -0.5s;\n}\n.sk-fading-circle .sk-circle9[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.4s;\n  animation-delay: -0.4s;\n}\n.sk-fading-circle .sk-circle10[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.3s;\n  animation-delay: -0.3s;\n}\n.sk-fading-circle .sk-circle11[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.2s;\n  animation-delay: -0.2s;\n}\n.sk-fading-circle .sk-circle12[data-v-ab9ce4b4]::before {\n  -webkit-animation-delay: -0.1s;\n  animation-delay: -0.1s;\n}\n@-webkit-keyframes sk-circlefadedelay-data-v-ab9ce4b4 {\n0%,\n  39%,\n  100% {\n    opacity: 0;\n}\n40% {\n    opacity: 1;\n}\n}\n@keyframes sk-circlefadedelay-data-v-ab9ce4b4 {\n0%,\n  39%,\n  100% {\n    opacity: 0;\n}\n40% {\n    opacity: 1;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9188,7 +10684,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.tab-content[data-v-5076d7f6] {\r\n  opacity: 1;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.tab-content[data-v-5076d7f6] {\n  opacity: 1;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9212,7 +10708,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.badge[data-v-2a4b0d1e] {\r\n    background-color: #9ffdd4;\r\n    padding: 4px 10px;\r\n    width: auto;\r\n    height: 1.8rem;\r\n    line-height: 1.3rem;\r\n    border-radius: 4px;\r\n    display: inline-block;\r\n    margin-left: auto;\n}\n.details[data-v-2a4b0d1e] {\r\n    background-color: rgba(215, 219, 218, 1);\r\n    background-color: rgba(215, 219, 218, 1);\r\n    width: 100%;\r\n    padding: 40px;\r\n    border-radius: 0px 0px 0px 74px;\n}\n.craousel-image-outer[data-v-2a4b0d1e] {\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.crouse-image[data-v-2a4b0d1e] {\r\n    height: 350px;\r\n    width: 100%;\n}\n.middle-banner-image[data-v-2a4b0d1e] {\r\n    width: 100%;\r\n    max-height: 500px;\r\n    border-radius: 0px 212px 0px 0px;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.mid-content[data-v-2a4b0d1e] {\r\n    max-width: 620px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.badge[data-v-2a4b0d1e] {\n    background-color: #9ffdd4;\n    padding: 4px 10px;\n    width: auto;\n    height: 1.8rem;\n    line-height: 1.3rem;\n    border-radius: 4px;\n    display: inline-block;\n    margin-left: auto;\n}\n.details[data-v-2a4b0d1e] {\n    background-color: rgba(215, 219, 218, 1);\n    background-color: rgba(215, 219, 218, 1);\n    width: 100%;\n    padding: 40px;\n    border-radius: 0px 0px 0px 74px;\n}\n.craousel-image-outer[data-v-2a4b0d1e] {\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.crouse-image[data-v-2a4b0d1e] {\n    height: 350px;\n    width: 100%;\n}\n.middle-banner-image[data-v-2a4b0d1e] {\n    width: 100%;\n    max-height: 500px;\n    border-radius: 0px 212px 0px 0px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n.mid-content[data-v-2a4b0d1e] {\n    max-width: 620px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40237,770 +41733,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "./node_modules/regenerator-runtime/runtime.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime.js ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var runtime = (function (exports) {
-  "use strict";
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  function define(obj, key, value) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-    return obj[key];
-  }
-  try {
-    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
-    define({}, "");
-  } catch (err) {
-    define = function(obj, key, value) {
-      return obj[key] = value;
-    };
-  }
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  exports.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  define(IteratorPrototype, iteratorSymbol, function () {
-    return this;
-  });
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = GeneratorFunctionPrototype;
-  define(Gp, "constructor", GeneratorFunctionPrototype);
-  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
-  GeneratorFunction.displayName = define(
-    GeneratorFunctionPrototype,
-    toStringTagSymbol,
-    "GeneratorFunction"
-  );
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      define(prototype, method, function(arg) {
-        return this._invoke(method, arg);
-      });
-    });
-  }
-
-  exports.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  exports.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      define(genFun, toStringTagSymbol, "GeneratorFunction");
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  exports.awrap = function(arg) {
-    return { __await: arg };
-  };
-
-  function AsyncIterator(generator, PromiseImpl) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return PromiseImpl.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return PromiseImpl.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration.
-          result.value = unwrapped;
-          resolve(result);
-        }, function(error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new PromiseImpl(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
-    return this;
-  });
-  exports.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-    if (PromiseImpl === void 0) PromiseImpl = Promise;
-
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList),
-      PromiseImpl
-    );
-
-    return exports.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        // Note: ["return"] must be used for ES3 parsing compatibility.
-        if (delegate.iterator["return"]) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
-
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
-
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
-      }
-
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  define(Gp, toStringTagSymbol, "Generator");
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  define(Gp, iteratorSymbol, function() {
-    return this;
-  });
-
-  define(Gp, "toString", function() {
-    return "[object Generator]";
-  });
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  exports.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  exports.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
-    }
-  };
-
-  // Regardless of whether this script is executing as a CommonJS module
-  // or not, return the runtime object so that we can declare the variable
-  // regeneratorRuntime in the outer scope, which allows this module to be
-  // injected easily by `bin/regenerator --include-runtime script.js`.
-  return exports;
-
-}(
-  // If this script is executing as a CommonJS module, use module.exports
-  // as the regeneratorRuntime namespace. Otherwise create a new empty
-  // object. Either way, the resulting object will be used to initialize
-  // the regeneratorRuntime variable at the top of this file.
-   true ? module.exports : 0
-));
-
-try {
-  regeneratorRuntime = runtime;
-} catch (accidentalStrictMode) {
-  // This module should not be running in strict mode, so the above
-  // assignment should always work unless something is misconfigured. Just
-  // in case runtime.js accidentally runs in strict mode, in modern engines
-  // we can explicitly access globalThis. In older engines we can escape
-  // strict mode using a global Function call. This could conceivably fail
-  // if a Content Security Policy forbids using Function, but in that case
-  // the proper solution is to fix the accidental strict mode problem. If
-  // you've misconfigured your bundler to force strict mode and applied a
-  // CSP to forbid Function, and you're not willing to fix either of those
-  // problems, please detail your unique predicament in a GitHub issue.
-  if (typeof globalThis === "object") {
-    globalThis.regeneratorRuntime = runtime;
-  } else {
-    Function("r", "regeneratorRuntime = r")(runtime);
-  }
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/commonComponents/Loader.vue?vue&type=style&index=0&id=ab9ce4b4&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/commonComponents/Loader.vue?vue&type=style&index=0&id=ab9ce4b4&scoped=true&lang=css& ***!
@@ -42234,14 +42966,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm._m(0)
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -42249,13 +42981,15 @@ var staticRenderFns = [
       _c("section", { staticClass: "faq-container bg-theme-light" }, [
         _c("div", { staticClass: "container p-0" }, [
           _c("h2", { staticClass: "theme-title position-relative" }, [
-            _vm._v("\n                Frequently Asked Questions\n            ")
+            _vm._v(
+              "\n                Frequently Asked Questions\n            "
+            ),
           ]),
           _vm._v(" "),
           _c("h5", { staticClass: "text-secondary text-center" }, [
             _vm._v(
               "\n                YOU CAN FIND QUESTIONS RELATED TO YOUR QUERY\n            "
-            )
+            ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row py-5" }, [
@@ -42264,9 +42998,9 @@ var staticRenderFns = [
                 staticClass: "img-fluid h-100",
                 attrs: {
                   src: "/assets/images/cards/pexels-olya-kobruseva-5428829.jpg",
-                  alt: ""
-                }
-              })
+                  alt: "",
+                },
+              }),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-7" }, [
@@ -42274,7 +43008,7 @@ var staticRenderFns = [
                 "div",
                 {
                   staticClass: "accordion accordion-flush",
-                  attrs: { id: "faqlist" }
+                  attrs: { id: "faqlist" },
                 },
                 [
                   _c("div", { staticClass: "accordion-item" }, [
@@ -42287,15 +43021,15 @@ var staticRenderFns = [
                           attrs: {
                             type: "button",
                             "data-bs-toggle": "collapse",
-                            "data-bs-target": "#faq-content-1"
-                          }
+                            "data-bs-target": "#faq-content-1",
+                          },
                         },
                         [
                           _vm._v(
                             "\n                                    What is the average home price ?\n                                "
-                          )
+                          ),
                         ]
-                      )
+                      ),
                     ]),
                     _vm._v(" "),
                     _c(
@@ -42304,17 +43038,17 @@ var staticRenderFns = [
                         staticClass: "accordion-collapse collapse show",
                         attrs: {
                           id: "faq-content-1",
-                          "data-bs-parent": "#faqlist"
-                        }
+                          "data-bs-parent": "#faqlist",
+                        },
                       },
                       [
                         _c("div", { staticClass: "accordion-body bg-white" }, [
                           _vm._v(
                             "\n                                    Lorem Ipsum is simply dummy text of the\n                                    printing and typesetting industry. Lorem\n                                    Ipsum has been the industry's standard\n                                    dummy text ever since the 1500s, when an\n                                    unknown printer took a galley of type\n                                    and scrambled it to make a type specimen\n                                    book. It has survived not only five\n                                    centuries, but also the leap into\n                                    electronic typesetting, remaining\n                                    essentially unchanged.\n                                "
-                          )
-                        ])
+                          ),
+                        ]),
                       ]
-                    )
+                    ),
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "accordion-item" }, [
@@ -42327,15 +43061,15 @@ var staticRenderFns = [
                           attrs: {
                             type: "button",
                             "data-bs-toggle": "collapse",
-                            "data-bs-target": "#faq-content-2"
-                          }
+                            "data-bs-target": "#faq-content-2",
+                          },
                         },
                         [
                           _vm._v(
                             "\n                                    What is the average home price ?\n                                "
-                          )
+                          ),
                         ]
-                      )
+                      ),
                     ]),
                     _vm._v(" "),
                     _c(
@@ -42344,17 +43078,17 @@ var staticRenderFns = [
                         staticClass: "accordion-collapse collapse",
                         attrs: {
                           id: "faq-content-2",
-                          "data-bs-parent": "#faqlist"
-                        }
+                          "data-bs-parent": "#faqlist",
+                        },
                       },
                       [
                         _c("div", { staticClass: "accordion-body bg-white" }, [
                           _vm._v(
                             "\n                                    Lorem Ipsum is simply dummy text of the\n                                    printing and typesetting industry. Lorem\n                                    Ipsum has been the industry's standard\n                                    dummy text ever since the 1500s, when an\n                                    unknown printer took a galley of type\n                                    and scrambled it to make a type specimen\n                                    book. It has survived not only five\n                                    centuries, but also the leap into\n                                    electronic typesetting, remaining\n                                    essentially unchanged.\n                                "
-                          )
-                        ])
+                          ),
+                        ]),
                       ]
-                    )
+                    ),
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "accordion-item" }, [
@@ -42367,15 +43101,15 @@ var staticRenderFns = [
                           attrs: {
                             type: "button",
                             "data-bs-toggle": "collapse",
-                            "data-bs-target": "#faq-content-3"
-                          }
+                            "data-bs-target": "#faq-content-3",
+                          },
                         },
                         [
                           _vm._v(
                             "\n                                    What is the average home price ?\n                                "
-                          )
+                          ),
                         ]
-                      )
+                      ),
                     ]),
                     _vm._v(" "),
                     _c(
@@ -42384,17 +43118,17 @@ var staticRenderFns = [
                         staticClass: "accordion-collapse collapse",
                         attrs: {
                           id: "faq-content-3",
-                          "data-bs-parent": "#faqlist"
-                        }
+                          "data-bs-parent": "#faqlist",
+                        },
                       },
                       [
                         _c("div", { staticClass: "accordion-body bg-white" }, [
                           _vm._v(
                             "\n                                    Lorem Ipsum is simply dummy text of the\n                                    printing and typesetting industry. Lorem\n                                    Ipsum has been the industry's standard\n                                    dummy text ever since the 1500s, when an\n                                    unknown printer took a galley of type\n                                    and scrambled it to make a type specimen\n                                    book. It has survived not only five\n                                    centuries, but also the leap into\n                                    electronic typesetting, remaining\n                                    essentially unchanged.\n                                "
-                          )
-                        ])
+                          ),
+                        ]),
                       ]
-                    )
+                    ),
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "accordion-item" }, [
@@ -42407,15 +43141,15 @@ var staticRenderFns = [
                           attrs: {
                             type: "button",
                             "data-bs-toggle": "collapse",
-                            "data-bs-target": "#faq-content-4"
-                          }
+                            "data-bs-target": "#faq-content-4",
+                          },
                         },
                         [
                           _vm._v(
                             "\n                                    What is the average home price ?\n                                "
-                          )
+                          ),
                         ]
-                      )
+                      ),
                     ]),
                     _vm._v(" "),
                     _c(
@@ -42424,17 +43158,17 @@ var staticRenderFns = [
                         staticClass: "accordion-collapse collapse",
                         attrs: {
                           id: "faq-content-4",
-                          "data-bs-parent": "#faqlist"
-                        }
+                          "data-bs-parent": "#faqlist",
+                        },
                       },
                       [
                         _c("div", { staticClass: "accordion-body bg-white" }, [
                           _vm._v(
                             "\n                                    Lorem Ipsum is simply dummy text of the\n                                    printing and typesetting industry. Lorem\n                                    Ipsum has been the industry's standard\n                                    dummy text ever since the 1500s, when an\n                                    unknown printer took a galley of type\n                                    and scrambled it to make a type specimen\n                                    book. It has survived not only five\n                                    centuries, but also the leap into\n                                    electronic typesetting, remaining\n                                    essentially unchanged.\n                                "
-                          )
-                        ])
+                          ),
+                        ]),
                       ]
-                    )
+                    ),
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "accordion-item" }, [
@@ -42447,15 +43181,15 @@ var staticRenderFns = [
                           attrs: {
                             type: "button",
                             "data-bs-toggle": "collapse",
-                            "data-bs-target": "#faq-content-5"
-                          }
+                            "data-bs-target": "#faq-content-5",
+                          },
                         },
                         [
                           _vm._v(
                             "\n                                    What is the average home price ?\n                                "
-                          )
+                          ),
                         ]
-                      )
+                      ),
                     ]),
                     _vm._v(" "),
                     _c(
@@ -42464,26 +43198,26 @@ var staticRenderFns = [
                         staticClass: "accordion-collapse collapse",
                         attrs: {
                           id: "faq-content-5",
-                          "data-bs-parent": "#faqlist"
-                        }
+                          "data-bs-parent": "#faqlist",
+                        },
                       },
                       [
                         _c("div", { staticClass: "accordion-body bg-white" }, [
                           _vm._v(
                             "\n                                    Lorem Ipsum is simply dummy text of the\n                                    printing and typesetting industry. Lorem\n                                    Ipsum has been the industry's standard\n                                    dummy text ever since the 1500s, when an\n                                    unknown printer took a galley of type\n                                    and scrambled it to make a type specimen\n                                    book. It has survived not only five\n                                    centuries, but also the leap into\n                                    electronic typesetting, remaining\n                                    essentially unchanged.\n                                "
-                          )
-                        ])
+                          ),
+                        ]),
                       ]
-                    )
-                  ])
+                    ),
+                  ]),
                 ]
-              )
-            ])
-          ])
-        ])
-      ])
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -42503,7 +43237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -42511,7 +43245,7 @@ var render = function() {
     _c("section", { staticClass: "property bg-theme-light" }, [
       _c("div", { staticClass: "container p-0" }, [
         _c("h2", { staticClass: "theme-title" }, [
-          _vm._v("Featured Properties in Toronto")
+          _vm._v("Featured Properties in Toronto"),
         ]),
         _vm._v(" "),
         !_vm.loadingProperties
@@ -42521,12 +43255,12 @@ var render = function() {
                     "div",
                     { staticClass: "row" },
                     [
-                      _vm._l(_vm.properties, function(property) {
+                      _vm._l(_vm.properties, function (property) {
                         return _c(
                           "div",
                           {
                             key: property.Ml_num,
-                            staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5"
+                            staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5",
                           },
                           [_c("PropCard", { attrs: { property: property } })],
                           1
@@ -42541,23 +43275,23 @@ var render = function() {
                             "router-link",
                             {
                               staticClass: "btn btn-theme-color px-5",
-                              attrs: { to: { name: "search-property" } }
+                              attrs: { to: { name: "search-property" } },
                             },
                             [_vm._v("View All")]
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ],
                     2
                   )
-                : _c("div", [_c("no-data")], 1)
+                : _c("div", [_c("no-data")], 1),
             ])
           : _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "p-5 text-center" }, [_c("loader")], 1)
-            ])
-      ])
-    ])
+              _c("div", { staticClass: "p-5 text-center" }, [_c("loader")], 1),
+            ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -42579,14 +43313,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm._m(0)
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -42596,28 +43330,28 @@ var staticRenderFns = [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-4" }, [
               _c("h3", { staticClass: "text-color fw-bold" }, [
-                _vm._v("Remax")
+                _vm._v("Remax"),
               ]),
               _vm._v(" "),
               _c("p", [
                 _vm._v(
                   "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry.\n                    "
-                )
+                ),
               ]),
               _vm._v(" "),
               _c("ul", { staticClass: "list-unstyled" }, [
                 _c("li", { staticClass: "social-icons" }, [
                   _c("img", {
                     staticClass: "img-fluid m-auto",
-                    attrs: { src: "/assets/images/icons/twitter.png", alt: "" }
-                  })
+                    attrs: { src: "/assets/images/icons/twitter.png", alt: "" },
+                  }),
                 ]),
                 _vm._v(" "),
                 _c("li", { staticClass: "social-icons" }, [
                   _c("img", {
                     staticClass: "img-fluid m-auto",
-                    attrs: { src: "/assets/images/icons/google.png", alt: "" }
-                  })
+                    attrs: { src: "/assets/images/icons/google.png", alt: "" },
+                  }),
                 ]),
                 _vm._v(" "),
                 _c("li", { staticClass: "social-icons" }, [
@@ -42625,74 +43359,74 @@ var staticRenderFns = [
                     staticClass: "img-fluid m-auto",
                     attrs: {
                       src: "/assets/images/icons/facebook-logo.png",
-                      alt: ""
-                    }
-                  })
-                ])
-              ])
+                      alt: "",
+                    },
+                  }),
+                ]),
+              ]),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-2" }, [
               _c("ul", { staticClass: "list-unstyled" }, [
                 _c("li", { staticClass: "text-secondary fw-bold" }, [
-                  _vm._v("About")
+                  _vm._v("About"),
                 ]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "" } }, [_vm._v("Why choose us")])
+                  _c("a", { attrs: { href: "" } }, [_vm._v("Why choose us")]),
                 ]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "" } }, [_vm._v("Review")])
+                  _c("a", { attrs: { href: "" } }, [_vm._v("Review")]),
                 ]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "" } }, [_vm._v("Customers")])
+                  _c("a", { attrs: { href: "" } }, [_vm._v("Customers")]),
                 ]),
                 _vm._v(" "),
                 _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Blog")])]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "" } }, [_vm._v("Carrier")])
-                ])
-              ])
+                  _c("a", { attrs: { href: "" } }, [_vm._v("Carrier")]),
+                ]),
+              ]),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-2" }, [
               _c("ul", { staticClass: "list-unstyled" }, [
                 _c("li", { staticClass: "text-secondary fw-bold" }, [
-                  _vm._v("About")
+                  _vm._v("About"),
                 ]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "" } }, [_vm._v("Why choose us")])
+                  _c("a", { attrs: { href: "" } }, [_vm._v("Why choose us")]),
                 ]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "" } }, [_vm._v("Review")])
+                  _c("a", { attrs: { href: "" } }, [_vm._v("Review")]),
                 ]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "" } }, [_vm._v("Customers")])
+                  _c("a", { attrs: { href: "" } }, [_vm._v("Customers")]),
                 ]),
                 _vm._v(" "),
                 _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Blog")])]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("a", { attrs: { href: "" } }, [_vm._v("Carrier")])
-                ])
-              ])
+                  _c("a", { attrs: { href: "" } }, [_vm._v("Carrier")]),
+                ]),
+              ]),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-4" }, [
               _c("p", { staticClass: "text-secondary fw-bold" }, [
-                _vm._v("Newsletter")
+                _vm._v("Newsletter"),
               ]),
               _vm._v(" "),
               _c("p", [
                 _vm._v(
                   "\n                        Subscribe our newletter to got updates about our\n                        services\n                    "
-                )
+                ),
               ]),
               _vm._v(" "),
               _c("form", { attrs: { action: "" } }, [
@@ -42700,32 +43434,32 @@ var staticRenderFns = [
                   staticClass: "form-control mb-3",
                   attrs: {
                     type: "text",
-                    placeholder: "Enter your email address"
-                  }
+                    placeholder: "Enter your email address",
+                  },
                 }),
                 _vm._v(" "),
                 _c(
                   "button",
                   {
                     staticClass: "btn btn-theme-color w-100",
-                    attrs: { type: "submit" }
+                    attrs: { type: "submit" },
                   },
                   [
                     _vm._v(
                       "\n                            Subscribe\n                        "
-                    )
+                    ),
                   ]
-                )
-              ])
-            ])
-          ])
-        ])
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
       ]),
       _vm._v(" "),
       _c("section", { staticClass: "p-0 footer" }, [
         _c("div", { staticClass: "container" }, [
-          _c("hr", { staticClass: "m-0" })
-        ])
+          _c("hr", { staticClass: "m-0" }),
+        ]),
       ]),
       _vm._v(" "),
       _c("section", { staticClass: "sub-footer footer py-5" }, [
@@ -42735,13 +43469,13 @@ var staticRenderFns = [
               "\n                Copyright ©2021 All rights reserved |\n                "
             ),
             _c("span", { staticClass: "text-darker fw-lighter-items" }, [
-              _vm._v("Remax")
-            ])
-          ])
-        ])
-      ])
+              _vm._v("Remax"),
+            ]),
+          ]),
+        ]),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -42761,7 +43495,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -42785,7 +43519,7 @@ var render = function() {
                 "div",
                 {
                   staticClass: "collapse navbar-collapse",
-                  attrs: { id: "navbarSupportedContent" }
+                  attrs: { id: "navbarSupportedContent" },
                 },
                 [
                   _vm._m(1),
@@ -42799,10 +43533,10 @@ var render = function() {
                           "router-link",
                           {
                             staticClass: "nav-link active",
-                            attrs: { "aria-current": "home", to: "/" }
+                            attrs: { "aria-current": "home", to: "/" },
                           },
                           [_vm._v("Home")]
-                        )
+                        ),
                       ],
                       1
                     ),
@@ -42817,31 +43551,31 @@ var render = function() {
                             staticClass: "nav-link",
                             attrs: {
                               "aria-current": "properties",
-                              to: { name: "search-property" }
-                            }
+                              to: { name: "search-property" },
+                            },
                           },
                           [_vm._v("Properties")]
-                        )
+                        ),
                       ],
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(2)
-                  ])
+                    _vm._m(2),
+                  ]),
                 ]
               ),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(3),
             ],
             1
-          )
-        ])
-      ])
-    ])
+          ),
+        ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -42855,13 +43589,13 @@ var staticRenderFns = [
           "data-bs-target": "#navbarSupportedContent",
           "aria-controls": "navbarSupportedContent",
           "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
+          "aria-label": "Toggle navigation",
+        },
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -42869,8 +43603,8 @@ var staticRenderFns = [
       _c("div", { staticClass: "input-group bg-white input-bar" }, [
         _c("button", { staticClass: "btn bg-transparent p-0" }, [
           _c("img", {
-            attrs: { src: "/assets/images/icons/search.png", alt: "" }
-          })
+            attrs: { src: "/assets/images/icons/search.png", alt: "" },
+          }),
         ]),
         _vm._v(" "),
         _c("input", {
@@ -42878,13 +43612,13 @@ var staticRenderFns = [
           attrs: {
             type: "text",
             "aria-label": "Search",
-            "aria-describedby": "search-bar"
-          }
-        })
-      ])
+            "aria-describedby": "search-bar",
+          },
+        }),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -42893,13 +43627,13 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "nav-link",
-          attrs: { "aria-current": "blog", href: "#" }
+          attrs: { "aria-current": "blog", href: "#" },
         },
         [_vm._v("Blog")]
-      )
+      ),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -42910,14 +43644,14 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "nav-link header-icons",
-              attrs: { "aria-current": "favourate", href: "#" }
+              attrs: { "aria-current": "favourate", href: "#" },
             },
             [
               _c("img", {
-                attrs: { src: "/assets/images/icons/bookmark.svg", alt: "" }
-              })
+                attrs: { src: "/assets/images/icons/bookmark.svg", alt: "" },
+              }),
             ]
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "nav-item me-3" }, [
@@ -42925,31 +43659,31 @@ var staticRenderFns = [
             "a",
             {
               staticClass: "nav-link header-icons",
-              attrs: { "aria-current": "favourate", href: "#" }
+              attrs: { "aria-current": "favourate", href: "#" },
             },
             [
               _c("img", {
-                attrs: { src: "/assets/images/icons/alarm.svg", alt: "" }
-              })
+                attrs: { src: "/assets/images/icons/alarm.svg", alt: "" },
+              }),
             ]
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "nav-item" }, [
           _c("button", [
             _c("img", {
-              attrs: { src: "/assets/images/icons/refer.svg", alt: "" }
+              attrs: { src: "/assets/images/icons/refer.svg", alt: "" },
             }),
             _c(
               "a",
               { staticClass: "text-light", attrs: { href: "login.html" } },
               [_vm._v("Sign in")]
-            )
-          ])
-        ])
-      ])
+            ),
+          ]),
+        ]),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -42969,7 +43703,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -42978,13 +43712,13 @@ var render = function() {
     _vm._v(" "),
     _vm.text
       ? _c("span", { staticClass: "p-0 m-0 mt-2 text-center" }, [
-          _vm._v(_vm._s(_vm.text))
+          _vm._v(_vm._s(_vm.text)),
         ])
-      : _vm._e()
+      : _vm._e(),
   ])
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -43011,9 +43745,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "sk-circle11 sk-circle" }),
       _vm._v(" "),
-      _c("div", { staticClass: "sk-circle12 sk-circle" })
+      _c("div", { staticClass: "sk-circle12 sk-circle" }),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -43033,7 +43767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -43043,21 +43777,21 @@ var render = function() {
     _c("div", { staticClass: "text-center" }, [
       _vm.text
         ? _c("span", { staticClass: "p-0 m-0 mt-2 text-center" }, [
-            _vm._v(_vm._s(_vm.text))
+            _vm._v(_vm._s(_vm.text)),
           ])
-        : _vm._e()
-    ])
+        : _vm._e(),
+    ]),
   ])
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center mt-5 mb-2" }, [
-      _c("i", { staticClass: "fas fa-home fa-3x" })
+      _c("i", { staticClass: "fas fa-home fa-3x" }),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -43077,7 +43811,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -43092,9 +43826,9 @@ var render = function() {
             attrs: {
               to: {
                 name: "view-details",
-                params: { ml_num: _vm.property.Ml_num }
-              }
-            }
+                params: { ml_num: _vm.property.Ml_num },
+              },
+            },
           },
           [
             _vm.property.images.length > 0
@@ -43102,27 +43836,26 @@ var render = function() {
                   staticClass: "card-img-top",
                   attrs: {
                     src: _vm.property.images[0].image,
-                    alt: "Property image not found"
-                  }
+                    alt: "Property image not found",
+                  },
                 })
               : _c("img", {
                   staticClass: "card-img-top",
                   attrs: {
-                    src:
-                      "/assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg",
-                    alt: "Not Found"
-                  }
-                })
+                    src: "/assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg",
+                    alt: "Not Found",
+                  },
+                }),
           ]
         ),
         _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "badge" }, [
-          _c("p", { staticClass: "text-color me-5" }, [
-            _vm._v(_vm._s(_vm.property.S_r))
-          ])
-        ])
+          _c("p", { staticClass: "text-color" }, [
+            _vm._v(_vm._s(_vm.property.S_r)),
+          ]),
+        ]),
       ],
       1
     ),
@@ -43132,21 +43865,21 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-10 d-flex align-items-center" }, [
             _c("h6", { staticClass: "mb-0 card-title" }, [
-              _vm._v("$" + _vm._s(_vm.property.Lp_dol))
-            ])
+              _vm._v("$" + _vm._s(_vm.property.Lp_dol)),
+            ]),
           ]),
           _vm._v(" "),
-          _vm._m(1)
-        ])
+          _vm._m(1),
+        ]),
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row pt-2" }, [
         _c("div", { staticClass: "col-8" }, [
           _c("p", { staticClass: "mb-0" }, [
-            _vm._v("\n          " + _vm._s(_vm.property.Addr) + "\n        ")
-          ])
-        ])
-      ])
+            _vm._v("\n          " + _vm._s(_vm.property.Addr) + "\n        "),
+          ]),
+        ]),
+      ]),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-footer" }, [
@@ -43155,10 +43888,10 @@ var render = function() {
           _c("ul", { staticClass: "list-unstyled" }, [
             _c("li", { staticClass: "float-start" }, [
               _c("small", { staticClass: "ps-3 card-title fw-normal" }, [
-                _vm._v("MLS " + _vm._s(_vm.property.Ml_num))
-              ])
-            ])
-          ])
+                _vm._v("MLS " + _vm._s(_vm.property.Ml_num)),
+              ]),
+            ]),
+          ]),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-6 p-0" }, [
@@ -43169,14 +43902,14 @@ var render = function() {
                   attrs: {
                     src: "/assets/images/icons/bathTab.png",
                     alt: "",
-                    width: "16px"
-                  }
+                    width: "16px",
+                  },
                 }),
                 _vm._v(" "),
                 _c("span", { staticClass: "count card-title" }, [
-                  _vm._v(" " + _vm._s(_vm.property.Rms))
-                ])
-              ])
+                  _vm._v(" " + _vm._s(_vm.property.Rms)),
+                ]),
+              ]),
             ]),
             _vm._v(" "),
             _c("li", { staticClass: "float-end" }, [
@@ -43185,42 +43918,42 @@ var render = function() {
                   attrs: {
                     src: "/assets/images/icons/bed.png",
                     alt: "",
-                    width: "16px"
-                  }
+                    width: "16px",
+                  },
                 }),
                 _vm._v(" "),
                 _c("span", { staticClass: "count card-title" }, [
-                  _vm._v(" " + _vm._s(_vm.property.Bath_tot))
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
+                  _vm._v(" " + _vm._s(_vm.property.Bath_tot)),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "star" }, [
-      _c("img", { attrs: { src: "/assets/images/icons/star.png", alt: "" } })
+      _c("img", { attrs: { src: "/assets/images/icons/star.png", alt: "" } }),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-2" }, [
       _c("small", { staticClass: "font-weight-bold" }, [
         _c("img", {
-          attrs: { src: "/assets/images/icons/bookmark_blue.png", alt: "" }
-        })
-      ])
+          attrs: { src: "/assets/images/icons/bookmark_blue.png", alt: "" },
+        }),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -43240,7 +43973,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -43254,30 +43987,30 @@ var render = function() {
                 name: "model",
                 rawName: "v-model",
                 value: _vm.form.listedFor,
-                expression: "form.listedFor"
-              }
+                expression: "form.listedFor",
+              },
             ],
             staticClass: "tab-switch",
             attrs: {
               type: "radio",
               name: "css-tabs",
               id: "forSale",
-              value: "Sale"
+              value: "Sale",
             },
             domProps: {
               checked: _vm.form.listedFor == "Sale",
-              checked: _vm._q(_vm.form.listedFor, "Sale")
+              checked: _vm._q(_vm.form.listedFor, "Sale"),
             },
             on: {
-              change: function($event) {
+              change: function ($event) {
                 return _vm.$set(_vm.form, "listedFor", "Sale")
-              }
-            }
+              },
+            },
           }),
           _vm._v(" "),
           _c("label", { staticClass: "tab-label", attrs: { for: "forSale" } }, [
-            _vm._v("Buy")
-          ])
+            _vm._v("Buy"),
+          ]),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "tab" }, [
@@ -43287,32 +44020,32 @@ var render = function() {
                 name: "model",
                 rawName: "v-model",
                 value: _vm.form.listedFor,
-                expression: "form.listedFor"
-              }
+                expression: "form.listedFor",
+              },
             ],
             staticClass: "tab-switch",
             attrs: {
               type: "radio",
               name: "css-tabs",
               id: "for_lease",
-              value: "Lease"
+              value: "Lease",
             },
             domProps: {
               checked: _vm.form.listedFor == "Lease",
-              checked: _vm._q(_vm.form.listedFor, "Lease")
+              checked: _vm._q(_vm.form.listedFor, "Lease"),
             },
             on: {
-              change: function($event) {
+              change: function ($event) {
                 return _vm.$set(_vm.form, "listedFor", "Lease")
-              }
-            }
+              },
+            },
           }),
           _vm._v(" "),
           _c(
             "label",
             { staticClass: "tab-label", attrs: { for: "for_lease" } },
             [_vm._v("Rent")]
-          )
+          ),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "tab" }, [
@@ -43327,25 +44060,25 @@ var render = function() {
                       name: "model",
                       rawName: "v-model",
                       value: _vm.form.addr,
-                      expression: "form.addr"
-                    }
+                      expression: "form.addr",
+                    },
                   ],
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
                     "aria-label": "First name",
-                    placeholder: "Location"
+                    placeholder: "Location",
                   },
                   domProps: { value: _vm.form.addr },
                   on: {
-                    input: function($event) {
+                    input: function ($event) {
                       if ($event.target.composing) {
                         return
                       }
                       _vm.$set(_vm.form, "addr", $event.target.value)
-                    }
-                  }
-                })
+                    },
+                  },
+                }),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-width" }, [
@@ -43357,28 +44090,28 @@ var render = function() {
                       name: "model",
                       rawName: "v-model",
                       value: _vm.form.propertyType,
-                      expression: "form.propertyType"
-                    }
+                      expression: "form.propertyType",
+                    },
                   ],
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
                     "aria-label": "Last name",
                     list: "type_proper",
-                    placeholder: "Type"
+                    placeholder: "Type",
                   },
                   domProps: { value: _vm.form.propertyType },
                   on: {
-                    input: function($event) {
+                    input: function ($event) {
                       if ($event.target.composing) {
                         return
                       }
                       _vm.$set(_vm.form, "propertyType", $event.target.value)
-                    }
-                  }
+                    },
+                  },
                 }),
                 _vm._v(" "),
-                _vm._m(0)
+                _vm._m(0),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-width" }, [
@@ -43390,25 +44123,25 @@ var render = function() {
                       name: "model",
                       rawName: "v-model",
                       value: _vm.form.minPrice,
-                      expression: "form.minPrice"
-                    }
+                      expression: "form.minPrice",
+                    },
                   ],
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
                     "aria-label": "Last name",
-                    placeholder: "Min"
+                    placeholder: "Min",
                   },
                   domProps: { value: _vm.form.minPrice },
                   on: {
-                    input: function($event) {
+                    input: function ($event) {
                       if ($event.target.composing) {
                         return
                       }
                       _vm.$set(_vm.form, "minPrice", $event.target.value)
-                    }
-                  }
-                })
+                    },
+                  },
+                }),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-width" }, [
@@ -43420,25 +44153,25 @@ var render = function() {
                       name: "model",
                       rawName: "v-model",
                       value: _vm.form.maxPrice,
-                      expression: "form.maxPrice"
-                    }
+                      expression: "form.maxPrice",
+                    },
                   ],
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
                     "aria-label": "Last name",
-                    placeholder: "Max"
+                    placeholder: "Max",
                   },
                   domProps: { value: _vm.form.maxPrice },
                   on: {
-                    input: function($event) {
+                    input: function ($event) {
                       if ($event.target.composing) {
                         return
                       }
                       _vm.$set(_vm.form, "maxPrice", $event.target.value)
-                    }
-                  }
-                })
+                    },
+                  },
+                }),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-width" }, [
@@ -43450,25 +44183,25 @@ var render = function() {
                       name: "model",
                       rawName: "v-model",
                       value: _vm.form.bedRoom,
-                      expression: "form.bedRoom"
-                    }
+                      expression: "form.bedRoom",
+                    },
                   ],
                   staticClass: "form-control",
                   attrs: {
                     type: "text",
                     "aria-label": "Last name",
-                    placeholder: "Rooms"
+                    placeholder: "Rooms",
                   },
                   domProps: { value: _vm.form.bedRoom },
                   on: {
-                    input: function($event) {
+                    input: function ($event) {
                       if ($event.target.composing) {
                         return
                       }
                       _vm.$set(_vm.form, "bedRoom", $event.target.value)
-                    }
-                  }
-                })
+                    },
+                  },
+                }),
               ]),
               _vm._v(" "),
               _vm._m(1),
@@ -43477,7 +44210,7 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    "col p-0 d-flex align-items-end justify-content-center"
+                    "col p-0 d-flex align-items-end justify-content-center",
                 },
                 [
                   _c(
@@ -43485,21 +44218,21 @@ var render = function() {
                     {
                       staticClass: "btn btn-theme-color",
                       attrs: { type: "button" },
-                      on: { click: _vm.searchProperty }
+                      on: { click: _vm.searchProperty },
                     },
                     [_vm._v("\n                Search\n              ")]
-                  )
+                  ),
                 ]
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -43508,10 +44241,10 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("option", { attrs: { value: "Commercial" } }),
       _vm._v(" "),
-      _c("option", { attrs: { value: "Condo" } })
+      _c("option", { attrs: { value: "Condo" } }),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -43524,14 +44257,14 @@ var staticRenderFns = [
           { staticClass: "btn btn-theme-color", attrs: { type: "button" } },
           [
             _c("img", {
-              attrs: { src: "/assets/images/icons/menu_bar.svg", alt: "" }
+              attrs: { src: "/assets/images/icons/menu_bar.svg", alt: "" },
             }),
-            _vm._v("\n                More\n              ")
+            _vm._v("\n                More\n              "),
           ]
-        )
+        ),
       ]
     )
-  }
+  },
 ]
 render._withStripped = true
 
@@ -43551,7 +44284,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -43562,7 +44295,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view"),
       _vm._v(" "),
-      _c("add-footer")
+      _c("add-footer"),
     ],
     1
   )
@@ -43586,7 +44319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -43603,13 +44336,13 @@ var render = function() {
             _c("h6", [
               _vm._v(
                 "\n                Easy to buy, sell or rent your property through homeplore.\n            "
-              )
+              ),
             ]),
             _vm._v(" "),
-            _c("property-search")
+            _c("property-search"),
           ],
           1
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("property-listing"),
@@ -43618,13 +44351,13 @@ var render = function() {
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
-      _c("faq")
+      _c("faq"),
     ],
     1
   )
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -43635,19 +44368,19 @@ var staticRenderFns = [
             _c("h1", { staticClass: "text-light fw-bold" }, [
               _vm._v(
                 "\n                        7 tips to got approved for a mortgage\n                    "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-light" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-light" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c(
@@ -43656,9 +44389,9 @@ var staticRenderFns = [
               [
                 _vm._v(
                   "\n                        Learn more\n                    "
-                )
+                ),
               ]
-            )
+            ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-7 p-0" }, [
@@ -43666,15 +44399,15 @@ var staticRenderFns = [
               staticClass: "img-responsive img-fluid",
               attrs: {
                 src: "/assets/images/cards/pexels-andres-ayrton-6578879.jpg",
-                alt: ""
-              }
-            })
-          ])
-        ])
-      ])
+                alt: "",
+              },
+            }),
+          ]),
+        ]),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -43685,7 +44418,7 @@ var staticRenderFns = [
             _c("h2", { staticClass: "text-color fw-bold pb-2" }, [
               _vm._v(
                 "\n                        Market Report and states\n                    "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c("img", {
@@ -43693,44 +44426,44 @@ var staticRenderFns = [
               attrs: {
                 src: "/assets/images/cards/pexels-burst-373912 1.png",
                 width: "450px",
-                alt: ""
-              }
+                alt: "",
+              },
             }),
             _vm._v(" "),
             _c("h3", { staticClass: "text-color fw-bold py-4" }, [
               _vm._v(
                 "\n                        June Market State\n                    "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-color me-5" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-color me-5" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-color me-5" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-              )
+              ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-color me-5" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-              )
-            ])
+              ),
+            ]),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-6 border-start" }, [
             _c("h3", { staticClass: "text-color fw-bold" }, [
-              _vm._v("June Market State")
+              _vm._v("June Market State"),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
@@ -43741,9 +44474,9 @@ var staticRenderFns = [
                   [
                     _vm._v(
                       "\n                                Graph\n                            "
-                    )
+                    ),
                   ]
-                )
+                ),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-6 pe-0" }, [
@@ -43753,10 +44486,10 @@ var staticRenderFns = [
                   [
                     _vm._v(
                       "\n                                Graph\n                            "
-                    )
+                    ),
                   ]
-                )
-              ])
+                ),
+              ]),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row py-4" }, [
@@ -43764,20 +44497,20 @@ var staticRenderFns = [
                 "div",
                 {
                   staticClass:
-                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center"
+                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
                 },
                 [
                   _c("ul", { staticClass: "list-unstyled me-auto" }, [
                     _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
                     _vm._v(" "),
                     _c("li", { staticClass: "fw-bold" }, [
-                      _vm._v("Semi-Detached")
+                      _vm._v("Semi-Detached"),
                     ]),
                     _vm._v(" "),
                     _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
                     _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")])
-                  ])
+                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
+                  ]),
                 ]
               ),
               _vm._v(" "),
@@ -43793,12 +44526,12 @@ var staticRenderFns = [
                           {
                             staticClass:
                               "border border-1 text-center fw-lighter-items",
-                            attrs: { colspan: "3" }
+                            attrs: { colspan: "3" },
                           },
                           [
                             _vm._v(
                               "\n                                            Sales\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43807,14 +44540,14 @@ var staticRenderFns = [
                           {
                             staticClass:
                               "border border-1 text-center fw-lighter-items",
-                            attrs: { colspan: "3" }
+                            attrs: { colspan: "3" },
                           },
                           [
                             _vm._v(
                               "\n                                            Average Price\n                                        "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("tr", { staticClass: "table-row-theme" }, [
@@ -43824,7 +44557,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43834,7 +44567,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43844,7 +44577,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43854,7 +44587,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43864,7 +44597,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43874,9 +44607,9 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("tr", [
@@ -43886,7 +44619,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43896,7 +44629,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43906,7 +44639,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43916,7 +44649,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43926,7 +44659,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43936,9 +44669,9 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("tr", [
@@ -43948,7 +44681,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43958,7 +44691,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43968,7 +44701,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43978,7 +44711,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43988,7 +44721,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -43998,9 +44731,9 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("tr", [
@@ -44010,7 +44743,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44020,7 +44753,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44030,7 +44763,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44040,7 +44773,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44050,7 +44783,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44060,14 +44793,14 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
-                            )
+                            ),
                           ]
-                        )
-                      ])
+                        ),
+                      ]),
                     ]
-                  )
-                ])
-              ])
+                  ),
+                ]),
+              ]),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row py-4" }, [
@@ -44075,20 +44808,20 @@ var staticRenderFns = [
                 "div",
                 {
                   staticClass:
-                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center"
+                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
                 },
                 [
                   _c("ul", { staticClass: "list-unstyled me-auto" }, [
                     _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
                     _vm._v(" "),
                     _c("li", { staticClass: "fw-bold" }, [
-                      _vm._v("Semi-Detached")
+                      _vm._v("Semi-Detached"),
                     ]),
                     _vm._v(" "),
                     _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
                     _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")])
-                  ])
+                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
+                  ]),
                 ]
               ),
               _vm._v(" "),
@@ -44104,12 +44837,12 @@ var staticRenderFns = [
                           {
                             staticClass:
                               "border border-1 text-center fw-lighter-items",
-                            attrs: { colspan: "3" }
+                            attrs: { colspan: "3" },
                           },
                           [
                             _vm._v(
                               "\n                                            Sales\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44118,14 +44851,14 @@ var staticRenderFns = [
                           {
                             staticClass:
                               "border border-1 text-center fw-lighter-items",
-                            attrs: { colspan: "3" }
+                            attrs: { colspan: "3" },
                           },
                           [
                             _vm._v(
                               "\n                                            Average Price\n                                        "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("tr", { staticClass: "table-row-theme" }, [
@@ -44135,7 +44868,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44145,7 +44878,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44155,7 +44888,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44165,7 +44898,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44175,7 +44908,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44185,9 +44918,9 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("tr", [
@@ -44197,7 +44930,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44207,7 +44940,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44217,7 +44950,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44227,7 +44960,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44237,7 +44970,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44247,9 +44980,9 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("tr", [
@@ -44259,7 +44992,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44269,7 +45002,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44279,7 +45012,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44289,7 +45022,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44299,7 +45032,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44309,9 +45042,9 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
-                            )
+                            ),
                           ]
-                        )
+                        ),
                       ]),
                       _vm._v(" "),
                       _c("tr", [
@@ -44321,7 +45054,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44331,7 +45064,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44341,7 +45074,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44351,7 +45084,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44361,7 +45094,7 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
-                            )
+                            ),
                           ]
                         ),
                         _vm._v(" "),
@@ -44371,20 +45104,20 @@ var staticRenderFns = [
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
-                            )
+                            ),
                           ]
-                        )
-                      ])
+                        ),
+                      ]),
                     ]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -44404,7 +45137,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -44423,7 +45156,7 @@ var render = function() {
                           _c("h2", { staticClass: "theme-title text-start" }, [
                             _vm._v(
                               "\n                                Property Details\n                            "
-                            )
+                            ),
                           ]),
                           _vm._v(" "),
                           _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
@@ -44437,16 +45170,15 @@ var render = function() {
                                       staticClass:
                                         "img-fluid align-middle pb-1",
                                       attrs: {
-                                        src:
-                                          "/assets/images/icons/Mask Group.svg",
+                                        src: "/assets/images/icons/Mask Group.svg",
                                         width: "14",
-                                        alt: ""
-                                      }
+                                        alt: "",
+                                      },
                                     }),
                                     _vm._v(
                                       "\n                                            Home"
-                                    )
-                                  ])
+                                    ),
+                                  ]),
                                 ],
                                 1
                               ),
@@ -44456,18 +45188,18 @@ var render = function() {
                                 { staticClass: "breadcrumb-item" },
                                 [
                                   _c("router-link", { attrs: { to: "/" } }, [
-                                    _vm._v("Properties")
-                                  ])
+                                    _vm._v("Properties"),
+                                  ]),
                                 ],
                                 1
                               ),
                               _vm._v(" "),
-                              _vm._m(0)
-                            ])
-                          ])
-                        ])
-                      ])
-                    ])
+                              _vm._m(0),
+                            ]),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
                   ]
                 ),
                 _vm._v(" "),
@@ -44482,10 +45214,10 @@ var render = function() {
                               "per-page": 4,
                               autoplay: true,
                               centerMode: true,
-                              paginationEnabled: false
-                            }
+                              paginationEnabled: false,
+                            },
                           },
-                          _vm._l(_vm.property.images, function(img) {
+                          _vm._l(_vm.property.images, function (img) {
                             return _c(
                               "Slide",
                               { key: img.property_ml_num + "_" + img.id },
@@ -44494,23 +45226,23 @@ var render = function() {
                                   "div",
                                   {
                                     staticClass:
-                                      "carousel-outer border bg-light text-center craousel-image-outer"
+                                      "carousel-outer border bg-light text-center craousel-image-outer",
                                   },
                                   [
                                     _c("img", {
                                       staticClass: "crouse-image",
                                       attrs: {
                                         src: img.image,
-                                        alt: "Not Found"
-                                      }
-                                    })
+                                        alt: "Not Found",
+                                      },
+                                    }),
                                   ]
-                                )
+                                ),
                               ]
                             )
                           }),
                           1
-                        )
+                        ),
                       ],
                       1
                     )
@@ -44527,7 +45259,7 @@ var render = function() {
                                 "\n                                        " +
                                   _vm._s(_vm.property.Addr) +
                                   "\n                                    "
-                              )
+                              ),
                             ]),
                             _vm._v(" "),
                             _c("h6", { staticClass: "text-color fw-light" }, [
@@ -44535,8 +45267,8 @@ var render = function() {
                                 "\n                                        " +
                                   _vm._s(_vm.property.Rltr) +
                                   "\n                                    "
-                              )
-                            ])
+                              ),
+                            ]),
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-6 pt-0 text-end" }, [
@@ -44548,7 +45280,7 @@ var render = function() {
                                   "\n                                        $" +
                                     _vm._s(_vm.property.Lp_dol) +
                                     "\n                                    "
-                                )
+                                ),
                               ]
                             ),
                             _vm._v(" "),
@@ -44558,9 +45290,9 @@ var render = function() {
                                   "\n                                            For " +
                                     _vm._s(_vm.property.S_r) +
                                     "\n                                        "
-                                )
-                              ])
-                            ])
+                                ),
+                              ]),
+                            ]),
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "col-12 py-1" }, [
@@ -44571,8 +45303,8 @@ var render = function() {
                                     attrs: {
                                       src: "/assets/images/icons/bathTab.png",
                                       alt: "BathRoom",
-                                      width: "24px"
-                                    }
+                                      width: "24px",
+                                    },
                                   }),
                                   _vm._v(" "),
                                   _c(
@@ -44582,10 +45314,10 @@ var render = function() {
                                       _vm._v(
                                         "\n                                                    " +
                                           _vm._s(_vm.property.Bath_tot)
-                                      )
+                                      ),
                                     ]
-                                  )
-                                ])
+                                  ),
+                                ]),
                               ]),
                               _vm._v(" "),
                               _c("li", { staticClass: "float-start" }, [
@@ -44594,16 +45326,16 @@ var render = function() {
                                     attrs: {
                                       src: "/assets/images/icons/bed.png",
                                       alt: "Washroom",
-                                      width: "24px"
-                                    }
+                                      width: "24px",
+                                    },
                                   }),
                                   _vm._v(" "),
                                   _c(
                                     "span",
                                     { staticClass: "count card-title" },
                                     [_vm._v(_vm._s(_vm.property.Rms))]
-                                  )
-                                ])
+                                  ),
+                                ]),
                               ]),
                               _vm._v(" "),
                               _c("li", { staticClass: "float-start" }, [
@@ -44614,34 +45346,34 @@ var render = function() {
                                     _vm._v(
                                       "MLS\n                                                " +
                                         _vm._s(_vm.property.Ml_num)
-                                    )
+                                    ),
                                   ]
-                                )
-                              ])
-                            ])
+                                ),
+                              ]),
+                            ]),
                           ]),
                           _vm._v(" "),
-                          _vm._m(1)
+                          _vm._m(1),
                         ]),
                         _vm._v(" "),
                         _c("hr"),
                         _vm._v(" "),
                         _c("span", { staticClass: "text-color me-5" }, [
-                          _vm._v(_vm._s(_vm.property.Ad_text))
+                          _vm._v(_vm._s(_vm.property.Ad_text)),
                         ]),
                         _vm._v(" "),
                         _c("br"),
                         _vm._v(" "),
                         _c("span", { staticClass: "text-color me-5" }, [
-                          _vm._v(_vm._s(_vm.property.Extras))
-                        ])
+                          _vm._v(_vm._s(_vm.property.Extras)),
+                        ]),
                       ]),
                       _vm._v(" "),
                       _c(
                         "div",
                         {
                           staticClass:
-                            "col-md-6 d-flex justify-content-center p-0"
+                            "col-md-6 d-flex justify-content-center p-0",
                         },
                         [
                           _c("div", { staticClass: "row details" }, [
@@ -44657,7 +45389,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Property Type\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44671,8 +45403,8 @@ var render = function() {
                                             )
                                           ) +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
@@ -44682,7 +45414,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Walk Score\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44691,8 +45423,8 @@ var render = function() {
                                         "\n                                                " +
                                           _vm._s(_vm.property.Sqft || "N/A") +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
@@ -44702,7 +45434,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Style\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44711,8 +45443,8 @@ var render = function() {
                                         "\n                                                " +
                                           _vm._s(_vm.property.Style || "N/A") +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
@@ -44722,7 +45454,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Added\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44734,8 +45466,8 @@ var render = function() {
                                               _vm.property.Idx_dt
                                           ) +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
@@ -44745,7 +45477,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Size\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44756,8 +45488,8 @@ var render = function() {
                                             _vm.property.Tot_area || "N/A"
                                           ) +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
@@ -44767,7 +45499,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Lot Size\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44778,8 +45510,8 @@ var render = function() {
                                             _vm.property.Lotsz_code || "N/A"
                                           ) +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
                                   _vm._m(2),
@@ -44791,7 +45523,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Age\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44802,8 +45534,8 @@ var render = function() {
                                             _vm.property.Yr_built || "N/A"
                                           ) +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
@@ -44813,7 +45545,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                MLS\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44822,8 +45554,8 @@ var render = function() {
                                         "\n                                                #\n                                                " +
                                           _vm._s(_vm.property.Ml_num || "NA") +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
@@ -44833,7 +45565,7 @@ var render = function() {
                                       [
                                         _vm._v(
                                           "\n                                                Taxes\n                                            "
-                                        )
+                                        ),
                                       ]
                                     ),
                                     _vm._v(" "),
@@ -44842,19 +45574,19 @@ var render = function() {
                                         "\n                                                " +
                                           _vm._s(_vm.property.Yr || "N/A") +
                                           "\n                                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(3)
+                                  _vm._m(3),
                                 ]
-                              )
-                            ])
-                          ])
+                              ),
+                            ]),
+                          ]),
                         ]
-                      )
-                    ])
-                  ])
+                      ),
+                    ]),
+                  ]),
                 ]),
                 _vm._v(" "),
                 _vm.property.images
@@ -44868,78 +45600,4626 @@ var render = function() {
                               staticClass: "middle-banner-image",
                               attrs: {
                                 src: _vm.property.images[0].image,
-                                alt: "Not Found"
-                              }
-                            })
+                                alt: "Not Found",
+                              },
+                            }),
                           ]),
                           _vm._v(" "),
                           _c(
                             "div",
                             {
                               staticClass:
-                                "col-md-6 mt-5 text-white mid-content ps-md-5 pe-sm-2"
+                                "col-md-6 mt-5 text-white mid-content ps-md-5 pe-sm-2",
                             },
                             [
                               _c("h3", { staticClass: "text-white" }, [
-                                _vm._v("Home Value")
+                                _vm._v("Home Value"),
                               ]),
                               _vm._v(" "),
                               _c("span", { staticClass: "text-muted" }, [
                                 _vm._v(
                                   "Price estimate and comparrables near 114 High\n                            park Avenue The approximate value of a 4 bedroom\n                            house in the area is"
-                                )
+                                ),
                               ]),
                               _vm._v(" "),
                               _c("h3", { staticClass: "mt-2" }, [
-                                _vm._v("$" + _vm._s(_vm.property.Lp_dol))
+                                _vm._v("$" + _vm._s(_vm.property.Lp_dol)),
                               ]),
                               _vm._v(" "),
-                              _vm._m(4)
+                              _vm._m(4),
                             ]
-                          )
-                        ])
+                          ),
+                        ]),
                       ]
                     )
                   : _vm._e(),
                 _vm._v(" "),
                 _vm._m(5),
                 _vm._v(" "),
-                _vm._m(6),
-                _vm._v(" "),
-                _vm._m(7),
-                _vm._v(" "),
-                _c("section", [
-                  _c("div", { staticClass: "container" }, [
+                _c("section", { staticClass: "container" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-sm-4 col-lg-4 col-md-4" }, [
+                      _c(
+                        "table",
+                        { staticClass: "table table-bordered border mb-2" },
+                        [
+                          _vm._m(6),
+                          _vm._v(" "),
+                          _vm.property.property_type
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Property Type"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.property_type)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_feat1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Features 1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_feat1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_feat2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Features 2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_feat2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_feat3
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Features 3"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_feat3)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_feat4
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Features 4"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_feat4)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_feat5
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Features 5"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_feat5)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shoreline1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Shoreline 1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shoreline1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shoreline2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Shoreline 2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shoreline2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shore_allow
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Shoreline Allowance"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shore_allow)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shoreline_exp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Shoreline Exposure"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shoreline_exp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Alt_power1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Alternative Power1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Alt_power1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Alt_power2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Alternative Power2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Alt_power2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Retirement
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Retirement"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Retirement)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Legal_desc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Legal Description"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Legal_desc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level10
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 10"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level10)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level11
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 11"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level11)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level12
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 12"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level12)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level3
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 3"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level3)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level4
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 4"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level4)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level5
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 5"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level5)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level6
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 6"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level6)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level7
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 7"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level7)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level8
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 8"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level8)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Level9
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level 9"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Level9)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Lotsz_code
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Lot Size Code"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Lotsz_code)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Lse_terms
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Leased Terms"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Lse_terms)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Mmap_col
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Map Column #"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Mmap_col)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Mmap_page
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Map #"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Mmap_page)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Mmap_row
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Map Row"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Mmap_row)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Acreage
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Acres"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Acreage)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Addl_mo_fee
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Add Monthly Fees"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Addl_mo_fee)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.All_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("All Inclusive"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.All_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Apt_num
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Apt/Unit"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Apt_num)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Ass_year
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Assessment Year"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Ass_year)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Portion_property_lease1_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("PortionPropertyLease1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.property.Portion_property_lease1_out
+                                    ) + "\n                                "
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Portion_property_lease2_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("PortionPropertyLease2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.property.Portion_property_lease2_out
+                                    ) + "\n                                "
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Portion_property_lease3_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("PortionPropertyLease3"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.property.Portion_property_lease3_out
+                                    ) + "\n                                "
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Portion_property_lease4_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("PortionPropertyLease4"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.property.Portion_property_lease4_out
+                                    ) + "\n                                "
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Portion_property_lease_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "\n                                    PortionPropertyLeaseSrch\n                                "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.property.Portion_property_lease_srch
+                                    ) + "\n                                "
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Portion_lease_comments
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Portion Lease Comments"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.property.Portion_lease_comments)
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Assignment
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Assignment"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Assignment)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Fractional_ownership
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("FractionalOwnership"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.property.Fractional_ownership)
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Sewer
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Sewers"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Sewer)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Spec_des1_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Special Designation 1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Spec_des1_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Spec_des2_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Special Designation 2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Spec_des2_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Spec_des3_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Special Designation 3"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Spec_des3_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Spec_des4_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Special Designation 4"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Spec_des4_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Spec_des5_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Special Designation 5"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Spec_des5_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Sqft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Approx Square Footage"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Sqft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Style
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Style"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Style)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Taxes
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Taxes"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Taxes)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Tour_url
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Virtual Tour URL"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Tour_url)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Community_code
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Community Code"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Community_code)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Area_code
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Area Code"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Area_code)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Tv
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Assessment"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Tv)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Type_own_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Type"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Type_own_srch)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Type_own1_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Type 1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Type_own1_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Uffi
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("UFFI"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Uffi)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Util_cable
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Utilities-Cable"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Util_cable)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Util_tel
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Utilities-Telephone\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Util_tel)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Vend_pis
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Seller Property Info Statement"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Vend_pis)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Vtour_updt
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Virtual Tour Upload Date"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Vtour_updt)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Included"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Waterfront
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Waterfront"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Waterfront)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wtr_suptyp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Supply Types"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wtr_suptyp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Yr
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Tax Year"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Yr)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Yr_built
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Approx Age"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Yr_built)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Zip
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Postal Code"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Zip)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Zoning
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Zoning"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Zoning)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Br
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Bedrooms"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Br)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Br_plus
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Bedrooms +"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Br_plus)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Bsmt1_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Basement1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Bsmt1_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Bsmt2_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Basement2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Bsmt2_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Cable
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Cable TV Included"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Cable)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Cac_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("CAC Included"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Cac_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Central_vac
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Central Vac"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Central_vac)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Comel_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Common Elements Included"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Comel_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Comp_pts
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Fronting On (NSEW)"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Comp_pts)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Constr1_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Exterior1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Constr1_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Constr2_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Exterior2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Constr2_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.County
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Province"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.County)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Cross_st
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Directions/Cross Streets"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Cross_st)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Heat_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Heat Included"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Heat_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Spec_des6_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Special Designation 6"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Spec_des6_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_body
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Body Name"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_body)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_type
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Body Type"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_type)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_front
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Frontage"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_front)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Access_prop1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Access To Property1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Access_prop1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Easement_rest1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Easements Restrictions1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Easement_rest1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Easement_rest2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Easements Restrictions2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Easement_rest2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Easement_rest3
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Easements Restrictions3"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Easement_rest3)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Easement_rest4
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Easements Restrictions4"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Easement_rest4)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Rural_svc1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Rural Services1\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Rural_svc1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Rural_svc2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Rural Services2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Rural_svc2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Rural_svc3
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Rural Services3"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Rural_svc3)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Rural_svc4
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Rural Services4"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Rural_svc4)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Rural_svc5
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Rural Services5"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Rural_svc5)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_acc_bldg1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Waterfront Accessory Bldgs1\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_acc_bldg1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_acc_bldg2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Waterfront Accessory Bldgs2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_acc_bldg2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_del_feat1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Delivery Features1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_del_feat1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_del_feat2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Delivery Features2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_del_feat2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Sewage1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Sewage1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Sewage1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Sewage2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Sewage2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Sewage2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Depth
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Lot Depth"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Depth)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Disp_addr
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Display Address On Internet\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Disp_addr)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Drive
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Drive"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Drive)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Elec
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Utilities-Hydro\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Elec)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Elevator
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Elevator"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Elevator)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Extras
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Extras"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Extras)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Farm_agri
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Farm/Agriculture"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Farm_agri)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Occ
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Possession Remarks"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Occ)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.A_c
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Air Conditioning"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.A_c)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Access_prop2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Access To Property2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Access_prop2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Oth_struc1_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Other Structures1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Oth_struc1_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Oth_struc2_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Other Structures2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Oth_struc2_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Outof_area
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Out of Area Municipality"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Outof_area)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Parcel_id
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("PIN#"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Parcel_id)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Pool
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Pool"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Pool)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Prop_feat1_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Property Features 1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Prop_feat1_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Prop_feat2_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Property Features 2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Prop_feat2_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Prop_feat3_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Property Features 3"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Prop_feat3_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Prop_feat4_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Property Features 4"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Prop_feat4_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Prop_feat5_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Property Features 5"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Prop_feat5_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Prop_feat6_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Property Features 6"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Prop_feat6_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Pvt_ent
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Private Entrance"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Pvt_ent)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Municipality_district
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Municipality District"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.property.Municipality_district)
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Municipality
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Municipality"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Municipality)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Pix_updt
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Pix updated date"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Pix_updt)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Timestamp_sql
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Updated timestamp"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Timestamp_sql)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Municipality_code
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Municipality Code"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.property.Municipality_code)
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "row" },
-                      _vm._l(_vm.property, function(value, key) {
-                        return _c(
-                          "div",
-                          { key: key, staticClass: "col-sm-6" },
+                      {
+                        staticClass:
+                          "col-sm-4 col-lg-4 col-md-4 table-responsive",
+                      },
+                      [
+                        _c(
+                          "table",
+                          { staticClass: "table table-bordered border" },
                           [
-                            key != "images" && value != null && value != ""
-                              ? _c("div", { staticClass: "border p-2" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(key + " : " + value) +
-                                      "\n                            "
-                                  )
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _vm.property.Insur_bldg
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Building Insurance Included\t"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Insur_bldg)),
+                                  ]),
                                 ])
-                              : _vm._e()
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Bldg_amen1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Building Amenities 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Bldg_amen1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Bldg_amen2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Building Amenities 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Bldg_amen2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Bldg_amen3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Building Amenities 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Bldg_amen3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Bldg_amen4_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Building Amenities 4"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Bldg_amen4_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Bldg_amen5_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Building Amenities 5"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Bldg_amen5_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Bldg_amen6_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Building Amenities 6"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Bldg_amen6_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
                           ]
-                        )
-                      }),
-                      0
-                    )
-                  ])
-                ])
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "table",
+                          { staticClass: "table table-bordered border" },
+                          [
+                            _vm._m(8),
+                            _vm._v(" "),
+                            _vm.property.Rms
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Rooms"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rms)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rooms_plus
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Rooms +"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rooms_plus)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm1_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 1 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm1_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm1_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 1 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm1_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm1_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 1 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm1_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm1_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 1 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm1_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm1_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 1 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm1_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm10_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 10 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm10_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm10_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 10 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm10_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm10_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 10 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm10_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm10_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 10 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm10_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm10_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 10"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm10_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm10_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 10 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm10_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm11_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 11 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm11_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm11_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 11 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm11_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm11_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 11 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm11_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm11_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 11 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm11_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm11_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 11 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm11_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm12_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 12 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm12_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm12_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 12 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm12_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm12_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 12 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm12_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm12_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 12 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm12_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm12_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 12"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm12_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm12_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 12 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm12_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm2_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 2 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm2_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm2_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 2 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm2_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm2_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 2 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm2_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm2_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 2 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm2_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm2_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 2 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm2_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Room
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Rm3_dc1_out"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(
+                                      _vm._s(_vm.property.Room) + " 3 Desc 1"
+                                    ),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm3_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 3 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm3_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm3_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 3 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm3_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm3_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 3 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm3_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm3_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 3 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm3_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm4_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 4 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm4_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm4_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 4 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm4_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm4_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 4 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm4_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm4_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 4 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm4_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm4_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 4"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm4_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm4_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 4 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm4_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm5_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 5 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm5_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm5_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 5 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm5_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm5_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 5 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm5_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm5_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 5 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm5_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm5_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 5"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm5_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm5_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 5 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm5_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm6_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 6 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm6_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm6_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 6 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm6_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm6_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 6 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm6_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm6_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 6 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm6_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm6_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 6"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm6_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm6_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 6 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm6_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm7_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 7 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm7_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm7_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 7 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm7_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm7_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 7 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm7_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm7_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 7"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm7_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm7_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 7 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm7_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm8_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 8 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm8_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm8_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 8 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm8_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm8_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 8 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm8_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm8_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 8 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm8_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm8_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 8"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm8_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm8_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 8 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm8_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm9_dc1_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 9 Desc 1"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm9_dc1_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm9_dc2_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 9 Desc 2"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm9_dc2_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm9_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 9 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm9_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm9_len
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 9 Length"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm9_len)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm9_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 9"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm9_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm9_wth
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 9 Width"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm9_wth)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Den_fr
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Family Room"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Den_fr)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm11_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 11"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm11_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.property.Rm7_dc3_out
+                              ? _c("tr", [
+                                  _c("th", { staticClass: "p-2" }, [
+                                    _vm._v("Room 7 Desc 3"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "p-2" }, [
+                                    _vm._v(_vm._s(_vm.property.Rm7_dc3_out)),
+                                  ]),
+                                ])
+                              : _vm._e(),
+                          ]
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-4 col-lg-4 col-md-4" }, [
+                      _c(
+                        "table",
+                        { staticClass: "table table-bordered border" },
+                        [
+                          _vm._m(9),
+                          _vm._v(" "),
+                          _vm.property.Bath_tot
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Bath_tot)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_p1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 1 # Pcs"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_p1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_p2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 2 # Pcs"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_p2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_p3
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 3 # Pcs"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_p3)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_p4
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 4 # Pcs"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_p4)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_p5
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 5 # Pcs"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_p5)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t1lvl
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 1 Level"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t1lvl)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t2lvl
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 2 Level"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t2lvl)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t3
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 3"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t3)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t3lvl
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 3 Level"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t3lvl)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t4
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 4"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t4)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t4lvl
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 4 Level"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t4lvl)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t5
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 5"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t5)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t5lvl
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 5 Level"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t5lvl)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Wcloset_t1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Washrooms Type 1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Wcloset_t1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm.property.Potl
+                        ? _c(
+                            "table",
+                            { staticClass: "table table-bordered border" },
+                            [
+                              _vm._m(10),
+                              _vm._v(" "),
+                              _vm.property.Potl
+                                ? _c("tr", [
+                                    _c("th", { staticClass: "p-2" }, [
+                                      _vm._v("Parcel of Tied Land"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("td", { staticClass: "p-2" }, [
+                                      _vm._v(_vm._s(_vm.property.Potl)),
+                                    ]),
+                                  ])
+                                : _vm._e(),
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        { staticClass: "table table-bordered border" },
+                        [
+                          _vm._m(11),
+                          _vm._v(" "),
+                          _vm.property.Cond_txinc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Condo Taxes Included"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Cond_txinc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Condo_corp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Condo Registry Office"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Condo_corp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Condo_exp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Exposure"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Condo_exp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Corp_num
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Condo Corp#\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Corp_num)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        { staticClass: "table table-bordered border mt-4" },
+                        [
+                          _vm._m(12),
+                          _vm._v(" "),
+                          _vm.property.Heating
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Heat Type"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Heating)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Hydro_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Hydro Included"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Hydro_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Irreg
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Lot Irregularities"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Irreg)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Kit_plus
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Kitchens Plus"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Kit_plus)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Laundry
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Laundry Access"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Laundry)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Laundry_lev
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Laundry Level"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Laundry_lev)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Fpl_num
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Fireplace/Stove\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Fpl_num)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Front_ft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Lot Front"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Front_ft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Fuel
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Heat Source"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Fuel)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Furnished
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Furnished"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Furnished)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Gar_spaces
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Garage Spaces"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Gar_spaces)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Gar_type
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Garage Type"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Gar_type)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Gas
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Utilities-Gas"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Gas)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Num_kit
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Kitchens"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Num_kit)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        { staticClass: "table table-bordered border" },
+                        [
+                          _vm._m(13),
+                          _vm._v(" "),
+                          _vm.property.Park_chgs
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Park Cost/Mo"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_chgs)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Park_spcs
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking Spaces"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_spcs)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Tot_park_spcs
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Total Parking Spaces"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Tot_park_spcs)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Park_desig
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking Type"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_desig)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Park_desig_2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking Type2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_desig_2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Park_fac
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking/Drive"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_fac)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Park_lgl_desc1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking Legal Description"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_lgl_desc1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Park_lgl_desc2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking Legal Description2\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_lgl_desc2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Park_spc1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking Spot #1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_spc1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Park_spc2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking Spot #2\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Park_spc2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Prkg_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Parking Included"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Prkg_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Trlr_pk_spt
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("# Trailer Parking Spots\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Trlr_pk_spt)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        { staticClass: "table table-bordered border" },
+                        [
+                          _vm._m(14),
+                          _vm._v(" "),
+                          _vm.property.Area
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Area"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Area)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Community
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Community"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Community)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Idx_dt
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("IDX updated date"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Idx_dt)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Exp_actest
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Expenses Actual/Estimated"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Exp_actest)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Fin_stmnt
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Financial Statement"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Fin_stmnt)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Franchise
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Franchise"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Franchise)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Freestandg
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Freestandg"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Freestandg)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Gross_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Gross_inc"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Gross_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Heat_exp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Heat_exp"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Heat_exp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Hours_open
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Hours_open"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Hours_open)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Hydro_exp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Hydro_exp"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Hydro_exp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Ind_area
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Ind_area"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Ind_area)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Ind_areacd
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Ind_areacd"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Ind_areacd)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Insur
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Insur"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Insur)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Inventory
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Inventory"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Inventory)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Llbo
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Llbo"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Llbo)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Lot_code
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Lot_code"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Lot_code)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Lp_code
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Lp_code"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Lp_code)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Maint
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Maint"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Maint)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Mgmt
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Mgmt"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Mgmt)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Minrenttrm
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Minrenttrm"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Minrenttrm)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Net_inc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Net_inc"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Net_inc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Oa_area
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Oa_area"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Oa_area)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Occupancy
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Occupancy"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Occupancy)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Off_areacd
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Off_areacd"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Off_areacd)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Oper_exp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Oper_exp"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Oper_exp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Other
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Other"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Other)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Out_storg
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Out_storg"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Out_storg)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Perc_bldg
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Perc_bldg"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Perc_bldg)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Amps
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Amps"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Amps)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Area_infl1_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Area_infl1_out"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Area_infl1_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Area_infl2_out
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Area_infl2_out"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Area_infl2_out)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Bay_size1
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Bay_size1"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Bay_size1)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Bay_size1_in
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Bay_size1_in"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Bay_size1_in)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Bay_size2
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Bay_size2"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Bay_size2)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Bay_size2_in
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Bay_size2_in"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Bay_size2_in)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Bus_type
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Bus_type"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Bus_type)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Ceil_ht
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Ceil_ht"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Ceil_ht)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Ceil_ht_in
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Ceil_ht_in"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Ceil_ht_in)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Chattels
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Chattels"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Chattels)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Com_chgs
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Com_chgs"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Com_chgs)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Com_cn_fee
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Com_cn_fee"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Com_cn_fee)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Crane
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Crane"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Crane)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Days_open
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Days_open"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Days_open)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Dba
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Dba"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Dba)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Employees
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Employees"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Employees)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Seats
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Seats"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Seats)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdlhtft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Drive-In Level Shipping Doors Height Feet"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdlhtft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdlhtin
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Drive-In Level Shipping Doors Height Inches\t"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdlhtin)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdlnu
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Drive-In Level Shipping Doors"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdlnu)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdlwdft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Drive-In Level Shipping Doors Width Feet"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdlwdft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdlwdin
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Drive-In Level Shipping Doors Width Inches"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdlwdin)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdmhtft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Double Man Shipping Doors Height Feet"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdmhtft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdmhtin
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Double Man Shipping Doors Height Inches"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdmhtin)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdmnu
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Double Man Shipping Doors #"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdmnu)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdmwdft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Double Man Shipping Doors Width Feet"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdmwdft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsdmwdin
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Double Man Shipping Doors Width Inches"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsdmwdin)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsglhtft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Grade Level Shipping Doors Height Feet"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsglhtft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsglhtin
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Grade Level Shipping Doors Height Inches"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsglhtin)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsglnu
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Grade Level Shipping Doors #"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsglnu)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsglwdft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Grade Level Shipping Doors Width Feet"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsglwdft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrsglwdin
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Grade Level Shipping Doors Width Inches"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrsglwdin)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrstlhtft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Truck Level Shipping Doors Height Feet"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrstlhtft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrstlhtin
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Truck Level Shipping Doors Height Inches"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrstlhtin)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrstlnu
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Truck Level Shipping Doors #"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrstlnu)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrstlwdft
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Truck Level Shipping Doors Width Feet"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrstlwdft)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shpdrstlwdin
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    "Truck Level Shipping Doors Width Inches"
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shpdrstlwdin)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Soil_test
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Soil_test"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Soil_test)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Sprinklers
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Sprinklers"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Sprinklers)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Survey
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Survey"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Survey)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Taxes_exp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Maximum Rental Term"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Taxes_exp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Terms
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Terms"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Terms)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Tot_area
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Total Area"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Tot_area)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Tot_areacd
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Tot_areacd"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Tot_areacd)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Type_taxes
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Type Taxes"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Type_taxes)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Utilities
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Utilities"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Utilities)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Vac_perc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Vacancy Allowance"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Vac_perc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Volts
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Volts"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Volts)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_exp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Expense"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_exp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Yr_exp
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Year Expenses"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Yr_exp)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Perc_rent
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Percentage Rent"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Perc_rent)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Prop_type
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Category"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Prop_type)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Rail
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Rail"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Rail)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Retail_a
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Retail Area\t"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Retail_a)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Retail_ac
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Retail Area Code"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Retail_ac)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Ens_lndry
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Ensuite Laundry"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Ens_lndry)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Gar
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Garage/Park Spaces"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Gar)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Sewage_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Sewage Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Sewage_srch)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Locker_lev_unit
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Locker Level"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Locker_lev_unit)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Locker_unit
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Locker Unit"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Locker_unit)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Access_prop_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Access To Property Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Access_prop_srch)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_feat_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Features Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Water_feat_srch)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Shoreline_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Shoreline Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Shoreline_srch)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Pets
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Pets Permitted"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Pets)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Patio_ter
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Balcony"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Patio_ter)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Lease_term
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Lease Term"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Lease_term)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Locker
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Locker"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Locker)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Locker_num
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Locker #"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Locker_num)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Alt_power_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Alternative Power Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Alt_power_srch)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Easement_rest_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Easements Restrictions Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.property.Easement_rest_srch)
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Rural_svc_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Rural Services Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Rural_svc_srch)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_acc_bldg_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Waterfront Accessory Bldgs Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.property.Water_acc_bldg_srch)
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Water_del_feat_srch
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Water Delivery Features Search"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.property.Water_del_feat_srch)
+                                  ),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Stories
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Level"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Stories)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Unit_num
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("Unit #"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Unit_num)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.property.Share_perc
+                            ? _c("tr", [
+                                _c("th", { staticClass: "p-2" }, [
+                                  _vm._v("# Shares %"),
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "p-2" }, [
+                                  _vm._v(_vm._s(_vm.property.Share_perc)),
+                                ]),
+                              ])
+                            : _vm._e(),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _vm._m(15),
               ])
             : _c("div", [
                 _c("p", { staticClass: "p-5 text-center" }, [
-                  _vm._v("Oops! no data found.")
-                ])
-              ])
+                  _vm._v("Oops! no data found."),
+                ]),
+              ]),
         ])
       : _c("div", [
           _c("section", [
@@ -44948,25 +50228,25 @@ var render = function() {
               { staticClass: "text-center" },
               [
                 _c("loader", {
-                  attrs: { text: "Please wait... Loading details" }
-                })
+                  attrs: { text: "Please wait... Loading details" },
+                }),
               ],
               1
-            )
-          ])
-        ])
+            ),
+          ]),
+        ]),
   ])
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "breadcrumb-item" }, [
-      _c("span", { staticClass: "active" }, [_vm._v("Property details")])
+      _c("span", { staticClass: "active" }, [_vm._v("Property details")]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -44975,7 +50255,7 @@ var staticRenderFns = [
         _c("li", { staticClass: "float-start" }, [
           _c("input", {
             staticClass: "tab-switch",
-            attrs: { type: "button", name: "css-tabs", id: "tab-1" }
+            attrs: { type: "button", name: "css-tabs", id: "tab-1" },
           }),
           _vm._v(" "),
           _c("label", { staticClass: "tab-label", attrs: { for: "tab-1" } }, [
@@ -44984,17 +50264,19 @@ var staticRenderFns = [
               attrs: {
                 src: "/assets/images/icons/bookmark.png",
                 alt: "",
-                width: "18px"
-              }
+                width: "18px",
+              },
             }),
-            _vm._v("\n                                                Bookmark")
-          ])
+            _vm._v(
+              "\n                                                Bookmark"
+            ),
+          ]),
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "float-start" }, [
           _c("input", {
             staticClass: "tab-switch",
-            attrs: { type: "button", name: "css-tabs", id: "tab-1" }
+            attrs: { type: "button", name: "css-tabs", id: "tab-1" },
           }),
           _vm._v(" "),
           _c("label", { staticClass: "tab-label", attrs: { for: "tab-1" } }, [
@@ -45003,17 +50285,17 @@ var staticRenderFns = [
               attrs: {
                 src: "/assets/images/icons/share.png",
                 alt: "",
-                width: "18px"
-              }
+                width: "18px",
+              },
             }),
-            _vm._v("\n                                                Share")
-          ])
+            _vm._v("\n                                                Share"),
+          ]),
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "float-start" }, [
           _c("input", {
             staticClass: "tab-switch",
-            attrs: { type: "button", name: "css-tabs", id: "tab-1" }
+            attrs: { type: "button", name: "css-tabs", id: "tab-1" },
           }),
           _vm._v(" "),
           _c("label", { staticClass: "tab-label", attrs: { for: "tab-1" } }, [
@@ -45022,18 +50304,18 @@ var staticRenderFns = [
               attrs: {
                 src: "/assets/images/icons/book_showing.png",
                 alt: "",
-                width: "18px"
-              }
+                width: "18px",
+              },
             }),
             _vm._v(
               "\n\n                                                Book Showing"
-            )
-          ])
-        ])
-      ])
+            ),
+          ]),
+        ]),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -45041,17 +50323,17 @@ var staticRenderFns = [
       _c("h6", { staticClass: "text-dark fw-bold mb-0" }, [
         _vm._v(
           "\n                                                Last Checked\n                                            "
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("small", [
         _vm._v(
           "\n                                                Now (Today)\n                                            "
-        )
-      ])
+        ),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -45059,17 +50341,17 @@ var staticRenderFns = [
       _c("h6", { staticClass: "text-dark fw-bold mb-0" }, [
         _vm._v(
           "\n                                                Listed by\n                                            "
-        )
+        ),
       ]),
       _vm._v(" "),
       _c("small", [
         _vm._v(
           "\n                                                Remax Real Estate\n                                            "
-        )
-      ])
+        ),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -45077,1224 +50359,204 @@ var staticRenderFns = [
       _c("table", { staticClass: "table mt-5 table-borderless" }, [
         _c("tbody", [
           _c("tr", [
-            _c("td", { staticClass: "p-3 text-white" }, [
+            _c("td", { staticClass: "p-2 text-white" }, [
               _c("img", {
-                attrs: { src: "/assets/images/icons/calender-ico.png", alt: "" }
-              })
+                attrs: {
+                  src: "/assets/images/icons/calender-ico.png",
+                  alt: "",
+                },
+              }),
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "p-3 text-white" }, [
+            _c("td", { staticClass: "p-2 text-white" }, [
               _c("h5", [
                 _vm._v(
                   "\n                                                Schedule a tour immediately.\n                                            "
-                )
+                ),
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "text-muted" }, [
                 _vm._v(
                   "Homes like this sell on\n                                                avarage in 6 days. There in\n                                                an 73% chance that this home\n                                                will be sold within one week\n                                                of listing"
-                )
-              ])
-            ])
+                ),
+              ]),
+            ]),
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("td", { staticClass: "p-3 text-white" }, [
+            _c("td", { staticClass: "p-2 text-white" }, [
               _c("img", {
-                attrs: { src: "/assets/images/icons/share-market.png", alt: "" }
-              })
+                attrs: {
+                  src: "/assets/images/icons/share-market.png",
+                  alt: "",
+                },
+              }),
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "p-3 text-white" }, [
+            _c("td", { staticClass: "p-2 text-white" }, [
               _c("h5", [_vm._v("Expect to bid higher.")]),
               _vm._v(" "),
               _c("span", { staticClass: "text-muted" }, [
                 _vm._v(
                   "6 out of 10 homes like this\n                                                one have sold over\n                                                asking"
-                )
-              ])
-            ])
+                ),
+              ]),
+            ]),
           ]),
           _vm._v(" "),
           _c("tr", [
-            _c("td", { staticClass: "p-3 text-white" }, [
+            _c("td", { staticClass: "p-2 text-white" }, [
               _c("img", {
-                attrs: { src: "/assets/images/icons/dolor.png", alt: "" }
-              })
+                attrs: { src: "/assets/images/icons/dolor.png", alt: "" },
+              }),
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "p-3 text-white" }, [
+            _c("td", { staticClass: "p-2 text-white" }, [
               _c("h5", [
                 _vm._v(
                   "\n                                                you're unlikely to get a\n                                                deal.\n                                            "
-                )
+                ),
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "text-muted" }, [
                 _vm._v(
                   "Only 3 in 100 homes like\n                                                this sell bellow 93% of\n                                                asking"
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", { staticClass: "p-0" }, [
       _c("div", { staticClass: "container" }, [
-        _c("hr", { staticClass: "m-0" })
-      ])
+        _c("hr", { staticClass: "m-0" }),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c("table", { staticClass: "table table-bordered border mb-2" }, [
-            _c("tr", [
-              _c(
-                "th",
-                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
-                [
-                  _vm._v(
-                    "\n                                    Property\n                                "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Property Type")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("property_type")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("MLS#")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Ml_num")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Status")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Status")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Parcel of Tied Land")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Potl")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [
-                _vm._v("Total Parking Spaces")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Tot_park_spcs")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Link")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Link_yn")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Link Comment")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Link_Comment")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat1")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat2")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat3")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features4")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat4")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Water Features5")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Water_feat5")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Shoreline1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Shoreline1")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Shoreline2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Shoreline2")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Shoreline Allowance")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Shore_allow")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Shoreline Exposure")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Shoreline_exp")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("SAlternative Power1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Alt_power1")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("SAlternative Power2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Alt_power2")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Retirement")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Retirement")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("List Brokerage")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rltr")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 1 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm1_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 10 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm10_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 11 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm11_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 12 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm12_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 2 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm2_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "p-3" }, [_vm._v("Room 3 Desc 1")]),
-              _vm._v(" "),
-              _c("th", { staticClass: "p-3" }, [_vm._v("Rm3_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 3 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm3_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Heat Type")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Heating")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Hydro Included")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Hydro_inc")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Lot Irregularities")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Irreg")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Kitchens Plus")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Kit_plus")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Laundry Access")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Laundry")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Laundry Level")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Laundry_lev")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Legal Description")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Legal_desc")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level1")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 10")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level10")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 11")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level11")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 12")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level12")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level2")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level3")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 4")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level4")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 5")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level5")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 6")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level6")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 7")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level7")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 8")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level8")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Level 9")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Level9")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Lot Size Code")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Lotsz_code")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("List Price")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Lp_dol")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Leased Terms")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Lse_terms")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Map Column #")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Mmap_col")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Map #")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Mmap_page")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Map Row")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Mmap_row")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "p-3" }, [_vm._v("Acreage")]),
-              _vm._v(" "),
-              _c("th", { staticClass: "p-3" }, [_vm._v("Acres")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Remarks For Clients")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Ad_text")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Addl Monthly Fees")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Addl_mo_fee")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Address")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Addr")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("All Inclusive")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("All_inc")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Apt/Unit")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Apt_num")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Assessment Year")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Ass_year")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Washrooms")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Bath_tot")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [
-                _vm._v("PortionPropertyLease1")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [
-                _vm._v(
-                  "\n                                    Portion_property_lease1_out\n                                "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [
-                _vm._v("PortionPropertyLease2")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [
-                _vm._v(
-                  "\n                                    Portion_property_lease2_out\n                                "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [
-                _vm._v("PortionPropertyLease3")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [
-                _vm._v(
-                  "\n                                    Portion_property_lease3_out\n                                "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [
-                _vm._v("PortionPropertyLease4")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [
-                _vm._v(
-                  "\n                                    Portion_property_lease4_out\n                                "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [
-                _vm._v(
-                  "\n                                    PortionPropertyLeaseSrch\n                                "
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [
-                _vm._v(
-                  "\n                                    Portion_property_lease_srch\n                                "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [
-                _vm._v("Portion Lease Comments")
-              ]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [
-                _vm._v("Portion_lease_comments")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Assignment")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Assignment")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("FractionalOwnership")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Fractional_ownership")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 4 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm4_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 5 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm5_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 6 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm6_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_len")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 7 Width")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm7_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8 Desc 1")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_dc1_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8 Desc 2")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_dc2_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8 Desc 3")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_dc3_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8 Length")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_out")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("Room 8")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("Rm8_wth")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3" }, [_vm._v("ddddd")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ddddd")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table table-bordered border mt-4" }, [
-            _c("tr", [
-              _c(
-                "th",
-                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
-                [
-                  _vm._v(
-                    "\n                                    Inside\n                                "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c("table", { staticClass: "table table-bordered border" }, [
-            _c("tr", [
-              _c(
-                "th",
-                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
-                [
-                  _vm._v(
-                    "\n                                    Building\n                                "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table table-bordered border" }, [
-            _c("tr", [
-              _c(
-                "th",
-                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
-                [
-                  _vm._v(
-                    "\n                                    Parking\n                                "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table table-bordered border" }, [
-            _c("tr", [
-              _c(
-                "th",
-                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
-                [
-                  _vm._v(
-                    "\n                                    Highlights\n                                "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c("table", { staticClass: "table table-bordered border" }, [
-            _c("tr", [
-              _c(
-                "th",
-                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
-                [
-                  _vm._v(
-                    "\n                                    Land\n                                "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("table", { staticClass: "table table-bordered border" }, [
-            _c("tr", [
-              _c(
-                "th",
-                { staticClass: "p-3 text-center", attrs: { colspan: "2" } },
-                [
-                  _vm._v(
-                    "\n                                    Condo\n                                "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("th", { staticClass: "p-3 border-left" }, [_vm._v("ok")]),
-              _vm._v(" "),
-              _c("td", { staticClass: "p-3" }, [_vm._v("ok")])
-            ])
-          ])
-        ])
-      ])
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Property\n                                "
+        ),
+      ]),
     ])
   },
-  function() {
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Building\n                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Rooms\n                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Washrooms\n                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Land\n                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Condo\n                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Inside\n                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Parking\n                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticClass: "p-2 text-center", attrs: { colspan: "2" } }, [
+        _vm._v(
+          "\n                                    Highlights\n                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", { staticClass: "p-0" }, [
       _c("div", { staticClass: "container" }, [
-        _c("hr", { staticClass: "m-0" })
-      ])
+        _c("hr", { staticClass: "m-0" }),
+      ]),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -46314,7 +50576,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -46325,7 +50587,7 @@ var render = function() {
           _c("div", { staticClass: "row py-0" }, [
             _c("div", { staticClass: "col-12" }, [
               _c("h2", { staticClass: "theme-title text-start" }, [
-                _vm._v("Properties")
+                _vm._v("Properties"),
               ]),
               _vm._v(" "),
               _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
@@ -46340,11 +50602,11 @@ var render = function() {
                           attrs: {
                             src: "/assets/images/icons/Mask Group.svg",
                             width: "14",
-                            alt: ""
-                          }
+                            alt: "",
+                          },
                         }),
-                        _vm._v("\n                    Home")
-                      ])
+                        _vm._v("\n                    Home"),
+                      ]),
                     ],
                     1
                   ),
@@ -46354,18 +50616,18 @@ var render = function() {
                     { staticClass: "breadcrumb-item" },
                     [
                       _c("router-link", { attrs: { to: "/" } }, [
-                        _vm._v("Properties")
-                      ])
+                        _vm._v("Properties"),
+                      ]),
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(0)
-                ])
-              ])
-            ])
-          ])
-        ])
+                  _vm._m(0),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
       ]),
       _vm._v(" "),
       _c(
@@ -46383,16 +50645,16 @@ var render = function() {
                       [
                         _c("property-search", {
                           attrs: { form: _vm.form },
-                          on: { clicked: _vm.getFilteredDataOnClick }
-                        })
+                          on: { clicked: _vm.getFilteredDataOnClick },
+                        }),
                       ],
                       1
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
+                    ),
+                  ]),
+                ]),
+              ]),
+            ]),
+          ]),
         ]
       ),
       _vm._v(" "),
@@ -46401,7 +50663,7 @@ var render = function() {
       _c("section", { staticClass: "property bg-theme-light" }, [
         _c("div", { staticClass: "container p-0" }, [
           _c("h2", { staticClass: "theme-title" }, [
-            _vm._v("Houses for Sale/Lease in Toronto")
+            _vm._v("Houses for Sale/Lease in Toronto"),
           ]),
           _vm._v(" "),
           !_vm.loadingProperties
@@ -46411,12 +50673,12 @@ var render = function() {
                       "div",
                       { staticClass: "row" },
                       [
-                        _vm._l(_vm.properties, function(property) {
+                        _vm._l(_vm.properties, function (property) {
                           return _c(
                             "div",
                             {
                               key: property.Ml_num,
-                              staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5"
+                              staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5",
                             },
                             [_c("PropCard", { attrs: { property: property } })],
                             1
@@ -46431,7 +50693,7 @@ var render = function() {
                                       "div",
                                       {
                                         staticClass:
-                                          "load-more-button mt-4 text-center"
+                                          "load-more-button mt-4 text-center",
                                       },
                                       [
                                         _c(
@@ -46439,18 +50701,18 @@ var render = function() {
                                           {
                                             staticClass:
                                               "btn btn-theme-color px-5",
-                                            on: { click: _vm.loadMore }
+                                            on: { click: _vm.loadMore },
                                           },
                                           [
                                             _vm._v(
                                               "\n                    Load More\n                    "
                                             ),
-                                            _vm._m(2)
+                                            _vm._m(2),
                                           ]
-                                        )
+                                        ),
                                       ]
                                     )
-                                  : _vm._e()
+                                  : _vm._e(),
                               ])
                             : _c("div", [
                                 _c(
@@ -46459,15 +50721,14 @@ var render = function() {
                                   [
                                     _c("loader", {
                                       attrs: {
-                                        text:
-                                          "Please wait, Loading More Properties for you..."
-                                      }
-                                    })
+                                        text: "Please wait, Loading More Properties for you...",
+                                      },
+                                    }),
                                   ],
                                   1
-                                )
-                              ])
-                        ])
+                                ),
+                              ]),
+                        ]),
                       ],
                       2
                     )
@@ -46475,47 +50736,52 @@ var render = function() {
                       "div",
                       [
                         _c("NoData", {
-                          attrs: { text: "No matched property found." }
-                        })
+                          attrs: { text: "No matched property found." },
+                        }),
                       ],
                       1
-                    )
+                    ),
               ])
             : _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "p-5 text-center" }, [_c("loader")], 1)
-              ])
-        ])
-      ])
-    ])
+                _c(
+                  "div",
+                  { staticClass: "p-5 text-center" },
+                  [_c("loader")],
+                  1
+                ),
+              ]),
+        ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "breadcrumb-item" }, [
-      _c("span", { staticClass: "active" }, [_vm._v("Property search")])
+      _c("span", { staticClass: "active" }, [_vm._v("Property search")]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", { staticClass: "p-0" }, [
       _c("div", { staticClass: "container" }, [
-        _c("hr", { staticClass: "m-0" })
-      ])
+        _c("hr", { staticClass: "m-0" }),
+      ]),
     ])
   },
-  function() {
+  function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("small", { staticClass: "ps-2" }, [
-      _c("i", { staticClass: "fas fa-arrow-right" })
+      _c("i", { staticClass: "fas fa-arrow-right" }),
     ])
-  }
+  },
 ]
 render._withStripped = true
 
@@ -46648,7 +50914,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /*!
-  * vue-router v3.5.2
+  * vue-router v3.5.3
   * (c) 2021 Evan You
   * @license MIT
   */
@@ -46661,7 +50927,7 @@ function assert (condition, message) {
 }
 
 function warn (condition, message) {
-  if ( true && !condition) {
+  if (!condition) {
     typeof console !== 'undefined' && console.warn(("[vue-router] " + message));
   }
 }
@@ -47167,7 +51433,7 @@ function parsePath (path) {
 }
 
 function cleanPath (path) {
-  return path.replace(/\/\//g, '/')
+  return path.replace(/\/+/g, '/')
 }
 
 var isarray = Array.isArray || function (arr) {
@@ -48959,7 +53225,9 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
           cb(err);
         });
       } else {
-        warn(false, 'uncaught error during route navigation:');
+        if (true) {
+          warn(false, 'uncaught error during route navigation:');
+        }
         console.error(err);
       }
     }
@@ -48974,6 +53242,9 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     route.matched[lastRouteIndex] === current.matched[lastCurrentIndex]
   ) {
     this.ensureURL();
+    if (route.hash) {
+      handleScroll(this.router, current, route, false);
+    }
     return abort(createNavigationDuplicatedError(current, route))
   }
 
@@ -49537,6 +53808,9 @@ var AbstractHistory = /*@__PURE__*/(function (History) {
 var VueRouter = function VueRouter (options) {
   if ( options === void 0 ) options = {};
 
+  if (true) {
+    warn(this instanceof VueRouter, "Router must be called with the new operator.");
+  }
   this.app = null;
   this.apps = [];
   this.options = options;
@@ -49781,7 +54055,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.5.2';
+VueRouter.version = '3.5.3';
 VueRouter.isNavigationFailure = isNavigationFailure;
 VueRouter.NavigationFailureType = NavigationFailureType;
 VueRouter.START_LOCATION = START;
@@ -61846,7 +66120,7 @@ Vue.compile = compileToFunctions;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\xampp\\\\htdocs\\\\remax-laravel"]],"_development":true,"_from":"axios@0.21.4","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"axios@0.21.4","name":"axios","escapedName":"axios","rawSpec":"0.21.4","saveSpec":null,"fetchSpec":"0.21.4"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_spec":"0.21.4","_where":"C:\\\\xampp\\\\htdocs\\\\remax-laravel","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"/var/www/html/remax-laravel","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 
