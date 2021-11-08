@@ -4,6 +4,8 @@ import VueRouter from "vue-router";
 import Home from "./pages/Home.vue";
 import PropertyDetails from "./pages/property/details.vue";
 import PropertySearch from "./pages/property/search.vue";
+import Login from "./pages/Login.vue"
+import Signup from "./pages/Signup.vue"
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,16 @@ const router = new VueRouter({
             name: "search-property",
             component: PropertySearch,
             props: true
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: Login,
+        },
+        {
+            path: "/sign-up",
+            name: "sign-up",
+            component: Signup,
         }
     ]
 });

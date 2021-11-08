@@ -56,11 +56,11 @@
                                     >
                                 </li>
                                 <li class="nav-item">
-                                    <a
+                                    <router-link
                                         class="nav-link"
                                         aria-current="blog"
                                         href="#"
-                                        >Blog</a
+                                        >Blog</router-link
                                     >
                                 </li>
                             </ul>
@@ -68,34 +68,34 @@
                         <div class="right-menu">
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item p-0">
-                                    <a
+                                    <router-link
                                         class="nav-link header-icons"
                                         aria-current="favourate"
-                                        href="#"
+                                        to="/"
                                         ><img
                                             src="/assets/images/icons/bookmark.svg"
                                             alt=""
-                                    /></a>
+                                    /></router-link>
                                 </li>
                                 <li class="nav-item me-3">
-                                    <a
+                                    <router-link
                                         class="nav-link header-icons"
                                         aria-current="favourate"
-                                        href="#"
+                                        to="/"
                                         ><img
                                             src="/assets/images/icons/alarm.svg"
                                             alt=""
-                                    /></a>
+                                    /></router-link>
                                 </li>
                                 <li class="nav-item">
                                     <button>
                                         <img
                                             src="/assets/images/icons/refer.svg"
                                             alt=""
-                                        /><a
-                                            href="login.html"
+                                        /><router-link
+                                            to="/login"
                                             class="text-light"
-                                            >Sign in</a
+                                            >Sign in</router-link
                                         >
                                     </button>
                                 </li>
