@@ -35,6 +35,23 @@
                             <input type="text" class="form-control mb-4" placeholder="Confirm Password*">
                             <button type="submit" class="btn btn-theme-color w-100 py-2">Sign In</button>
                         </form>
+                        <h5 class="text-center text-secondary mt-4 mb-3">Sign up with </h5>
+                        <ul class="list-unstyled text-center">
+                            <li class="social-icon">
+                                <img src="assets/images/icons/socials/fb.png" alt="facebook" class="img-fluid" style="background-color: #4867AA">
+                            </li>
+                            <li class="social-icon">
+                                <img src="assets/images/icons/socials/twitter.png" alt="twitter" class="img-fluid" style="background-color: #56D7FE; padding: 2px">
+                            </li>
+                            <li class="social-icon">
+                                <img src="assets/images/icons/socials/google.png" alt="google" class="img-fluid" style="background-color: #DC4E41">
+                            </li>
+                            <li class="social-icon">
+                                <img src="assets/images/icons/socials/linkedIn.png" alt="linkedIn" class="img-fluid" style="background-color: #1675B9">
+                            </li>
+                        </ul>
+                        <hr class="fw-bold" />
+                        <h5 class="text-center text-secondary mt-4 mb-3">Already a member? <router-link to="/login" class="text-color">Login here</router-link></h5>
                     </div>
                 </div>
             </div>
@@ -43,3 +60,16 @@
         <!-- Login -->
     </div>
 </template>
+<style scoped>
+.social-icon {
+    text-align: center;
+    display: inline-block;
+}
+.social-icon img {
+    border-radius: 6px;
+    padding: 6px;
+    height: 40px;
+    display: inline-block;
+    margin: 0px 15px;
+}
+</style>

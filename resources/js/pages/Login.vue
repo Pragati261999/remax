@@ -30,7 +30,7 @@
                         <form action="">
                             <input type="text" class="form-control mb-4" placeholder="Enter your email address*">
                             <input type="text" class="form-control mb-4" placeholder="Password*">
-                            <button type="submit" class="btn btn-theme-color w-100 py-2">Sign In</button>
+                            <button type="submit" class="btn btn-theme-color w-100 py-2">Log In</button>
                         </form>
                         <router-link to="#" class="text-dark fw-light my-2 text-center fp">Forget Password</router-link>
                         <h4 class="theme-title">DON'T HAVE AN ACCOUNT?</h4>
