@@ -28,14 +28,14 @@
                     </div>
                     <div class="col-6 px-5">
                         <form action="">
-                            <input type="text" class="form-control mb-4" placeholder="First name*">
-                            <input type="text" class="form-control mb-4" placeholder="Last name*">
+                            <input type="text" class="form-control mb-4" placeholder="Full name*">
+                            <input type="text" class="form-control mb-4" placeholder="Contact Number*">
                             <input type="text" class="form-control mb-4" placeholder="Email Address*">
-                            <input type="text" class="form-control mb-4" placeholder="Password*">
-                            <input type="text" class="form-control mb-4" placeholder="Confirm Password*">
-                            <button type="submit" class="btn btn-theme-color w-100 py-2">Sign In</button>
+                            <input type="text" class="form-control mb-4" placeholder="Create Password*">
+                            <button type="submit" class="btn btn-theme-color w-100 py-2">Sign Up</button>
                         </form>
-                        <h5 class="text-center text-secondary mt-4 mb-3">Sign up with </h5>
+                        <h6 class="text-dark text-center my-4 divider">OR</h6>
+                        <h5 class="text-center text-secondary my-3">Sign up with </h5>
                         <ul class="list-unstyled text-center">
                             <li class="social-icon">
                                 <img src="assets/images/icons/socials/fb.png" alt="facebook" class="img-fluid" style="background-color: #4867AA">
@@ -61,6 +61,27 @@
     </div>
 </template>
 <style scoped>
+.divider {
+    position: relative;
+}
+.divider:after {
+    content: '';
+    width: 100px;
+    background: #9f9f9f;
+    height: 2px;
+    position: absolute;
+    top: 8px;
+    left: calc(50% + 15px);
+}
+.divider:before {
+    content: '';
+    width: 100px;
+    background: #9f9f9f;
+    height: 2px;
+    position: absolute;
+    top: 8px;
+    right: calc(50% + 15px);
+}
 .social-icon {
     text-align: center;
     display: inline-block;

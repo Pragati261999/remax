@@ -11384,7 +11384,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.social-icon[data-v-7e4a77e1] {\n    text-align: center;\n    display: inline-block;\n}\n.social-icon img[data-v-7e4a77e1] {\n    border-radius: 6px;\n    padding: 6px;\n    height: 40px;\n    display: inline-block;\n    margin: 0px 15px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.divider[data-v-7e4a77e1] {\n    position: relative;\n}\n.divider[data-v-7e4a77e1]:after {\n    content: '';\n    width: 100px;\n    background: #9f9f9f;\n    height: 2px;\n    position: absolute;\n    top: 8px;\n    left: calc(50% + 15px);\n}\n.divider[data-v-7e4a77e1]:before {\n    content: '';\n    width: 100px;\n    background: #9f9f9f;\n    height: 2px;\n    position: absolute;\n    top: 8px;\n    right: calc(50% + 15px);\n}\n.social-icon[data-v-7e4a77e1] {\n    text-align: center;\n    display: inline-block;\n}\n.social-icon img[data-v-7e4a77e1] {\n    border-radius: 6px;\n    padding: 6px;\n    height: 40px;\n    display: inline-block;\n    margin: 0px 15px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -46184,7 +46184,11 @@ var render = function () {
           _c("div", { staticClass: "col-6 px-5" }, [
             _vm._m(2),
             _vm._v(" "),
-            _c("h5", { staticClass: "text-center text-secondary mt-4 mb-3" }, [
+            _c("h6", { staticClass: "text-dark text-center my-4 divider" }, [
+              _vm._v("OR"),
+            ]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "text-center text-secondary my-3" }, [
               _vm._v("Sign up with "),
             ]),
             _vm._v(" "),
@@ -46274,12 +46278,12 @@ var staticRenderFns = [
     return _c("form", { attrs: { action: "" } }, [
       _c("input", {
         staticClass: "form-control mb-4",
-        attrs: { type: "text", placeholder: "First name*" },
+        attrs: { type: "text", placeholder: "Full name*" },
       }),
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control mb-4",
-        attrs: { type: "text", placeholder: "Last name*" },
+        attrs: { type: "text", placeholder: "Contact Number*" },
       }),
       _vm._v(" "),
       _c("input", {
@@ -46289,12 +46293,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("input", {
         staticClass: "form-control mb-4",
-        attrs: { type: "text", placeholder: "Password*" },
-      }),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control mb-4",
-        attrs: { type: "text", placeholder: "Confirm Password*" },
+        attrs: { type: "text", placeholder: "Create Password*" },
       }),
       _vm._v(" "),
       _c(
@@ -46303,7 +46302,7 @@ var staticRenderFns = [
           staticClass: "btn btn-theme-color w-100 py-2",
           attrs: { type: "submit" },
         },
-        [_vm._v("Sign In")]
+        [_vm._v("Sign Up")]
       ),
     ])
   },
