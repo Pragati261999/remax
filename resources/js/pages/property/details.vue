@@ -2650,27 +2650,67 @@
                     class="container-fluid pb-5 bg-theme"
                 >
                     <div class="row">
-                        <div class="col-md-6 mt-5 text-white d-flex justify-content-center align-items-center">
-                           <div class="row">
+                        <div
+                            class="
+                                col-md-6
+                                mt-5
+                                text-white
+                                d-flex
+                                justify-content-center
+                                align-items-center
+                            "
+                        >
+                            <div class="row">
                                 <h4 class="text-white fw-bold">Book Showing</h4>
                                 <div class="col-9">
-                                   <form>
+                                    <form @submit.prevent="saveLaed">
                                         <fieldset class="my-3">
-                                            <input type="text" aria-label="Full name" placeholder="Full name" class="form-control">
+                                            <input
+                                                v-model="lead.name"
+                                                type="text"
+                                                aria-label="Full name"
+                                                placeholder="Full name"
+                                                class="form-control"
+                                            />
                                         </fieldset>
                                         <fieldset class="my-3">
-                                            <input type="text" aria-label="Email" placeholder="Email" class="form-control">
+                                            <input
+                                                v-model="lead.email"
+                                                type="text"
+                                                aria-label="Email"
+                                                placeholder="Email"
+                                                class="form-control"
+                                            />
                                         </fieldset>
                                         <fieldset class="my-3">
-                                            <input type="text" aria-label="Phone Number" placeholder="Phone Number" class="form-control">
+                                            <input
+                                                v-model="lead.contact"
+                                                type="text"
+                                                aria-label="Phone Number"
+                                                placeholder="Phone Number"
+                                                class="form-control"
+                                            />
                                         </fieldset>
                                         <fieldset class="my-3">
-                                            <textarea rows="3" col="3" type="text" aria-label="I would like more information abour the property" placeholder="I would like more information abour the property" class="form-control"></textarea>
+                                            <textarea
+                                                v-model="lead.remark"
+                                                rows="3"
+                                                col="3"
+                                                type="text"
+                                                aria-label="I would like more information abour the property"
+                                                placeholder="I would like more information abour the property"
+                                                class="form-control"
+                                            ></textarea>
                                         </fieldset>
                                         <fieldset class="my-3">
-                                            <button class="btn btn-light text-color" style="border-radius: 14px 14px">Submit</button>
+                                            <button                                                
+                                                class="btn btn-light text-color"
+                                                style="border-radius: 14px 14px"
+                                            >
+                                                Submit
+                                            </button>
                                         </fieldset>
-                                   </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -2707,14 +2747,39 @@ export default {
     },
     data() {
         return {
+            lead: {
+                ml_num: null,
+                name: "",
+                email: "",
+                contact: "",
+                remark: "",
+            },
             property: null,
             loadingProperty: true,
         };
     },
     mounted() {
         this.getAllData();
+        this.updateIfLoggedIN();
     },
     methods: {
+        async saveLaed() {
+            const self = this;
+
+            await axios
+                .post(`/api/lead/new`, self.lead)
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
+        },
+
+        updateIfLoggedIN() {
+            this.lead.ml_num = this.$route.params.ml_num;
+            if (this.$store.state.auth_user) {
+                (this.lead.name = this.$store.state.auth_user.name),
+                    (this.lead.email = this.$store.state.auth_user.email),
+                    (this.lead.contact = this.$store.state.auth_user.contact);
+            }
+        },
         async getAllData() {
             const self = this;
             self.loadingProperty = true;
@@ -2724,6 +2789,13 @@ export default {
                 )
                 .then((res) => {
                     self.property = res.data.data[0];
+
+                    // Update remark field
+                    self.lead.remark =
+                        "I would like more information regarding." +
+                        self.property.Addr +
+                        " At " +
+                        self.property.Rltr;
                     self.loadingProperty = false;
                 })
                 .catch((err) => {

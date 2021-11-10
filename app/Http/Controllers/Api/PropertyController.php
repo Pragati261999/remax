@@ -40,9 +40,9 @@ class PropertyController extends AppBaseController
             ->when(!empty($data['addr']), function ($query) use ($data) {
                 $addrr = $data['addr'];
                 return $query->where('Addr', 'LIKE', "%{$addrr}%")
-                        ->orWhere(function($query) use ($addrr) {
-                            $query->where('Ml_num', 'LIKE', "%{$addrr}%");
-                        });
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Ml_num', 'LIKE', "%{$addrr}%");
+                    });
             })
 
             ->when($bedRoom, function ($query) use ($data) {
@@ -72,7 +72,7 @@ class PropertyController extends AppBaseController
 
             ->orderby('id', 'DESC')
             ->paginate('15')->withQueryString();
-            
+
         // $response = $request->all();
         return $this->sendResponse($msg, $response);
     }

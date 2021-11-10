@@ -1,11 +1,12 @@
 require("./bootstrap");
 
 window.Vue = require("vue").default;
-import Vuex from 'vuex'
+import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 import router from "./router";
 import App from "./layouts/App.vue";
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 Vue.component(
     "loader",
@@ -41,29 +42,30 @@ Vue.component("faq", require("./components/Faq.vue").default);
 
 const store = new Vuex.Store({
     state: {
-      auth_token: null,
-      auth_user: null,
+        auth_token: null,
+        auth_user: null,
     },
+    plugins: [createPersistedState()],
     mutations: {
-        addAuthToken (state, token) {
-          state.auth_token = token
+        addAuthToken(state, token) {
+            state.auth_token = token;
         },
-        removeAuthToken (state) {
-          state.auth_token = null
+        removeAuthToken(state) {
+            state.auth_token = null;
         },
-        
-        addAuthUser (state, user) {
-          state.auth_user = user
+
+        addAuthUser(state, user) {
+            state.auth_user = user;
         },
-        removeAuthUser (state) {
-          state.auth_user = null
-        }
-    }
-  })
+        removeAuthUser(state) {
+            state.auth_user = null;
+        },
+    },
+});
 
 const app = new Vue({
     router,
     el: "#app",
     store,
-    render: h => h(App)
+    render: (h) => h(App),
 });

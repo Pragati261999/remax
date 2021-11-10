@@ -30,6 +30,8 @@ class UserController extends AppBaseController
 
         $validated = $validator->validated();
 
+        // dd($validated);
+
         $user = User::create([
             'name' => $validated['name'],
             'contact' => $validated['contact'],
@@ -41,7 +43,8 @@ class UserController extends AppBaseController
         $ut = explode('|', $ut)[1];
 
         $token = [
-            'token' => $ut
+            'token' => $ut,
+            'user' => $user
         ];
 
 
@@ -72,7 +75,8 @@ class UserController extends AppBaseController
         $ut = explode('|', $ut)[1];
 
         $token = [
-            'token' => $ut
+            'token' => $ut,
+            'user' => auth()->user()
         ];
 
         return $this->sendResponse("Login success.", $token);

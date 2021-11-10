@@ -32,7 +32,11 @@
                                     </button>
                                     <input
                                         type="text"
-                                        class="form-control border-0 bg-transparent"
+                                        class="
+                                            form-control
+                                            border-0
+                                            bg-transparent
+                                        "
                                         aria-label="Search"
                                         aria-describedby="search-bar"
                                     />
@@ -51,7 +55,7 @@
                                     <router-link
                                         class="nav-link"
                                         aria-current="properties"
-                                        :to="{name: 'search-property'}"
+                                        :to="{ name: 'search-property' }"
                                         >Properties</router-link
                                     >
                                 </li>
@@ -102,14 +106,40 @@
                                     </div>
                                     <div v-else>
                                         <div class="dropdown">
-                                            <button class="btn btn-theme dropdown-toggle" type="button" id="userDDBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button
+                                                class="
+                                                    btn btn-theme
+                                                    dropdown-toggle
+                                                "
+                                                type="button"
+                                                id="userDDBtn"
+                                                data-toggle="dropdown"
+                                                aria-haspopup="true"
+                                                aria-expanded="false"
+                                            >
                                                 <i class="fa fa-user"></i>
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="userDDBtn">
-                                                <span role="button" aria-hidden="true" class="dropdown-item">Dashboard</span>
-                                                <span @click="logout" role="button" aria-hidden="true" class="dropdown-item">Logout</span>
+                                            <div
+                                                class="dropdown-menu"
+                                                aria-labelledby="userDDBtn"
+                                            >
+                                                <router-link
+                                                    to="/dashboard"
+                                                    role="button"
+                                                    aria-hidden="true"
+                                                    class="dropdown-item"
+                                                    >Hi,
+                                                    {{ user.name }}</router-link
+                                                >
+                                                <span
+                                                    @click="logout"
+                                                    role="button"
+                                                    aria-hidden="true"
+                                                    class="dropdown-item"
+                                                    >Logout</span
+                                                >
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
@@ -123,10 +153,17 @@
 
 <script>
 export default {
+    computed: {
+        user() {
+            return this.$store.state.auth_user;
+        },
+    },
     methods: {
-        logout(){
-            this.$store.commit('removeAuthToken');            
-        }
-    }
-}
+        logout() {
+            this.$store.commit("removeAuthToken");
+            this.$store.commit("removeAuthUser");
+            this.$router.push("/");
+        },
+    },
+};
 </script>

@@ -4,8 +4,11 @@ import VueRouter from "vue-router";
 import Home from "./pages/Home.vue";
 import PropertyDetails from "./pages/property/details.vue";
 import PropertySearch from "./pages/property/search.vue";
-import Login from "./pages/Login.vue"
-import Signup from "./pages/Signup.vue"
+import Login from "./pages/Login.vue";
+import Signup from "./pages/Signup.vue";
+
+// User component
+import Dashboard from "./pages/user/Dashboard.vue";
 
 Vue.use(VueRouter);
 
@@ -16,18 +19,18 @@ const router = new VueRouter({
         {
             path: "/",
             name: "home",
-            component: Home
+            component: Home,
         },
         {
             path: "/property/view/:ml_num",
             name: "view-details",
-            component: PropertyDetails
+            component: PropertyDetails,
         },
         {
             path: "/property/search/",
             name: "search-property",
             component: PropertySearch,
-            props: true
+            props: true,
         },
         {
             path: "/login",
@@ -38,25 +41,30 @@ const router = new VueRouter({
             path: "/sign-up",
             name: "sign-up",
             component: Signup,
-        }
-    ]
+        },
+        {
+            path: "/dashboard",
+            name: "dashboard",
+            component: Dashboard,
+        },
+    ],
 });
 
 router.beforeEach((to, from, next) => {
     if (!to.meta.middleware) {
-        return next()
+        return next();
     }
-    const middleware = to.meta.middleware
+    const middleware = to.meta.middleware;
 
     const context = {
         to,
         from,
         next,
-        store
-    }
+        store,
+    };
     return middleware[0]({
-        ...context
-    })
-})
+        ...context,
+    });
+});
 
 export default router;

@@ -26,6 +26,11 @@ Route::prefix('property')->group(function () {
     Route::post('/search', [Api\PropertyController::class, 'searchProperty']);
 });
 
+// Leads 
+Route::prefix('lead')->group(function () {
+    Route::post('/new', [Api\LeadController::class, 'saveLead']);
+});
+
 Route::get('/', function () {
     dd('Welcome to remax.');
 });
