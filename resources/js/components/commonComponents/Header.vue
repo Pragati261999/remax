@@ -88,16 +88,29 @@
                                     /></router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <button>
-                                        <img
-                                            src="/assets/images/icons/refer.svg"
-                                            alt=""
-                                        /><router-link
-                                            to="/login"
-                                            class="text-light"
-                                            >Sign in</router-link
-                                        >
-                                    </button>
+                                    <div v-if="!$store.state.auth_token">
+                                        <button>
+                                            <img
+                                                src="/assets/images/icons/refer.svg"
+                                                alt=""
+                                            /><router-link
+                                                to="/login"
+                                                class="text-light"
+                                                >Sign in</router-link
+                                            >
+                                        </button>
+                                    </div>
+                                    <div v-else>
+                                        <div class="dropdown">
+                                            <button class="btn btn-theme dropdown-toggle" type="button" id="userDDBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user"></i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="userDDBtn">
+                                                <span role="button" aria-hidden="true" class="dropdown-item">Dashboard</span>
+                                                <span @click="logout" role="button" aria-hidden="true" class="dropdown-item">Logout</span>
+                                            </div>
+                                        </div>                                        
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -107,3 +120,13 @@
         </header>
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        logout(){
+            this.$store.commit('removeAuthToken');            
+        }
+    }
+}
+</script>

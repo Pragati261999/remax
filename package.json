@@ -27,6 +27,7 @@
     "dependencies": {
         "vue-axios": "^3.4.0",
         "vue-carousel": "^0.18.0",
-        "vue-router": "^3.5.2"
+        "vue-router": "^3.5.2",
+        "vuex": "^3.6.2"
     }
 }

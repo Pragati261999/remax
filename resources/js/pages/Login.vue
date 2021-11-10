@@ -72,7 +72,8 @@ export default {
             }
         }
     },
-    mounted() {},
+    mounted() {
+    },
     methods: {
         async login() {
             const user = this.userData
@@ -80,6 +81,9 @@ export default {
             .then(response => {
                 this.success.message = response.data.message
                 this.success.color = 'text-success'
+                const token = response.data.data.token
+                this.$store.commit('addAuthToken', token)
+                this.$router.push('/')
             })
             .catch(err => {
                 const errorData = err.response.data
