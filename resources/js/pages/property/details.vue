@@ -2655,7 +2655,7 @@
                                 <h4 class="text-white fw-bold">Book Showing</h4>
                                 <div class="col-9">
                                    <form>
-                                       <fieldset class="my-3">
+                                        <fieldset class="my-3">
                                             <input type="text" aria-label="Full name" placeholder="Full name" class="form-control">
                                         </fieldset>
                                         <fieldset class="my-3">

@@ -44,6 +44,7 @@
                                 <input type="password" @keyup.prevent="errors.password = ''" class="form-control" v-model="userData.password" placeholder="Create Password*">
                                 <small class="text-danger" v-if="errors.password">{{ errors.password.toString() }}</small>
                             </fieldset>
+                            <small :class="success.color" class="text-success" v-if="success.message">{{ success.message }}</small>
                             <button type="submit" class="btn btn-theme-color w-100 py-2">Sign Up</button>
                         </form>
                         <h6 class="text-dark text-center my-4 divider">OR</h6>
@@ -110,7 +111,11 @@
     // create-user
 export default {
     data() {
-        return {
+        return {            
+            success: {
+                message: '',
+                color: '',
+            },
             userData: {
                 name: '',
                 contact: '',
@@ -129,20 +134,21 @@ export default {
     methods: {
         async registerUser() {
             const user = this.userData
-            // this.errors.name = '',
-            // this.errors.email = '',
-            // this.errors.contact = '',
-            // this.errors.password = '',
             await axios.post('/api/user/register', user)
             .then(response => {
-                console.log(response)
+                this.success.message = response.data.message
+                this.success.color = 'text-success'
             })
             .catch(err => {
                 const errorData = err.response.data
                 this.errors.name = errorData.error.name
-                this.errors.email = errorData.error.email
                 this.errors.contact = errorData.error.contact
+                this.errors.email = errorData.error.email
                 this.errors.password = errorData.error.password
+                if(errorData.success == false) {
+                    this.success.message = errorData.message
+                    this.success.color = 'text-danger'
+                }
             })
         }
     }

@@ -78,6 +78,6 @@ class UserController extends AppBaseController
     
     public function profile(Request $request)
     {
-        
+        return auth()->user();
     }
 }

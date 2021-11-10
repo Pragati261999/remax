@@ -27,9 +27,16 @@
                         <img src="assets/images/icons/login.png" alt="" class="img-fluid">
                     </div>
                     <div class="col-6 px-5">
-                        <form action="">
-                            <input type="text" class="form-control mb-4" placeholder="Enter your email address*">
-                            <input type="password" class="form-control mb-4" placeholder="Password*">
+                        <form @submit.prevent="login()">                            
+                            <fieldset class="mb-4">
+                                <input type="text" @keyup.prevent="errors.email = ''" class="form-control" v-model="userData.email" placeholder="Email Address*">
+                                <small class="text-danger" v-if="errors.email">{{ errors.email.toString() }}</small>
+                            </fieldset>
+                            <fieldset class="mb-4">
+                                <input type="password" @keyup.prevent="errors.password = ''" class="form-control" v-model="userData.password" placeholder="Create Password*">
+                                <small class="text-danger" v-if="errors.password">{{ errors.password.toString() }}</small>
+                            </fieldset>
+                            <small :class="success.color" class="text-success" v-if="success.message">{{ success.message }}</small>
                             <button type="submit" class="btn btn-theme-color w-100 py-2">Log In</button>
                         </form>
                         <router-link to="#" class="text-dark fw-light my-2 text-center fp">Forget Password</router-link>
@@ -46,3 +53,44 @@
         <!-- Login -->
     </div>
 </template>
+<script>
+    // create-user
+export default {
+    data() {
+        return {
+            success: {
+                message: '',
+                color: '',
+            },
+            userData: {
+                email: '',
+                password: '',
+            },
+            errors: {
+                email: '',
+                password: '',
+            }
+        }
+    },
+    mounted() {},
+    methods: {
+        async login() {
+            const user = this.userData
+            await axios.post('/api/user/login', user)
+            .then(response => {
+                this.success.message = response.data.message
+                this.success.color = 'text-success'
+            })
+            .catch(err => {
+                const errorData = err.response.data
+                this.errors.email = errorData.error.email
+                this.errors.password = errorData.error.password
+                if(errorData.success == false) {
+                    this.success.message = errorData.message
+                    this.success.color = 'text-danger'
+                }
+            })
+        }
+    }
+}
+</script>
