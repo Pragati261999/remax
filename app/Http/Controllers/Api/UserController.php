@@ -10,16 +10,19 @@ use App\Models\User;
 
 class UserController extends AppBaseController
 {
-    public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'contact' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6'
-        ]  
-    );
+    public function register(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required|string|max:255',
+                'contact' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:6'
+            ]
+        );
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             $error = $validator->errors();
             $message = "Please check the format of all fields";
             return $this->sendError($message, $error, 422);
@@ -43,7 +46,6 @@ class UserController extends AppBaseController
 
 
         return $this->sendResponse('Successfully registered', $token);
-
     }
 
     public function login(Request $request)
@@ -75,9 +77,9 @@ class UserController extends AppBaseController
 
         return $this->sendResponse("Login success.", $token);
     }
-    
+
     public function profile(Request $request)
     {
-        
+        return $request->user();
     }
 }

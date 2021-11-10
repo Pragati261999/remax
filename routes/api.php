@@ -8,10 +8,15 @@ use App\Http\Controllers\Api;
 //     return $request->user();
 // });
 
-//User
+//Authentication 
 Route::prefix('user')->group(function () {
     Route::post('/register', [Api\UserController::class, 'register']);
     Route::post('/login', [Api\UserController::class, 'login']);
+});
+
+// User dashboard
+Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
+    Route::get('/', [Api\UserController::class, 'profile']);
 });
 
 // Property
@@ -22,5 +27,5 @@ Route::prefix('property')->group(function () {
 });
 
 Route::get('/', function () {
-    dd('Working..');
+    dd('Welcome to remax.');
 });
