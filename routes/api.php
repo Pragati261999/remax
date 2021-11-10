@@ -12,6 +12,9 @@ use App\Http\Controllers\Api;
 Route::prefix('user')->group(function () {
     Route::post('/register', [Api\UserController::class, 'register']);
     Route::post('/login', [Api\UserController::class, 'login']);
+
+    // Lead
+    Route::post('/save-lead', [Api\LeadController::class, 'saveLead']);
 });
 
 // User dashboard
@@ -28,7 +31,12 @@ Route::prefix('property')->group(function () {
 
 // Leads 
 Route::prefix('lead')->group(function () {
-    Route::post('/new', [Api\LeadController::class, 'saveLead']);
+    Route::post('/new-guest', [Api\LeadController::class, 'saveLeadGuest']);
+});
+
+// News letters
+Route::prefix('newsletter')->group(function () {
+    Route::post('/subscribe', [Api\NewsLetterController::class, 'save']);
 });
 
 Route::get('/', function () {

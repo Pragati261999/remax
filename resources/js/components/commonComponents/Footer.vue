@@ -59,18 +59,26 @@
                             Subscribe our newletter to got updates about our
                             services
                         </p>
-                        <form action="">
+                        <form @submit.prevent="subscribe">
                             <input
+                                v-model="form.email"
                                 type="text"
                                 class="form-control mb-3"
                                 placeholder="Enter your email address"
                             />
                             <button
+                                :disabled="sSubscribeEmail"
                                 type="submit"
                                 class="btn btn-theme-color w-100"
                             >
+                                <i
+                                    v-if="sSubscribeEmail"
+                                    class="fa fa-spinner fa-spin pl-2"
+                                    aria-hidden="true"
+                                ></i>
                                 Subscribe
                             </button>
+                            <span v-html="rSubscribeEmail"></span>
                         </form>
                     </div>
                 </div>
@@ -95,3 +103,42 @@
         <!-- bottom footer -->
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            form: { email: "" },
+            sSubscribeEmail: false,
+            rSubscribeEmail: "",
+        };
+    },
+    methods: {
+        async subscribe() {
+            const self = this;
+
+            self.sSubscribeEmail = true;
+            self.rSubscribeEmail =
+                "<span class='text-muted'>Subscribing...</span>";
+
+            await axios
+                .post("/api/newsletter/subscribe", self.form)
+                .then((res) => {
+                    self.sSubscribeEmail = false;
+                    self.rSubscribeEmail =
+                        "<span class='text-success'>" +
+                        res.data.message +
+                        "</span>";
+                    self.form.email = "";
+                })
+                .catch((err) => {
+                    self.sSubscribeEmail = false;
+                    self.rSubscribeEmail =
+                        "<span class='text-danger'>" +
+                        err.response.data.error.email.toString() +
+                        "</span>";
+                });
+        },
+    },
+};
+</script>

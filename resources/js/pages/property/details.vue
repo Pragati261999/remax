@@ -2672,6 +2672,14 @@
                                                 placeholder="Full name"
                                                 class="form-control"
                                             />
+                                            <small
+                                                v-if="leadError.name"
+                                                class="text-danger"
+                                            >
+                                                {{
+                                                    leadError.name.toString()
+                                                }}</small
+                                            >
                                         </fieldset>
                                         <fieldset class="my-3">
                                             <input
@@ -2681,6 +2689,13 @@
                                                 placeholder="Email"
                                                 class="form-control"
                                             />
+                                            <small
+                                                v-if="leadError.email"
+                                                class="text-danger"
+                                                >{{
+                                                    leadError.email.toString()
+                                                }}</small
+                                            >
                                         </fieldset>
                                         <fieldset class="my-3">
                                             <input
@@ -2690,6 +2705,13 @@
                                                 placeholder="Phone Number"
                                                 class="form-control"
                                             />
+                                            <small
+                                                v-if="leadError.contact"
+                                                class="text-danger"
+                                                >{{
+                                                    leadError.contact.toString()
+                                                }}</small
+                                            >
                                         </fieldset>
                                         <fieldset class="my-3">
                                             <textarea
@@ -2701,15 +2723,32 @@
                                                 placeholder="I would like more information abour the property"
                                                 class="form-control"
                                             ></textarea>
+                                            <small
+                                                v-if="leadError.remark"
+                                                class="text-danger"
+                                                >{{
+                                                    leadError.remark.toString()
+                                                }}</small
+                                            >
                                         </fieldset>
                                         <fieldset class="my-3">
-                                            <button                                                
+                                            <button
+                                                :disabled="sLead"
                                                 class="btn btn-light text-color"
                                                 style="border-radius: 14px 14px"
                                             >
+                                                <i
+                                                    v-if="sLead"
+                                                    class="
+                                                        fa fa-spinner fa-spin
+                                                        pl-2
+                                                    "
+                                                    aria-hidden="true"
+                                                ></i>
                                                 Submit
                                             </button>
                                         </fieldset>
+                                        <small v-html="rLead"></small>
                                     </form>
                                 </div>
                             </div>
@@ -2748,12 +2787,16 @@ export default {
     data() {
         return {
             lead: {
+                user_id: null,
                 ml_num: null,
                 name: "",
                 email: "",
                 contact: "",
                 remark: "",
             },
+            sLead: false,
+            rLead: "",
+            leadError: {},
             property: null,
             loadingProperty: true,
         };
@@ -2764,12 +2807,38 @@ export default {
     },
     methods: {
         async saveLaed() {
+            let url = `/api/lead/new-guest`;
+            // Check a user is logged in or not.
+            if (this.$store.state.auth_user) {
+                url = `/api/user/save-lead`;
+                this.lead.user_id = this.$store.state.auth_user.id;
+            }
             const self = this;
 
+            self.sLead = true;
+            self.rLead = "<span class='text-muted'>Sending...</span>";
+            self.leadError = {};
+
             await axios
-                .post(`/api/lead/new`, self.lead)
-                .then((res) => console.log(res))
-                .catch((err) => console.log(err));
+                .post(url, self.lead)
+                .then((res) => {
+                    self.lead = {};
+                    self.sLead = false;
+                    self.rLead =
+                        "<span class='text-success'>" +
+                        res.data.message +
+                        "</span>";
+                    self.leadError = {};
+                })
+                .catch((err) => {
+                    console.log(err.response);
+                    self.sLead = false;
+                    self.rLead =
+                        "<span class='text-danger'>" +
+                        err.response.data.message +
+                        "</span>";
+                    self.leadError = err.response.data.error;
+                });
         },
 
         updateIfLoggedIN() {
