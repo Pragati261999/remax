@@ -9,8 +9,8 @@ class AppBaseController extends Controller
         return response()->json(['success' => true, 'message' => $message, 'data' => $result], 200);
     }
 
-    public function sendError($error, $code = 404)
+    public function sendError($message, $error, $code = 404)
     {
-        return response()->json(['success' => false, 'message' => $error, 'error' => $error], $code);
+        return response()->json(['success' => false, 'message' => $message, 'error' => $error], $code);
     }
 }

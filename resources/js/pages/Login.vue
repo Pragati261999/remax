@@ -29,7 +29,7 @@
                     <div class="col-6 px-5">
                         <form action="">
                             <input type="text" class="form-control mb-4" placeholder="Enter your email address*">
-                            <input type="text" class="form-control mb-4" placeholder="Password*">
+                            <input type="password" class="form-control mb-4" placeholder="Password*">
                             <button type="submit" class="btn btn-theme-color w-100 py-2">Log In</button>
                         </form>
                         <router-link to="#" class="text-dark fw-light my-2 text-center fp">Forget Password</router-link>

@@ -59,7 +59,7 @@
                                     <router-link
                                         class="nav-link"
                                         aria-current="blog"
-                                        href="#"
+                                        to="#"
                                         >Blog</router-link
                                     >
                                 </li>
@@ -71,7 +71,7 @@
                                     <router-link
                                         class="nav-link header-icons"
                                         aria-current="favourate"
-                                        to="/"
+                                        to="#"
                                         ><img
                                             src="/assets/images/icons/bookmark.svg"
                                             alt=""
@@ -81,7 +81,7 @@
                                     <router-link
                                         class="nav-link header-icons"
                                         aria-current="favourate"
-                                        to="/"
+                                        to="#"
                                         ><img
                                             src="/assets/images/icons/alarm.svg"
                                             alt=""

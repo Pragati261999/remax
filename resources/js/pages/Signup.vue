@@ -27,11 +27,23 @@
                         <img src="assets/images/icons/login.png" alt="" class="img-fluid">
                     </div>
                     <div class="col-6 px-5">
-                        <form action="">
-                            <input type="text" class="form-control mb-4" placeholder="Full name*">
-                            <input type="text" class="form-control mb-4" placeholder="Contact Number*">
-                            <input type="text" class="form-control mb-4" placeholder="Email Address*">
-                            <input type="text" class="form-control mb-4" placeholder="Create Password*">
+                        <form @submit.prevent="registerUser()" method="post">
+                            <fieldset class="mb-4">
+                                <input type="text" @keyup.prevent="errors.name = ''" class="form-control" v-model="userData.name" placeholder="Full name*">
+                                <small class="text-danger" v-if="errors.name">{{ errors.name.toString() }}</small>
+                            </fieldset>
+                            <fieldset class="mb-4">
+                                <input type="text" @keyup.prevent="errors.contact = ''" class="form-control" v-model="userData.contact" placeholder="Contact Number*">
+                                <small class="text-danger" v-if="errors.contact">{{ errors.contact.toString() }}</small>
+                            </fieldset>
+                            <fieldset class="mb-4">
+                                <input type="text" @keyup.prevent="errors.email = ''" class="form-control" v-model="userData.email" placeholder="Email Address*">
+                                <small class="text-danger" v-if="errors.email">{{ errors.email.toString() }}</small>
+                            </fieldset>
+                            <fieldset class="mb-4">
+                                <input type="password" @keyup.prevent="errors.password = ''" class="form-control" v-model="userData.password" placeholder="Create Password*">
+                                <small class="text-danger" v-if="errors.password">{{ errors.password.toString() }}</small>
+                            </fieldset>
                             <button type="submit" class="btn btn-theme-color w-100 py-2">Sign Up</button>
                         </form>
                         <h6 class="text-dark text-center my-4 divider">OR</h6>
@@ -61,36 +73,78 @@
     </div>
 </template>
 <style scoped>
-.divider {
-    position: relative;
-}
-.divider:after {
-    content: '';
-    width: 100px;
-    background: #9f9f9f;
-    height: 2px;
-    position: absolute;
-    top: 8px;
-    left: calc(50% + 15px);
-}
-.divider:before {
-    content: '';
-    width: 100px;
-    background: #9f9f9f;
-    height: 2px;
-    position: absolute;
-    top: 8px;
-    right: calc(50% + 15px);
-}
-.social-icon {
-    text-align: center;
-    display: inline-block;
-}
-.social-icon img {
-    border-radius: 6px;
-    padding: 6px;
-    height: 40px;
-    display: inline-block;
-    margin: 0px 15px;
-}
+    .divider {
+        position: relative;
+    }
+    .divider:after {
+        content: '';
+        width: 100px;
+        background: #9f9f9f;
+        height: 2px;
+        position: absolute;
+        top: 8px;
+        left: calc(50% + 15px);
+    }
+    .divider:before {
+        content: '';
+        width: 100px;
+        background: #9f9f9f;
+        height: 2px;
+        position: absolute;
+        top: 8px;
+        right: calc(50% + 15px);
+    }
+    .social-icon {
+        text-align: center;
+        display: inline-block;
+    }
+    .social-icon img {
+        border-radius: 6px;
+        padding: 6px;
+        height: 40px;
+        display: inline-block;
+        margin: 0px 15px;
+    }
 </style>
+<script>
+    // create-user
+export default {
+    data() {
+        return {
+            userData: {
+                name: '',
+                contact: '',
+                email: '',
+                password: '',
+            },
+            errors: {
+                name: '',
+                contact: '',
+                email: '',
+                password: '',
+            }
+        }
+    },
+    mounted() {},
+    methods: {
+        async registerUser() {
+            const user = this.userData
+            // this.errors.name = '',
+            // this.errors.email = '',
+            // this.errors.contact = '',
+            // this.errors.password = '',
+            await axios.post('/api/user/register', user)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(err => {
+                const errorData = err.response.data
+                this.errors.name = errorData.error.name
+                this.errors.email = errorData.error.email
+                this.errors.contact = errorData.error.contact
+                this.errors.password = errorData.error.password
+            })
+        }
+    }
+}
+</script>
