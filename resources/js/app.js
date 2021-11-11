@@ -44,6 +44,7 @@ const store = new Vuex.Store({
     state: {
         auth_token: null,
         auth_user: null,
+        favourite: [],
     },
     plugins: [createPersistedState()],
     mutations: {
@@ -59,6 +60,19 @@ const store = new Vuex.Store({
         },
         removeAuthUser(state) {
             state.auth_user = null;
+        },
+
+        addFavourite(state, ml_num) {
+            state.favourite.push(ml_num);
+        },
+        removeFavourite(state, ml_num) {
+            var index = state.favourite.indexOf(ml_num);
+            if (index !== -1) {
+                state.favourite.splice(index, 1);
+            }
+        },
+        removeBookMark(state) {
+            state.favourite = [];
         },
     },
 });

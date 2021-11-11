@@ -145,6 +145,12 @@ export default {
                 .post("/api/user/login", user)
                 .then((response) => {
                     this.success.message = response.data.message;
+                    const f = response.data.data.favourites;
+
+                    f.forEach((fv) => {
+                        this.$store.commit("addFavourite", fv.ml_num);
+                    });
+
                     this.success.color = "text-success";
                     const token = response.data.data.token;
                     const user = response.data.data.user;

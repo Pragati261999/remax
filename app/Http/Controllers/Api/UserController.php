@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Models\Favourite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -74,9 +75,12 @@ class UserController extends AppBaseController
         $ut = auth()->user()->createToken('remax_auth')->plainTextToken;
         $ut = explode('|', $ut)[1];
 
+        $f = Favourite::where(['user_id' => auth()->user()->id])->get();
+
         $token = [
             'token' => $ut,
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'favourites' => $f,
         ];
 
         return $this->sendResponse("Login success.", $token);

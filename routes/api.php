@@ -12,14 +12,16 @@ use App\Http\Controllers\Api;
 Route::prefix('user')->group(function () {
     Route::post('/register', [Api\UserController::class, 'register']);
     Route::post('/login', [Api\UserController::class, 'login']);
-
-    // Lead
-    Route::post('/save-lead', [Api\LeadController::class, 'saveLead']);
 });
 
 // User dashboard
 Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/', [Api\UserController::class, 'profile']);
+
+    // Lead
+    Route::post('/save-lead', [Api\LeadController::class, 'saveLead']);
+    // Bookmark / favourite / Save
+    Route::post('/property/manage/favourite-property', [Api\PropertyController::class, 'saveFavourite']);
 });
 
 // Property

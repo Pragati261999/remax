@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Models\Favourite;
 use App\Models\Property;
 use Illuminate\Http\Request;
 
@@ -75,5 +76,27 @@ class PropertyController extends AppBaseController
 
         // $response = $request->all();
         return $this->sendResponse($msg, $response);
+    }
+
+    // saveFavourite
+    public function saveFavourite(Request $request)
+    {
+
+        $userId = auth()->user()->id;
+
+        $data = [
+            'user_id' => $userId,
+            'ml_num' => $request->ml_num
+        ];
+
+        $exists = Favourite::where($data)->exists();
+
+        if ($exists) {
+            Favourite::where($data)->delete();
+            return $this->sendResponse("Removed from your favourite list.", ['action' => 'removed', 'ml_num' => $request->ml_num]);
+        }
+
+        Favourite::create($data);
+        return $this->sendResponse("Added to your favourite list.", ['action' => 'added', 'ml_num' => $request->ml_num]);
     }
 }

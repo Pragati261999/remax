@@ -162,6 +162,7 @@ export default {
         logout() {
             this.$store.commit("removeAuthToken");
             this.$store.commit("removeAuthUser");
+            this.$store.commit("removeBookMark");
             this.$router.push("/");
         },
     },
