@@ -12,7 +12,7 @@ class PropertyController extends AppBaseController
     public function getProperties(Request $request)
     {
         $msg = 'Property fetched successfully.';
-        $response = Property::with('images')->orderby('id', 'DESC')->paginate('111');
+        $response = Property::with('images')->orderby('id', 'DESC')->paginate('12');
         return $this->sendResponse($msg, $response);
     }
 
