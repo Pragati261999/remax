@@ -21,7 +21,7 @@
                 />
             </router-link>
             <div class="star">
-                <img src="/assets/images/icons/star.png" alt="" />
+                <img src="/assets/images/icons/share.png" alt="" />
             </div>
             <div class="badge">
                 <p class="text-color">{{ property.S_r }}</p>
@@ -92,7 +92,7 @@
                                     width="16px"
                                 />
                                 <span class="count card-title">
-                                    {{ property.Rms }}</span
+                                    {{ parseInt(property.Rms) }}</span
                                 >
                             </small>
                         </li>
@@ -104,7 +104,7 @@
                                     width="16px"
                                 />
                                 <span class="count card-title">
-                                    {{ property.Bath_tot }}</span
+                                    {{ parseInt(property.Bath_tot) }}</span
                                 >
                             </small>
                         </li>

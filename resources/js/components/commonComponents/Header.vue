@@ -73,9 +73,9 @@
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item p-0">
                                     <router-link
-                                        class="nav-link header-icons"
+                                        class="nav-link t header-icons text-decoration-none"
                                         aria-current="favourate"
-                                        to="#"
+                                        to="/dashboard/notifications"
                                         ><img
                                             src="/assets/images/icons/bookmark.svg"
                                             alt=""
@@ -83,9 +83,9 @@
                                 </li>
                                 <li class="nav-item me-3">
                                     <router-link
-                                        class="nav-link header-icons"
+                                        class="nav-link t header-icons text-decoration-none"
                                         aria-current="favourate"
-                                        to="#"
+                                        to="/dashboard/notifications"
                                         ><img
                                             src="/assets/images/icons/alarm.svg"
                                             alt=""

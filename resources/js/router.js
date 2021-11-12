@@ -6,6 +6,7 @@ import PropertyDetails from "./pages/property/details.vue";
 import PropertySearch from "./pages/property/search.vue";
 import Login from "./pages/Login.vue";
 import Signup from "./pages/Signup.vue";
+import Notifications from "./pages/Notification.vue";
 
 // User component
 import Dashboard from "./pages/user/Dashboard.vue";
@@ -47,6 +48,11 @@ const router = new VueRouter({
             name: "dashboard",
             component: Dashboard,
         },
+        {
+            path: "/dashboard/notifications",
+            name: "notifications",
+            component: Notifications
+        }
     ],
 });
 

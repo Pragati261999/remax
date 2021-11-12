@@ -6,6 +6,7 @@ import createPersistedState from "vuex-persistedstate";
 
 import router from "./router";
 import App from "./layouts/App.vue";
+import Vue from "vue";
 Vue.use(Vuex);
 
 Vue.component(
@@ -36,6 +37,16 @@ Vue.component(
 Vue.component(
     "property-listing",
     require("./components/PropertyListing.vue").default
+);
+
+Vue.component(
+    "notifications",
+    require("./components/dashboard/Notification.vue").default
+);
+
+Vue.component(
+    "bookmarks",
+    require("./components/dashboard/Bookmark.vue").default
 );
 
 Vue.component("faq", require("./components/Faq.vue").default);

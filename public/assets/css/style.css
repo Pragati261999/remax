@@ -45,6 +45,10 @@ a {
     background: #f7f7f7;
 }
 
+.nav-link.t.router-link-exact-active.router-link-active::after{
+    background: transparent !important;
+}
+
 .text-color {
     color: #032646 !important;
 }
@@ -125,19 +129,17 @@ section {
 
 .card .card-img .star {
     position: absolute;
-    width: 30px;
-    height: 30px;
     top: 15px;
-    right: 15px;
+    right: 24px;
     background-color: #fff;
-    padding: 4px;
+    padding: 6px;
     border-radius: 50%;
     justify-content: center;
     display: flex;
 }
 
 .card .card-img .star img {
-    width: 21px;
+    width: 18px;
     height: auto;
 }
 
@@ -407,7 +409,7 @@ table tr td {
     top: 0;
     font-size: 14px;
     font-weight: bold;
-}
+    }
 .tab-content {
     height: auto;
     position: absolute;
@@ -538,6 +540,8 @@ nav .breadcrumb .active {
 /* Notify */
 
 .notify .tabs::before,
+.notify .n-tabs::before,
+.notify .n-tabs::after,
 .notify .tabs::after {
     content: "";
     display: table;
@@ -547,24 +551,29 @@ nav .breadcrumb .active {
     margin: 0;
 }
 
-.notify .tab-label {
-    margin: 10px -50px 10px 80px;
-}
-
-.notify .tab-switch:checked + .tab-label {
+.notify .notification-tab .btn {
     background: transparent;
-    border: 2px solid #032646;
-    padding: 0px 20px;
-    line-height: 30px;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
 }
 
-.notify .tab-switch:checked + .tab-label img {
+.notify .notification-tab .active {    
+    padding: 0 1.5em;    
+    background: #032646;  
+    color: #fff;
+    line-height: 2.2em;
+}
+
+.notify .notification-tab .active img {
+    filter: invert(0) sepia(1) saturate(0) hue-rotate(26deg);
+}
+
+.notify .notification-tab button img {
     filter: invert(1) sepia(0) saturate(1) hue-rotate(175deg);
 }
 
-.notify .tabs {
-    position: relative;
-    min-height: 480px;
+.notify .notification-tab li {
+    margin: 12px;
 }
 
 .alert .btn-close {
