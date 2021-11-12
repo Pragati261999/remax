@@ -316,13 +316,13 @@ table tr td {
     font-weight: 700;
 }
 
-.tab-content input {
+.tab-content input, .tab-content select {
     border-radius: 4px;
     padding: 4px;
 }
 
 .input-width {
-    width: 132px !important;
+    width: 134px !important;
     flex: 1 0 0%;
 }
 
@@ -558,10 +558,13 @@ nav .breadcrumb .active {
 }
 
 .notify .notification-tab .active {    
-    padding: 0 1.5em;    
+    padding: 0 .75rem;  
     background: #032646;  
     color: #fff;
     line-height: 2.2em;
+}
+.notify .notification-tab .btn:focus {    
+    box-shadow: none;
 }
 
 .notify .notification-tab .active img {

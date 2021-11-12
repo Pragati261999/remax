@@ -1,5 +1,5 @@
 <template>
-    <div class="notification">
+    <div>
         <!-- Breakcrumbs -->
         <section class="breadcrumb-section bg-theme-light py-5">
             <div class="container p-0">
@@ -9,18 +9,21 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="#"
+                                    <router-link to="/"
                                         ><img
-                                            src="assets/images/icons/Mask Group.svg"
+                                            src="/./assets/images/icons/Mask Group.svg"
                                             width="14"
                                             class="img-fluid align-middle pb-1"
                                             alt=""
                                         />
-                                        Home</a
+                                        Home</router-link
                                     >
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="#" class="active">Log In</a>
+                                    <router-link to="/dashboard">Dashboard</router-link>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <router-link to="/dashboard/notifications" class="active text-capitalize">{{ activeTab }}</router-link>
                                 </li>
                             </ol>
                         </nav>
@@ -32,7 +35,7 @@
 
         <!-- Notification -->
         <section class="notify px-0 pt-0 bg-theme-light">
-            <div class="container-fluid p-0">
+            <div class="container-fluid p-0 pb-5">
                 <div class="wrapper p-0">
                     <div class="n-tabs">
                         <div class="notification-tab container">
@@ -55,6 +58,26 @@
                                             width="18px"
                                         />
                                         Bookmarked List
+                                    </button>
+                                </li>
+                                <li class="d-inline-block float-start">
+                                    <button class="btn" :class="activeTab=='recent visited' ? 'active' : ''" @click="activeTab = 'recent visited'">
+                                        <img
+                                            src="/../../assets/images/icons/clock.svg"
+                                            alt=""
+                                            width="18px"
+                                        />
+                                        Recent Visited
+                                    </button>
+                                </li>
+                                <li class="d-inline-block float-start">
+                                    <button class="btn" :class="activeTab=='my account' ? 'active' : ''" @click="activeTab = 'my account'">
+                                        <img
+                                            src="/../../assets/images/icons/ac.svg"
+                                            alt=""
+                                            width="18px"
+                                        />
+                                        My Account
                                     </button>
                                 </li>
                             </ul>
@@ -82,9 +105,14 @@ export default {
             activeTab: 'notification',
         };
     },
+    mounted() {
+        this.isAuthorized();
+    },
     methods: {
-        active() {
-            this.isActive = !this.isActive;
+        isAuthorized() {
+            if (!this.$store.state.auth_token) {
+                this.$router.push("/login");
+            }
         },
     },
 };

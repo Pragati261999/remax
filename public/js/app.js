@@ -3270,6 +3270,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     user: function user() {
@@ -3357,6 +3367,230 @@ __webpack_require__.r(__webpack_exports__);
     text: {
       type: String,
       "default": "No data found."
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboard/Bookmark.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboard/Bookmark.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../commonComponents/Loader.vue */ "./resources/js/components/commonComponents/Loader.vue");
+/* harmony import */ var _commonComponents_NoData_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../commonComponents/NoData.vue */ "./resources/js/components/commonComponents/NoData.vue");
+/* harmony import */ var _property_cards_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../property/cards.vue */ "./resources/js/components/property/cards.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Loader: _commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    PropCard: _property_cards_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    NoData: _commonComponents_NoData_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      properties: [],
+      loadingProperties: true,
+      nextPageUrl: null,
+      loadingMoreProperties: false
+    };
+  },
+  computed: {
+    bookmarks: function bookmarks() {
+      return this.$store.state.favourite;
+    }
+  },
+  mounted: function mounted() {
+    this.getSavedProp();
+  },
+  methods: {
+    getSavedProp: function getSavedProp() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var token, self;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!(_this.bookmarks.length > 0)) {
+                  _context.next = 6;
+                  break;
+                }
+
+                // get properties
+                token = _this.$store.state.auth_token; // console.log({ headers: {"Authorization" : `Bearer ${token}`} })
+
+                self = _this;
+                self.loadingProperties = true;
+                _context.next = 6;
+                return axios.get("/api/user/property/bookmarks", {
+                  headers: {
+                    Authorization: "Bearer ".concat(token)
+                  }
+                }).then(function (response) {
+                  self.properties = response.data.data.data;
+                  self.nextPageUrl = response.data.data.next_page_url;
+                  console.log(self.properties);
+                  self.loadingProperties = false;
+                })["catch"](function (err) {
+                  self.loadingProperties = false;
+                  console.log(err);
+                });
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    loadMore: function loadMore() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var self, token;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                self = _this2;
+                token = _this2.$store.state.auth_token;
+                self.loadingMoreProperties = true;
+                console.log(self.nextPageUrl);
+                _context3.next = 6;
+                return axios.get(self.nextPageUrl, {
+                  headers: {
+                    Authorization: "Bearer ".concat(token)
+                  }
+                }).then( /*#__PURE__*/function () {
+                  var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(res) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+                      while (1) {
+                        switch (_context2.prev = _context2.next) {
+                          case 0:
+                            _context2.next = 2;
+                            return self.updateProperties(res.data.data.data);
+
+                          case 2:
+                            self.nextPageUrl = res.data.data.next_page_url;
+                            self.loadingMoreProperties = false;
+
+                          case 4:
+                          case "end":
+                            return _context2.stop();
+                        }
+                      }
+                    }, _callee2);
+                  }));
+
+                  return function (_x) {
+                    return _ref.apply(this, arguments);
+                  };
+                }())["catch"](function (err) {
+                  self.loadingMoreProperties = false;
+                  console.log(err);
+                });
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    updateProperties: function updateProperties(arr) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                arr.forEach(function (element) {
+                  _this3.properties.push(element);
+                });
+
+              case 1:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   }
 });
@@ -3542,6 +3776,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -4486,15 +4721,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       activeTab: 'notification'
     };
   },
+  mounted: function mounted() {
+    this.isAuthorized();
+  },
   methods: {
-    active: function active() {
-      this.isActive = !this.isActive;
+    isAuthorized: function isAuthorized() {
+      if (!this.$store.state.auth_token) {
+        this.$router.push("/login");
+      }
     }
   }
 });
@@ -12670,7 +12933,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.tab-content[data-v-5076d7f6] {\n  opacity: 1;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.tab-content[data-v-5076d7f6] {\n  opacity: 1;\n}\nselect[data-v-5076d7f6]:checked {\n   color: #5c5c5c;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44433,15 +44696,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Bookmark_vue_vue_type_template_id_f5967908___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Bookmark.vue?vue&type=template&id=f5967908& */ "./resources/js/components/dashboard/Bookmark.vue?vue&type=template&id=f5967908&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Bookmark_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Bookmark.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/Bookmark.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 ;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Bookmark_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Bookmark_vue_vue_type_template_id_f5967908___WEBPACK_IMPORTED_MODULE_0__.render,
   _Bookmark_vue_vue_type_template_id_f5967908___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -44968,6 +45233,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NoData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./NoData.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/commonComponents/NoData.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NoData_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/Bookmark.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/dashboard/Bookmark.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookmark_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Bookmark.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/dashboard/Bookmark.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookmark_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -45777,7 +46058,7 @@ var render = function () {
     _c("section", { staticClass: "property bg-theme-light" }, [
       _c("div", { staticClass: "container p-0" }, [
         _c("h2", { staticClass: "theme-title" }, [
-          _vm._v("Featured Properties in Toronto"),
+          _vm._v("Featured Properties"),
         ]),
         _vm._v(" "),
         !_vm.loadingProperties
@@ -46158,7 +46439,7 @@ var render = function () {
                         "router-link",
                         {
                           staticClass:
-                            "nav-link t header-icons text-decoration-none",
+                            "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
                           attrs: {
                             "aria-current": "favourate",
                             to: "/dashboard/notifications",
@@ -46185,7 +46466,7 @@ var render = function () {
                         "router-link",
                         {
                           staticClass:
-                            "nav-link t header-icons text-decoration-none",
+                            "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
                           attrs: {
                             "aria-current": "favourate",
                             to: "/dashboard/notifications",
@@ -46206,28 +46487,32 @@ var render = function () {
                   _vm._v(" "),
                   _c("li", { staticClass: "nav-item" }, [
                     !_vm.$store.state.auth_token
-                      ? _c("div", [
-                          _c(
-                            "button",
-                            [
-                              _c("img", {
-                                attrs: {
-                                  src: "/assets/images/icons/refer.svg",
-                                  alt: "",
-                                },
-                              }),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass: "text-light",
-                                  attrs: { to: "/login" },
-                                },
-                                [_vm._v("Sign in")]
-                              ),
-                            ],
-                            1
-                          ),
-                        ])
+                      ? _c(
+                          "div",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "text-light",
+                                attrs: { to: "/login" },
+                              },
+                              [
+                                _c("button", [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/assets/images/icons/refer.svg",
+                                      alt: "",
+                                    },
+                                  }),
+                                  _vm._v(
+                                    "Sign in\n                                        "
+                                  ),
+                                ]),
+                              ]
+                            ),
+                          ],
+                          1
+                        )
                       : _c("div", [
                           _c("div", { staticClass: "dropdown" }, [
                             _vm._m(2),
@@ -46481,393 +46766,95 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "container px-4" }, [
+      _c("h2", { staticClass: "theme-title" }, [
+        _vm._v("Bookmarked Properties"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center mt-2" }, [
+        !_vm.loadingProperties
+          ? _c("div", [
+              _vm.properties.length > 0
+                ? _c(
+                    "div",
+                    { staticClass: "row" },
+                    [
+                      _vm._l(_vm.properties, function (property) {
+                        return _c(
+                          "div",
+                          {
+                            key: property.Ml_num,
+                            staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5",
+                          },
+                          [_c("PropCard", { attrs: { property: property } })],
+                          1
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("div", [
+                        !_vm.loadingMoreProperties
+                          ? _c("div", [
+                              _vm.nextPageUrl
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "load-more-button mt-4 text-center",
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "btn btn-theme-color px-5",
+                                          on: { click: _vm.loadMore },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                    Load More\n                                    "
+                                          ),
+                                          _vm._m(0),
+                                        ]
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                            ])
+                          : _c("div", [
+                              _c(
+                                "div",
+                                { staticClass: "mt-5 text-center" },
+                                [
+                                  _c("loader", {
+                                    attrs: {
+                                      text: "Please wait, Loading More Properties for you...",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                            ]),
+                      ]),
+                    ],
+                    2
+                  )
+                : _c("div", [_c("no-data")], 1),
+            ])
+          : _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "p-5 text-center" }, [_c("loader")], 1),
+            ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "container px-4" }, [
-        _c("h2", { staticClass: "theme-title" }, [
-          _vm._v("Houses for Sale in Toronto"),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-img position-relative" }, [
-                _c("img", {
-                  staticClass: "card-img-top",
-                  attrs: {
-                    src: "assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg",
-                    alt: "",
-                  },
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "star" }, [
-                  _c("img", {
-                    attrs: { src: "assets/images/icons/star.png", alt: "" },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "badge" }, [
-                  _c("p", { staticClass: "text-color me-5" }, [
-                    _vm._v("For sale"),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body pb-0" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "col-10 d-flex align-items-center" },
-                      [
-                        _c("h6", { staticClass: "mb-0 card-title" }, [
-                          _vm._v(
-                            "\n                                        $1,849,000\n                                    "
-                          ),
-                        ]),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-2" }, [
-                      _c("small", { staticClass: "font-weight-bold" }, [
-                        _c("img", {
-                          attrs: {
-                            src: "assets/images/icons/bookmark_blue.png",
-                            alt: "",
-                          },
-                        }),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row pt-2" }, [
-                  _c("div", { staticClass: "col-8" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "\n                                    114 Hign Park Avenue, Toronto, ON High\n                                    Park North\n                                "
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c("div", { staticClass: "row ps-3 pe-3 pb-2" }, [
-                  _c("div", { staticClass: "col-6 p-0" }, [
-                    _c("ul", { staticClass: "list-unstyled" }, [
-                      _c("li", { staticClass: "float-start" }, [
-                        _c(
-                          "small",
-                          {
-                            staticClass:
-                              "\n                                                ps-3\n                                                card-title\n                                                fw-normal\n                                            ",
-                          },
-                          [_vm._v("MLS W5329854")]
-                        ),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-6 p-0" }, [
-                    _c("ul", { staticClass: "list-unstyled" }, [
-                      _c("li", { staticClass: "float-end" }, [
-                        _c("small", { staticClass: "pe-3" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/images/icons/bathTab.png",
-                              alt: "",
-                              width: "16px",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "count card-title" }, [
-                            _vm._v(
-                              "\n                                                2"
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "float-end" }, [
-                        _c("small", { staticClass: "pe-3" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/images/icons/bed.png",
-                              alt: "",
-                              width: "16px",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "count card-title" }, [
-                            _vm._v(
-                              "\n                                                2"
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-img position-relative" }, [
-                _c("img", {
-                  staticClass: "card-img-top",
-                  attrs: {
-                    src: "assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg",
-                    alt: "",
-                  },
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "star" }, [
-                  _c("img", {
-                    attrs: { src: "assets/images/icons/star.png", alt: "" },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "badge" }, [
-                  _c("p", { staticClass: "text-color me-5" }, [
-                    _vm._v("For sale"),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body pb-0" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "col-10 d-flex align-items-center" },
-                      [
-                        _c("h6", { staticClass: "mb-0 card-title" }, [
-                          _vm._v(
-                            "\n                                        $1,849,000\n                                    "
-                          ),
-                        ]),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-2" }, [
-                      _c("small", { staticClass: "font-weight-bold" }, [
-                        _c("img", {
-                          attrs: {
-                            src: "assets/images/icons/bookmark_blue.png",
-                            alt: "",
-                          },
-                        }),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row pt-2" }, [
-                  _c("div", { staticClass: "col-8" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "\n                                    114 Hign Park Avenue, Toronto, ON High\n                                    Park North\n                                "
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c("div", { staticClass: "row ps-3 pe-3 pb-2" }, [
-                  _c("div", { staticClass: "col-6 p-0" }, [
-                    _c("ul", { staticClass: "list-unstyled" }, [
-                      _c("li", { staticClass: "float-start" }, [
-                        _c(
-                          "small",
-                          {
-                            staticClass:
-                              "\n                                                ps-3\n                                                card-title\n                                                fw-normal\n                                            ",
-                          },
-                          [_vm._v("MLS W5329854")]
-                        ),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-6 p-0" }, [
-                    _c("ul", { staticClass: "list-unstyled" }, [
-                      _c("li", { staticClass: "float-end" }, [
-                        _c("small", { staticClass: "pe-3" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/images/icons/bathTab.png",
-                              alt: "",
-                              width: "16px",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "count card-title" }, [
-                            _vm._v(
-                              "\n                                                2"
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "float-end" }, [
-                        _c("small", { staticClass: "pe-3" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/images/icons/bed.png",
-                              alt: "",
-                              width: "16px",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "count card-title" }, [
-                            _vm._v(
-                              "\n                                                2"
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5" }, [
-            _c("div", { staticClass: "card" }, [
-              _c("div", { staticClass: "card-img position-relative" }, [
-                _c("img", {
-                  staticClass: "card-img-top",
-                  attrs: {
-                    src: "assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg",
-                    alt: "",
-                  },
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "star" }, [
-                  _c("img", {
-                    attrs: { src: "assets/images/icons/star.png", alt: "" },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "badge" }, [
-                  _c("p", { staticClass: "text-color me-5" }, [
-                    _vm._v("For sale"),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body pb-0" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "col-10 d-flex align-items-center" },
-                      [
-                        _c("h6", { staticClass: "mb-0 card-title" }, [
-                          _vm._v(
-                            "\n                                        $1,849,000\n                                    "
-                          ),
-                        ]),
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-2" }, [
-                      _c("small", { staticClass: "font-weight-bold" }, [
-                        _c("img", {
-                          attrs: {
-                            src: "assets/images/icons/bookmark_blue.png",
-                            alt: "",
-                          },
-                        }),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row pt-2" }, [
-                  _c("div", { staticClass: "col-8" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "\n                                    114 Hign Park Avenue, Toronto, ON High\n                                    Park North\n                                "
-                      ),
-                    ]),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-footer" }, [
-                _c("div", { staticClass: "row ps-3 pe-3 pb-2" }, [
-                  _c("div", { staticClass: "col-6 p-0" }, [
-                    _c("ul", { staticClass: "list-unstyled" }, [
-                      _c("li", { staticClass: "float-start" }, [
-                        _c(
-                          "small",
-                          {
-                            staticClass:
-                              "\n                                                ps-3\n                                                card-title\n                                                fw-normal\n                                            ",
-                          },
-                          [_vm._v("MLS W5329854")]
-                        ),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-6 p-0" }, [
-                    _c("ul", { staticClass: "list-unstyled" }, [
-                      _c("li", { staticClass: "float-end" }, [
-                        _c("small", { staticClass: "pe-3" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/images/icons/bathTab.png",
-                              alt: "",
-                              width: "16px",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "count card-title" }, [
-                            _vm._v(
-                              "\n                                                2"
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "float-end" }, [
-                        _c("small", { staticClass: "pe-3" }, [
-                          _c("img", {
-                            attrs: {
-                              src: "assets/images/icons/bed.png",
-                              alt: "",
-                              width: "16px",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "count card-title" }, [
-                            _vm._v(
-                              "\n                                                2"
-                            ),
-                          ]),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
+    return _c("small", { staticClass: "ps-2" }, [
+      _c("i", { staticClass: "fas fa-arrow-right" }),
     ])
   },
 ]
@@ -46929,7 +46916,7 @@ var staticRenderFns = [
           _c("hr"),
           _vm._v(" "),
           _c("div", { staticClass: "notify-div" }, [
-            _c("div", { staticClass: "alert-notify px-3" }, [
+            _c("div", { staticClass: "alert-notify" }, [
               _c(
                 "div",
                 {
@@ -46978,7 +46965,7 @@ var staticRenderFns = [
               ),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "alert-notify px-3" }, [
+            _c("div", { staticClass: "alert-notify" }, [
               _c(
                 "div",
                 {
@@ -47003,40 +46990,7 @@ var staticRenderFns = [
               ),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "alert-notify px-3" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "alert alert-primary alert-dismissible fade show rounded-3",
-                  attrs: { role: "alert" },
-                },
-                [
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("$1,299,000"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("115 Decarie Circle"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("Toronto, Erigate-centennial-west Deance"),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "btn-close",
-                    attrs: {
-                      type: "button",
-                      "data-bs-dismiss": "alert",
-                      "aria-label": "Close",
-                    },
-                  }),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "alert-notify px-3" }, [
+            _c("div", { staticClass: "alert-notify" }, [
               _c(
                 "div",
                 {
@@ -47069,7 +47023,7 @@ var staticRenderFns = [
               ),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "alert-notify px-3" }, [
+            _c("div", { staticClass: "alert-notify" }, [
               _c(
                 "div",
                 {
@@ -47102,7 +47056,40 @@ var staticRenderFns = [
               ),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "alert-notify px-3" }, [
+            _c("div", { staticClass: "alert-notify" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "alert alert-primary alert-dismissible fade show rounded-3",
+                  attrs: { role: "alert" },
+                },
+                [
+                  _c("p", { staticClass: "mb-0 text-dark" }, [
+                    _vm._v("$1,299,000"),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mb-0 text-dark" }, [
+                    _vm._v("115 Decarie Circle"),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mb-0 text-dark" }, [
+                    _vm._v("Toronto, Erigate-centennial-west Deance"),
+                  ]),
+                  _vm._v(" "),
+                  _c("button", {
+                    staticClass: "btn-close",
+                    attrs: {
+                      type: "button",
+                      "data-bs-dismiss": "alert",
+                      "aria-label": "Close",
+                    },
+                  }),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "alert-notify" }, [
               _c(
                 "div",
                 {
@@ -47471,34 +47458,56 @@ var render = function () {
               _c("div", { staticClass: "input-width" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Property Type")]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
+                _c("select", { staticClass: "form-control" }, [
+                  _c("option", { staticClass: "text-theme-light" }, [
+                    _vm._v("Select Type"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "option",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.propertyType,
-                      expression: "form.propertyType",
+                      attrs: { value: "Residential" },
+                      model: {
+                        value: _vm.form.propertyType,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.form, "propertyType", $$v)
+                        },
+                        expression: "form.propertyType",
+                      },
                     },
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    "aria-label": "Last name",
-                    list: "type_proper",
-                    placeholder: "Type",
-                  },
-                  domProps: { value: _vm.form.propertyType },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "propertyType", $event.target.value)
+                    [_vm._v("Residential")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    {
+                      attrs: { value: "Commercial" },
+                      model: {
+                        value: _vm.form.propertyType,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.form, "propertyType", $$v)
+                        },
+                        expression: "form.propertyType",
+                      },
                     },
-                  },
-                }),
-                _vm._v(" "),
-                _vm._m(0),
+                    [_vm._v("Commercial")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "option",
+                    {
+                      attrs: { value: "Condo" },
+                      model: {
+                        value: _vm.form.propertyType,
+                        callback: function ($$v) {
+                          _vm.$set(_vm.form, "propertyType", $$v)
+                        },
+                        expression: "form.propertyType",
+                      },
+                    },
+                    [_vm._v("Condo")]
+                  ),
+                ]),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "input-width" }, [
@@ -47515,7 +47524,7 @@ var render = function () {
                   ],
                   staticClass: "form-control",
                   attrs: {
-                    type: "text",
+                    type: "number",
                     "aria-label": "Last name",
                     placeholder: "Min",
                   },
@@ -47545,7 +47554,7 @@ var render = function () {
                   ],
                   staticClass: "form-control",
                   attrs: {
-                    type: "text",
+                    type: "number",
                     "aria-label": "Last name",
                     placeholder: "Max",
                   },
@@ -47575,9 +47584,9 @@ var render = function () {
                   ],
                   staticClass: "form-control",
                   attrs: {
-                    type: "text",
+                    type: "number",
                     "aria-label": "Last name",
-                    placeholder: "Rooms",
+                    placeholder: "Beds",
                   },
                   domProps: { value: _vm.form.bedRoom },
                   on: {
@@ -47591,7 +47600,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c(
                 "div",
@@ -47619,18 +47628,6 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("datalist", { attrs: { id: "type_proper" } }, [
-      _c("option", { attrs: { value: "Residential" } }),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "Commercial" } }),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "Condo" } }),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -48773,11 +48770,71 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "notification" }, [
-    _vm._m(0),
+  return _c("div", [
+    _c("section", { staticClass: "breadcrumb-section bg-theme-light py-5" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row py-0" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h2", { staticClass: "theme-title text-start" }, [
+              _vm._v("Account"),
+            ]),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c("ol", { staticClass: "breadcrumb" }, [
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _c("img", {
+                        staticClass: "img-fluid align-middle pb-1",
+                        attrs: {
+                          src: "/./assets/images/icons/Mask Group.svg",
+                          width: "14",
+                          alt: "",
+                        },
+                      }),
+                      _vm._v("\n                                    Home"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c("router-link", { attrs: { to: "/dashboard" } }, [
+                      _vm._v("Dashboard"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "active text-capitalize",
+                        attrs: { to: "/dashboard/notifications" },
+                      },
+                      [_vm._v(_vm._s(_vm.activeTab))]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
     _vm._v(" "),
     _c("section", { staticClass: "notify px-0 pt-0 bg-theme-light" }, [
-      _c("div", { staticClass: "container-fluid p-0" }, [
+      _c("div", { staticClass: "container-fluid p-0 pb-5" }, [
         _c("div", { staticClass: "wrapper p-0" }, [
           _c("div", { staticClass: "n-tabs" }, [
             _c("div", { staticClass: "notification-tab container" }, [
@@ -48835,6 +48892,60 @@ var render = function () {
                     ]
                   ),
                 ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "d-inline-block float-start" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      class: _vm.activeTab == "recent visited" ? "active" : "",
+                      on: {
+                        click: function ($event) {
+                          _vm.activeTab = "recent visited"
+                        },
+                      },
+                    },
+                    [
+                      _c("img", {
+                        attrs: {
+                          src: "/../../assets/images/icons/clock.svg",
+                          alt: "",
+                          width: "18px",
+                        },
+                      }),
+                      _vm._v(
+                        "\n                                    Recent Visited\n                                "
+                      ),
+                    ]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "d-inline-block float-start" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      class: _vm.activeTab == "my account" ? "active" : "",
+                      on: {
+                        click: function ($event) {
+                          _vm.activeTab = "my account"
+                        },
+                      },
+                    },
+                    [
+                      _c("img", {
+                        attrs: {
+                          src: "/../../assets/images/icons/ac.svg",
+                          alt: "",
+                          width: "18px",
+                        },
+                      }),
+                      _vm._v(
+                        "\n                                    My Account\n                                "
+                      ),
+                    ]
+                  ),
+                ]),
               ]),
             ]),
           ]),
@@ -48853,52 +48964,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "section",
-      { staticClass: "breadcrumb-section bg-theme-light py-5" },
-      [
-        _c("div", { staticClass: "container p-0" }, [
-          _c("div", { staticClass: "row py-0" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _c("h2", { staticClass: "theme-title text-start" }, [
-                _vm._v("Account"),
-              ]),
-              _vm._v(" "),
-              _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-                _c("ol", { staticClass: "breadcrumb" }, [
-                  _c("li", { staticClass: "breadcrumb-item" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("img", {
-                        staticClass: "img-fluid align-middle pb-1",
-                        attrs: {
-                          src: "assets/images/icons/Mask Group.svg",
-                          width: "14",
-                          alt: "",
-                        },
-                      }),
-                      _vm._v("\n                                    Home"),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "breadcrumb-item" }, [
-                    _c("a", { staticClass: "active", attrs: { href: "#" } }, [
-                      _vm._v("Log In"),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -41,25 +41,26 @@
               </div>
               <div class="input-width">
                 <label for="">Property Type</label>
-                <input
+                <!--input
                   v-model="form.propertyType"
                   type="text"
                   class="form-control"
                   aria-label="Last name"
                   list="type_proper"
                   placeholder="Type"
-                />
-                <datalist id="type_proper">
-                  <option value="Residential"></option>
-                  <option value="Commercial"></option>
-                  <option value="Condo"></option>
-                </datalist>
+                /-->
+                <select class="form-control">
+                  <option class="text-theme-light">Select Type</option>
+                  <option v-model="form.propertyType" value="Residential">Residential</option>
+                  <option v-model="form.propertyType" value="Commercial">Commercial</option>
+                  <option v-model="form.propertyType" value="Condo">Condo</option>
+                </select>
               </div>
               <div class="input-width">
                 <label for="">Pricing</label>
                 <input
                   v-model="form.minPrice"
-                  type="text"
+                  type="number"
                   class="form-control"
                   aria-label="Last name"
                   placeholder="Min"
@@ -69,7 +70,7 @@
                 <label for=""></label>
                 <input
                   v-model="form.maxPrice"
-                  type="text"
+                  type="number"
                   class="form-control"
                   aria-label="Last name"
                   placeholder="Max"
@@ -79,10 +80,10 @@
                 <label for="">Beds</label>
                 <input
                   v-model="form.bedRoom"
-                  type="text"
+                  type="number"
                   class="form-control"
                   aria-label="Last name"
-                  placeholder="Rooms"
+                  placeholder="Beds"
                 />
               </div>
               <div
@@ -126,7 +127,6 @@ export default {
   methods: {
     searchProperty() {
       const self = this;
-
       if (self.$route.name !== "search-property") {
         self.$router.push({
           name: "search-property",
@@ -145,5 +145,8 @@ export default {
 <style scoped>
 .tab-content {
   opacity: 1;
+}
+select:checked {
+   color: #5c5c5c;
 }
 </style>

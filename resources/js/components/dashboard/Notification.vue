@@ -10,7 +10,7 @@
                 </div>
                 <hr />
                 <div class="notify-div">
-                    <div class="alert-notify px-3">
+                    <div class="alert-notify">
                         <div class="alert alert-primary alert-dismissible fade show rounded-3" role="alert">
                             <p class="mb-0 text-dark">$1,299,000</p>
                             <p class="mb-0 text-dark">115 Decarie Circle</p>
@@ -22,21 +22,13 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
-                    <div class="alert-notify px-3">
+                    <div class="alert-notify">
                         <div class="alert alert-primary alert-dismissible fade show rounded-3" role="alert">
                             <p class="mb-0 text-dark">$1,299,000</p>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
-                    <div class="alert-notify px-3">
-                        <div class="alert alert-primary alert-dismissible fade show rounded-3" role="alert">
-                            <p class="mb-0 text-dark">$1,299,000</p>
-                            <p class="mb-0 text-dark">115 Decarie Circle</p>
-                            <p class="mb-0 text-dark">Toronto, Erigate-centennial-west Deance</p>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-                    <div class="alert-notify px-3">
+                    <div class="alert-notify">
                         <div class="alert alert-primary alert-dismissible fade show rounded-3" role="alert">
                             <p class="mb-0 text-dark">$1,299,000</p>
                             <p class="mb-0 text-dark">115 Decarie Circle</p>
@@ -44,7 +36,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
-                    <div class="alert-notify px-3">
+                    <div class="alert-notify">
                         <div class="alert alert-primary alert-dismissible fade show rounded-3" role="alert">
                             <p class="mb-0 text-dark">$1,299,000</p>
                             <p class="mb-0 text-dark">115 Decarie Circle</p>
@@ -52,7 +44,15 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
-                    <div class="alert-notify px-3">
+                    <div class="alert-notify">
+                        <div class="alert alert-primary alert-dismissible fade show rounded-3" role="alert">
+                            <p class="mb-0 text-dark">$1,299,000</p>
+                            <p class="mb-0 text-dark">115 Decarie Circle</p>
+                            <p class="mb-0 text-dark">Toronto, Erigate-centennial-west Deance</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="alert-notify">
                         <div class="alert alert-primary alert-dismissible fade show rounded-3" role="alert">
                             <p class="mb-0 text-dark">$1,299,000</p>
                             <p class="mb-0 text-dark">115 Decarie Circle</p>

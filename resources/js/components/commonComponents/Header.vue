@@ -73,7 +73,12 @@
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item p-0">
                                     <router-link
-                                        class="nav-link t header-icons text-decoration-none"
+                                        class="
+                                            nav-link
+                                            t
+                                            header-icons
+                                            text-decoration-none
+                                        "
                                         aria-current="favourate"
                                         to="/dashboard/notifications"
                                         ><img
@@ -83,7 +88,12 @@
                                 </li>
                                 <li class="nav-item me-3">
                                     <router-link
-                                        class="nav-link t header-icons text-decoration-none"
+                                        class="
+                                            nav-link
+                                            t
+                                            header-icons
+                                            text-decoration-none
+                                        "
                                         aria-current="favourate"
                                         to="/dashboard/notifications"
                                         ><img
@@ -93,16 +103,16 @@
                                 </li>
                                 <li class="nav-item">
                                     <div v-if="!$store.state.auth_token">
-                                        <button>
-                                            <img
-                                                src="/assets/images/icons/refer.svg"
-                                                alt=""
-                                            /><router-link
-                                                to="/login"
-                                                class="text-light"
-                                                >Sign in</router-link
-                                            >
-                                        </button>
+                                        <router-link
+                                            to="/login"
+                                            class="text-light"
+                                            ><button>
+                                                <img
+                                                    src="/assets/images/icons/refer.svg"
+                                                    alt=""
+                                                />Sign in
+                                            </button></router-link
+                                        >
                                     </div>
                                     <div v-else>
                                         <div class="dropdown">

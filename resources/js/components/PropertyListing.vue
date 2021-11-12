@@ -2,7 +2,7 @@
   <div>
     <section class="property bg-theme-light">
       <div class="container p-0">
-        <h2 class="theme-title">Featured Properties in Toronto</h2>
+        <h2 class="theme-title">Featured Properties</h2>
         <div v-if="!loadingProperties">
           <div v-if="properties.length > 0" class="row">
             <div
