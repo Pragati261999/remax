@@ -67,7 +67,9 @@
                                 "
                             >
                                 <img
-                                    :src="img.image"
+                                    v-lazy="{
+                                        src: img.image,
+                                    }"
                                     alt="Not Found"
                                     class="crouse-image"
                                 />
@@ -117,7 +119,7 @@
                                                         class="count card-title"
                                                     >
                                                         {{
-                                                            property.Bath_tot
+                                                            parseInt(property.Bath_tot)
                                                         }}</span
                                                     >
                                                 </small>
@@ -132,7 +134,7 @@
                                                     <span
                                                         class="count card-title"
                                                         >{{
-                                                            property.Rms
+                                                            parseInt(property.Rms)
                                                         }}</span
                                                     >
                                                 </small>

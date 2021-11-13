@@ -40,7 +40,7 @@
                             <li><a href="">Review</a></li>
                             <li><a href="">Customers</a></li>
                             <li><a href="">Blog</a></li>
-                            <li><a href="">Carrier</a></li>
+                            <li><a href="">Career</a></li>
                         </ul>
                     </div>
                     <div class="col-2">
@@ -50,7 +50,7 @@
                             <li><a href="">Review</a></li>
                             <li><a href="">Customers</a></li>
                             <li><a href="">Blog</a></li>
-                            <li><a href="">Carrier</a></li>
+                            <li><a href="">Career</a></li>
                         </ul>
                     </div>
                     <div class="col-4">

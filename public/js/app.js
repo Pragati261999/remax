@@ -8149,6 +8149,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -48733,7 +48735,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Blog")])]),
         _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Carrier")])]),
+        _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Career")])]),
       ]),
     ])
   },
@@ -48753,7 +48755,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Blog")])]),
         _vm._v(" "),
-        _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Carrier")])]),
+        _c("li", [_c("a", { attrs: { href: "" } }, [_vm._v("Career")])]),
       ]),
     ])
   },
@@ -52077,11 +52079,19 @@ var render = function () {
                                   },
                                   [
                                     _c("img", {
+                                      directives: [
+                                        {
+                                          name: "lazy",
+                                          rawName: "v-lazy",
+                                          value: {
+                                            src: img.image,
+                                          },
+                                          expression:
+                                            "{\n                                    src: img.image,\n                                }",
+                                        },
+                                      ],
                                       staticClass: "crouse-image",
-                                      attrs: {
-                                        src: img.image,
-                                        alt: "Not Found",
-                                      },
+                                      attrs: { alt: "Not Found" },
                                     }),
                                   ]
                                 ),
@@ -52160,7 +52170,9 @@ var render = function () {
                                     [
                                       _vm._v(
                                         "\n                                                    " +
-                                          _vm._s(_vm.property.Bath_tot)
+                                          _vm._s(
+                                            parseInt(_vm.property.Bath_tot)
+                                          )
                                       ),
                                     ]
                                   ),
@@ -52180,7 +52192,7 @@ var render = function () {
                                   _c(
                                     "span",
                                     { staticClass: "count card-title" },
-                                    [_vm._v(_vm._s(_vm.property.Rms))]
+                                    [_vm._v(_vm._s(parseInt(_vm.property.Rms)))]
                                   ),
                                 ]),
                               ]),
