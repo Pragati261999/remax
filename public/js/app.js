@@ -3501,8 +3501,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 }).then(function (response) {
                   self.properties = response.data.data.data;
-                  self.nextPageUrl = response.data.data.next_page_url;
-                  console.log(self.properties);
+                  self.nextPageUrl = response.data.data.next_page_url; // console.log(self.properties);
+
+                  // console.log(self.properties);
                   self.loadingProperties = false;
                 })["catch"](function (err) {
                   self.loadingProperties = false;
@@ -4744,10 +4745,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  computed: {
+    routeChanges: function routeChanges() {
+      this.routerChange(this.$route.name);
+    }
+  },
   data: function data() {
     return {
-      activeTab: 'notification'
+      activeTab: 'notifications'
     };
   },
   mounted: function mounted() {
@@ -4757,6 +4772,16 @@ __webpack_require__.r(__webpack_exports__);
     isAuthorized: function isAuthorized() {
       if (!this.$store.state.auth_token) {
         this.$router.push("/login");
+      }
+    },
+    routerChange: function routerChange(routername) {
+      if (routername == 'notifications') {
+        console.log(routername);
+        return this.activeTab = 'notifications';
+      } else if (routername == 'bookmarks') {
+        return this.activeTab = 'bookmarks';
+      } else if (routername == 'my-account') {
+        return this.activeTab = 'my account';
       }
     }
   }
@@ -8481,6 +8506,18 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_8__["default"]({
   }, {
     path: "/dashboard/notifications",
     name: "notifications",
+    component: _pages_Notification_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }, {
+    path: "/dashboard/bookmarks",
+    name: "bookmarks",
+    component: _pages_Notification_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }, {
+    path: "/dashboard/my-account",
+    name: "my-account",
+    component: _pages_Notification_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  }, {
+    path: "/dashboard/recent-visited",
+    name: "recent visited",
     component: _pages_Notification_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }]
 });
@@ -46442,7 +46479,7 @@ var render = function () {
                             "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
                           attrs: {
                             "aria-current": "favourate",
-                            to: "/dashboard/notifications",
+                            to: "/dashboard/bookmarks",
                           },
                         },
                         [
@@ -46529,7 +46566,7 @@ var render = function () {
                                   {
                                     staticClass: "dropdown-item",
                                     attrs: {
-                                      to: "/dashboard",
+                                      to: "/dashboard/my-account",
                                       role: "button",
                                       "aria-hidden": "true",
                                     },
@@ -48838,16 +48875,20 @@ var render = function () {
         _c("div", { staticClass: "wrapper p-0" }, [
           _c("div", { staticClass: "n-tabs" }, [
             _c("div", { staticClass: "notification-tab container" }, [
+              _c("span", { staticClass: "d-none" }, [
+                _vm._v(_vm._s(_vm.routeChanges)),
+              ]),
+              _vm._v(" "),
               _c("ul", { staticClass: "list-unstyled m-0" }, [
                 _c("li", { staticClass: "d-inline-block float-start" }, [
                   _c(
                     "button",
                     {
                       staticClass: "btn",
-                      class: _vm.activeTab == "notification" ? "active" : "",
+                      class: _vm.activeTab == "notifications" ? "active" : "",
                       on: {
                         click: function ($event) {
-                          _vm.activeTab = "notification"
+                          _vm.activeTab = "notifications"
                         },
                       },
                     },
@@ -48871,10 +48912,10 @@ var render = function () {
                     "button",
                     {
                       staticClass: "btn",
-                      class: _vm.activeTab == "bookmark" ? "active" : "",
+                      class: _vm.activeTab == "bookmarks" ? "active" : "",
                       on: {
                         click: function ($event) {
-                          _vm.activeTab = "bookmark"
+                          _vm.activeTab = "bookmarks"
                         },
                       },
                     },
@@ -48953,12 +48994,20 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
-        _vm.activeTab == "bookmark"
+        _vm.activeTab == "bookmarks"
           ? _c("div", [_c("bookmarks")], 1)
           : _vm._e(),
         _vm._v(" "),
-        _vm.activeTab == "notification"
+        _vm.activeTab == "notifications"
           ? _c("div", [_c("notifications")], 1)
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.activeTab == "recent visited"
+          ? _c("div", [_c("h2", [_vm._v("Recent Visits")])])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.activeTab == "my account"
+          ? _c("div", [_c("h2", [_vm._v("My Account")])])
           : _vm._e(),
       ]),
     ]),

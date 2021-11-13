@@ -52,6 +52,21 @@ const router = new VueRouter({
             path: "/dashboard/notifications",
             name: "notifications",
             component: Notifications
+        },
+        {
+            path: "/dashboard/bookmarks",
+            name: "bookmarks",
+            component: Notifications
+        },
+        {
+            path: "/dashboard/my-account",
+            name: "my-account",
+            component: Notifications
+        },
+        {
+            path: "/dashboard/recent-visited",
+            name: "recent visited",
+            component: Notifications
         }
     ],
 });

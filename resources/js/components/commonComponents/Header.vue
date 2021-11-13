@@ -80,7 +80,7 @@
                                             text-decoration-none
                                         "
                                         aria-current="favourate"
-                                        to="/dashboard/notifications"
+                                        to="/dashboard/bookmarks"
                                         ><img
                                             src="/assets/images/icons/bookmark.svg"
                                             alt=""
@@ -134,7 +134,7 @@
                                                 aria-labelledby="userDDBtn"
                                             >
                                                 <router-link
-                                                    to="/dashboard"
+                                                    to="/dashboard/my-account"
                                                     role="button"
                                                     aria-hidden="true"
                                                     class="dropdown-item"

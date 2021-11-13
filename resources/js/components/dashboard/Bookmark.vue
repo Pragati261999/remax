@@ -90,7 +90,7 @@ export default {
                     .then((response) => {
                         self.properties = response.data.data.data;
                         self.nextPageUrl = response.data.data.next_page_url;
-                        console.log(self.properties);
+                        // console.log(self.properties);
                         self.loadingProperties = false;
                     })
                     .catch((err) => {

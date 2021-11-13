@@ -39,9 +39,12 @@
                 <div class="wrapper p-0">
                     <div class="n-tabs">
                         <div class="notification-tab container">
+                        <!--To run tabs -->
+                        <span class="d-none">{{ routeChanges }}</span>
+                        <!--To run tabs -->
                             <ul class="list-unstyled m-0">
                                 <li class="d-inline-block float-start">
-                                    <button class="btn" :class="activeTab=='notification' ? 'active' : ''" @click="activeTab = 'notification'">
+                                    <button class="btn" :class="activeTab=='notifications' ? 'active' : ''" @click="activeTab = 'notifications'">
                                         <img
                                             src="/../../assets/images/icons/alarm.svg"
                                             alt=""
@@ -51,7 +54,7 @@
                                     </button>
                                 </li>
                                 <li class="d-inline-block float-start">
-                                    <button class="btn" :class="activeTab=='bookmark' ? 'active' : ''" @click="activeTab = 'bookmark'">
+                                    <button class="btn" :class="activeTab=='bookmarks' ? 'active' : ''" @click="activeTab = 'bookmarks'">
                                         <img
                                             src="/../../assets/images/icons/bookmark.svg"
                                             alt=""
@@ -86,11 +89,17 @@
                 </div>
             </div>
             <div class="container">
-                <div v-if="activeTab=='bookmark'">
+                <div v-if="activeTab=='bookmarks'">
                     <bookmarks />
                 </div>
-                <div v-if="activeTab=='notification'">
+                <div v-if="activeTab=='notifications'">
                     <notifications />
+                </div>
+                <div v-if="activeTab=='recent visited'">
+                    <h2>Recent Visits</h2>
+                </div>
+                <div v-if="activeTab=='my account'">
+                    <h2>My Account</h2>
                 </div>
             </div>
         </section>
@@ -100,18 +109,33 @@
 </template>
 <script>
 export default {
+    computed: {
+        routeChanges() {
+            this.routerChange(this.$route.name)
+        },
+    },
     data() {
         return {
-            activeTab: 'notification',
+            activeTab: 'notifications',
         };
     },
     mounted() {
-        this.isAuthorized();
+        this.isAuthorized()
     },
     methods: {
         isAuthorized() {
             if (!this.$store.state.auth_token) {
                 this.$router.push("/login");
+            }
+        },
+        routerChange(routername) {
+            if(routername == 'notifications') {
+                console.log(routername)
+                return this.activeTab = 'notifications'
+            } else if (routername == 'bookmarks') {
+                return this.activeTab = 'bookmarks'
+            } else if (routername == 'my-account') {
+                return this.activeTab = 'my account'
             }
         },
     },
