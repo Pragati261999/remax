@@ -4131,6 +4131,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     property: {
@@ -50127,7 +50135,9 @@ var render = function () {
                 _c("span", { staticClass: "count card-title" }, [
                   _vm._v(
                     "\n                                " +
-                      _vm._s(parseInt(_vm.property.Rms))
+                      _vm._s(
+                        _vm.property.Rms ? parseInt(_vm.property.Rms) : "0"
+                      )
                   ),
                 ]),
               ]),
@@ -50146,7 +50156,11 @@ var render = function () {
                 _c("span", { staticClass: "count card-title" }, [
                   _vm._v(
                     "\n                                " +
-                      _vm._s(parseInt(_vm.property.Bath_tot))
+                      _vm._s(
+                        _vm.property.Bath_tot
+                          ? parseInt(_vm.property.Bath_tot)
+                          : "0"
+                      )
                   ),
                 ]),
               ]),
@@ -50545,19 +50559,462 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("section", { staticClass: "breadcrumb-section bg-theme-light py-5" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row py-0" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h2", { staticClass: "theme-title text-start" }, [
+              _vm._v("Blog"),
+            ]),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c("ol", { staticClass: "breadcrumb" }, [
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _c("img", {
+                        staticClass: "img-fluid align-middle pb-1",
+                        attrs: {
+                          src: "assets/images/icons/Mask Group.svg",
+                          width: "14",
+                          alt: "",
+                        },
+                      }),
+                      _vm._v("\n                                    Home"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "active", attrs: { to: "/blog" } },
+                      [_vm._v("Blog")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _vm._m(3),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _vm._v("\n    Blog\n    "),
-      _c("hr"),
-      _vm._v(
-        "\n    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam nemo\n    iste in facilis quia, perferendis, ullam consequuntur labore harum, aut\n    facere blanditiis? Aliquam et sequi cumque rerum blanditiis esse at?\n"
-      ),
+    return _c("section", { staticClass: "blog bg-theme-light" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-4" }, [
+            _c("h2", { staticClass: "text-light fw-bold mb-2" }, [
+              _vm._v(
+                "\n                        Is Mortgage Interest Tax-Deductible in Canada ?\n                    "
+              ),
+            ]),
+            _vm._v(" "),
+            _c(
+              "h5",
+              {
+                staticClass: "text-light",
+                staticStyle: { "line-height": "28px", "margin-bottom": "20px" },
+              },
+              [
+                _vm._v(
+                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                    "
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "\n                            btn\n                            bg-white\n                            text-color\n                            fw-bolder\n                            btn-rounded\n                        ",
+              },
+              [
+                _vm._v(
+                  "\n                        Read more\n                    "
+                ),
+              ]
+            ),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "news bg-theme-light" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h6", { staticClass: "text-light fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-white" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h6", { staticClass: "text-light fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-white" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h6", { staticClass: "text-light fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-white" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "subscribe py-5 p-0 bg-gray" }, [
+      _c("div", { staticClass: "container-fluid py-5 subscribe-container" }, [
+        _c("div", { staticClass: "subscridtion-form my-5" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-7" }, [
+              _c("h5", { staticClass: "theme-title fw-bold text-start" }, [
+                _vm._v(
+                  "\n                            Subscribe to our newsletter\n                        "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("h6", { staticClass: "theme-title text-start fw-light" }, [
+                _vm._v(
+                  "\n                            Subscribe now and so you don’t miss any updates\n                            from us!\n                        "
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-5" }, [
+              _c("form", { staticClass: "row mt-auto ms-auto" }, [
+                _c("div", { staticClass: "col p-0" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "visually-hidden",
+                      attrs: { for: "inputPassword2" },
+                    },
+                    [_vm._v("Password")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "password",
+                      id: "inputPassword2",
+                      placeholder: "",
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col p-0" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-theme-color mb-3 lh-1",
+                      attrs: { type: "submit" },
+                    },
+                    [
+                      _vm._v(
+                        "\n                                    Subscribe\n                                "
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "blog-container bg-theme-light" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h6", { staticClass: "text-dark fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-dark" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h6", { staticClass: "text-dark fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-dark" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "text-dark fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-dark" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "text-dark fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-dark" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "text-dark fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-dark" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12 mt-3" }, [
+            _c(
+              "div",
+              { staticClass: "card rounded-0 position-relative d-block" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid",
+                  attrs: {
+                    src: "assets/images/banners/pexels-pixabay-434631 11.png",
+                    alt: "",
+                  },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "text-dark fw-bold mb-2" }, [
+                    _vm._v(
+                      "\n                                Is Mortgage Interest Tax-Deductible in\n                                Canada ?\n                            "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "text-dark" }, [
+                    _vm._v(
+                      "\n                                Lorem Ipsum is simply dummy text of the\n                                printing and typesetting industry. Lorem\n                                Ipsum has been the industry's standard dummy\n                                text ever since the 1500s,\n                            "
+                    ),
+                  ]),
+                ]),
+              ]
+            ),
+          ]),
+        ]),
+      ]),
     ])
   },
 ]

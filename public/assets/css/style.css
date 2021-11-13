@@ -616,10 +616,9 @@ nav .breadcrumb .active {
     background-image: url(../images/banners/main_image.png);
     background-size: 100%;
     background-repeat: no-repeat;
-    padding-top: 316px;
-    padding-bottom: 72px;
     display: flex;
-    align-items: baseline;
+    align-items: end;
+    height: 570px;
 }
 
 .news .card,

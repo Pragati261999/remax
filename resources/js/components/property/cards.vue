@@ -94,7 +94,11 @@
                                     width="16px"
                                 />
                                 <span class="count card-title">
-                                    {{ parseInt(property.Rms) }}</span
+                                    {{
+                                        property.Rms
+                                            ? parseInt(property.Rms)
+                                            : "0"
+                                    }}</span
                                 >
                             </small>
                         </li>
@@ -106,7 +110,11 @@
                                     width="16px"
                                 />
                                 <span class="count card-title">
-                                    {{ parseInt(property.Bath_tot) }}</span
+                                    {{
+                                        property.Bath_tot
+                                            ? parseInt(property.Bath_tot)
+                                            : "0"
+                                    }}</span
                                 >
                             </small>
                         </li>
