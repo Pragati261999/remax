@@ -9,7 +9,9 @@
             >
                 <img
                     v-if="property.images.length > 0"
-                    :src="property.images[0].image"
+                    v-lazy="{
+                        src: property.images[0].image,
+                    }"
                     class="card-img-top"
                     alt="Property image not found"
                 />
@@ -131,10 +133,17 @@ export default {
             // check user is logged in
             if (this.$store.state.auth_token) {
                 const self = this;
+                const token = this.$store.state.auth_token;
                 axios
-                    .post("/api/user/property/manage/favourite-property", {
-                        ml_num,
-                    })
+                    .post(
+                        "/api/user/property/manage/favourite-property",
+                        {
+                            ml_num,
+                        },
+                        {
+                            headers: { Authorization: `Bearer ${token}` },
+                        }
+                    )
                     .then((res) => {
                         const d = res.data.data;
                         if (d.action == "added") {

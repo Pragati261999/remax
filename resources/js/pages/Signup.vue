@@ -230,7 +230,7 @@ export default {
     methods: {
         authCheck() {
             if (this.$store.state.auth_token) {
-                this.$router.push("/dashboard");
+                this.$router.push("/dashboard/my-account");
             }
         },
         async registerUser() {
@@ -249,7 +249,7 @@ export default {
                     const user = response.data.data.user;
                     this.$store.commit("addAuthToken", token);
                     this.$store.commit("addAuthUser", user);
-                    this.$router.push("/dashboard");
+                    this.$router.push("/dashboard/my-account");
                 })
                 .catch((err) => {
                     const errorData = err.response.data;

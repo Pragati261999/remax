@@ -63,7 +63,7 @@
                                     <router-link
                                         class="nav-link"
                                         aria-current="blog"
-                                        to="#"
+                                        to="/blog"
                                         >Blog</router-link
                                     >
                                 </li>
@@ -133,13 +133,18 @@
                                                 class="dropdown-menu"
                                                 aria-labelledby="userDDBtn"
                                             >
+                                                <div class="dropdown-header">
+                                                    Hi, {{ user.name }}
+                                                </div>
+                                                <div
+                                                    class="dropdown-divider"
+                                                ></div>
                                                 <router-link
                                                     to="/dashboard/my-account"
                                                     role="button"
                                                     aria-hidden="true"
                                                     class="dropdown-item"
-                                                    >Hi,
-                                                    {{ user.name }}</router-link
+                                                    >Dashboard</router-link
                                                 >
                                                 <span
                                                     @click="logout"

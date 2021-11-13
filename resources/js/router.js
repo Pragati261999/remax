@@ -6,10 +6,9 @@ import PropertyDetails from "./pages/property/details.vue";
 import PropertySearch from "./pages/property/search.vue";
 import Login from "./pages/Login.vue";
 import Signup from "./pages/Signup.vue";
-import Notifications from "./pages/Notification.vue";
+import UserDashboard from "./pages/user/Dashboard.vue";
 
-// User component
-import Dashboard from "./pages/user/Dashboard.vue";
+import Blogs from "./pages/Blog.vue";
 
 Vue.use(VueRouter);
 
@@ -44,30 +43,30 @@ const router = new VueRouter({
             component: Signup,
         },
         {
-            path: "/dashboard",
-            name: "dashboard",
-            component: Dashboard,
-        },
-        {
-            path: "/dashboard/notifications",
-            name: "notifications",
-            component: Notifications
-        },
-        {
-            path: "/dashboard/bookmarks",
-            name: "bookmarks",
-            component: Notifications
+            path: "/blog",
+            name: "blog",
+            component: Blogs,
         },
         {
             path: "/dashboard/my-account",
             name: "my-account",
-            component: Notifications
+            component: UserDashboard,
+        },
+        {
+            path: "/dashboard/bookmarks",
+            name: "bookmarks",
+            component: UserDashboard,
+        },
+        {
+            path: "/dashboard/notifications",
+            name: "notifications",
+            component: UserDashboard,
         },
         {
             path: "/dashboard/recent-visited",
-            name: "recent visited",
-            component: Notifications
-        }
+            name: "recent-visited",
+            component: UserDashboard,
+        },
     ],
 });
 

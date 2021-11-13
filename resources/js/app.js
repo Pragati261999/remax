@@ -7,7 +7,17 @@ import createPersistedState from "vuex-persistedstate";
 import router from "./router";
 import App from "./layouts/App.vue";
 import Vue from "vue";
+
+import VueLazyload from "vue-lazyload";
+
 Vue.use(Vuex);
+
+Vue.use(VueLazyload, {
+    preLoad: 1.3,
+    error: "/assets/images/loader/loader.gif",
+    loading: "/assets/images/loader/loader.gif",
+    attempt: 1,
+});
 
 Vue.component(
     "loader",
@@ -47,6 +57,16 @@ Vue.component(
 Vue.component(
     "bookmarks",
     require("./components/dashboard/Bookmark.vue").default
+);
+
+Vue.component(
+    "my-account",
+    require("./components/dashboard/Profile.vue").default
+);
+
+Vue.component(
+    "recent-visit",
+    require("./components/dashboard/recentVisit.vue").default
 );
 
 Vue.component("faq", require("./components/Faq.vue").default);
