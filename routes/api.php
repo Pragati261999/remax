@@ -17,6 +17,7 @@ Route::prefix('user')->group(function () {
 // User dashboard
 Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/', [Api\UserController::class, 'profile']);
+    Route::post('/update-profile', [Api\UserController::class, 'update']);
 
     // Lead
     Route::post('/save-lead', [Api\LeadController::class, 'saveLead']);

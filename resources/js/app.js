@@ -66,7 +66,7 @@ Vue.component(
 
 Vue.component(
     "recent-visit",
-    require("./components/dashboard/recentVisit.vue").default
+    require("./components/dashboard/RecentVisit.vue").default
 );
 
 Vue.component("faq", require("./components/Faq.vue").default);

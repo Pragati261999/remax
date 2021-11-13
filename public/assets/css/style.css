@@ -180,6 +180,10 @@ header {
     line-height: 1.2 !important;
 }
 
+.btn:focus {
+    box-shadow: none !important;
+}
+
 .btn-rounded {
     border-radius: 25px !important;
     padding: 4px 25px !important;

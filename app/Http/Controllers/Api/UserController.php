@@ -86,6 +86,33 @@ class UserController extends AppBaseController
         return $this->sendResponse("Login success.", $token);
     }
 
+    public function update(Request $request)
+    {
+        // dd($request->contact);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'contact' => 'required|min:10',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            $message = "Validation failed";
+            $this->sendError($message, $error, 422);
+        }
+
+        $validated = $validator->validated();
+
+        $id = auth()->user()->id;
+        // dd($id);
+        if ($validated) {
+            $u = User::where(['id'=> $id])->update(['name'=> $request->name, 'contact'=> $request->contact]);
+            $u = User::where(['id'=> $id])->first();
+            return $this->sendResponse('User data updated successfully', $u);            
+        } else {
+            return $this->sendError('Error', "We are not update your details");
+        }
+    }
+
     public function profile(Request $request)
     {
         return $request->user();

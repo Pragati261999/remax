@@ -76,28 +76,25 @@ export default {
     },
     methods: {
         async getSavedProp() {
-            // console.log(this.$store.state.auth_token)
-            if (this.bookmarks.length > 0) {
-                // get properties
-                const token = this.$store.state.auth_token;
-                // console.log({ headers: {"Authorization" : `Bearer ${token}`} })
-                const self = this;
-                self.loadingProperties = true;
-                await axios
-                    .get("/api/user/property/bookmarks", {
-                        headers: { Authorization: `Bearer ${token}` },
-                    })
-                    .then((response) => {
-                        self.properties = response.data.data.data;
-                        self.nextPageUrl = response.data.data.next_page_url;
-                        // console.log(self.properties);
-                        self.loadingProperties = false;
-                    })
-                    .catch((err) => {
-                        self.loadingProperties = false;
-                        console.log(err);
-                    });
-            }
+            // get properties
+            const token = this.$store.state.auth_token;
+            // console.log({ headers: {"Authorization" : `Bearer ${token}`} })
+            const self = this;
+            self.loadingProperties = true;
+            await axios
+                .get("/api/user/property/bookmarks", {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                .then((response) => {
+                    self.properties = response.data.data.data;
+                    self.nextPageUrl = response.data.data.next_page_url;
+                    // console.log(self.properties);
+                    self.loadingProperties = false;
+                })
+                .catch((err) => {
+                    self.loadingProperties = false;
+                    console.log(err);
+                });
         },
 
         async loadMore() {
