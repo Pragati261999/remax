@@ -126,7 +126,7 @@
                                                 <i class="fa fa-user"></i>
                                             </button>
                                             <div
-                                                class="dropdown-menu"
+                                                class="dropdown-menu dropdown-menu-right"
                                                 aria-labelledby="userDDBtn"
                                             >
                                                 <div class="dropdown-header">
@@ -179,3 +179,9 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.dropdown-menu-right {
+    right: 0;
+}
+</style>

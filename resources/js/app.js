@@ -14,7 +14,7 @@ Vue.use(Vuex);
 
 Vue.use(VueLazyload, {
     preLoad: 1.3,
-    error: "/assets/images/loader/loader.gif",
+    error: "/assets/images/loader/Image-404.jpg",
     loading: "/assets/images/loader/loader.gif",
     attempt: 1,
 });
