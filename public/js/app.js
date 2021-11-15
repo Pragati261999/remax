@@ -3281,10 +3281,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     user: function user() {
@@ -8292,12 +8288,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -48261,10 +48251,10 @@ var staticRenderFns = [
     return _c("div", [
       _c("section", { staticClass: "faq-container bg-theme-light" }, [
         _c("div", { staticClass: "container p-0" }, [
-          _c("h2", { staticClass: "theme-title position-relative" }, [
-            _vm._v(
-              "\n                Frequently Asked Questions\n            "
-            ),
+          _c("h2", { staticClass: "theme-title" }, [
+            _c("span", { staticClass: "position-relative" }, [
+              _vm._v("Frequently Asked Questions"),
+            ]),
           ]),
           _vm._v(" "),
           _c("h5", { staticClass: "text-secondary text-center" }, [
@@ -48836,7 +48826,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "collapse navbar-collapse",
+                  staticClass: "collapse navbar-collapse right-menu",
                   attrs: { id: "navbarSupportedContent" },
                 },
                 [
@@ -48893,148 +48883,150 @@ var render = function () {
                       ],
                       1
                     ),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item" }, [
+                      !_vm.$store.state.auth_token
+                        ? _c(
+                            "div",
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass: "text-light",
+                                  attrs: { to: "/login" },
+                                },
+                                [
+                                  _c("button", [
+                                    _c("img", {
+                                      attrs: {
+                                        src: "/assets/images/icons/refer.svg",
+                                        alt: "",
+                                      },
+                                    }),
+                                    _vm._v(
+                                      "Sign in\n                                        "
+                                    ),
+                                  ]),
+                                ]
+                              ),
+                            ],
+                            1
+                          )
+                        : _c("div", [
+                            _c("div", { staticClass: "dropdown" }, [
+                              _vm._m(2),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "dropdown-menu",
+                                  attrs: { "aria-labelledby": "userDDBtn" },
+                                },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "dropdown-header" },
+                                    [
+                                      _vm._v(
+                                        "\n                                                Hi, " +
+                                          _vm._s(_vm.user.name) +
+                                          "\n                                            "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "dropdown-divider",
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "router-link",
+                                    {
+                                      staticClass: "dropdown-item",
+                                      attrs: {
+                                        to: "/dashboard/my-account",
+                                        role: "button",
+                                        "aria-hidden": "true",
+                                      },
+                                    },
+                                    [_vm._v("Dashboard")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "dropdown-item",
+                                      attrs: {
+                                        role: "button",
+                                        "aria-hidden": "true",
+                                      },
+                                      on: { click: _vm.logout },
+                                    },
+                                    [_vm._v("Logout")]
+                                  ),
+                                ],
+                                1
+                              ),
+                            ]),
+                          ]),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item p-0" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
+                            attrs: {
+                              "aria-current": "favourate",
+                              to: "/dashboard/bookmarks",
+                            },
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/assets/images/icons/bookmark.svg",
+                                alt: "",
+                              },
+                            }),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item me-3" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
+                            attrs: {
+                              "aria-current": "favourate",
+                              to: "/dashboard/notifications",
+                            },
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/assets/images/icons/alarm.svg",
+                                alt: "",
+                              },
+                            }),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
                   ]),
                 ]
               ),
-              _vm._v(" "),
-              _c("div", { staticClass: "right-menu" }, [
-                _c("ul", { staticClass: "navbar-nav mb-2 mb-lg-0" }, [
-                  _c(
-                    "li",
-                    { staticClass: "nav-item p-0" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
-                          attrs: {
-                            "aria-current": "favourate",
-                            to: "/dashboard/bookmarks",
-                          },
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "/assets/images/icons/bookmark.svg",
-                              alt: "",
-                            },
-                          }),
-                        ]
-                      ),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item me-3" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass:
-                            "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
-                          attrs: {
-                            "aria-current": "favourate",
-                            to: "/dashboard/notifications",
-                          },
-                        },
-                        [
-                          _c("img", {
-                            attrs: {
-                              src: "/assets/images/icons/alarm.svg",
-                              alt: "",
-                            },
-                          }),
-                        ]
-                      ),
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "nav-item" }, [
-                    !_vm.$store.state.auth_token
-                      ? _c(
-                          "div",
-                          [
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "text-light",
-                                attrs: { to: "/login" },
-                              },
-                              [
-                                _c("button", [
-                                  _c("img", {
-                                    attrs: {
-                                      src: "/assets/images/icons/refer.svg",
-                                      alt: "",
-                                    },
-                                  }),
-                                  _vm._v(
-                                    "Sign in\n                                        "
-                                  ),
-                                ]),
-                              ]
-                            ),
-                          ],
-                          1
-                        )
-                      : _c("div", [
-                          _c("div", { staticClass: "dropdown" }, [
-                            _vm._m(2),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "dropdown-menu",
-                                attrs: { "aria-labelledby": "userDDBtn" },
-                              },
-                              [
-                                _c("div", { staticClass: "dropdown-header" }, [
-                                  _vm._v(
-                                    "\n                                                Hi, " +
-                                      _vm._s(_vm.user.name) +
-                                      "\n                                            "
-                                  ),
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "dropdown-divider" }),
-                                _vm._v(" "),
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "dropdown-item",
-                                    attrs: {
-                                      to: "/dashboard/my-account",
-                                      role: "button",
-                                      "aria-hidden": "true",
-                                    },
-                                  },
-                                  [_vm._v("Dashboard")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "span",
-                                  {
-                                    staticClass: "dropdown-item",
-                                    attrs: {
-                                      role: "button",
-                                      "aria-hidden": "true",
-                                    },
-                                    on: { click: _vm.logout },
-                                  },
-                                  [_vm._v("Logout")]
-                                ),
-                              ],
-                              1
-                            ),
-                          ]),
-                        ]),
-                  ]),
-                ]),
-              ]),
             ],
             1
           ),
@@ -50277,7 +50269,7 @@ var render = function () {
         _c("div", { staticClass: "tab" }, [
           _c("div", { staticClass: "tab-content d-block" }, [
             _c("div", { staticClass: "row g-3" }, [
-              _c("div", { staticClass: "input-width" }, [
+              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Location/MLS#")]),
                 _vm._v(" "),
                 _c("input", {
@@ -50307,7 +50299,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "input-width" }, [
+              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Property Type")]),
                 _vm._v(" "),
                 _c("select", { staticClass: "form-control" }, [
@@ -50362,7 +50354,7 @@ var render = function () {
                 ]),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "input-width" }, [
+              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Pricing")]),
                 _vm._v(" "),
                 _c("input", {
@@ -50392,7 +50384,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "input-width" }, [
+              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
                 _c("label", { attrs: { for: "" } }),
                 _vm._v(" "),
                 _c("input", {
@@ -50422,7 +50414,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "input-width" }, [
+              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Beds")]),
                 _vm._v(" "),
                 _c("input", {
@@ -50454,24 +50446,17 @@ var render = function () {
               _vm._v(" "),
               _vm._m(0),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "col p-0 d-flex align-items-end justify-content-center",
-                },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-theme-color",
-                      attrs: { type: "button" },
-                      on: { click: _vm.searchProperty },
-                    },
-                    [_vm._v("\n                Search\n              ")]
-                  ),
-                ]
-              ),
+              _c("div", { staticClass: "col-lg-2 d-flex align-items-end" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-theme-color",
+                    attrs: { type: "button" },
+                    on: { click: _vm.searchProperty },
+                  },
+                  [_vm._v("\n                Search\n              ")]
+                ),
+              ]),
             ]),
           ]),
         ]),
@@ -50484,22 +50469,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col p-0 d-flex align-items-end justify-content-center" },
-      [
-        _c(
-          "button",
-          { staticClass: "btn btn-theme-color", attrs: { type: "button" } },
-          [
-            _c("img", {
-              attrs: { src: "/assets/images/icons/menu_bar.svg", alt: "" },
-            }),
-            _vm._v("\n                More\n              "),
-          ]
-        ),
-      ]
-    )
+    return _c("div", { staticClass: "col-lg-2 d-flex align-items-end" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-theme-color", attrs: { type: "button" } },
+        [
+          _c("img", {
+            attrs: { src: "/assets/images/icons/menu_bar.svg", alt: "" },
+          }),
+          _vm._v("\n                More\n              "),
+        ]
+      ),
+    ])
   },
 ]
 render._withStripped = true
@@ -50625,7 +50606,7 @@ var staticRenderFns = [
     return _c("section", { staticClass: "blog bg-theme-light" }, [
       _c("div", { staticClass: "container p-0" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-4" }, [
+          _c("div", { staticClass: "col-lg-5 col-md-6 col-sm-6" }, [
             _c("h2", { staticClass: "text-light fw-bold mb-2" }, [
               _vm._v(
                 "\n                        Is Mortgage Interest Tax-Deductible in Canada ?\n                    "
@@ -51131,7 +51112,7 @@ var staticRenderFns = [
     return _c("section", { staticClass: "market-report bg-theme-light" }, [
       _c("div", { staticClass: "container p-0" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12" }, [
             _c("h2", { staticClass: "text-color fw-bold pb-2" }, [
               _vm._v(
                 "\n                        Market Report and states\n                    "
@@ -51178,659 +51159,675 @@ var staticRenderFns = [
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-6 border-start" }, [
-            _c("h3", { staticClass: "text-color fw-bold" }, [
-              _vm._v("June Market State"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6 pe-0" }, [
-                _c(
-                  "div",
-                  { staticClass: "bg-theme text-light p-2 rounded-3" },
-                  [
-                    _vm._v(
-                      "\n                                Graph\n                            "
-                    ),
-                  ]
-                ),
+          _c(
+            "div",
+            { staticClass: "col-lg-6 col-md-6 col-sm-12 border-start" },
+            [
+              _c("h3", { staticClass: "text-color fw-bold" }, [
+                _vm._v("June Market State"),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-6 pe-0" }, [
-                _c(
-                  "div",
-                  { staticClass: "bg-theme text-light p-2 rounded-3" },
-                  [
-                    _vm._v(
-                      "\n                                Graph\n                            "
-                    ),
-                  ]
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row py-4" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
-                },
-                [
-                  _c("ul", { staticClass: "list-unstyled me-auto" }, [
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [
-                      _vm._v("Semi-Detached"),
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-8 p-0" }, [
-                _c("div", [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-6 pe-0" }, [
                   _c(
-                    "table",
-                    { staticClass: "table table-responsive rounded-2" },
+                    "div",
+                    { staticClass: "bg-theme text-light p-2 rounded-3" },
                     [
-                      _c("tr", [
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-1 text-center fw-lighter-items",
-                            attrs: { colspan: "3" },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            Sales\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-1 text-center fw-lighter-items",
-                            attrs: { colspan: "3" },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            Average Price\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", { staticClass: "table-row-theme" }, [
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
+                      _vm._v(
+                        "\n                                Graph\n                            "
+                      ),
+                    ]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6 pe-0" }, [
+                  _c(
+                    "div",
+                    { staticClass: "bg-theme text-light p-2 rounded-3" },
+                    [
+                      _vm._v(
+                        "\n                                Graph\n                            "
+                      ),
                     ]
                   ),
                 ]),
               ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row py-4" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
-                },
-                [
-                  _c("ul", { staticClass: "list-unstyled me-auto" }, [
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [
-                      _vm._v("Semi-Detached"),
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
-                  ]),
-                ]
-              ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-8 p-0" }, [
-                _c("div", [
-                  _c(
-                    "table",
-                    { staticClass: "table table-responsive rounded-2" },
-                    [
-                      _c("tr", [
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-1 text-center fw-lighter-items",
-                            attrs: { colspan: "3" },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            Sales\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "border border-1 text-center fw-lighter-items",
-                            attrs: { colspan: "3" },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            Average Price\n                                        "
-                            ),
-                          ]
-                        ),
+              _c("div", { staticClass: "row py-4" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
+                  },
+                  [
+                    _c("ul", { staticClass: "list-unstyled me-auto" }, [
+                      _c("li", { staticClass: "fw-bold" }, [
+                        _vm._v("Detached"),
                       ]),
                       _vm._v(" "),
-                      _c("tr", { staticClass: "table-row-theme" }, [
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
+                      _c("li", { staticClass: "fw-bold" }, [
+                        _vm._v("Semi-Detached"),
                       ]),
                       _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
+                      _c("li", { staticClass: "fw-bold" }, [
+                        _vm._v("Townhouse"),
                       ]),
                       _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
+                      _c("li", { staticClass: "fw-bold" }, [
+                        _vm._v("Condo Apt"),
                       ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-8 p-0" }, [
+                  _c("div", [
+                    _c(
+                      "table",
+                      { staticClass: "table table-responsive rounded-2" },
+                      [
+                        _c("tr", [
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "border border-1 text-center fw-lighter-items",
+                              attrs: { colspan: "3" },
+                            },
+                            [
+                              _vm._v(
+                                "\n                                            Sales\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "border border-1 text-center fw-lighter-items",
+                              attrs: { colspan: "3" },
+                            },
+                            [
+                              _vm._v(
+                                "\n                                            Average Price\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
                         _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
+                        _c("tr", { staticClass: "table-row-theme" }, [
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            85\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            78\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            77\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            81\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
                         _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
+                        _c("tr", [
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            85\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            78\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            77\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            81\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
                         _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
+                        _c("tr", [
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            85\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            78\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            77\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            81\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
                         _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "border border-1 text-center" },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                    ]
-                  ),
+                        _c("tr", [
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            85\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            78\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            77\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            81\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ]),
                 ]),
               ]),
-            ]),
-          ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row py-4" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
+                  },
+                  [
+                    _c("ul", { staticClass: "list-unstyled me-auto" }, [
+                      _c("li", { staticClass: "fw-bold" }, [
+                        _vm._v("Detached"),
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "fw-bold" }, [
+                        _vm._v("Semi-Detached"),
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "fw-bold" }, [
+                        _vm._v("Townhouse"),
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "fw-bold" }, [
+                        _vm._v("Condo Apt"),
+                      ]),
+                    ]),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-8 p-0" }, [
+                  _c("div", [
+                    _c(
+                      "table",
+                      { staticClass: "table table-responsive rounded-2" },
+                      [
+                        _c("tr", [
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "border border-1 text-center fw-lighter-items",
+                              attrs: { colspan: "3" },
+                            },
+                            [
+                              _vm._v(
+                                "\n                                            Sales\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            {
+                              staticClass:
+                                "border border-1 text-center fw-lighter-items",
+                              attrs: { colspan: "3" },
+                            },
+                            [
+                              _vm._v(
+                                "\n                                            Average Price\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", { staticClass: "table-row-theme" }, [
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            85\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            78\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            77\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            81\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            85\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            78\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            77\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            81\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            85\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            78\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            77\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            81\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            85\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            78\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            82\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            77\n                                        "
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "border border-1 text-center" },
+                            [
+                              _vm._v(
+                                "\n                                            81\n                                        "
+                              ),
+                            ]
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                ]),
+              ]),
+            ]
+          ),
         ]),
       ]),
     ])
@@ -58891,7 +58888,7 @@ var staticRenderFns = [
             _c("img", {
               staticClass: "me-2",
               attrs: {
-                src: "/assets/images/icons/share.png",
+                src: "/assets/images/icons/shareLight.png",
                 alt: "",
                 width: "18px",
               },
@@ -59169,7 +59166,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
+    return _c("div", { staticClass: "row m-0" }, [
       _c("div", { staticClass: "container mb-4" }, [
         _c("h4", { staticClass: "text-color fw-bold" }, [
           _vm._v("Neighbourhood"),
@@ -59261,24 +59258,18 @@ var render = function () {
         { staticClass: "properties bg-theme-light position-relative" },
         [
           _c("div", { staticClass: "container p-0" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-12 properties-filter" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12" }, [
-                    _c(
-                      "div",
-                      { staticClass: "col-12" },
-                      [
-                        _c("property-search", {
-                          attrs: { form: _vm.form },
-                          on: { clicked: _vm.getFilteredDataOnClick },
-                        }),
-                      ],
-                      1
-                    ),
-                  ]),
-                ]),
-              ]),
+            _c("div", { staticClass: "row propp" }, [
+              _c(
+                "div",
+                { staticClass: "col-12 properties-filter" },
+                [
+                  _c("property-search", {
+                    attrs: { form: _vm.form },
+                    on: { clicked: _vm.getFilteredDataOnClick },
+                  }),
+                ],
+                1
+              ),
             ]),
           ]),
         ]

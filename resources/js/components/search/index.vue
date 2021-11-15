@@ -29,7 +29,7 @@
         <div class="tab">
           <div class="tab-content d-block">
             <div class="row g-3">
-              <div class="input-width">
+              <div class="col-lg-2 col-md-2">
                 <label for="">Location/MLS#</label>
                 <input
                   v-model="form.addr"
@@ -39,7 +39,7 @@
                   placeholder="Location"
                 />
               </div>
-              <div class="input-width">
+              <div class="col-lg-2 col-md-2">
                 <label for="">Property Type</label>
                 <!--input
                   v-model="form.propertyType"
@@ -56,7 +56,7 @@
                   <option v-model="form.propertyType" value="Condo">Condo</option>
                 </select>
               </div>
-              <div class="input-width">
+              <div class="col-lg-2 col-md-2">
                 <label for="">Pricing</label>
                 <input
                   v-model="form.minPrice"
@@ -66,7 +66,7 @@
                   placeholder="Min"
                 />
               </div>
-              <div class="input-width">
+              <div class="col-lg-2 col-md-2">
                 <label for=""></label>
                 <input
                   v-model="form.maxPrice"
@@ -76,7 +76,7 @@
                   placeholder="Max"
                 />
               </div>
-              <div class="input-width">
+              <div class="col-lg-2 col-md-2">
                 <label for="">Beds</label>
                 <input
                   v-model="form.bedRoom"
@@ -87,7 +87,7 @@
                 />
               </div>
               <div
-                class="col p-0 d-flex align-items-end justify-content-center"
+                class="col-lg-2 d-flex align-items-end"
               >
                 <button type="button" class="btn btn-theme-color">
                   <img src="/assets/images/icons/menu_bar.svg" alt="" />
@@ -95,7 +95,7 @@
                 </button>
               </div>
               <div
-                class="col p-0 d-flex align-items-end justify-content-center"
+                class="col-lg-2 d-flex align-items-end"
               >
                 <button
                   type="button"

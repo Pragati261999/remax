@@ -179,7 +179,7 @@
                                                     for="tab-1"
                                                     class="tab-label"
                                                     ><img
-                                                        src="/assets/images/icons/share.png"
+                                                        src="/assets/images/icons/shareLight.png"
                                                         alt=""
                                                         width="18px"
                                                         class="me-2"
@@ -2625,7 +2625,7 @@
                 </section>
 
                 <div class="container-fluid p-0 mb-0">
-                    <div class="row">
+                    <div class="row m-0">
                         <div class="container mb-4">
                             <h4 class="text-color fw-bold">Neighbourhood</h4>
                             <span class="text-color"

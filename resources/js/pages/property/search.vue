@@ -37,18 +37,12 @@
       <!-- Banner  -->
       <section class="properties bg-theme-light position-relative">
         <div class="container p-0">
-          <div class="row">
+          <div class="row propp">
             <div class="col-12 properties-filter">
-              <div class="row">
-                <div class="col-12">
-                  <div class="col-12">
-                    <property-search
-                      :form="form"
-                      @clicked="getFilteredDataOnClick"
-                    ></property-search>
-                  </div>
-                </div>
-              </div>
+              <property-search
+                :form="form"
+                @clicked="getFilteredDataOnClick"
+              ></property-search>
             </div>
           </div>
         </div>

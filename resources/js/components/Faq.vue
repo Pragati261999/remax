@@ -2,8 +2,8 @@
     <div>
         <section class="faq-container bg-theme-light">
             <div class="container p-0">
-                <h2 class="theme-title position-relative">
-                    Frequently Asked Questions
+                <h2 class="theme-title">
+                    <span class="position-relative">Frequently Asked Questions</span>
                 </h2>
                 <h5 class="text-secondary text-center">
                     YOU CAN FIND QUESTIONS RELATED TO YOUR QUERY

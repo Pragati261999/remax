@@ -67,7 +67,7 @@
         <section class="market-report bg-theme-light">
             <div class="container p-0">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
                         <h2 class="text-color fw-bold pb-2">
                             Market Report and states
                         </h2>
@@ -137,7 +137,7 @@
                             Lorem Ipsum.
                         </p>
                     </div>
-                    <div class="col-6 border-start">
+                    <div class="col-lg-6 col-md-6 col-sm-12 border-start">
                         <h3 class="text-color fw-bold">June Market State</h3>
                         <div class="row">
                             <div class="col-6 pe-0">

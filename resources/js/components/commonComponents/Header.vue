@@ -19,7 +19,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div
-                            class="collapse navbar-collapse"
+                            class="collapse navbar-collapse right-menu"
                             id="navbarSupportedContent"
                         >
                             <form class="d-flex me-auto search-bar">
@@ -66,40 +66,6 @@
                                         to="/blog"
                                         >Blog</router-link
                                     >
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="right-menu">
-                            <ul class="navbar-nav mb-2 mb-lg-0">
-                                <li class="nav-item p-0">
-                                    <router-link
-                                        class="
-                                            nav-link
-                                            t
-                                            header-icons
-                                            text-decoration-none
-                                        "
-                                        aria-current="favourate"
-                                        to="/dashboard/bookmarks"
-                                        ><img
-                                            src="/assets/images/icons/bookmark.svg"
-                                            alt=""
-                                    /></router-link>
-                                </li>
-                                <li class="nav-item me-3">
-                                    <router-link
-                                        class="
-                                            nav-link
-                                            t
-                                            header-icons
-                                            text-decoration-none
-                                        "
-                                        aria-current="favourate"
-                                        to="/dashboard/notifications"
-                                        ><img
-                                            src="/assets/images/icons/alarm.svg"
-                                            alt=""
-                                    /></router-link>
                                 </li>
                                 <li class="nav-item">
                                     <div v-if="!$store.state.auth_token">
@@ -156,6 +122,36 @@
                                             </div>
                                         </div>
                                     </div>
+                                </li>
+                                <li class="nav-item p-0">
+                                    <router-link
+                                        class="
+                                            nav-link
+                                            t
+                                            header-icons
+                                            text-decoration-none
+                                        "
+                                        aria-current="favourate"
+                                        to="/dashboard/bookmarks"
+                                        ><img
+                                            src="/assets/images/icons/bookmark.svg"
+                                            alt=""
+                                    /></router-link>
+                                </li>
+                                <li class="nav-item me-3">
+                                    <router-link
+                                        class="
+                                            nav-link
+                                            t
+                                            header-icons
+                                            text-decoration-none
+                                        "
+                                        aria-current="favourate"
+                                        to="/dashboard/notifications"
+                                        ><img
+                                            src="/assets/images/icons/alarm.svg"
+                                            alt=""
+                                    /></router-link>
                                 </li>
                             </ul>
                         </div>

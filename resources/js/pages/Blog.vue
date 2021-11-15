@@ -34,7 +34,7 @@
         <section class="blog bg-theme-light">
             <div class="container p-0">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-lg-5 col-md-6 col-sm-6">
                         <h2 class="text-light fw-bold mb-2">
                             Is Mortgage Interest Tax-Deductible in Canada ?
                         </h2>

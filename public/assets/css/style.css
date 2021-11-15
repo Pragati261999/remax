@@ -337,18 +337,18 @@ table tr td {
     height: 100vh;
 }
 
-.tips .container-fluid {
+/* .tips .container-fluid {
     padding-left: 292px;
-}
+} */
 
-.faq-container .theme-title::after {
+.faq-container .theme-title span::after {
     content: "";
     position: absolute;
     width: 60px;
     height: 3px;
     background-color: #2cbdb8;
     bottom: 0;
-    left: 346px;
+    left: 0;
 }
 
 .footer,
@@ -531,10 +531,14 @@ nav .breadcrumb .active {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 168px;
+    padding: 168px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.propp {
+    padding: 0px 100px;
 }
 
 .properties-filter .tab-content {
@@ -616,7 +620,7 @@ nav .breadcrumb .active {
 
 .blog {
     background-image: url(../images/banners/main_image.png);
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     display: flex;
     align-items: end;
