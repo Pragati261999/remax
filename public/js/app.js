@@ -48884,6 +48884,60 @@ var render = function () {
                       1
                     ),
                     _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item p-0" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
+                            attrs: {
+                              "aria-current": "favourate",
+                              to: "/dashboard/bookmarks",
+                            },
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/assets/images/icons/bookmark.svg",
+                                alt: "",
+                              },
+                            }),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item me-3" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
+                            attrs: {
+                              "aria-current": "favourate",
+                              to: "/dashboard/notifications",
+                            },
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/assets/images/icons/alarm.svg",
+                                alt: "",
+                              },
+                            }),
+                          ]
+                        ),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
                     _c("li", { staticClass: "nav-item" }, [
                       !_vm.$store.state.auth_token
                         ? _c(
@@ -48970,60 +49024,6 @@ var render = function () {
                             ]),
                           ]),
                     ]),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "nav-item p-0" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass:
-                              "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
-                            attrs: {
-                              "aria-current": "favourate",
-                              to: "/dashboard/bookmarks",
-                            },
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src: "/assets/images/icons/bookmark.svg",
-                                alt: "",
-                              },
-                            }),
-                          ]
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "nav-item me-3" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass:
-                              "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
-                            attrs: {
-                              "aria-current": "favourate",
-                              to: "/dashboard/notifications",
-                            },
-                          },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src: "/assets/images/icons/alarm.svg",
-                                alt: "",
-                              },
-                            }),
-                          ]
-                        ),
-                      ],
-                      1
-                    ),
                   ]),
                 ]
               ),
@@ -50269,7 +50269,7 @@ var render = function () {
         _c("div", { staticClass: "tab" }, [
           _c("div", { staticClass: "tab-content d-block" }, [
             _c("div", { staticClass: "row g-3" }, [
-              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
+              _c("div", { staticClass: "input-width" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Location/MLS#")]),
                 _vm._v(" "),
                 _c("input", {
@@ -50299,7 +50299,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
+              _c("div", { staticClass: "input-width" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Property Type")]),
                 _vm._v(" "),
                 _c("select", { staticClass: "form-control" }, [
@@ -50354,7 +50354,7 @@ var render = function () {
                 ]),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
+              _c("div", { staticClass: "input-width" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Pricing")]),
                 _vm._v(" "),
                 _c("input", {
@@ -50384,7 +50384,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
+              _c("div", { staticClass: "input-width" }, [
                 _c("label", { attrs: { for: "" } }),
                 _vm._v(" "),
                 _c("input", {
@@ -50414,7 +50414,7 @@ var render = function () {
                 }),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-2 col-md-2" }, [
+              _c("div", { staticClass: "input-width" }, [
                 _c("label", { attrs: { for: "" } }, [_vm._v("Beds")]),
                 _vm._v(" "),
                 _c("input", {
@@ -50446,7 +50446,7 @@ var render = function () {
               _vm._v(" "),
               _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-2 d-flex align-items-end" }, [
+              _c("div", { staticClass: "col d-flex align-items-end" }, [
                 _c(
                   "button",
                   {
@@ -50469,7 +50469,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-2 d-flex align-items-end" }, [
+    return _c("div", { staticClass: "col d-flex align-items-end" }, [
       _c(
         "button",
         { staticClass: "btn btn-theme-color", attrs: { type: "button" } },
