@@ -60,7 +60,7 @@
       <!-- Property Listing  -->
       <section class="property bg-theme-light">
         <div class="container p-0">
-          <h2 class="theme-title">Houses for Sale/Lease in Toronto</h2>
+          <h2 class="theme-title">Houses for Sale/Lease</h2>
           <div v-if="!loadingProperties">
             <div v-if="properties.length > 0" class="row">
               <div

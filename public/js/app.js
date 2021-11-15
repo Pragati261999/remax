@@ -59361,7 +59361,7 @@ var render = function () {
       _c("section", { staticClass: "property bg-theme-light" }, [
         _c("div", { staticClass: "container p-0" }, [
           _c("h2", { staticClass: "theme-title" }, [
-            _vm._v("Houses for Sale/Lease in Toronto"),
+            _vm._v("Houses for Sale/Lease"),
           ]),
           _vm._v(" "),
           !_vm.loadingProperties
