@@ -9,18 +9,18 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="#"
+                                    <router-link to="/"
                                         ><img
                                             src="assets/images/icons/Mask Group.svg"
                                             width="14"
                                             class="img-fluid align-middle pb-1"
                                             alt=""
                                         />
-                                        Home</a
+                                        Home</router-link
                                     >
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="#" class="active">Log In</a>
+                                    <router-link to="/login" class="active">Log In</router-link>
                                 </li>
                             </ol>
                         </nav>

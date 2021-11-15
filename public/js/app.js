@@ -51859,12 +51859,58 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("section", { staticClass: "breadcrumb-section bg-theme-light py-4" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row py-0" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h2", { staticClass: "theme-title text-start" }, [
+              _vm._v("Account"),
+            ]),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c("ol", { staticClass: "breadcrumb" }, [
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _c("img", {
+                        staticClass: "img-fluid align-middle pb-1",
+                        attrs: {
+                          src: "assets/images/icons/Mask Group.svg",
+                          width: "14",
+                          alt: "",
+                        },
+                      }),
+                      _vm._v("\n                                    Home"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "active", attrs: { to: "/login" } },
+                      [_vm._v("Log In")]
+                    ),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
     _vm._v(" "),
     _c("section", { staticClass: "login bg-theme bg-theme-light pt-4" }, [
       _c("div", { staticClass: "container p-0" }, [
         _c("div", { staticClass: "row py-3" }, [
-          _vm._m(1),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "div",
@@ -52025,50 +52071,6 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "section",
-      { staticClass: "breadcrumb-section bg-theme-light py-4" },
-      [
-        _c("div", { staticClass: "container p-0" }, [
-          _c("div", { staticClass: "row py-0" }, [
-            _c("div", { staticClass: "col-12" }, [
-              _c("h2", { staticClass: "theme-title text-start" }, [
-                _vm._v("Account"),
-              ]),
-              _vm._v(" "),
-              _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-                _c("ol", { staticClass: "breadcrumb" }, [
-                  _c("li", { staticClass: "breadcrumb-item" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _c("img", {
-                        staticClass: "img-fluid align-middle pb-1",
-                        attrs: {
-                          src: "assets/images/icons/Mask Group.svg",
-                          width: "14",
-                          alt: "",
-                        },
-                      }),
-                      _vm._v("\n                                    Home"),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "breadcrumb-item" }, [
-                    _c("a", { staticClass: "active", attrs: { href: "#" } }, [
-                      _vm._v("Log In"),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]
-    )
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

@@ -318,6 +318,7 @@ table tr td {
 .tab-content label {
     font-size: 12px;
     font-weight: 700;
+    margin: 2px;
 }
 
 .tab-content input, .tab-content select {
@@ -326,7 +327,8 @@ table tr td {
 }
 
 .input-width {
-    width: 134px !important;
+    width: 160px !important;
+    max-width: 100% !important;
     flex: 1 0 0%;
 }
 
@@ -423,7 +425,7 @@ table tr td {
     background: #fff;
     color: #2c3e50;
     opacity: 0;
-    padding: 24px;
+    padding: 20px 24px;
     border-radius: 6px;
 }
 .tab-switch:checked + .tab-label {
