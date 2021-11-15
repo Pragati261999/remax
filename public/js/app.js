@@ -49123,7 +49123,13 @@ var staticRenderFns = [
           "aria-label": "Toggle navigation",
         },
       },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
+      [
+        _c("span", { staticClass: "navbar-toggler-icon header-icons" }, [
+          _c("img", {
+            attrs: { src: "/assets/images/icons/menu_bar.svg", alt: "" },
+          }),
+        ]),
+      ]
     )
   },
   function () {

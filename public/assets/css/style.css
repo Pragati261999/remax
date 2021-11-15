@@ -33,12 +33,12 @@ a {
 }
 
 .nav-link.router-link-exact-active.router-link-active::after{
-    content: '';
+    /* content: '';
     height: 1px;
     width: 50%;
     background: #032646;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto; */
 }
 
 .home-header .nav-link.router-link-exact-active.router-link-active::after{
