@@ -50516,17 +50516,24 @@ var render = function () {
               _vm._v(" "),
               _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "col d-flex align-items-end" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-theme-color",
-                    attrs: { type: "button" },
-                    on: { click: _vm.searchProperty },
-                  },
-                  [_vm._v("\n                Search\n              ")]
-                ),
-              ]),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "col justify-content-center d-flex align-items-end",
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-theme-color",
+                      attrs: { type: "button" },
+                      on: { click: _vm.searchProperty },
+                    },
+                    [_vm._v("\n                Search\n              ")]
+                  ),
+                ]
+              ),
             ]),
           ]),
         ]),
@@ -50539,18 +50546,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col d-flex align-items-end" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-theme-color", attrs: { type: "button" } },
-        [
-          _c("img", {
-            attrs: { src: "/assets/images/icons/menu_bar.svg", alt: "" },
-          }),
-          _vm._v("\n                More\n              "),
-        ]
-      ),
-    ])
+    return _c(
+      "div",
+      { staticClass: "col justify-content-center d-flex align-items-end" },
+      [
+        _c(
+          "button",
+          { staticClass: "btn btn-theme-color", attrs: { type: "button" } },
+          [
+            _c("img", {
+              attrs: { src: "/assets/images/icons/menu_bar.svg", alt: "" },
+            }),
+            _vm._v("\n                More\n              "),
+          ]
+        ),
+      ]
+    )
   },
 ]
 render._withStripped = true

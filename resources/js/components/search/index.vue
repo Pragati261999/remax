@@ -87,7 +87,7 @@
                 />
               </div>
               <div
-                class="col d-flex align-items-end"
+                class="col justify-content-center d-flex align-items-end"
               >
                 <button type="button" class="btn btn-theme-color">
                   <img src="/assets/images/icons/menu_bar.svg" alt="" />
@@ -95,7 +95,7 @@
                 </button>
               </div>
               <div
-                class="col d-flex align-items-end"
+                class="col justify-content-center d-flex align-items-end"
               >
                 <button
                   type="button"
