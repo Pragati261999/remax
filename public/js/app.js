@@ -52000,7 +52000,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "col-6 px-5" },
+            { staticClass: "col-lg-6 col-md-6 col-sm-12 px-5" },
             [
               _c(
                 "form",
@@ -52161,7 +52161,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6" }, [
+    return _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-none" }, [
       _c("img", {
         staticClass: "img-fluid",
         attrs: { src: "assets/images/icons/login.png", alt: "" },
@@ -52199,7 +52199,7 @@ var render = function () {
         _c("div", { staticClass: "row py-3" }, [
           _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "col-6 px-5" }, [
+          _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12 px-5" }, [
             _c(
               "form",
               {
@@ -52458,7 +52458,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6" }, [
+    return _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-none" }, [
       _c("img", {
         staticClass: "img-fluid",
         attrs: { src: "assets/images/icons/login.png", alt: "" },

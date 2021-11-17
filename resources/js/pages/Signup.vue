@@ -35,14 +35,14 @@
         <section class="login bg-theme bg-theme-light pt-4">
             <div class="container p-0">
                 <div class="row py-3">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-6 col-sm-none">
                         <img
                             src="assets/images/icons/login.png"
                             alt=""
                             class="img-fluid"
                         />
                     </div>
-                    <div class="col-6 px-5">
+                    <div class="col-lg-6 col-md-6 col-sm-12 px-5">
                         <form @submit.prevent="registerUser()" method="post">
                             <fieldset class="mb-4">
                                 <input
