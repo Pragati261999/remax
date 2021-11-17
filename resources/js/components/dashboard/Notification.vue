@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row w-100">
-            <div class="col-6 px-4 notify-col">
+            <div class="col-lg-6 col-md-6 col-sm-12 px-4 notify-col">
                 <div class="list-items w-100">
                     <ul
                         class="
@@ -172,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6 col-sm-none">
                 <img
                     src="/../../assets/images/icons/login.png"
                     class="img-responsive img-fluid"

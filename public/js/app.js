@@ -8187,7 +8187,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var url, self;
+        var url, self, token;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -8203,8 +8203,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 self.sLead = true;
                 self.rLead = "<span class='text-muted'>Sending...</span>";
                 self.leadError = {};
-                _context.next = 8;
-                return axios.post(url, self.lead).then(function (res) {
+                token = _this.$store.state.auth_token;
+                _context.next = 9;
+                return axios.post(url, self.lead, {
+                  headers: {
+                    Authorization: "Bearer ".concat(token)
+                  }
+                }).then(function (res) {
                   self.lead = {};
                   self.sLead = false;
                   self.rLead = "<span class='text-success'>" + res.data.message + "</span>";
@@ -8216,7 +8221,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   self.leadError = err.response.data.error;
                 });
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -48333,7 +48338,7 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row py-5" }, [
-            _c("div", { staticClass: "col-5" }, [
+            _c("div", { staticClass: "col-5 col-sm-none" }, [
               _c("img", {
                 staticClass: "img-fluid h-100",
                 attrs: {
@@ -48343,7 +48348,7 @@ var staticRenderFns = [
               }),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-7" }, [
+            _c("div", { staticClass: "col-lg-7 col-md-7 col-sm-12" }, [
               _c(
                 "div",
                 {
@@ -48667,7 +48672,7 @@ var render = function () {
           _vm._v(" "),
           _vm._m(2),
           _vm._v(" "),
-          _c("div", { staticClass: "col-4" }, [
+          _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12" }, [
             _c("p", { staticClass: "text-secondary fw-bold" }, [
               _vm._v("Newsletter"),
             ]),
@@ -48753,7 +48758,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4" }, [
+    return _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12" }, [
       _c("h3", { staticClass: "text-color fw-bold" }, [_vm._v("Remax")]),
       _vm._v(" "),
       _c("p", [
@@ -48790,7 +48795,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
+    return _c("div", { staticClass: "col-lg-2 col-md-2 col-6" }, [
       _c("ul", { staticClass: "list-unstyled" }, [
         _c("li", { staticClass: "text-secondary fw-bold" }, [_vm._v("About")]),
         _vm._v(" "),
@@ -48810,7 +48815,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
+    return _c("div", { staticClass: "col-lg-2 col-md-2 col-6" }, [
       _c("ul", { staticClass: "list-unstyled" }, [
         _c("li", { staticClass: "text-secondary fw-bold" }, [_vm._v("About")]),
         _vm._v(" "),
@@ -49430,262 +49435,266 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("div", { staticClass: "row w-100" }, [
-        _c("div", { staticClass: "col-6 px-4 notify-col" }, [
-          _c("div", { staticClass: "list-items w-100" }, [
-            _c(
-              "ul",
-              {
-                staticClass:
-                  "\n                        list-unstyled\n                        d-flex\n                        justify-content-between\n                        align-content-end\n                        mb-0\n                    ",
-              },
-              [
-                _c("li", { staticClass: "d-inline-block float-start" }, [
-                  _c("h4", { staticClass: "theme-title text-start" }, [
-                    _vm._v("Properties"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "d-inline-block float-start" }, [
-                  _c("button", { staticClass: "btn btn-theme-color" }, [
-                    _vm._v(
-                      "\n                            Clear all\n                        "
-                    ),
-                  ]),
-                ]),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", { staticClass: "notify-div" }, [
-            _c("div", { staticClass: "alert-notify" }, [
+        _c(
+          "div",
+          { staticClass: "col-lg-6 col-md-6 col-sm-12 px-4 notify-col" },
+          [
+            _c("div", { staticClass: "list-items w-100" }, [
               _c(
-                "div",
+                "ul",
                 {
                   staticClass:
-                    "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
-                  attrs: { role: "alert" },
+                    "\n                        list-unstyled\n                        d-flex\n                        justify-content-between\n                        align-content-end\n                        mb-0\n                    ",
                 },
                 [
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("$1,299,000"),
+                  _c("li", { staticClass: "d-inline-block float-start" }, [
+                    _c("h4", { staticClass: "theme-title text-start" }, [
+                      _vm._v("Properties"),
+                    ]),
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("115 Decarie Circle"),
+                  _c("li", { staticClass: "d-inline-block float-start" }, [
+                    _c("button", { staticClass: "btn btn-theme-color" }, [
+                      _vm._v(
+                        "\n                            Clear all\n                        "
+                      ),
+                    ]),
                   ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "btn-close",
-                    attrs: {
-                      type: "button",
-                      "data-bs-dismiss": "alert",
-                      "aria-label": "Close",
-                    },
-                  }),
                 ]
               ),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "alert-notify" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
-                  attrs: { role: "alert" },
-                },
-                [
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("$1,299,000"),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "btn-close",
-                    attrs: {
-                      type: "button",
-                      "data-bs-dismiss": "alert",
-                      "aria-label": "Close",
-                    },
-                  }),
-                ]
-              ),
-            ]),
+            _c("hr"),
             _vm._v(" "),
-            _c("div", { staticClass: "alert-notify" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
-                  attrs: { role: "alert" },
-                },
-                [
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("$1,299,000"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("115 Decarie Circle"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "btn-close",
-                    attrs: {
-                      type: "button",
-                      "data-bs-dismiss": "alert",
-                      "aria-label": "Close",
-                    },
-                  }),
-                ]
-              ),
+            _c("div", { staticClass: "notify-div" }, [
+              _c("div", { staticClass: "alert-notify" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
+                    attrs: { role: "alert" },
+                  },
+                  [
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("$1,299,000"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("115 Decarie Circle"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "alert",
+                        "aria-label": "Close",
+                      },
+                    }),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "alert-notify" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
+                    attrs: { role: "alert" },
+                  },
+                  [
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("$1,299,000"),
+                    ]),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "alert",
+                        "aria-label": "Close",
+                      },
+                    }),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "alert-notify" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
+                    attrs: { role: "alert" },
+                  },
+                  [
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("$1,299,000"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("115 Decarie Circle"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "alert",
+                        "aria-label": "Close",
+                      },
+                    }),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "alert-notify" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
+                    attrs: { role: "alert" },
+                  },
+                  [
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("$1,299,000"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("115 Decarie Circle"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "alert",
+                        "aria-label": "Close",
+                      },
+                    }),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "alert-notify" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
+                    attrs: { role: "alert" },
+                  },
+                  [
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("$1,299,000"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("115 Decarie Circle"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "alert",
+                        "aria-label": "Close",
+                      },
+                    }),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "alert-notify" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
+                    attrs: { role: "alert" },
+                  },
+                  [
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("$1,299,000"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v("115 Decarie Circle"),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "mb-0 text-dark" }, [
+                      _vm._v(
+                        "\n                            Toronto, Erigate-centennial-west Deance\n                        "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("button", {
+                      staticClass: "btn-close",
+                      attrs: {
+                        type: "button",
+                        "data-bs-dismiss": "alert",
+                        "aria-label": "Close",
+                      },
+                    }),
+                  ]
+                ),
+              ]),
             ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "alert-notify" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
-                  attrs: { role: "alert" },
-                },
-                [
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("$1,299,000"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("115 Decarie Circle"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "btn-close",
-                    attrs: {
-                      type: "button",
-                      "data-bs-dismiss": "alert",
-                      "aria-label": "Close",
-                    },
-                  }),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "alert-notify" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
-                  attrs: { role: "alert" },
-                },
-                [
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("$1,299,000"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("115 Decarie Circle"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "btn-close",
-                    attrs: {
-                      type: "button",
-                      "data-bs-dismiss": "alert",
-                      "aria-label": "Close",
-                    },
-                  }),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "alert-notify" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                            alert alert-primary alert-dismissible\n                            fade\n                            show\n                            rounded-3\n                        ",
-                  attrs: { role: "alert" },
-                },
-                [
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("$1,299,000"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v("115 Decarie Circle"),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mb-0 text-dark" }, [
-                    _vm._v(
-                      "\n                            Toronto, Erigate-centennial-west Deance\n                        "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("button", {
-                    staticClass: "btn-close",
-                    attrs: {
-                      type: "button",
-                      "data-bs-dismiss": "alert",
-                      "aria-label": "Close",
-                    },
-                  }),
-                ]
-              ),
-            ]),
-          ]),
-        ]),
+          ]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-none" }, [
           _c("img", {
             staticClass: "img-responsive img-fluid",
             staticStyle: { transform: "rotateY(180deg)" },
@@ -50532,7 +50541,7 @@ var render = function () {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-theme-color",
+                      staticClass: "btn btn-theme-color input-full-wth",
                       attrs: { type: "button" },
                       on: { click: _vm.searchProperty },
                     },
@@ -50558,7 +50567,10 @@ var staticRenderFns = [
       [
         _c(
           "button",
-          { staticClass: "btn btn-theme-color", attrs: { type: "button" } },
+          {
+            staticClass: "btn btn-theme-color input-full-wth",
+            attrs: { type: "button" },
+          },
           [
             _c("img", {
               attrs: { src: "/assets/images/icons/menu_bar.svg", alt: "" },
@@ -50838,7 +50850,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "container-fluid py-5 subscribe-container" }, [
         _c("div", { staticClass: "subscridtion-form my-5" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-7" }, [
+            _c("div", { staticClass: "col-lg-7 col-md-7 col-sm-12" }, [
               _c("h5", { staticClass: "theme-title fw-bold text-start" }, [
                 _vm._v(
                   "\n                            Subscribe to our newsletter\n                        "
@@ -50852,7 +50864,7 @@ var staticRenderFns = [
               ]),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-5" }, [
+            _c("div", { staticClass: "col-lg-5 col-md-5 col-sm-12" }, [
               _c("form", { staticClass: "row mt-auto ms-auto" }, [
                 _c("div", { staticClass: "col p-0" }, [
                   _c(
@@ -51149,37 +51161,43 @@ var staticRenderFns = [
     return _c("section", { staticClass: "tips bg-theme pe-0" }, [
       _c("div", { staticClass: "container-fluid pe-0" }, [
         _c("div", { staticClass: "row pe-0 me-0" }, [
-          _c("div", { staticClass: "col-5 ps-0 pe-5 m-auto" }, [
-            _c("h1", { staticClass: "text-light fw-bold" }, [
-              _vm._v(
-                "\n                        7 tips to got approved for a mortgage\n                    "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-light" }, [
-              _vm._v(
-                "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-light" }, [
-              _vm._v(
-                "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-              ),
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn bg-white text-color fw-bolder btn-rounded" },
-              [
+          _c(
+            "div",
+            { staticClass: "col-lg-5 col-md-5 col-sm-12 ps-0 pe-5 m-auto" },
+            [
+              _c("h1", { staticClass: "text-light fw-bold" }, [
                 _vm._v(
-                  "\n                        Learn more\n                    "
+                  "\n                        7 tips to got approved for a mortgage\n                    "
                 ),
-              ]
-            ),
-          ]),
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-light" }, [
+                _vm._v(
+                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
+                ),
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-light" }, [
+                _vm._v(
+                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
+                ),
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn bg-white text-color fw-bolder btn-rounded",
+                },
+                [
+                  _vm._v(
+                    "\n                        Learn more\n                    "
+                  ),
+                ]
+              ),
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "col-7 p-0" }, [
+          _c("div", { staticClass: "col-lg-7 col-md-7 col-sm-none in p-0" }, [
             _c("img", {
               staticClass: "img-responsive img-fluid",
               attrs: {
@@ -51246,675 +51264,659 @@ var staticRenderFns = [
             ]),
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-lg-6 col-md-6 col-sm-12 border-start" },
-            [
-              _c("h3", { staticClass: "text-color fw-bold" }, [
-                _vm._v("June Market State"),
+          _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12 bstart" }, [
+            _c("h3", { staticClass: "text-color fw-bold" }, [
+              _vm._v("June Market State"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-6 pe-0" }, [
+                _c(
+                  "div",
+                  { staticClass: "bg-theme text-light p-2 rounded-3" },
+                  [
+                    _vm._v(
+                      "\n                                Graph\n                            "
+                    ),
+                  ]
+                ),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-6 pe-0" }, [
+              _c("div", { staticClass: "col-6 pe-0" }, [
+                _c(
+                  "div",
+                  { staticClass: "bg-theme text-light p-2 rounded-3" },
+                  [
+                    _vm._v(
+                      "\n                                Graph\n                            "
+                    ),
+                  ]
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row py-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
+                },
+                [
+                  _c("ul", { staticClass: "list-unstyled me-auto" }, [
+                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "fw-bold" }, [
+                      _vm._v("Semi-Detached"),
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-8 p-0" }, [
+                _c("div", [
                   _c(
-                    "div",
-                    { staticClass: "bg-theme text-light p-2 rounded-3" },
+                    "table",
+                    { staticClass: "table table-responsive rounded-2" },
                     [
-                      _vm._v(
-                        "\n                                Graph\n                            "
-                      ),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "border border-1 text-center fw-lighter-items",
+                            attrs: { colspan: "3" },
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Sales\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "border border-1 text-center fw-lighter-items",
+                            attrs: { colspan: "3" },
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Average Price\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", { staticClass: "table-row-theme" }, [
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            85\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            78\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            77\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            81\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            85\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            78\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            77\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            81\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            85\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            78\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            77\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            81\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            85\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            78\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            77\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            81\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
                     ]
                   ),
                 ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-6 pe-0" }, [
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row py-4" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
+                },
+                [
+                  _c("ul", { staticClass: "list-unstyled me-auto" }, [
+                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "fw-bold" }, [
+                      _vm._v("Semi-Detached"),
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-8 p-0" }, [
+                _c("div", [
                   _c(
-                    "div",
-                    { staticClass: "bg-theme text-light p-2 rounded-3" },
+                    "table",
+                    { staticClass: "table table-responsive rounded-2" },
                     [
-                      _vm._v(
-                        "\n                                Graph\n                            "
-                      ),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "border border-1 text-center fw-lighter-items",
+                            attrs: { colspan: "3" },
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Sales\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            staticClass:
+                              "border border-1 text-center fw-lighter-items",
+                            attrs: { colspan: "3" },
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Average Price\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", { staticClass: "table-row-theme" }, [
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            85\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            78\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            77\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            81\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            85\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            78\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            77\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            81\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            85\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            78\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            77\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            81\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            85\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            78\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            82\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            77\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "border border-1 text-center" },
+                          [
+                            _vm._v(
+                              "\n                                            81\n                                        "
+                            ),
+                          ]
+                        ),
+                      ]),
                     ]
                   ),
                 ]),
               ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row py-4" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
-                  },
-                  [
-                    _c("ul", { staticClass: "list-unstyled me-auto" }, [
-                      _c("li", { staticClass: "fw-bold" }, [
-                        _vm._v("Detached"),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "fw-bold" }, [
-                        _vm._v("Semi-Detached"),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "fw-bold" }, [
-                        _vm._v("Townhouse"),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "fw-bold" }, [
-                        _vm._v("Condo Apt"),
-                      ]),
-                    ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-8 p-0" }, [
-                  _c("div", [
-                    _c(
-                      "table",
-                      { staticClass: "table table-responsive rounded-2" },
-                      [
-                        _c("tr", [
-                          _c(
-                            "th",
-                            {
-                              staticClass:
-                                "border border-1 text-center fw-lighter-items",
-                              attrs: { colspan: "3" },
-                            },
-                            [
-                              _vm._v(
-                                "\n                                            Sales\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "th",
-                            {
-                              staticClass:
-                                "border border-1 text-center fw-lighter-items",
-                              attrs: { colspan: "3" },
-                            },
-                            [
-                              _vm._v(
-                                "\n                                            Average Price\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", { staticClass: "table-row-theme" }, [
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            85\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            78\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            77\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            81\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            85\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            78\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            77\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            81\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            85\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            78\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            77\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            81\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            85\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            78\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            77\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            81\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                      ]
-                    ),
-                  ]),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row py-4" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
-                  },
-                  [
-                    _c("ul", { staticClass: "list-unstyled me-auto" }, [
-                      _c("li", { staticClass: "fw-bold" }, [
-                        _vm._v("Detached"),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "fw-bold" }, [
-                        _vm._v("Semi-Detached"),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "fw-bold" }, [
-                        _vm._v("Townhouse"),
-                      ]),
-                      _vm._v(" "),
-                      _c("li", { staticClass: "fw-bold" }, [
-                        _vm._v("Condo Apt"),
-                      ]),
-                    ]),
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-8 p-0" }, [
-                  _c("div", [
-                    _c(
-                      "table",
-                      { staticClass: "table table-responsive rounded-2" },
-                      [
-                        _c("tr", [
-                          _c(
-                            "th",
-                            {
-                              staticClass:
-                                "border border-1 text-center fw-lighter-items",
-                              attrs: { colspan: "3" },
-                            },
-                            [
-                              _vm._v(
-                                "\n                                            Sales\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "th",
-                            {
-                              staticClass:
-                                "border border-1 text-center fw-lighter-items",
-                              attrs: { colspan: "3" },
-                            },
-                            [
-                              _vm._v(
-                                "\n                                            Average Price\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", { staticClass: "table-row-theme" }, [
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            85\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            78\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            77\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            81\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            85\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            78\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            77\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            81\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            85\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            78\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            77\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            81\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            85\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            78\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            82\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            77\n                                        "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { staticClass: "border border-1 text-center" },
-                            [
-                              _vm._v(
-                                "\n                                            81\n                                        "
-                              ),
-                            ]
-                          ),
-                        ]),
-                      ]
-                    ),
-                  ]),
-                ]),
-              ]),
-            ]
-          ),
+            ]),
+          ]),
         ]),
       ]),
     ])
@@ -59603,8 +59605,16 @@ var render = function () {
                                 width: "18px",
                               },
                             }),
-                            _vm._v(
-                              "\n                                        My Account\n                                    "
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                class:
+                                  _vm.activeTab == "my-account"
+                                    ? ""
+                                    : "col-sm-none",
+                              },
+                              [_vm._v("My Account")]
                             ),
                           ]
                         ),
@@ -59629,8 +59639,16 @@ var render = function () {
                                 width: "18px",
                               },
                             }),
-                            _vm._v(
-                              "\n                                        Bookmarked List\n                                    "
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                class:
+                                  _vm.activeTab == "bookmarks"
+                                    ? ""
+                                    : "col-sm-none",
+                              },
+                              [_vm._v("Bookmarked List")]
                             ),
                           ]
                         ),
@@ -59656,8 +59674,16 @@ var render = function () {
                                 width: "18px",
                               },
                             }),
-                            _vm._v(
-                              "\n                                        Notifications\n                                    "
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                class:
+                                  _vm.activeTab == "notifications"
+                                    ? ""
+                                    : "col-sm-none",
+                              },
+                              [_vm._v("Notifications")]
                             ),
                           ]
                         ),
@@ -59683,8 +59709,16 @@ var render = function () {
                                 width: "18px",
                               },
                             }),
-                            _vm._v(
-                              "\n                                        Recent Visited\n                                    "
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                class:
+                                  _vm.activeTab == "recent-visited"
+                                    ? ""
+                                    : "col-sm-none",
+                              },
+                              [_vm._v("Recent Visited")]
                             ),
                           ]
                         ),

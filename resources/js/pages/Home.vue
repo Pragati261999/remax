@@ -15,7 +15,7 @@
         <section class="tips bg-theme pe-0">
             <div class="container-fluid pe-0">
                 <div class="row pe-0 me-0">
-                    <div class="col-5 ps-0 pe-5 m-auto">
+                    <div class="col-lg-5 col-md-5 col-sm-12 ps-0 pe-5 m-auto">
                         <h1 class="text-light fw-bold">
                             7 tips to got approved for a mortgage
                         </h1>
@@ -53,7 +53,7 @@
                             Learn more
                         </button>
                     </div>
-                    <div class="col-7 p-0">
+                    <div class="col-lg-7 col-md-7 col-sm-none in p-0">
                         <img
                             src="/assets/images/cards/pexels-andres-ayrton-6578879.jpg"
                             class="img-responsive img-fluid"
@@ -137,7 +137,7 @@
                             Lorem Ipsum.
                         </p>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 border-start">
+                    <div class="col-lg-6 col-md-6 col-sm-12 bstart">
                         <h3 class="text-color fw-bold">June Market State</h3>
                         <div class="row">
                             <div class="col-6 pe-0">

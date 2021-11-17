@@ -64,7 +64,7 @@
                                                 alt=""
                                                 width="18px"
                                             />
-                                            My Account
+                                            <span :class="activeTab == 'my-account' ? '' : 'col-sm-none'">My Account</span>
                                         </button>
                                     </router-link>
                                     <router-link to="/dashboard/bookmarks">
@@ -81,7 +81,7 @@
                                                 alt=""
                                                 width="18px"
                                             />
-                                            Bookmarked List
+                                            <span :class="activeTab == 'bookmarks' ? '' : 'col-sm-none'">Bookmarked List</span>
                                         </button>
                                     </router-link>
                                     <router-link to="/dashboard/notifications">
@@ -98,7 +98,7 @@
                                                 alt=""
                                                 width="18px"
                                             />
-                                            Notifications
+                                            <span :class="activeTab == 'notifications' ? '' : 'col-sm-none'">Notifications</span>
                                         </button>
                                     </router-link>
                                     <router-link to="/dashboard/recent-visited">
@@ -115,7 +115,7 @@
                                                 alt=""
                                                 width="18px"
                                             />
-                                            Recent Visited
+                                            <span :class="activeTab == 'recent-visited' ? '' : 'col-sm-none'">Recent Visited</span>
                                         </button>
                                     </router-link>
                                 </li>

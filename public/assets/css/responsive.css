@@ -17,6 +17,50 @@
   .tabs {
     padding-bottom: 210px;
   }
+  .hero-container {
+    padding: 45px 80px !important;
+    background-color: #f7f7f7;
+  }
+}
+
+@media (max-width: 425px) {
+  .input-width {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: unset;
+  }
+  .input-full-wth {
+    width: 100% !important;
+  }
+  .hero-container {
+    padding: 45px 20px !important;
+  }
+  .hero-container h1 {
+    font-size: 3rem;
+  }
+  .hero-container h6 {
+    font-size: 1rem;
+  }
+  .tabs {
+    padding-bottom: 350px;
+  }
+  section {
+    padding: 60px 20px;
+  }
+  .col-sm-none {display: none}
+  .bstart {
+    border-left: none !important;
+  }
+  .faq-container .theme-title span::after {
+    left: 2px;
+    top: 42px;
+  }
+  .faq-container h5 {
+    font-size: 1rem;
+  }
+  .accordion-body {
+    font-size: 12px;
+  }
 }
 
 /* // Large devices (desktops, 992px and up) */

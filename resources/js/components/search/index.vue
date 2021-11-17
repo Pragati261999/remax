@@ -89,7 +89,7 @@
               <div
                 class="col justify-content-center d-flex align-items-end"
               >
-                <button type="button" class="btn btn-theme-color">
+                <button type="button" class="btn btn-theme-color input-full-wth">
                   <img src="/assets/images/icons/menu_bar.svg" alt="" />
                   More
                 </button>
@@ -99,7 +99,7 @@
               >
                 <button
                   type="button"
-                  class="btn btn-theme-color"
+                  class="btn btn-theme-color input-full-wth"
                   @click="searchProperty"
                 >
                   Search

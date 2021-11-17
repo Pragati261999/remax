@@ -142,7 +142,7 @@
             <div class="container-fluid py-5 subscribe-container">
                 <div class="subscridtion-form my-5">
                     <div class="row">
-                        <div class="col-7">
+                        <div class="col-lg-7 col-md-7 col-sm-12">
                             <h5 class="theme-title fw-bold text-start">
                                 Subscribe to our newsletter
                             </h5>
@@ -151,7 +151,7 @@
                                 from us!
                             </h6>
                         </div>
-                        <div class="col-5">
+                        <div class="col-lg-5 col-md-5 col-sm-12">
                             <form class="row mt-auto ms-auto">
                                 <div class="col p-0">
                                     <label

@@ -41,6 +41,10 @@ a {
     margin: 0 auto; */
 }
 
+.bstart {
+    border-left: 2px solid #a0a1a1;
+}
+
 .home-header .nav-link.router-link-exact-active.router-link-active::after{
     background: #f7f7f7;
 }
@@ -647,7 +651,7 @@ nav .breadcrumb .active {
 
 .subscribe-container {
     background-image: url(../images/banners/news_letter.png);
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;

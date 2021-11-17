@@ -3,7 +3,7 @@
         <section class="footer">
             <div class="container p-0">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
                         <h3 class="text-color fw-bold">Remax</h3>
                         <p>
                             Lorem Ipsum is simply dummy text of the printing and
@@ -33,7 +33,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-2 col-6">
                         <ul class="list-unstyled">
                             <li class="text-secondary fw-bold">About</li>
                             <li><a href="">Why choose us</a></li>
@@ -43,7 +43,7 @@
                             <li><a href="">Career</a></li>
                         </ul>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2 col-md-2 col-6">
                         <ul class="list-unstyled">
                             <li class="text-secondary fw-bold">About</li>
                             <li><a href="">Why choose us</a></li>
@@ -53,7 +53,7 @@
                             <li><a href="">Career</a></li>
                         </ul>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
                         <p class="text-secondary fw-bold">Newsletter</p>
                         <p>
                             Subscribe our newletter to got updates about our
