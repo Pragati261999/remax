@@ -2808,7 +2808,7 @@ export default {
         this.updateIfLoggedIN();
     },
     methods: {
-        async saveLaed() {
+         async saveLaed() {
             let url = `/api/lead/new-guest`;
             // Check a user is logged in or not.
             if (this.$store.state.auth_user) {
@@ -2821,8 +2821,12 @@ export default {
             self.rLead = "<span class='text-muted'>Sending...</span>";
             self.leadError = {};
 
+            const token = this.$store.state.auth_token;
+
             await axios
-                .post(url, self.lead)
+                .post(url, self.lead, {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
                 .then((res) => {
                     self.lead = {};
                     self.sLead = false;
