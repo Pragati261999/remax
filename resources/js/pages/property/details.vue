@@ -2850,80 +2850,80 @@ export default {
     computed: {
         getTotalRooms() {
             let count = 0;
-            if (this.property) {
-                if (
-                    this.property.Rm1_wth !== null &&
-                    this.property.Rm1_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm2_wth !== null &&
-                    this.property.Rm2_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm3_wth !== null &&
-                    this.property.Rm3_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm4_wth !== null &&
-                    this.property.Rm4_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm5_wth !== null &&
-                    this.property.Rm5_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm6_wth !== null &&
-                    this.property.Rm6_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm7_wth !== null &&
-                    this.property.Rm7_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm8_wth !== null &&
-                    this.property.Rm8_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm9_wth !== null &&
-                    this.property.Rm9_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm10_wth !== null &&
-                    this.property.Rm10_wt > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm11_wth !== null &&
-                    this.property.Rm11_wt > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm12_wth !== null &&
-                    this.property.Rm12_wt > 0
-                ) {
-                    count++;
-                }
-            }
+            // if (this.property) {
+            //     if (
+            //         this.property.Rm1_wth !== null &&
+            //         this.property.Rm1_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm2_wth !== null &&
+            //         this.property.Rm2_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm3_wth !== null &&
+            //         this.property.Rm3_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm4_wth !== null &&
+            //         this.property.Rm4_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm5_wth !== null &&
+            //         this.property.Rm5_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm6_wth !== null &&
+            //         this.property.Rm6_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm7_wth !== null &&
+            //         this.property.Rm7_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm8_wth !== null &&
+            //         this.property.Rm8_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm9_wth !== null &&
+            //         this.property.Rm9_wth > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm10_wth !== null &&
+            //         this.property.Rm10_wt > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm11_wth !== null &&
+            //         this.property.Rm11_wt > 0
+            //     ) {
+            //         count++;
+            //     }
+            //     if (
+            //         this.property.Rm12_wth !== null &&
+            //         this.property.Rm12_wt > 0
+            //     ) {
+            //         count++;
+            //     }
+            // }
 
             return count;
             // parseInt(property.Rms);

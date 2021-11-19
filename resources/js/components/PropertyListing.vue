@@ -1,65 +1,69 @@
 <template>
-  <div>
-    <section class="property bg-theme-light">
-      <div class="container p-0">
-        <h2 class="theme-title">Featured Properties</h2>
-        <div v-if="!loadingProperties">
-          <div v-if="properties.length > 0" class="row">
-            <div
-              v-for="property in properties"
-              :key="property.Ml_num"
-              class="col-lg-4 col-md-6 col-sm-12 mt-5"
-            >
-              <PropCard :property="property" />
+    <div>
+        <section class="property bg-theme-light">
+            <div class="container p-0">
+                <h2 class="theme-title">Featured Properties Brampton</h2>
+                <div v-if="!loadingProperties">
+                    <div v-if="properties.length > 0" class="row">
+                        <div
+                            v-for="property in properties"
+                            :key="property.Ml_num"
+                            class="col-lg-4 col-md-6 col-sm-12 mt-5"
+                        >
+                            <PropCard :property="property" />
+                        </div>
+                        <div class="mt-4 text-center">
+                            <router-link
+                                class="btn btn-theme-color px-5"
+                                :to="{ name: 'search-property' }"
+                                >View All</router-link
+                            >
+                        </div>
+                    </div>
+                    <div v-else>
+                        <no-data />
+                    </div>
+                </div>
+                <div v-else class="row">
+                    <div class="p-5 text-center">
+                        <loader />
+                    </div>
+                </div>
             </div>
-            <div class="mt-4 text-center">
-              <router-link class="btn btn-theme-color px-5" :to="{name: 'search-property'}">View All</router-link>
-            </div>
-          </div>
-          <div v-else>
-            <no-data />
-          </div>
-        </div>
-        <div v-else class="row">
-          <div class="p-5 text-center">
-            <loader />
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+        </section>
+    </div>
 </template>
 
 <script>
 import Loader from "./commonComponents/Loader.vue";
-import NoData from './commonComponents/NoData.vue';
+import NoData from "./commonComponents/NoData.vue";
 import PropCard from "./property/cards.vue";
 export default {
-  components: { Loader, PropCard, NoData },
-  data() {
-    return {
-      properties: [],
-      loadingProperties: true,
-    };
-  },
-  mounted() {
-    this.getAllData();
-  },
-  methods: {
-    async getAllData() {
-      const self = this;
-      self.loadingProperties = true;
-      await axios
-        .get("api/property/properties")
-        .then((res) => {
-          self.properties = res.data.data.data;
-          self.loadingProperties = false;
-        })
-        .catch((err) => {
-          self.loadingProperties = false;
-          console.log(err);
-        });
+    components: { Loader, PropCard, NoData },
+    data() {
+        return {
+            properties: [],
+            loadingProperties: true,
+        };
     },
-  },
+    mounted() {
+        this.getAllData();
+    },
+    methods: {
+        async getAllData() {
+            const self = this;
+            self.loadingProperties = true;
+            await axios
+                .get("api/property/properties")
+                .then((res) => {
+                    self.properties = res.data.data.data;
+                    self.loadingProperties = false;
+                })
+                .catch((err) => {
+                    self.loadingProperties = false;
+                    console.log(err);
+                });
+        },
+    },
 };
 </script>

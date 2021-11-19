@@ -16,7 +16,11 @@
                             aria-expanded="false"
                             aria-label="Toggle navigation"
                         >
-                            <span class="navbar-toggler-icon header-icons"><img src="/assets/images/icons/menu_bar.svg" alt="" /></span>
+                            <span class="navbar-toggler-icon header-icons"
+                                ><img
+                                    src="/assets/images/icons/menu_bar.svg"
+                                    alt=""
+                            /></span>
                         </button>
                         <div
                             class="collapse navbar-collapse right-menu"
@@ -126,7 +130,10 @@
                                                 <i class="fa fa-user"></i>
                                             </button>
                                             <div
-                                                class="dropdown-menu dropdown-menu-right"
+                                                class="
+                                                    dropdown-menu
+                                                    dropdown-menu-right
+                                                "
                                                 aria-labelledby="userDDBtn"
                                             >
                                                 <div class="dropdown-header">
@@ -170,7 +177,11 @@ export default {
         },
     },
     methods: {
-        logout() {
+        async logout() {
+            const token = this.$store.state.auth_token;
+            await axios.post("/api/user/logout", {
+                headers: { Authorization: `Bearer ${token}` },
+            });
             this.$store.commit("removeAuthToken");
             this.$store.commit("removeAuthUser");
             this.$store.commit("removeBookMark");

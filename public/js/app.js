@@ -2883,6 +2883,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -3129,6 +3133,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3301,10 +3320,38 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      this.$store.commit("removeAuthToken");
-      this.$store.commit("removeAuthUser");
-      this.$store.commit("removeBookMark");
-      this.$router.push("/");
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var token;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                token = _this.$store.state.auth_token;
+                _context.next = 3;
+                return axios.post("/api/user/logout", {
+                  headers: {
+                    Authorization: "Bearer ".concat(token)
+                  }
+                });
+
+              case 3:
+                _this.$store.commit("removeAuthToken");
+
+                _this.$store.commit("removeAuthUser");
+
+                _this.$store.commit("removeBookMark");
+
+                _this.$router.push("/");
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   }
 });
@@ -8299,57 +8346,80 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     getTotalRooms: function getTotalRooms() {
-      var count = 0;
-
-      if (this.property) {
-        if (this.property.Rm1_wth !== null && this.property.Rm1_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm2_wth !== null && this.property.Rm2_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm3_wth !== null && this.property.Rm3_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm4_wth !== null && this.property.Rm4_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm5_wth !== null && this.property.Rm5_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm6_wth !== null && this.property.Rm6_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm7_wth !== null && this.property.Rm7_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm8_wth !== null && this.property.Rm8_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm9_wth !== null && this.property.Rm9_wth > 0) {
-          count++;
-        }
-
-        if (this.property.Rm10_wth !== null && this.property.Rm10_wt > 0) {
-          count++;
-        }
-
-        if (this.property.Rm11_wth !== null && this.property.Rm11_wt > 0) {
-          count++;
-        }
-
-        if (this.property.Rm12_wth !== null && this.property.Rm12_wt > 0) {
-          count++;
-        }
-      }
+      var count = 0; // if (this.property) {
+      //     if (
+      //         this.property.Rm1_wth !== null &&
+      //         this.property.Rm1_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm2_wth !== null &&
+      //         this.property.Rm2_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm3_wth !== null &&
+      //         this.property.Rm3_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm4_wth !== null &&
+      //         this.property.Rm4_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm5_wth !== null &&
+      //         this.property.Rm5_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm6_wth !== null &&
+      //         this.property.Rm6_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm7_wth !== null &&
+      //         this.property.Rm7_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm8_wth !== null &&
+      //         this.property.Rm8_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm9_wth !== null &&
+      //         this.property.Rm9_wth > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm10_wth !== null &&
+      //         this.property.Rm10_wt > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm11_wth !== null &&
+      //         this.property.Rm11_wt > 0
+      //     ) {
+      //         count++;
+      //     }
+      //     if (
+      //         this.property.Rm12_wth !== null &&
+      //         this.property.Rm12_wt > 0
+      //     ) {
+      //         count++;
+      //     }
+      // }
 
       return count; // parseInt(property.Rms);
     }
@@ -48945,7 +49015,7 @@ var render = function () {
     _c("section", { staticClass: "property bg-theme-light" }, [
       _c("div", { staticClass: "container p-0" }, [
         _c("h2", { staticClass: "theme-title" }, [
-          _vm._v("Featured Properties"),
+          _vm._v("Featured Properties Brampton"),
         ]),
         _vm._v(" "),
         !_vm.loadingProperties
@@ -49414,7 +49484,7 @@ var render = function () {
                                 "div",
                                 {
                                   staticClass:
-                                    "dropdown-menu dropdown-menu-right",
+                                    "\n                                                dropdown-menu\n                                                dropdown-menu-right\n                                            ",
                                   attrs: { "aria-labelledby": "userDDBtn" },
                                 },
                                 [

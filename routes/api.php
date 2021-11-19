@@ -12,6 +12,7 @@ use App\Http\Controllers\Api;
 Route::prefix('user')->group(function () {
     Route::post('/register', [Api\UserController::class, 'register']);
     Route::post('/login', [Api\UserController::class, 'login']);
+    Route::post('/logout', [Api\UserController::class, 'logout']);
 });
 
 // User dashboard

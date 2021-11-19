@@ -86,6 +86,12 @@ class UserController extends AppBaseController
         return $this->sendResponse("Login success.", $token);
     }
 
+    public function logout(Request $request)
+    {
+        auth()->user()->tokens()->delete();
+        return $this->sendResponse("Logout success.", []);
+    }
+
     public function update(Request $request)
     {
         // dd($request->contact);
@@ -105,9 +111,9 @@ class UserController extends AppBaseController
         $id = auth()->user()->id;
         // dd($id);
         if ($validated) {
-            $u = User::where(['id'=> $id])->update(['name'=> $request->name, 'contact'=> $request->contact]);
-            $u = User::where(['id'=> $id])->first();
-            return $this->sendResponse('User data updated successfully', $u);            
+            $u = User::where(['id' => $id])->update(['name' => $request->name, 'contact' => $request->contact]);
+            $u = User::where(['id' => $id])->first();
+            return $this->sendResponse('User data updated successfully', $u);
         } else {
             return $this->sendError('Error', "We are not update your details");
         }
