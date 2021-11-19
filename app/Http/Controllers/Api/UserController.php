@@ -88,7 +88,10 @@ class UserController extends AppBaseController
 
     public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        if (auth()->user()) {
+            print_r(auth()->user());
+            auth()->user()->tokens()->delete();
+        }
         return $this->sendResponse("Logout success.", []);
     }
 
