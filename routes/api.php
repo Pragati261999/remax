@@ -12,11 +12,11 @@ use App\Http\Controllers\Api;
 Route::prefix('user')->group(function () {
     Route::post('/register', [Api\UserController::class, 'register']);
     Route::post('/login', [Api\UserController::class, 'login']);
-    Route::post('/logout', [Api\UserController::class, 'logout']);
 });
 
 // User dashboard
 Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
+    Route::post('/logout', [Api\UserController::class, 'logout']);
     Route::get('/', [Api\UserController::class, 'profile']);
     Route::post('/update-profile', [Api\UserController::class, 'update']);
 
