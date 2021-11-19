@@ -4958,6 +4958,186 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -8346,80 +8526,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     getTotalRooms: function getTotalRooms() {
-      var count = 0; // if (this.property) {
-      //     if (
-      //         this.property.Rm1_wth !== null &&
-      //         this.property.Rm1_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm2_wth !== null &&
-      //         this.property.Rm2_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm3_wth !== null &&
-      //         this.property.Rm3_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm4_wth !== null &&
-      //         this.property.Rm4_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm5_wth !== null &&
-      //         this.property.Rm5_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm6_wth !== null &&
-      //         this.property.Rm6_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm7_wth !== null &&
-      //         this.property.Rm7_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm8_wth !== null &&
-      //         this.property.Rm8_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm9_wth !== null &&
-      //         this.property.Rm9_wth > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm10_wth !== null &&
-      //         this.property.Rm10_wt > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm11_wth !== null &&
-      //         this.property.Rm11_wt > 0
-      //     ) {
-      //         count++;
-      //     }
-      //     if (
-      //         this.property.Rm12_wth !== null &&
-      //         this.property.Rm12_wt > 0
-      //     ) {
-      //         count++;
-      //     }
-      // }
+      var count = 0;
+
+      if (this.property) {
+        if (this.property.Rm1_wth !== null && this.property.Rm1_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm2_wth !== null && this.property.Rm2_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm3_wth !== null && this.property.Rm3_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm4_wth !== null && this.property.Rm4_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm5_wth !== null && this.property.Rm5_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm6_wth !== null && this.property.Rm6_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm7_wth !== null && this.property.Rm7_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm8_wth !== null && this.property.Rm8_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm9_wth !== null && this.property.Rm9_wth > 0) {
+          count++;
+        }
+
+        if (this.property.Rm10_wth !== null && this.property.Rm10_wt > 0) {
+          count++;
+        }
+
+        if (this.property.Rm11_wth !== null && this.property.Rm11_wt > 0) {
+          count++;
+        }
+
+        if (this.property.Rm12_wth !== null && this.property.Rm12_wt > 0) {
+          count++;
+        }
+      }
 
       return count; // parseInt(property.Rms);
     }
@@ -13703,7 +13860,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-menu-right[data-v-0e5f7320] {\r\n    right: 0;\n}\n.navbar-toggler-icon[data-v-0e5f7320] {\r\n    padding-top: 1.5px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-menu-right[data-v-0e5f7320] {\r\n    right: 0;\n}\n.navbar-toggler-icon[data-v-0e5f7320] {\r\n    padding-top: 1.5px;\n}\n.navbar-toggler[data-v-0e5f7320] {\r\n    box-shadow: 0 0 0 1px #032646 !important;\n}\n.home-header .navbar-toggler[data-v-0e5f7320] {\r\n    box-shadow: none !important;\n}\n@media (max-width: 991px) {\n.search-bar[data-v-0e5f7320],\r\n    .search-bar .input-bar[data-v-0e5f7320] {\r\n        width: 100%;\r\n        max-width: 100% !important;\n}\n.nav-item[data-v-0e5f7320] {\r\n        border-bottom: 1px solid rgba(0, 0, 0, 0.13);\n}\n.nav-item[data-v-0e5f7320]:last-child {\r\n        border-bottom: none;\n}\n.nav-item.me-3[data-v-0e5f7320] {\r\n        margin-right: 0 !important;\n}\n.home-header .nav-item[data-v-0e5f7320] {\r\n        border-bottom: 1px solid rgba(255, 255, 255, 0.13);\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51605,13 +51762,13 @@ var staticRenderFns = [
                 ),
               ]),
               _vm._v(" "),
-              _c("p", { staticClass: "text-light" }, [
+              _c("p", { staticClass: "text-light small" }, [
                 _vm._v(
                   "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
                 ),
               ]),
               _vm._v(" "),
-              _c("p", { staticClass: "text-light" }, [
+              _c("p", { staticClass: "text-light small" }, [
                 _vm._v(
                   "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
                 ),
@@ -51620,7 +51777,8 @@ var staticRenderFns = [
               _c(
                 "button",
                 {
-                  staticClass: "btn bg-white text-color fw-bolder btn-rounded",
+                  staticClass:
+                    "\n                            btn\n                            bg-white\n                            text-color\n                            fw-bolder\n                            btn-rounded\n                        ",
                 },
                 [
                   _vm._v(
@@ -51673,25 +51831,25 @@ var staticRenderFns = [
               ),
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-color me-5" }, [
+            _c("p", { staticClass: "text-color me-5 small" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
               ),
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-color me-5" }, [
+            _c("p", { staticClass: "text-color me-5 small" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
               ),
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-color me-5" }, [
+            _c("p", { staticClass: "text-color me-5 small" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
               ),
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-color me-5" }, [
+            _c("p", { staticClass: "text-color me-5 small" }, [
               _vm._v(
                 "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
               ),
@@ -51734,7 +51892,7 @@ var staticRenderFns = [
                 "div",
                 {
                   staticClass:
-                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
+                    "\n                                col-4\n                                pe-0\n                                ps-3\n                                d-flex\n                                align-items-center\n                                justify-content-center\n                            ",
                 },
                 [
                   _c("ul", { staticClass: "list-unstyled me-auto" }, [
@@ -51762,7 +51920,7 @@ var staticRenderFns = [
                           "th",
                           {
                             staticClass:
-                              "border border-1 text-center fw-lighter-items",
+                              "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
                             attrs: { colspan: "3" },
                           },
                           [
@@ -51776,7 +51934,7 @@ var staticRenderFns = [
                           "th",
                           {
                             staticClass:
-                              "border border-1 text-center fw-lighter-items",
+                              "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
                             attrs: { colspan: "3" },
                           },
                           [
@@ -51790,7 +51948,10 @@ var staticRenderFns = [
                       _c("tr", { staticClass: "table-row-theme" }, [
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -51800,7 +51961,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
@@ -51810,7 +51974,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
@@ -51820,7 +51987,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -51830,7 +52000,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
@@ -51840,7 +52013,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
@@ -51852,7 +52028,10 @@ var staticRenderFns = [
                       _c("tr", [
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -51862,7 +52041,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
@@ -51872,7 +52054,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
@@ -51882,7 +52067,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -51892,7 +52080,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
@@ -51902,7 +52093,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
@@ -51914,7 +52108,10 @@ var staticRenderFns = [
                       _c("tr", [
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -51924,7 +52121,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
@@ -51934,7 +52134,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
@@ -51944,7 +52147,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -51954,7 +52160,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
@@ -51964,7 +52173,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
@@ -51976,7 +52188,10 @@ var staticRenderFns = [
                       _c("tr", [
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -51986,7 +52201,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
@@ -51996,7 +52214,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
@@ -52006,7 +52227,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52016,7 +52240,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
@@ -52026,7 +52253,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
@@ -52045,7 +52275,7 @@ var staticRenderFns = [
                 "div",
                 {
                   staticClass:
-                    "col-4 pe-0 ps-3 d-flex align-items-center justify-content-center",
+                    "\n                                col-4\n                                pe-0\n                                ps-3\n                                d-flex\n                                align-items-center\n                                justify-content-center\n                            ",
                 },
                 [
                   _c("ul", { staticClass: "list-unstyled me-auto" }, [
@@ -52073,7 +52303,7 @@ var staticRenderFns = [
                           "th",
                           {
                             staticClass:
-                              "border border-1 text-center fw-lighter-items",
+                              "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
                             attrs: { colspan: "3" },
                           },
                           [
@@ -52087,7 +52317,7 @@ var staticRenderFns = [
                           "th",
                           {
                             staticClass:
-                              "border border-1 text-center fw-lighter-items",
+                              "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
                             attrs: { colspan: "3" },
                           },
                           [
@@ -52101,7 +52331,10 @@ var staticRenderFns = [
                       _c("tr", { staticClass: "table-row-theme" }, [
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52111,7 +52344,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
@@ -52121,7 +52357,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
@@ -52131,7 +52370,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52141,7 +52383,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
@@ -52151,7 +52396,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
@@ -52163,7 +52411,10 @@ var staticRenderFns = [
                       _c("tr", [
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52173,7 +52424,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
@@ -52183,7 +52437,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
@@ -52193,7 +52450,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52203,7 +52463,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
@@ -52213,7 +52476,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
@@ -52225,7 +52491,10 @@ var staticRenderFns = [
                       _c("tr", [
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52235,7 +52504,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
@@ -52245,7 +52517,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
@@ -52255,7 +52530,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52265,7 +52543,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
@@ -52275,7 +52556,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            81\n                                        "
@@ -52287,7 +52571,10 @@ var staticRenderFns = [
                       _c("tr", [
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52297,7 +52584,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            85\n                                        "
@@ -52307,7 +52597,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            78\n                                        "
@@ -52317,7 +52610,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            82\n                                        "
@@ -52327,7 +52623,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            77\n                                        "
@@ -52337,7 +52636,10 @@ var staticRenderFns = [
                         _vm._v(" "),
                         _c(
                           "td",
-                          { staticClass: "border border-1 text-center" },
+                          {
+                            staticClass:
+                              "\n                                                border border-1\n                                                text-center\n                                            ",
+                          },
                           [
                             _vm._v(
                               "\n                                            81\n                                        "

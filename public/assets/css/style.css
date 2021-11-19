@@ -65,8 +65,8 @@ a {
     color: #5c5c5c;
 }
 
-p {
-    font-size: 10px;
+p.small {
+    font-size: 13px;
 }
 
 .bg-theme {

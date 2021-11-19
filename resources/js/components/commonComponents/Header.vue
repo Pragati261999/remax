@@ -199,4 +199,34 @@ export default {
 .navbar-toggler-icon {
     padding-top: 1.5px;
 }
+
+.navbar-toggler {
+    box-shadow: 0 0 0 1px #032646 !important;
+}
+
+.home-header .navbar-toggler {
+    box-shadow: none !important;
+}
+
+@media (max-width: 991px) {
+    .search-bar,
+    .search-bar .input-bar {
+        width: 100%;
+        max-width: 100% !important;
+    }
+    .nav-item {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+    }
+
+    .nav-item:last-child {
+        border-bottom: none;
+    }
+    .nav-item.me-3 {
+        margin-right: 0 !important;
+    }
+
+    .home-header .nav-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+    }
+}
 </style>

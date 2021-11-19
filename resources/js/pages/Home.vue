@@ -19,7 +19,7 @@
                         <h1 class="text-light fw-bold">
                             7 tips to got approved for a mortgage
                         </h1>
-                        <p class="text-light">
+                        <p class="text-light small">
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum has been the
                             industry's standard dummy text ever since the 1500s,
@@ -33,7 +33,7 @@
                             software like Aldus PageMaker including versions of
                             Lorem Ipsum.
                         </p>
-                        <p class="text-light">
+                        <p class="text-light small">
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum has been the
                             industry's standard dummy text ever since the 1500s,
@@ -48,7 +48,13 @@
                             Lorem Ipsum.
                         </p>
                         <button
-                            class="btn bg-white text-color fw-bolder btn-rounded"
+                            class="
+                                btn
+                                bg-white
+                                text-color
+                                fw-bolder
+                                btn-rounded
+                            "
                         >
                             Learn more
                         </button>
@@ -80,7 +86,7 @@
                         <h3 class="text-color fw-bold py-4">
                             June Market State
                         </h3>
-                        <p class="text-color me-5">
+                        <p class="text-color me-5 small">
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum has been the
                             industry's standard dummy text ever since the 1500s,
@@ -94,7 +100,7 @@
                             software like Aldus PageMaker including versions of
                             Lorem Ipsum.
                         </p>
-                        <p class="text-color me-5">
+                        <p class="text-color me-5 small">
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum has been the
                             industry's standard dummy text ever since the 1500s,
@@ -108,7 +114,7 @@
                             software like Aldus PageMaker including versions of
                             Lorem Ipsum.
                         </p>
-                        <p class="text-color me-5">
+                        <p class="text-color me-5 small">
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum has been the
                             industry's standard dummy text ever since the 1500s,
@@ -122,7 +128,7 @@
                             software like Aldus PageMaker including versions of
                             Lorem Ipsum.
                         </p>
-                        <p class="text-color me-5">
+                        <p class="text-color me-5 small">
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum has been the
                             industry's standard dummy text ever since the 1500s,
@@ -153,7 +159,14 @@
                         </div>
                         <div class="row py-4">
                             <div
-                                class="col-4 pe-0 ps-3 d-flex align-items-center justify-content-center"
+                                class="
+                                    col-4
+                                    pe-0
+                                    ps-3
+                                    d-flex
+                                    align-items-center
+                                    justify-content-center
+                                "
                             >
                                 <ul class="list-unstyled me-auto">
                                     <li class="fw-bold">Detached</li>
@@ -169,13 +182,21 @@
                                     >
                                         <tr>
                                             <th
-                                                class="border border-1 text-center fw-lighter-items"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                    fw-lighter-items
+                                                "
                                                 colspan="3"
                                             >
                                                 Sales
                                             </th>
                                             <th
-                                                class="border border-1 text-center fw-lighter-items"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                    fw-lighter-items
+                                                "
                                                 colspan="3"
                                             >
                                                 Average Price
@@ -183,128 +204,200 @@
                                         </tr>
                                         <tr class="table-row-theme">
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 85
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 78
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 77
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 81
                                             </td>
                                         </tr>
                                         <tr>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 85
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 78
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 77
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 81
                                             </td>
                                         </tr>
                                         <tr>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 85
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 78
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 77
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 81
                                             </td>
                                         </tr>
                                         <tr>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 85
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 78
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 77
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 81
                                             </td>
@@ -315,7 +408,14 @@
                         </div>
                         <div class="row py-4">
                             <div
-                                class="col-4 pe-0 ps-3 d-flex align-items-center justify-content-center"
+                                class="
+                                    col-4
+                                    pe-0
+                                    ps-3
+                                    d-flex
+                                    align-items-center
+                                    justify-content-center
+                                "
                             >
                                 <ul class="list-unstyled me-auto">
                                     <li class="fw-bold">Detached</li>
@@ -331,13 +431,21 @@
                                     >
                                         <tr>
                                             <th
-                                                class="border border-1 text-center fw-lighter-items"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                    fw-lighter-items
+                                                "
                                                 colspan="3"
                                             >
                                                 Sales
                                             </th>
                                             <th
-                                                class="border border-1 text-center fw-lighter-items"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                    fw-lighter-items
+                                                "
                                                 colspan="3"
                                             >
                                                 Average Price
@@ -345,128 +453,200 @@
                                         </tr>
                                         <tr class="table-row-theme">
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 85
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 78
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 77
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 81
                                             </td>
                                         </tr>
                                         <tr>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 85
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 78
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 77
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 81
                                             </td>
                                         </tr>
                                         <tr>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 85
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 78
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 77
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 81
                                             </td>
                                         </tr>
                                         <tr>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 85
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 78
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 82
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 77
                                             </td>
                                             <td
-                                                class="border border-1 text-center"
+                                                class="
+                                                    border border-1
+                                                    text-center
+                                                "
                                             >
                                                 81
                                             </td>
