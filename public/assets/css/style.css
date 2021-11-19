@@ -28,11 +28,15 @@ body {
     border-radius: 10px;
 }
 
+button.swal-button.swal-button--confirm {
+    background: #032646;
+}
+
 a {
     text-decoration: none !important;
 }
 
-.nav-link.router-link-exact-active.router-link-active::after{
+.nav-link.router-link-exact-active.router-link-active::after {
     /* content: '';
     height: 1px;
     width: 50%;
@@ -45,11 +49,11 @@ a {
     border-left: 2px solid #a0a1a1;
 }
 
-.home-header .nav-link.router-link-exact-active.router-link-active::after{
+.home-header .nav-link.router-link-exact-active.router-link-active::after {
     background: #f7f7f7;
 }
 
-.nav-link.t.router-link-exact-active.router-link-active::after{
+.nav-link.t.router-link-exact-active.router-link-active::after {
     background: transparent !important;
 }
 
@@ -325,7 +329,8 @@ table tr td {
     margin: 2px;
 }
 
-.tab-content input, .tab-content select {
+.tab-content input,
+.tab-content select {
     border-radius: 4px;
     padding: 4px;
 }
@@ -387,24 +392,30 @@ table tr td {
     width: 100%;
     /* padding-left: 4px;   */
 }
+
 .tabs {
     position: relative;
     min-height: 8.5em;
 }
+
 .tabs::before,
 .tabs::after {
     content: "";
     display: table;
 }
+
 .tabs::after {
     clear: both;
 }
+
 .tab {
     float: left;
 }
+
 .tab-switch {
     display: none;
 }
+
 .tab-label {
     position: relative;
     display: block;
@@ -419,7 +430,8 @@ table tr td {
     top: 0;
     font-size: 14px;
     font-weight: bold;
-    }
+}
+
 .tab-content {
     height: auto;
     position: absolute;
@@ -432,13 +444,14 @@ table tr td {
     padding: 20px 24px;
     border-radius: 6px;
 }
-.tab-switch:checked + .tab-label {
+
+.tab-switch:checked+.tab-label {
     background: #fff;
     color: #2c3e50;
     border-bottom: 0;
 }
 
-.tab-switch:checked + label + .tab-content {
+.tab-switch:checked+label+.tab-content {
     z-index: 2;
     opacity: 1;
     background-color: transparent;
@@ -451,9 +464,11 @@ table tr td {
     border: 0 !important;
     margin-bottom: 12px !important;
 }
+
 .accordion-collapse {
     border: 0;
 }
+
 .accordion-button {
     padding: 0px;
     font-weight: bold;
@@ -464,18 +479,22 @@ table tr td {
     border-bottom: 1px solid #ddd;
     background-color: #f2f4f5 !important;
 }
+
 .accordion-button:focus {
     box-shadow: none !important;
     border: none;
 }
+
 .accordion-button:not(.collapsed) {
     background: none;
     /* color: #dc3545; */
 }
+
 .accordion-body {
     padding: 15px;
     background-color: #f6f6f6;
 }
+
 .accordion-button.collapsed::after {
     width: auto;
     height: auto;
@@ -486,6 +505,7 @@ table tr td {
     color: #032646;
     transform: translateY(0px);
 }
+
 .accordion-button:not(.collapsed)::after {
     width: auto;
     height: auto;
@@ -496,6 +516,7 @@ table tr td {
     transform: translate(-5px, -4px);
     transform: rotate(0deg);
 }
+
 /* Accordion */
 
 /* Login */
@@ -507,7 +528,7 @@ table tr td {
     background-size: 18%;
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
     content: var(--bs-breadcrumb-divider, ">") !important;
 }
 
@@ -571,13 +592,14 @@ nav .breadcrumb .active {
     border: 2px solid #2c3e50;
 }
 
-.notify .notification-tab .active {    
-    padding: 0 .75rem;  
-    background: #032646;  
+.notify .notification-tab .active {
+    padding: 0 .75rem;
+    background: #032646;
     color: #fff;
     line-height: 2.2em;
 }
-.notify .notification-tab .btn:focus {    
+
+.notify .notification-tab .btn:focus {
     box-shadow: none;
 }
 

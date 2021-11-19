@@ -64,7 +64,14 @@
                                                 alt=""
                                                 width="18px"
                                             />
-                                            <span :class="activeTab == 'my-account' ? '' : 'col-sm-none'">My Account</span>
+                                            <span
+                                                :class="
+                                                    activeTab == 'my-account'
+                                                        ? ''
+                                                        : 'col-md-none'
+                                                "
+                                                >My Account</span
+                                            >
                                         </button>
                                     </router-link>
                                     <router-link to="/dashboard/bookmarks">
@@ -81,7 +88,14 @@
                                                 alt=""
                                                 width="18px"
                                             />
-                                            <span :class="activeTab == 'bookmarks' ? '' : 'col-sm-none'">Bookmarked List</span>
+                                            <span
+                                                :class="
+                                                    activeTab == 'bookmarks'
+                                                        ? ''
+                                                        : 'col-md-none'
+                                                "
+                                                >Bookmarked</span
+                                            >
                                         </button>
                                     </router-link>
                                     <router-link to="/dashboard/notifications">
@@ -98,7 +112,14 @@
                                                 alt=""
                                                 width="18px"
                                             />
-                                            <span :class="activeTab == 'notifications' ? '' : 'col-sm-none'">Notifications</span>
+                                            <span
+                                                :class="
+                                                    activeTab == 'notifications'
+                                                        ? ''
+                                                        : 'col-md-none'
+                                                "
+                                                >Notifications</span
+                                            >
                                         </button>
                                     </router-link>
                                     <router-link to="/dashboard/recent-visited">
@@ -115,7 +136,15 @@
                                                 alt=""
                                                 width="18px"
                                             />
-                                            <span :class="activeTab == 'recent-visited' ? '' : 'col-sm-none'">Recent Visited</span>
+                                            <span
+                                                :class="
+                                                    activeTab ==
+                                                    'recent-visited'
+                                                        ? ''
+                                                        : 'col-md-none'
+                                                "
+                                                >Recent Visited</span
+                                            >
                                         </button>
                                     </router-link>
                                 </li>

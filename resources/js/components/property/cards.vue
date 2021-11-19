@@ -95,8 +95,8 @@
                                 />
                                 <span class="count card-title">
                                     {{
-                                        property.Rms
-                                            ? parseInt(property.Rms)
+                                        property.Bath_tot
+                                            ? parseInt(property.Bath_tot)
                                             : "0"
                                     }}</span
                                 >
@@ -110,11 +110,7 @@
                                     width="16px"
                                 />
                                 <span class="count card-title">
-                                    {{
-                                        property.Bath_tot
-                                            ? parseInt(property.Bath_tot)
-                                            : "0"
-                                    }}</span
+                                    {{ getTotalRooms }}</span
                                 >
                             </small>
                         </li>
@@ -126,6 +122,7 @@
 </template>
 
 <script>
+import swal from "sweetalert";
 export default {
     props: {
         property: {
@@ -136,11 +133,94 @@ export default {
     data() {
         return {};
     },
+
+    computed: {
+        getTotalRooms() {
+            let count = 0;
+            if (this.property) {
+                if (
+                    this.property.Rm1_wth !== null &&
+                    this.property.Rm1_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm2_wth !== null &&
+                    this.property.Rm2_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm3_wth !== null &&
+                    this.property.Rm3_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm4_wth !== null &&
+                    this.property.Rm4_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm5_wth !== null &&
+                    this.property.Rm5_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm6_wth !== null &&
+                    this.property.Rm6_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm7_wth !== null &&
+                    this.property.Rm7_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm8_wth !== null &&
+                    this.property.Rm8_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm9_wth !== null &&
+                    this.property.Rm9_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm10_wth !== null &&
+                    this.property.Rm10_wt > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm11_wth !== null &&
+                    this.property.Rm11_wt > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm12_wth !== null &&
+                    this.property.Rm12_wt > 0
+                ) {
+                    count++;
+                }
+            }
+
+            return count;
+            // parseInt(property.Rms);
+        },
+    },
     methods: {
         markFavourite(ml_num) {
             // check user is logged in
+            const self = this;
             if (this.$store.state.auth_token) {
-                const self = this;
                 const token = this.$store.state.auth_token;
                 axios
                     .post(
@@ -164,8 +244,15 @@ export default {
                         console.log(err);
                     });
             } else {
-                alert("Please login to make favourite a property.");
-                this.$router.push("/login");
+                swal({
+                    text: "You are not logged in",
+                    icon: "warning",
+                    buttons: ["Close", "Go to login"],
+                }).then((res) => {
+                    if (res) {
+                        self.$router.push("/login");
+                    }
+                });
             }
         },
     },

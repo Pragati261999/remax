@@ -48,16 +48,22 @@
                 <!-- slider -->
                 <div v-if="property.images">
                     <Carousel
-                        :per-page="4"
                         :autoplay="true"
                         :centerMode="true"
                         :paginationEnabled="false"
+                        :perPageCustom="[
+                            [425, 1],
+                            [768, 2],
+                            [992, 3],
+                            [1199, 4],
+                        ]"
                     >
                         <Slide
                             v-for="img in property.images"
                             :key="img.property_ml_num + '_' + img.id"
                         >
                             <div
+                                v-if="img.image"
                                 class="
                                     carousel-outer
                                     border
@@ -97,9 +103,6 @@
                                         <h4 class="text-color fw-bold mb-1">
                                             ${{ property.Lp_dol }}
                                         </h4>
-                                        <!-- <small class="text-color fw-bold mb-2"
-                      >EST, 7625/month</small
-                    > -->
                                         <div class="badge">
                                             <p class="text-color">
                                                 For {{ property.S_r }}
@@ -119,7 +122,9 @@
                                                         class="count card-title"
                                                     >
                                                         {{
-                                                            parseInt(property.Bath_tot)
+                                                            parseInt(
+                                                                property.Bath_tot
+                                                            )
                                                         }}</span
                                                     >
                                                 </small>
@@ -134,7 +139,7 @@
                                                     <span
                                                         class="count card-title"
                                                         >{{
-                                                            parseInt(property.Rms)
+                                                            getTotalRooms
                                                         }}</span
                                                     >
                                                 </small>
@@ -159,14 +164,44 @@
                                                 <label
                                                     for="tab-1"
                                                     class="tab-label"
-                                                    ><img
-                                                        src="/assets/images/icons/bookmark.png"
-                                                        alt=""
-                                                        width="18px"
-                                                        class="me-2"
-                                                    />
-                                                    Bookmark</label
+                                                    @click="
+                                                        markFavourite(
+                                                            property.Ml_num
+                                                        )
+                                                    "
+                                                    :class="
+                                                        $store.state.favourite.indexOf(
+                                                            property.Ml_num
+                                                        ) > -1
+                                                            ? 'book-marked'
+                                                            : ''
+                                                    "
                                                 >
+                                                    <span
+                                                        v-if="
+                                                            $store.state.favourite.indexOf(
+                                                                property.Ml_num
+                                                            ) > -1
+                                                        "
+                                                        ><img
+                                                            src="/assets/images/icons/bookmark-check.png"
+                                                            alt=""
+                                                            width="18px"
+                                                            class="me-2"
+                                                        />
+                                                        Bookmarked
+                                                    </span>
+                                                    <span v-else>
+                                                        <img
+                                                            src="/assets/images/icons/bookmark.png"
+                                                            alt=""
+                                                            width="18px"
+                                                            class="me-2"
+                                                        />
+
+                                                        Bookmark</span
+                                                    >
+                                                </label>
                                             </li>
                                             <li class="float-start">
                                                 <input
@@ -197,6 +232,7 @@
                                                 <label
                                                     for="tab-1"
                                                     class="tab-label"
+                                                    @click="scrollToBookShowing"
                                                     ><img
                                                         src="/assets/images/icons/book_showing.png"
                                                         alt=""
@@ -2651,7 +2687,7 @@
                     v-if="property.images"
                     class="container-fluid pb-5 bg-theme"
                 >
-                    <div class="row">
+                    <div class="row" id="book-showing">
                         <div
                             class="
                                 col-md-6
@@ -2755,7 +2791,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 pe-0 mt-5 right-image">
+                        <div
+                            v-if="property.images"
+                            class="col-md-6 pe-0 mt-5 right-image"
+                        >
                             <img
                                 :src="property.images[0].image"
                                 alt="Not Found"
@@ -2807,8 +2846,92 @@ export default {
         this.getAllData();
         this.updateIfLoggedIN();
     },
+
+    computed: {
+        getTotalRooms() {
+            let count = 0;
+            if (this.property) {
+                if (
+                    this.property.Rm1_wth !== null &&
+                    this.property.Rm1_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm2_wth !== null &&
+                    this.property.Rm2_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm3_wth !== null &&
+                    this.property.Rm3_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm4_wth !== null &&
+                    this.property.Rm4_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm5_wth !== null &&
+                    this.property.Rm5_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm6_wth !== null &&
+                    this.property.Rm6_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm7_wth !== null &&
+                    this.property.Rm7_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm8_wth !== null &&
+                    this.property.Rm8_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm9_wth !== null &&
+                    this.property.Rm9_wth > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm10_wth !== null &&
+                    this.property.Rm10_wt > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm11_wth !== null &&
+                    this.property.Rm11_wt > 0
+                ) {
+                    count++;
+                }
+                if (
+                    this.property.Rm12_wth !== null &&
+                    this.property.Rm12_wt > 0
+                ) {
+                    count++;
+                }
+            }
+
+            return count;
+            // parseInt(property.Rms);
+        },
+    },
+
     methods: {
-         async saveLaed() {
+        async saveLaed() {
             let url = `/api/lead/new-guest`;
             // Check a user is logged in or not.
             if (this.$store.state.auth_user) {
@@ -2878,6 +3001,66 @@ export default {
                     console.log(err);
                 });
         },
+
+        async markFavourite(ml_num) {
+            // check user is logged in
+            const self = this;
+            if (this.$store.state.auth_token) {
+                const token = this.$store.state.auth_token;
+                await axios
+                    .post(
+                        "/api/user/property/manage/favourite-property",
+                        {
+                            ml_num,
+                        },
+                        {
+                            headers: { Authorization: `Bearer ${token}` },
+                        }
+                    )
+                    .then((res) => {
+                        const d = res.data.data;
+                        if (d.action == "added") {
+                            self.$store.commit("addFavourite", d.ml_num);
+                            // swal({
+                            //     icon: "success",
+                            //     text: "Item bookmarked.",
+                            //     buttons: false,
+                            //     timer: 2000,
+                            // });
+                        } else {
+                            self.$store.commit("removeFavourite", d.ml_num);
+                            // swal({
+                            //     icon: "error",
+                            //     text: "Item removed from your bookmark.",
+                            //     buttons: false,
+                            //     timer: 2000,
+                            // });
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            } else {
+                swal({
+                    text: "You are not logged in",
+                    icon: "warning",
+                    buttons: ["Close", "Go to login"],
+                }).then((res) => {
+                    if (res) {
+                        self.$router.push("/login");
+                    }
+                });
+            }
+        },
+
+        scrollToBookShowing() {
+            $("html, body").animate(
+                {
+                    scrollTop: $("#book-showing").offset().top,
+                },
+                200
+            );
+        },
     },
 };
 </script>
@@ -2922,5 +3105,8 @@ export default {
 }
 .mid-content {
     max-width: 620px;
+}
+.book-marked {
+    background: #0b810b;
 }
 </style>

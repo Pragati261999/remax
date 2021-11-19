@@ -99,6 +99,15 @@
                     <span class="text-darker fw-lighter-items">Remax</span>
                 </h6>
             </div>
+            <div class="b-t-t">
+                <button
+                    @onclick="backToTop"
+                    id="backToTopBtn"
+                    title="Go to top"
+                >
+                    Top
+                </button>
+            </div>
         </section>
         <!-- bottom footer -->
     </div>
@@ -114,6 +123,9 @@ export default {
         };
     },
     methods: {
+        backToTop() {
+            window.scrollTo(0, 0);
+        },
         async subscribe() {
             const self = this;
 
@@ -142,3 +154,25 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+#backToTopBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: #555; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+
+#backToTopBtn:hover {
+    background-color: #032646; /* Add a dark-grey background on hover */
+}
+</style>
