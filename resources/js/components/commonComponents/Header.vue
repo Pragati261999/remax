@@ -84,7 +84,9 @@
                                         ><img
                                             src="/assets/images/icons/bookmark.svg"
                                             alt=""
-                                    /></router-link>
+                                        />
+                                        <div class="mobile-m-v">Bookmark</div>
+                                    </router-link>
                                 </li>
                                 <li class="nav-item me-3">
                                     <router-link
@@ -99,7 +101,11 @@
                                         ><img
                                             src="/assets/images/icons/alarm.svg"
                                             alt=""
-                                    /></router-link>
+                                        />
+                                        <div class="mobile-m-v">
+                                            Notifications
+                                        </div>
+                                    </router-link>
                                 </li>
                                 <li class="nav-item">
                                     <div v-if="!$store.state.auth_token">
@@ -128,6 +134,9 @@
                                                 aria-expanded="false"
                                             >
                                                 <i class="fa fa-user"></i>
+                                                <div class="mobile-m-v">
+                                                    Dashboard
+                                                </div>
                                             </button>
                                             <div
                                                 class="
@@ -208,7 +217,21 @@ export default {
     box-shadow: none !important;
 }
 
+.mobile-m-v {
+    opacity: 0;
+    visibility: hidden;
+    padding-left: 0;
+    display: none;
+}
+
 @media (max-width: 991px) {
+    .mobile-m-v {
+        opacity: 1;
+        visibility: visible;
+        padding-left: 5px;
+        display: inline-block;
+    }
+
     .search-bar,
     .search-bar .input-bar {
         width: 100%;

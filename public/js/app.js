@@ -3312,6 +3312,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: {
     user: function user() {
@@ -13860,7 +13869,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-menu-right[data-v-0e5f7320] {\r\n    right: 0;\n}\n.navbar-toggler-icon[data-v-0e5f7320] {\r\n    padding-top: 1.5px;\n}\n.navbar-toggler[data-v-0e5f7320] {\r\n    box-shadow: 0 0 0 1px #032646 !important;\n}\n.home-header .navbar-toggler[data-v-0e5f7320] {\r\n    box-shadow: none !important;\n}\n@media (max-width: 991px) {\n.search-bar[data-v-0e5f7320],\r\n    .search-bar .input-bar[data-v-0e5f7320] {\r\n        width: 100%;\r\n        max-width: 100% !important;\n}\n.nav-item[data-v-0e5f7320] {\r\n        border-bottom: 1px solid rgba(0, 0, 0, 0.13);\n}\n.nav-item[data-v-0e5f7320]:last-child {\r\n        border-bottom: none;\n}\n.nav-item.me-3[data-v-0e5f7320] {\r\n        margin-right: 0 !important;\n}\n.home-header .nav-item[data-v-0e5f7320] {\r\n        border-bottom: 1px solid rgba(255, 255, 255, 0.13);\n}\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.dropdown-menu-right[data-v-0e5f7320] {\r\n    right: 0;\n}\n.navbar-toggler-icon[data-v-0e5f7320] {\r\n    padding-top: 1.5px;\n}\n.navbar-toggler[data-v-0e5f7320] {\r\n    box-shadow: 0 0 0 1px #032646 !important;\n}\n.home-header .navbar-toggler[data-v-0e5f7320] {\r\n    box-shadow: none !important;\n}\n.mobile-m-v[data-v-0e5f7320] {\r\n    opacity: 0;\r\n    visibility: hidden;\r\n    padding-left: 0;\r\n    display: none;\n}\n@media (max-width: 991px) {\n.mobile-m-v[data-v-0e5f7320] {\r\n        opacity: 1;\r\n        visibility: visible;\r\n        padding-left: 5px;\r\n        display: inline-block;\n}\n.search-bar[data-v-0e5f7320],\r\n    .search-bar .input-bar[data-v-0e5f7320] {\r\n        width: 100%;\r\n        max-width: 100% !important;\n}\n.nav-item[data-v-0e5f7320] {\r\n        border-bottom: 1px solid rgba(0, 0, 0, 0.13);\n}\n.nav-item[data-v-0e5f7320]:last-child {\r\n        border-bottom: none;\n}\n.nav-item.me-3[data-v-0e5f7320] {\r\n        margin-right: 0 !important;\n}\n.home-header .nav-item[data-v-0e5f7320] {\r\n        border-bottom: 1px solid rgba(255, 255, 255, 0.13);\n}\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49572,6 +49581,10 @@ var render = function () {
                                 alt: "",
                               },
                             }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mobile-m-v" }, [
+                              _vm._v("Bookmark"),
+                            ]),
                           ]
                         ),
                       ],
@@ -49599,6 +49612,12 @@ var render = function () {
                                 alt: "",
                               },
                             }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mobile-m-v" }, [
+                              _vm._v(
+                                "\n                                        Notifications\n                                    "
+                              ),
+                            ]),
                           ]
                         ),
                       ],
@@ -49771,7 +49790,15 @@ var staticRenderFns = [
           "aria-expanded": "false",
         },
       },
-      [_c("i", { staticClass: "fa fa-user" })]
+      [
+        _c("i", { staticClass: "fa fa-user" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "mobile-m-v" }, [
+          _vm._v(
+            "\n                                                Dashboard\n                                            "
+          ),
+        ]),
+      ]
     )
   },
 ]
