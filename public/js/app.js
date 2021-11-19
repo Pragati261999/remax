@@ -3329,14 +3329,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 token = _this.$store.state.auth_token;
-                _context.next = 3;
-                return axios.post("/api/user/logout", {
-                  headers: {
-                    Authorization: "Bearer ".concat(token)
-                  }
-                });
 
-              case 3:
                 _this.$store.commit("removeAuthToken");
 
                 _this.$store.commit("removeAuthUser");
@@ -3344,6 +3337,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.$store.commit("removeBookMark");
 
                 _this.$router.push("/");
+
+                _context.next = 7;
+                return axios.post("/api/user/logout", {
+                  headers: {
+                    Authorization: "Bearer ".concat(token)
+                  }
+                });
 
               case 7:
               case "end":

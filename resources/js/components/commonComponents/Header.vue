@@ -179,13 +179,14 @@ export default {
     methods: {
         async logout() {
             const token = this.$store.state.auth_token;
-            await axios.post("/api/user/logout", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+
             this.$store.commit("removeAuthToken");
             this.$store.commit("removeAuthUser");
             this.$store.commit("removeBookMark");
             this.$router.push("/");
+            await axios.post("/api/user/logout", {
+                headers: { Authorization: `Bearer ${token}` },
+            });
         },
     },
 };
