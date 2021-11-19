@@ -184,4 +184,7 @@ export default {
 .dropdown-menu-right {
     right: 0;
 }
+.navbar-toggler-icon {
+    padding-top: 1.5px;
+}
 </style>
