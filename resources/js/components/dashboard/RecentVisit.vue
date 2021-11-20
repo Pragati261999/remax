@@ -2,6 +2,11 @@
     <div>
         <div class="container px-4">
             <h2 class="theme-title">Recent Visited Properties</h2>
+            <div v-if="recentVisited.length > 0" class="clear text-center">
+                <u role="button" class="h6" @click="clearRecent"
+                    >Clear recent visited properties from your profile</u
+                >
+            </div>
             <div class="row justify-content-center mt-2">
                 <div v-if="!loadingProperties">
                     <div v-if="properties.length > 0" class="row">
@@ -67,24 +72,32 @@ export default {
         };
     },
     computed: {
-        bookmarks() {
-            return this.$store.state.favourite;
+        recentVisited() {
+            return this.$store.state.recent;
         },
     },
     mounted() {
-        this.getSavedProp();
+        this.getRecentProp();
     },
     methods: {
-        async getSavedProp() {
+        clearRecent() {
+            this.$store.commit("removeRecent");
+            this.getRecentProp();
+        },
+        async getRecentProp() {
             // get properties
             const token = this.$store.state.auth_token;
             // console.log({ headers: {"Authorization" : `Bearer ${token}`} })
             const self = this;
             self.loadingProperties = true;
             await axios
-                .get("/api/user/property/bookmarks", {
-                    headers: { Authorization: `Bearer ${token}` },
-                })
+                .post(
+                    "/api/user/property/recent",
+                    { ml_num: self.recentVisited },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                )
                 .then((response) => {
                     self.properties = response.data.data.data;
                     self.nextPageUrl = response.data.data.next_page_url;
@@ -103,9 +116,13 @@ export default {
             self.loadingMoreProperties = true;
             console.log(self.nextPageUrl);
             await axios
-                .get(self.nextPageUrl, {
-                    headers: { Authorization: `Bearer ${token}` },
-                })
+                .post(
+                    self.nextPageUrl,
+                    { ml_num: self.recentVisited },
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                )
                 .then(async (res) => {
                     await self.updateProperties(res.data.data.data);
                     self.nextPageUrl = res.data.data.next_page_url;

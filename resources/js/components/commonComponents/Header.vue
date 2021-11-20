@@ -83,7 +83,8 @@
                                         to="/dashboard/bookmarks"
                                         ><img
                                             src="/assets/images/icons/bookmark.svg"
-                                            alt=""
+                                            alt="Bookmarks"
+                                            class="mobile-m-v-hidden"
                                         />
                                         <div class="mobile-m-v">Bookmark</div>
                                     </router-link>
@@ -100,7 +101,8 @@
                                         to="/dashboard/notifications"
                                         ><img
                                             src="/assets/images/icons/alarm.svg"
-                                            alt=""
+                                            alt="Notification"
+                                            class="mobile-m-v-hidden"
                                         />
                                         <div class="mobile-m-v">
                                             Notifications
@@ -209,10 +211,6 @@ export default {
     padding-top: 1.5px;
 }
 
-.navbar-toggler {
-    box-shadow: 0 0 0 1px #032646 !important;
-}
-
 .home-header .navbar-toggler {
     box-shadow: none !important;
 }
@@ -220,16 +218,26 @@ export default {
 .mobile-m-v {
     opacity: 0;
     visibility: hidden;
-    padding-left: 0;
     display: none;
+}
+
+.mobile-m-v-hidden {
+    opacity: 1;
+    visibility: visible;
+    display: inline-block;
 }
 
 @media (max-width: 991px) {
     .mobile-m-v {
         opacity: 1;
         visibility: visible;
-        padding-left: 5px;
         display: inline-block;
+    }
+
+    .mobile-m-v-hidden {
+        opacity: 0;
+        visibility: hidden;
+        display: none;
     }
 
     .search-bar,
@@ -242,7 +250,9 @@ export default {
     }
 
     .nav-item:last-child {
-        border-bottom: none;
+        border-bottom: none !important;
+        padding-top: 10px;
+        text-align: right;
     }
     .nav-item.me-3 {
         margin-right: 0 !important;

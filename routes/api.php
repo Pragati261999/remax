@@ -26,6 +26,7 @@ Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
     Route::post('/property/manage/favourite-property', [Api\PropertyController::class, 'saveFavourite']);
     // Bookmark / favourite / Get
     Route::get('/property/bookmarks', [Api\PropertyController::class, 'getFavourite']);
+    Route::post('/property/recent', [Api\PropertyController::class, 'getRecent']);
 });
 
 // Property

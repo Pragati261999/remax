@@ -7,10 +7,12 @@ import createPersistedState from "vuex-persistedstate";
 import router from "./router";
 import App from "./layouts/App.vue";
 import Vue from "vue";
+import VueSocialSharing from "vue-social-sharing";
 
 import VueLazyload from "vue-lazyload";
 
 Vue.use(Vuex);
+Vue.use(VueSocialSharing);
 
 Vue.use(VueLazyload, {
     preLoad: 1.3,
@@ -76,6 +78,7 @@ const store = new Vuex.Store({
         auth_token: null,
         auth_user: null,
         favourite: [],
+        recent: [],
     },
     plugins: [createPersistedState()],
     mutations: {
@@ -104,6 +107,21 @@ const store = new Vuex.Store({
         },
         removeBookMark(state) {
             state.favourite = [];
+        },
+
+        addRecent(state, ml_num) {
+            var index = state.recent.indexOf(ml_num);
+            if (index < 0) {
+                // Not exists --- add new
+                // check length
+                if (state.recent.length >= 9) {
+                    state.recent.splice(0, 1);
+                }
+                state.recent.push(ml_num);
+            }
+        },
+        removeRecent(state) {
+            state.recent = [];
         },
     },
 });

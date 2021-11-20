@@ -99,7 +99,8 @@ class PropertyController extends AppBaseController
         Favourite::create($data);
         return $this->sendResponse("Added to your favourite list.", ['action' => 'added', 'ml_num' => $request->ml_num]);
     }
-    public function getFavourite() {
+    public function getFavourite(Request $request)
+    {
         // return $this->sendResponse('Bookmark Property successfully', []);
         $userId = auth()->user()->id;
         $f_id =  Favourite::where(['user_id' => $userId])->get('ml_num');
@@ -107,5 +108,11 @@ class PropertyController extends AppBaseController
         $response = Property::whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
         return $this->sendResponse('Bookmark Property successfully', $response);
     }
-
+    public function getRecent(Request $request)
+    {
+        $f_id = $request->ml_num;
+        // echo count($f_id);
+        $response = Property::whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
+        return $this->sendResponse('Bookmark Property successfully', $response);
+    }
 }

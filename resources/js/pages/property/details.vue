@@ -52,7 +52,7 @@
                         :centerMode="true"
                         :paginationEnabled="false"
                         :perPageCustom="[
-                            [425, 1],
+                            [500, 1],
                             [768, 2],
                             [992, 3],
                             [1199, 4],
@@ -2845,6 +2845,7 @@ export default {
     mounted() {
         this.getAllData();
         this.updateIfLoggedIN();
+        this.addToRecent();
     },
 
     computed: {
@@ -2931,6 +2932,12 @@ export default {
     },
 
     methods: {
+        addToRecent() {
+            const ml = this.$route.params.ml_num;
+            this.$store.commit("addRecent", ml);
+            console.log(this.$store.state.recent);
+        },
+
         async saveLaed() {
             let url = `/api/lead/new-guest`;
             // Check a user is logged in or not.
