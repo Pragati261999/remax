@@ -41,6 +41,13 @@ class PropertyController extends AppBaseController
         $min_price = !empty($data['minPrice']) ? (float) $data['minPrice'] : '';
         $max_price = !empty($data['maxPrice']) ? (float) $data['maxPrice'] : '';
 
+        $bath = !empty($data['bath']) ? (float) $data['bath'] : '';
+        $addedFrom =  !empty($data['addedFrom']) ? $data['addedFrom'] : '';
+        $key = !empty($data['key']) ? $data['key'] : '';
+
+        $Sqft = !empty($data['sqft']) ? (float) $data['sqft'] : '';
+        $openHouse = !empty($data['openHouse']) ? $data['openHouse'] : '';
+
         $msg = 'Property fetched successfully.';
 
         $response = Property::with('images')
@@ -55,7 +62,8 @@ class PropertyController extends AppBaseController
 
             ->when($bedRoom, function ($query) use ($data) {
                 $br = (float) $data['bedRoom'];
-                return $query->where('Rms', '>=', $br);
+                $col = 'Rm' . $br . '_len';
+                return $query->where($col, '>', 0.00);
             })
 
             ->when($min_price, function ($query) use ($data) {
@@ -77,6 +85,36 @@ class PropertyController extends AppBaseController
                 $propertyType = $data['propertyType'];
                 return $query->where('property_type', 'LIKE', "%{$propertyType}%");
             })
+
+            // bath
+            ->when($bath, function ($query) use ($data) {
+                $bath = (int) $data['bath'];
+                return $query->where('Bath_tot', '>=', $bath);
+            })
+
+            // sqft
+            // ->when($Sqft, function ($query) use ($data) {
+            //     $Sqft_ = (int) $data['sqft'];
+            //     return $query->where('Sqft', '>', $Sqft_);
+            // })
+
+            // addedFrom -- Idx_dt
+            ->when($addedFrom, function ($query) use ($data) {
+                $addedFrom_ = $data['addedFrom'];
+                return $query->where('Idx_dt', '<=', $addedFrom_);
+            })
+
+            // key
+            ->when($key, function ($query) use ($data) {
+                $key_ = $data['key'];
+                return $query->where('Ad_text', 'LIKE', "%{$key_}%");
+            })
+
+            // openHouse
+            // ->when($openHouse, function ($query) use ($data) {
+            //     $openHouse_ = $data['openHouse'];
+            //     return $query->where('openHouse', 'LIKE', "%{$openHouse_}%");
+            // })
 
             ->orderby('id', 'DESC')
             ->paginate('15')->withQueryString();

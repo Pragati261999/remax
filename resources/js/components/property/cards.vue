@@ -85,7 +85,7 @@
                     <ul class="list-unstyled">
                         <li class="float-start">
                             <small class="ps-3 card-title fw-normal"
-                                >MLS {{ property.Ml_num }}</small
+                                >MLS® {{ property.Ml_num }}</small
                             >
                         </li>
                     </ul>

@@ -3,11 +3,15 @@ require("./bootstrap");
 window.Vue = require("vue").default;
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
+import "vue-select/dist/vue-select.css";
 
 import router from "./router";
 import App from "./layouts/App.vue";
 import Vue from "vue";
 import VueSocialSharing from "vue-social-sharing";
+
+import vSelect from "vue-select";
+Vue.component("v-select", vSelect);
 
 import VueLazyload from "vue-lazyload";
 

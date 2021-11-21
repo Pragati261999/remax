@@ -857,7 +857,11 @@
                                 </tr>
                                 <tr v-if="property.Tour_url">
                                     <th class="p-2">Virtual Tour URL</th>
-                                    <td class="p-2">{{ property.Tour_url }}</td>
+                                    <td class="p-2">
+                                        <a :href="property.Tour_url"
+                                            >Click To View</a
+                                        >
+                                    </td>
                                 </tr>
                                 <tr v-if="property.Community_code">
                                     <th class="p-2">Community Code</th>
