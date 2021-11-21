@@ -4216,8 +4216,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     cptxt: function cptxt(url) {
-      navigator.clipboard.writeText(url);
-      this.copyText = "Copied";
+      var el = document.createElement("textarea");
+      el.value = url;
+      el.setAttribute("readonly", "");
+      el.style.position = "absolute";
+      el.style.left = "-9999px";
+      document.body.appendChild(el);
+      var selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false;
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+
+      if (selected) {
+        document.getSelection().removeAllRanges();
+        document.getSelection().addRange(selected);
+        this.copyText = "Copied";
+      } else {
+        this.copyText = "Failed";
+      }
     }
   }
 });
@@ -5850,6 +5866,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-carousel */ "./node_modules/vue-carousel/dist/vue-carousel.min.js");
 /* harmony import */ var vue_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_carousel__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_property_ShareProperty_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/property/ShareProperty.vue */ "./resources/js/components/property/ShareProperty.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -8676,11 +8693,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     Carousel: vue_carousel__WEBPACK_IMPORTED_MODULE_1__.Carousel,
-    Slide: vue_carousel__WEBPACK_IMPORTED_MODULE_1__.Slide
+    Slide: vue_carousel__WEBPACK_IMPORTED_MODULE_1__.Slide,
+    ShareProp: _components_property_ShareProperty_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -8765,7 +8791,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     addToRecent: function addToRecent() {
       var ml = this.$route.params.ml_num;
       this.$store.commit("addRecent", ml);
-      console.log(this.$store.state.recent);
     },
     saveLaed: function saveLaed() {
       var _this = this;
@@ -54140,7 +54165,54 @@ var render = function () {
                                 ),
                               ]),
                               _vm._v(" "),
-                              _vm._m(1),
+                              _c(
+                                "li",
+                                { staticClass: "float-start" },
+                                [
+                                  _c("input", {
+                                    staticClass: "tab-switch",
+                                    attrs: {
+                                      type: "button",
+                                      name: "css-tabs",
+                                      id: "tab-1",
+                                    },
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "tab-label",
+                                      attrs: {
+                                        for: "tab-1",
+                                        "data-toggle": "modal",
+                                        "data-target":
+                                          "#shareModal" + _vm.property.Ml_num,
+                                      },
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticClass: "me-2",
+                                        attrs: {
+                                          src: "/assets/images/icons/shareLight.png",
+                                          alt: "",
+                                          width: "18px",
+                                        },
+                                      }),
+                                      _vm._v(
+                                        "\n                                                Share"
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("ShareProp", {
+                                    attrs: {
+                                      mid: _vm.property.Ml_num,
+                                      property: _vm.property,
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
                               _vm._v(" "),
                               _c("li", { staticClass: "float-start" }, [
                                 _c("input", {
@@ -54354,7 +54426,7 @@ var render = function () {
                                     ]),
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(2),
+                                  _vm._m(1),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "col-6 py-2" }, [
                                     _c(
@@ -54427,7 +54499,7 @@ var render = function () {
                                     ]),
                                   ]),
                                   _vm._v(" "),
-                                  _vm._m(3),
+                                  _vm._m(2),
                                 ]
                               ),
                             ]),
@@ -54475,7 +54547,7 @@ var render = function () {
                                 _vm._v("$" + _vm._s(_vm.property.Lp_dol)),
                               ]),
                               _vm._v(" "),
-                              _vm._m(4),
+                              _vm._m(3),
                             ]
                           ),
                         ]),
@@ -54483,7 +54555,7 @@ var render = function () {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("section", { staticClass: "container" }, [
                   _c("div", { staticClass: "row" }, [
@@ -54498,7 +54570,7 @@ var render = function () {
                           "table",
                           { staticClass: "table table-bordered border mb-2" },
                           [
-                            _vm._m(6),
+                            _vm._m(5),
                             _vm._v(" "),
                             _vm.property.property_type
                               ? _c("tr", [
@@ -56478,7 +56550,7 @@ var render = function () {
                           "table",
                           { staticClass: "table table-bordered border" },
                           [
-                            _vm._m(7),
+                            _vm._m(6),
                             _vm._v(" "),
                             _vm.property.Insur_bldg
                               ? _c("tr", [
@@ -56600,7 +56672,7 @@ var render = function () {
                           "table",
                           { staticClass: "table table-bordered border" },
                           [
-                            _vm._m(8),
+                            _vm._m(7),
                             _vm._v(" "),
                             _vm.property.Rms
                               ? _c("tr", [
@@ -57665,7 +57737,7 @@ var render = function () {
                           "table",
                           { staticClass: "table table-bordered border" },
                           [
-                            _vm._m(9),
+                            _vm._m(8),
                             _vm._v(" "),
                             _vm.property.Bath_tot
                               ? _c("tr", [
@@ -57926,7 +57998,7 @@ var render = function () {
                               "table",
                               { staticClass: "table table-bordered border" },
                               [
-                                _vm._m(10),
+                                _vm._m(9),
                                 _vm._v(" "),
                                 _vm.property.Potl
                                   ? _c("tr", [
@@ -57947,7 +58019,7 @@ var render = function () {
                           "table",
                           { staticClass: "table table-bordered border" },
                           [
-                            _vm._m(11),
+                            _vm._m(10),
                             _vm._v(" "),
                             _vm.property.Cond_txinc
                               ? _c("tr", [
@@ -58015,7 +58087,7 @@ var render = function () {
                           "table",
                           { staticClass: "table table-bordered border mt-4" },
                           [
-                            _vm._m(12),
+                            _vm._m(11),
                             _vm._v(" "),
                             _vm.property.Heating
                               ? _c("tr", [
@@ -58207,7 +58279,7 @@ var render = function () {
                           "table",
                           { staticClass: "table table-bordered border" },
                           [
-                            _vm._m(13),
+                            _vm._m(12),
                             _vm._v(" "),
                             _vm.property.Park_chgs
                               ? _c("tr", [
@@ -58403,7 +58475,7 @@ var render = function () {
                           "table",
                           { staticClass: "table table-bordered border" },
                           [
-                            _vm._m(14),
+                            _vm._m(13),
                             _vm._v(" "),
                             _vm.property.Area
                               ? _c("tr", [
@@ -60026,7 +60098,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "container-fluid p-0 mb-0" }, [
-                  _vm._m(15),
+                  _vm._m(14),
                   _vm._v(" "),
                   _c("iframe", {
                     staticStyle: {
@@ -60401,29 +60473,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("li", { staticClass: "breadcrumb-item" }, [
       _c("span", { staticClass: "active" }, [_vm._v("Property details")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "float-start" }, [
-      _c("input", {
-        staticClass: "tab-switch",
-        attrs: { type: "button", name: "css-tabs", id: "tab-1" },
-      }),
-      _vm._v(" "),
-      _c("label", { staticClass: "tab-label", attrs: { for: "tab-1" } }, [
-        _c("img", {
-          staticClass: "me-2",
-          attrs: {
-            src: "/assets/images/icons/shareLight.png",
-            alt: "",
-            width: "18px",
-          },
-        }),
-        _vm._v("\n                                                Share"),
-      ]),
     ])
   },
   function () {

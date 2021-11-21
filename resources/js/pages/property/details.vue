@@ -213,6 +213,8 @@
                                                 <label
                                                     for="tab-1"
                                                     class="tab-label"
+                                                    data-toggle="modal"
+                                                    :data-target="`#shareModal${property.Ml_num}`"
                                                     ><img
                                                         src="/assets/images/icons/shareLight.png"
                                                         alt=""
@@ -221,6 +223,11 @@
                                                     />
                                                     Share</label
                                                 >
+
+                                                <ShareProp
+                                                    :mid="property.Ml_num"
+                                                    :property="property"
+                                                />
                                             </li>
                                             <li class="float-start">
                                                 <input
@@ -2820,10 +2827,12 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import ShareProp from "../../components/property/ShareProperty.vue";
 export default {
     components: {
         Carousel,
         Slide,
+        ShareProp,
     },
     data() {
         return {
@@ -2935,7 +2944,6 @@ export default {
         addToRecent() {
             const ml = this.$route.params.ml_num;
             this.$store.commit("addRecent", ml);
-            console.log(this.$store.state.recent);
         },
 
         async saveLaed() {
