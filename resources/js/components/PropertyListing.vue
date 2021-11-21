@@ -2,7 +2,10 @@
     <div>
         <section class="property bg-theme-light">
             <div class="container p-0">
-                <h2 class="theme-title">Featured Properties Brampton</h2>
+                <h2 class="theme-title">
+                    Featured Properties
+                    <span v-if="propLocation"> in {{ propLocation }}</span>
+                </h2>
                 <div v-if="!loadingProperties">
                     <div v-if="properties.length > 0" class="row">
                         <div
@@ -46,6 +49,12 @@ export default {
             loadingProperties: true,
         };
     },
+    props: {
+        propLocation: {
+            type: String,
+            default: "",
+        },
+    },
     mounted() {
         this.getAllData();
     },
@@ -54,7 +63,9 @@ export default {
             const self = this;
             self.loadingProperties = true;
             await axios
-                .get("api/property/properties")
+                .get(
+                    `api/property/properties?property-location=${self.propLocation}`
+                )
                 .then((res) => {
                     self.properties = res.data.data.data;
                     self.loadingProperties = false;

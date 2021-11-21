@@ -10,7 +10,12 @@
             </div>
         </section>
 
-        <property-listing></property-listing>
+        <!-- Brampton -->
+        <property-listing :prop-location="'Brampton'"></property-listing>
+        <!-- Toronto -->
+        <property-listing :prop-location="'Toronto'"></property-listing>
+        <!-- mississauga -->
+        <property-listing :prop-location="'mississauga'"></property-listing>
 
         <section class="tips bg-theme pe-0">
             <div class="container-fluid pe-0">

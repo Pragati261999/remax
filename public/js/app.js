@@ -2887,6 +2887,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2901,6 +2904,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       properties: [],
       loadingProperties: true
     };
+  },
+  props: {
+    propLocation: {
+      type: String,
+      "default": ""
+    }
   },
   mounted: function mounted() {
     this.getAllData();
@@ -2918,7 +2927,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 self = _this;
                 self.loadingProperties = true;
                 _context.next = 4;
-                return axios.get("api/property/properties").then(function (res) {
+                return axios.get("api/property/properties?property-location=".concat(self.propLocation)).then(function (res) {
                   self.properties = res.data.data.data;
                   self.loadingProperties = false;
                 })["catch"](function (err) {
@@ -4667,6 +4676,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49544,7 +49558,10 @@ var render = function () {
     _c("section", { staticClass: "property bg-theme-light" }, [
       _c("div", { staticClass: "container p-0" }, [
         _c("h2", { staticClass: "theme-title" }, [
-          _vm._v("Featured Properties Brampton"),
+          _vm._v("\n                Featured Properties\n                "),
+          _vm.propLocation
+            ? _c("span", [_vm._v(" in " + _vm._s(_vm.propLocation))])
+            : _vm._e(),
         ]),
         _vm._v(" "),
         !_vm.loadingProperties
@@ -52333,7 +52350,11 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c("property-listing"),
+      _c("property-listing", { attrs: { "prop-location": "Brampton" } }),
+      _vm._v(" "),
+      _c("property-listing", { attrs: { "prop-location": "Toronto" } }),
+      _vm._v(" "),
+      _c("property-listing", { attrs: { "prop-location": "mississauga" } }),
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),

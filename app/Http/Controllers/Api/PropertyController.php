@@ -11,8 +11,15 @@ class PropertyController extends AppBaseController
 {
     public function getProperties(Request $request)
     {
+
+        $addrr = $request->input('property-location');
         $msg = 'Property fetched successfully.';
-        $response = Property::with('images')->orderby('id', 'DESC')->paginate('12');
+        $response = Property::where('Municipality', 'LIKE', "%{$addrr}%")
+            ->orWhere('Municipality_district', 'LIKE', "%{$addrr}%")
+            ->orWhere('Community', 'LIKE', "%{$addrr}%")
+            ->with('images')
+            ->orderby('id', 'DESC')
+            ->paginate('9');
         return $this->sendResponse($msg, $response);
     }
 
