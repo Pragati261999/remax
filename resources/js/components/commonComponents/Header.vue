@@ -137,7 +137,7 @@
                                             >
                                                 <i class="fa fa-user"></i>
                                                 <div class="mobile-m-v">
-                                                    Dashboard
+                                                    &nbsp;&nbsp; My Account
                                                 </div>
                                             </button>
                                             <div

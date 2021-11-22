@@ -254,13 +254,33 @@
                                     </div>
                                 </div>
                                 <hr />
-                                <span class="text-color me-5">{{
-                                    property.Ad_text
-                                }}</span>
-                                <br />
-                                <span class="text-color me-5">{{
-                                    property.Extras
-                                }}</span>
+                                <span>
+                                    <span v-if="userLoggedIn">
+                                        <span class="text-color me-5">{{
+                                            property.Ad_text
+                                        }}</span>
+                                        <br />
+                                        <span class="text-color me-5">{{
+                                            property.Extras
+                                        }}</span>
+                                    </span>
+                                    <span v-else class="dummy-blir-text">
+                                        Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Nobis doloribus
+                                        tempore quod impedit ipsam hic corrupti
+                                        vero laboriosam. Voluptatem optio maxime
+                                        voluptatum sed placeat possimus
+                                        blanditiis, perspiciatis praesentium
+                                        laborum libero?
+                                        <br />
+                                        Lorem ipsum dolor sit amet consectetur
+                                        adipisicing elit. Earum unde repudiandae
+                                        ea, nobis odit placeat officia accusamus
+                                        consequuntur officiis neque dicta a hic
+                                        dolorum reiciendis aspernatur provident
+                                        tenetur exercitationem doloribus.
+                                    </span>
+                                </span>
                             </div>
                             <div
                                 class="
@@ -270,7 +290,7 @@
                                     p-0
                                 "
                             >
-                                <div class="row details">
+                                <div v-if="userLoggedIn" class="row details">
                                     <div class="col-12 d-flex p-0">
                                         <ul class="row list-unstyled w-100">
                                             <li class="col-6 py-2">
@@ -451,6 +471,16 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div v-else class="row">
+                                    <div class="col-12 details">
+                                        <h5 class="text-color">
+                                            Create a free account to view the
+                                            listing details
+                                        </h5>
+                                        <br />
+                                        <sign-up />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -459,7 +489,7 @@
 
                 <!-- Banner middle -->
                 <div
-                    v-if="property.images"
+                    v-if="property.images && userLoggedIn"
                     class="container-fluid pb-5 bg-theme"
                 >
                     <div class="row">
@@ -558,7 +588,8 @@
                     </div>
                 </section>
 
-                <section class="container">
+                <!-- Details in tabular format -->
+                <section v-if="userLoggedIn" class="container">
                     <div class="row">
                         <div
                             class="col-sm-4 col-lg-4 col-md-4 table-responsive"
@@ -2671,16 +2702,14 @@
                     </div>
                 </section>
 
-                <div class="container-fluid p-0 mb-0">
-                    <div class="row m-0">
-                        <div class="container mb-4">
-                            <h4 class="text-color fw-bold">Neighbourhood</h4>
-                            <span class="text-color"
-                                >Schhol, amenities, travel times, and market
-                                trends near 114 High Park Avenue</span
-                            >
-                        </div>
-                    </div>
+                <div v-if="userLoggedIn" class="container mb-4">
+                    <h4 class="text-color fw-bold">Neighbourhood</h4>
+                    <span class="text-color d-none"
+                        >Schhol, amenities, travel times, and market trends near
+                        114 High Park Avenue</span
+                    >
+                </div>
+                <div v-if="userLoggedIn" class="container-fluid p-0 mb-0">
                     <iframe
                         :src="
                             'https://maps.google.com/maps?q=' +
@@ -2832,11 +2861,13 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import ShareProp from "../../components/property/ShareProperty.vue";
+import SignUp from "../../components/auth/SignUp.vue";
 export default {
     components: {
         Carousel,
         Slide,
         ShareProp,
+        SignUp,
     },
     data() {
         return {
@@ -2862,6 +2893,10 @@ export default {
     },
 
     computed: {
+        userLoggedIn() {
+            return this.$store.state.auth_user;
+        },
+
         getTotalRooms() {
             let count = 0;
             if (this.property) {
@@ -3085,6 +3120,9 @@ export default {
 </script>
 
 <style scoped>
+.dummy-blir-text {
+    filter: blur(4px);
+}
 .badge {
     background-color: #9ffdd4;
     padding: 4px 10px;
