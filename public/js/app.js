@@ -4961,6 +4961,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -5017,25 +5025,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -53115,7 +53104,8 @@ var render = function () {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-theme-color input-full-wth",
+                      staticClass:
+                        "\n                                    btn btn-theme-color\n                                    input-full-wth\n                                    w-100\n                                ",
                       attrs: { type: "button" },
                       on: {
                         click: function ($event) {
@@ -53349,7 +53339,7 @@ var render = function () {
                     _c("div", { staticClass: "input-width" }, [
                       _c("label", { attrs: { for: "" } }),
                       _vm._v(" "),
-                      _c("label", [
+                      _c("label", { staticClass: "form-control" }, [
                         _c("input", {
                           directives: [
                             {
@@ -53414,7 +53404,8 @@ var render = function () {
                   _c(
                     "button",
                     {
-                      staticClass: "btn btn-theme-color input-full-wth",
+                      staticClass:
+                        "\n                                    btn btn-theme-color\n                                    input-full-wth\n                                    w-100\n                                ",
                       attrs: { type: "button" },
                       on: { click: _vm.searchProperty },
                     },
@@ -54049,7 +54040,58 @@ var render = function () {
       _vm._v(" "),
       _c("property-listing", { attrs: { "prop-location": "Brampton" } }),
       _vm._v(" "),
-      _vm._m(0),
+      _c("section", { staticClass: "tips bg-theme pe-0" }, [
+        _c("div", { staticClass: "container-fluid pe-0" }, [
+          _c("div", { staticClass: "row pe-0 me-0" }, [
+            _c(
+              "div",
+              { staticClass: "col-lg-5 col-md-5 col-sm-12 ps-0 pe-5 m-auto" },
+              [
+                _c("h1", { staticClass: "text-light fw-bold" }, [
+                  _vm._v(
+                    "\n                        7 tips to got approved for a mortgage\n                    "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-light small" }, [
+                  _vm._v(
+                    "\n                        If you're looking to dive into homeownership, it's\n                        important to be prepared at every step. Besides\n                        tracking interest rates and hunting for the perfect\n                        home, applying for a mortgage is the biggest step in\n                        the process. While it might seem stressful, it can\n                        be made much easier if you get your financial\n                        affairs in order ahead of time. Here are 7 ways to\n                        help get your mortgage application approved.\n                    "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-light small" }, [
+                  _vm._v(
+                    "\n                        1. Check your credit score\n                    "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "text-light small" }, [
+                  _vm._v(
+                    "\n                        In Canada, credit scores run from 300 to 900 across\n                        five categories: Poor, Fair, Good, Very Good, and\n                        Excellent. The exact categories vary based on which\n                        credit bureau is being used, but the process is\n                        essentially the same. Your credit score is a\n                        snapshot of your overall financial health, so it's\n                        important that you know what yours is.\n                    "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    staticClass:
+                      "\n                            btn\n                            bg-white\n                            text-color\n                            fw-bolder\n                            btn-rounded\n                        ",
+                    attrs: { to: "/blog" },
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Learn more\n                    "
+                    ),
+                  ]
+                ),
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(0),
+          ]),
+        ]),
+      ]),
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
@@ -54063,57 +54105,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "tips bg-theme pe-0" }, [
-      _c("div", { staticClass: "container-fluid pe-0" }, [
-        _c("div", { staticClass: "row pe-0 me-0" }, [
-          _c(
-            "div",
-            { staticClass: "col-lg-5 col-md-5 col-sm-12 ps-0 pe-5 m-auto" },
-            [
-              _c("h1", { staticClass: "text-light fw-bold" }, [
-                _vm._v(
-                  "\n                        7 tips to got approved for a mortgage\n                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-light small" }, [
-                _vm._v(
-                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-light small" }, [
-                _vm._v(
-                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "\n                            btn\n                            bg-white\n                            text-color\n                            fw-bolder\n                            btn-rounded\n                        ",
-                },
-                [
-                  _vm._v(
-                    "\n                        Learn more\n                    "
-                  ),
-                ]
-              ),
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-7 col-md-7 col-sm-none in p-0" }, [
-            _c("img", {
-              staticClass: "img-responsive img-fluid",
-              attrs: {
-                src: "/assets/images/cards/pexels-andres-ayrton-6578879.jpg",
-                alt: "",
-              },
-            }),
-          ]),
-        ]),
-      ]),
+    return _c("div", { staticClass: "col-lg-7 col-md-7 col-sm-none in p-0" }, [
+      _c("img", {
+        staticClass: "img-responsive img-fluid",
+        attrs: {
+          src: "/assets/images/cards/pexels-andres-ayrton-6578879.jpg",
+          alt: "",
+        },
+      }),
     ])
   },
   function () {
@@ -54147,25 +54146,25 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("p", { staticClass: "text-color me-5 small" }, [
               _vm._v(
-                "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
+                "\n                        June home sales were up compared to last year, but\n                        remained below the March 2021 peak and were lower\n                        than the number of transactions reported for May\n                        2021, consistent with the regular seasonal trend.\n                        The average selling price in June increased by\n                        double digits compared to last year as well, but the\n                        annual rate of increase moderated compared to the\n                        previous three months.\n                    "
               ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-color me-5 small" }, [
               _vm._v(
-                "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
+                "\n                        Greater Toronto Area REALTORS@reported 11,106 sales\n                        through TRREB'S MLS System in June 2021-up by 28.5\n                        per cent compared to June 2020. Looking at the GTA\n                        as a whole, year-over-year sales growth was\n                        strongest in the condominium apartment segment, both\n                        in the City of Toronto and some of the surrounding\n                        suburbs. On a monthover-month basis, both actual and\n                        seasonally adjusted sales continued to trend lower\n                        in June.\n                    "
               ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-color me-5 small" }, [
               _vm._v(
-                "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
+                '\n                        "We have seen market activity transition from a\n                        record pace to a robust pace over the last three\n                        months. While this could provide some relief for\n                        home buyers in the near term, a resumption of\n                        population growth based on immigration is only\n                        months away. While the primary focus of policymakers\n                        has been artificially curbing demand, the only\n                        longterm solution to affordability is increasing\n                        supply to accommodate perpetual housing needs in a\n                        growing region," said TRREB President Kevin Crigger.\n                    '
               ),
             ]),
             _vm._v(" "),
             _c("p", { staticClass: "text-color me-5 small" }, [
               _vm._v(
-                "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry. Lorem Ipsum has been the\n                        industry's standard dummy text ever since the 1500s,\n                        when an unknown printer took a galley of type and\n                        scrambled it to make a type specimen book. It has\n                        survived not only five centuries, but also the leap\n                        into electronic typesetting, remaining essentially\n                        unchanged. It was popularised in the 1960s with the\n                        release of Letraset sheets containing Lorem Ipsum\n                        passages, and more recently with desktop publishing\n                        software like Aldus PageMaker including versions of\n                        Lorem Ipsum.\n                    "
+                "\n                        in all major market segments, year-over-year growth\n                        in sales well outpaced growth in new listings over\n                        the same period, pointing to the continuation of\n                        tight market conditions characterized by competition\n                        between buyers and strong price growth. On a\n                        month-over-month basis. both actual and seasonally\n                        adjusted average prices edged lower in June.\n                    "
               ),
             ]),
           ]),

@@ -138,7 +138,11 @@
                             >
                                 <button
                                     type="button"
-                                    class="btn btn-theme-color input-full-wth"
+                                    class="
+                                        btn btn-theme-color
+                                        input-full-wth
+                                        w-100
+                                    "
                                     @click="more = !more"
                                 >
                                     <img
@@ -201,7 +205,7 @@
                                 </div>
                                 <div class="input-width">
                                     <label for=""> </label>
-                                    <label>
+                                    <label class="form-control">
                                         <input
                                             v-model="form.openHouse"
                                             type="checkbox"
@@ -221,7 +225,11 @@
                             >
                                 <button
                                     type="button"
-                                    class="btn btn-theme-color input-full-wth"
+                                    class="
+                                        btn btn-theme-color
+                                        input-full-wth
+                                        w-100
+                                    "
                                     @click="searchProperty"
                                 >
                                     Search

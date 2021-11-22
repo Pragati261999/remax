@@ -25,34 +25,29 @@
                             7 tips to got approved for a mortgage
                         </h1>
                         <p class="text-light small">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
+                            If you're looking to dive into homeownership, it's
+                            important to be prepared at every step. Besides
+                            tracking interest rates and hunting for the perfect
+                            home, applying for a mortgage is the biggest step in
+                            the process. While it might seem stressful, it can
+                            be made much easier if you get your financial
+                            affairs in order ahead of time. Here are 7 ways to
+                            help get your mortgage application approved.
                         </p>
                         <p class="text-light small">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
+                            1. Check your credit score
                         </p>
-                        <button
+                        <p class="text-light small">
+                            In Canada, credit scores run from 300 to 900 across
+                            five categories: Poor, Fair, Good, Very Good, and
+                            Excellent. The exact categories vary based on which
+                            credit bureau is being used, but the process is
+                            essentially the same. Your credit score is a
+                            snapshot of your overall financial health, so it's
+                            important that you know what yours is.
+                        </p>
+                        <router-link
+                            to="/blog"
                             class="
                                 btn
                                 bg-white
@@ -62,7 +57,7 @@
                             "
                         >
                             Learn more
-                        </button>
+                        </router-link>
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-none in p-0">
                         <img
@@ -92,60 +87,46 @@
                             June Market State
                         </h3>
                         <p class="text-color me-5 small">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
+                            June home sales were up compared to last year, but
+                            remained below the March 2021 peak and were lower
+                            than the number of transactions reported for May
+                            2021, consistent with the regular seasonal trend.
+                            The average selling price in June increased by
+                            double digits compared to last year as well, but the
+                            annual rate of increase moderated compared to the
+                            previous three months.
                         </p>
                         <p class="text-color me-5 small">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
+                            Greater Toronto Area REALTORS@reported 11,106 sales
+                            through TRREB'S MLS System in June 2021-up by 28.5
+                            per cent compared to June 2020. Looking at the GTA
+                            as a whole, year-over-year sales growth was
+                            strongest in the condominium apartment segment, both
+                            in the City of Toronto and some of the surrounding
+                            suburbs. On a monthover-month basis, both actual and
+                            seasonally adjusted sales continued to trend lower
+                            in June.
                         </p>
                         <p class="text-color me-5 small">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
+                            "We have seen market activity transition from a
+                            record pace to a robust pace over the last three
+                            months. While this could provide some relief for
+                            home buyers in the near term, a resumption of
+                            population growth based on immigration is only
+                            months away. While the primary focus of policymakers
+                            has been artificially curbing demand, the only
+                            longterm solution to affordability is increasing
+                            supply to accommodate perpetual housing needs in a
+                            growing region," said TRREB President Kevin Crigger.
                         </p>
                         <p class="text-color me-5 small">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when an unknown printer took a galley of type and
-                            scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap
-                            into electronic typesetting, remaining essentially
-                            unchanged. It was popularised in the 1960s with the
-                            release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing
-                            software like Aldus PageMaker including versions of
-                            Lorem Ipsum.
+                            in all major market segments, year-over-year growth
+                            in sales well outpaced growth in new listings over
+                            the same period, pointing to the continuation of
+                            tight market conditions characterized by competition
+                            between buyers and strong price growth. On a
+                            month-over-month basis. both actual and seasonally
+                            adjusted average prices edged lower in June.
                         </p>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 bstart">
