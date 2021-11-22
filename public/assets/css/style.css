@@ -436,9 +436,9 @@ table tr td {
 
 .tab-content {
     height: auto;
-    position: absolute;
+    position: relative;
     z-index: 1;
-    top: 4em;
+    top: 1em;
     left: 0;
     background: #fff;
     color: #2c3e50;
@@ -559,15 +559,15 @@ nav .breadcrumb .active {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 168px 0px;
+    padding: 120px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.propp {
+/* .propp {
     padding: 0px 100px;
-}
+} */
 
 .properties-filter .tab-content {
     opacity: 1;

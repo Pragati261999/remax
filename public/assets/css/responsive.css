@@ -16,17 +16,17 @@
         flex: unset;
     }
 
-    .tabs {
-        padding-bottom: 210px;
-    }
-
     .col-md-none {
         display: none
     }
 
     .hero-container {
-        padding: 45px 80px !important;
+        padding: 45px 55px 0 55px !important;
         background-color: #f7f7f7;
+    }
+
+    .properties {
+        padding: 50px 0;
     }
 }
 
@@ -42,7 +42,7 @@
     }
 
     .hero-container {
-        padding: 45px 20px !important;
+        padding: 40px 15px 0px 15px !important;
     }
 
     .hero-container h1 {
@@ -51,10 +51,6 @@
 
     .hero-container h6 {
         font-size: 1rem;
-    }
-
-    .tabs {
-        padding-bottom: 350px;
     }
 
     section {

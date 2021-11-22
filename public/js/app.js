@@ -4971,6 +4971,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -4990,6 +5023,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    moreFilter: function moreFilter() {
+      this.more = !this.more;
+    },
     getAddressData: function getAddressData(addressData, placeResultData, id) {
       this.form.addr = addressData.locality;
       console.log(this.form.addr);
@@ -52961,610 +52997,655 @@ var render = function () {
   return _c("div", [
     _c("div", { staticClass: "wrapper" }, [
       _c("div", { staticClass: "tabs" }, [
-        _c("div", { staticClass: "tab" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.listedFor,
-                expression: "form.listedFor",
-              },
-            ],
-            staticClass: "tab-switch",
-            attrs: {
-              type: "radio",
-              name: "css-tabs",
-              id: "forSale",
-              value: "Sale",
-            },
-            domProps: {
-              checked: _vm.form.listedFor == "Sale",
-              checked: _vm._q(_vm.form.listedFor, "Sale"),
-            },
-            on: {
-              change: function ($event) {
-                return _vm.$set(_vm.form, "listedFor", "Sale")
-              },
-            },
-          }),
-          _vm._v(" "),
-          _c("label", { staticClass: "tab-label", attrs: { for: "forSale" } }, [
-            _vm._v("Buy"),
-          ]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "tab" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.listedFor,
-                expression: "form.listedFor",
-              },
-            ],
-            staticClass: "tab-switch",
-            attrs: {
-              type: "radio",
-              name: "css-tabs",
-              id: "for_lease",
-              value: "Lease",
-            },
-            domProps: {
-              checked: _vm.form.listedFor == "Lease",
-              checked: _vm._q(_vm.form.listedFor, "Lease"),
-            },
-            on: {
-              change: function ($event) {
-                return _vm.$set(_vm.form, "listedFor", "Lease")
-              },
-            },
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "tab-label", attrs: { for: "for_lease" } },
-            [_vm._v("Rent")]
-          ),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "tab" }, [
-          _c("div", { staticClass: "tab-content d-block" }, [
-            _c("div", { staticClass: "row g-3" }, [
-              _c(
-                "div",
-                { staticClass: "input-width" },
-                [
-                  _c("label", { attrs: { for: "" } }, [
-                    _vm._v("Location/MLS#"),
-                  ]),
-                  _vm._v(" "),
-                  _c("vue-google-autocomplete", {
-                    ref: "address",
-                    attrs: {
-                      id: "map",
-                      classname: "form-control",
-                      placeholder: "Location/MLS",
-                      types: "(cities)",
-                      country: "ca",
-                    },
-                    on: {
-                      placechanged: _vm.getAddressData,
-                      keyup: _vm.getAddressInputData,
-                    },
-                  }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-width" }, [
-                _c("label", { attrs: { for: "" } }, [_vm._v("Property Type")]),
-                _vm._v(" "),
-                _c(
-                  "select",
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "tab" }, [
+              _c("input", {
+                directives: [
                   {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.propertyType,
-                        expression: "form.propertyType",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    on: {
-                      change: function ($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function (o) {
-                            return o.selected
-                          })
-                          .map(function (o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "propertyType",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      },
-                    },
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.listedFor,
+                    expression: "form.listedFor",
                   },
-                  [
+                ],
+                staticClass: "tab-switch",
+                attrs: {
+                  type: "radio",
+                  name: "css-tabs",
+                  id: "forSale",
+                  value: "Sale",
+                },
+                domProps: {
+                  checked: _vm.form.listedFor == "Sale",
+                  checked: _vm._q(_vm.form.listedFor, "Sale"),
+                },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.form, "listedFor", "Sale")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "tab-label", attrs: { for: "forSale" } },
+                [_vm._v("Buy")]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "tab" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.listedFor,
+                    expression: "form.listedFor",
+                  },
+                ],
+                staticClass: "tab-switch",
+                attrs: {
+                  type: "radio",
+                  name: "css-tabs",
+                  id: "for_lease",
+                  value: "Lease",
+                },
+                domProps: {
+                  checked: _vm.form.listedFor == "Lease",
+                  checked: _vm._q(_vm.form.listedFor, "Lease"),
+                },
+                on: {
+                  change: function ($event) {
+                    return _vm.$set(_vm.form, "listedFor", "Lease")
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                { staticClass: "tab-label", attrs: { for: "for_lease" } },
+                [_vm._v("Rent")]
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "tab w-100" }, [
+              _c("div", { staticClass: "tab-content d-block" }, [
+                _c("div", { staticClass: "row g-3" }, [
+                  _c(
+                    "div",
+                    { staticClass: "input-width" },
+                    [
+                      _c("label", { attrs: { for: "" } }, [
+                        _vm._v("Location/MLS#"),
+                      ]),
+                      _vm._v(" "),
+                      _c("vue-google-autocomplete", {
+                        ref: "address",
+                        attrs: {
+                          id: "map",
+                          classname: "form-control",
+                          placeholder: "Location/MLS",
+                          types: "(cities)",
+                          country: "ca",
+                        },
+                        on: {
+                          placechanged: _vm.getAddressData,
+                          keyup: _vm.getAddressInputData,
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-width" }, [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Property Type"),
+                    ]),
+                    _vm._v(" "),
                     _c(
-                      "option",
-                      { attrs: { value: "", disabled: "", selected: "" } },
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.propertyType,
+                            expression: "form.propertyType",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        on: {
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "propertyType",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
+                        },
+                      },
                       [
-                        _vm._v(
-                          "\n                                    Select Property Type\n                                "
+                        _c(
+                          "option",
+                          { attrs: { value: "", disabled: "", selected: "" } },
+                          [
+                            _vm._v(
+                              "\n                                            Select Property Type\n                                        "
+                            ),
+                          ]
                         ),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Residential" } }, [
+                          _vm._v(
+                            "\n                                            Residential\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Commercial" } }, [
+                          _vm._v(
+                            "\n                                            Commercial\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Condo" } }, [
+                          _vm._v("Condo"),
+                        ]),
                       ]
                     ),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "Residential" } }, [
-                      _vm._v(
-                        "\n                                    Residential\n                                "
-                      ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-width" }, [
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("Pricing ($)"),
                     ]),
                     _vm._v(" "),
-                    _c("option", { attrs: { value: "Commercial" } }, [
-                      _vm._v(
-                        "\n                                    Commercial\n                                "
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "Condo" } }, [
-                      _vm._v("Condo"),
-                    ]),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-width" }, [
-                _c("label", { attrs: { for: "" } }, [_vm._v("Pricing ($)")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.minPrice,
-                      expression: "form.minPrice",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    "aria-label": "Last name",
-                    placeholder: "Min",
-                    list: "minPrices",
-                    min: "1",
-                  },
-                  domProps: { value: _vm.form.minPrice },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "minPrice", $event.target.value)
-                    },
-                  },
-                }),
-                _vm._v(" "),
-                _vm._m(0),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-width" }, [
-                _c("label", { attrs: { for: "" } }),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.form.maxPrice,
-                      expression: "form.maxPrice",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    "aria-label": "Last name",
-                    placeholder: "Max",
-                    min: "1",
-                    list: "maxPrices",
-                  },
-                  domProps: { value: _vm.form.maxPrice },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.form, "maxPrice", $event.target.value)
-                    },
-                  },
-                }),
-                _vm._v(" "),
-                _vm._m(1),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-width" }, [
-                _c("label", { attrs: { for: "" } }, [_vm._v("Beds")]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.bedRoom,
-                        expression: "form.bedRoom",
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.minPrice,
+                          expression: "form.minPrice",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        "aria-label": "Last name",
+                        placeholder: "Min",
+                        list: "minPrices",
+                        min: "1",
                       },
-                    ],
-                    staticClass: "form-control",
-                    on: {
-                      change: function ($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function (o) {
-                            return o.selected
-                          })
-                          .map(function (o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "bedRoom",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      },
-                    },
-                  },
-                  [
-                    _c("option", { attrs: { value: "0" } }, [_vm._v("Any")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("1+")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [_vm._v("2+")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "3" } }, [_vm._v("3+")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "4" } }, [_vm._v("4+")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "5" } }, [_vm._v("5+")]),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                                col\n                                justify-content-center\n                                d-flex\n                                align-items-end\n                            ",
-                },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "\n                                    btn btn-theme-color\n                                    input-full-wth\n                                    w-100\n                                ",
-                      attrs: { type: "button" },
+                      domProps: { value: _vm.form.minPrice },
                       on: {
-                        click: function ($event) {
-                          _vm.more = !_vm.more
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "minPrice", $event.target.value)
                         },
                       },
-                    },
-                    [
-                      _c("img", {
-                        attrs: {
-                          src: "/assets/images/icons/menu_bar.svg",
-                          alt: "",
-                        },
-                      }),
-                      _vm._v(
-                        "\n                                More\n                            "
-                      ),
-                    ]
-                  ),
-                ]
-              ),
-              _vm._v(" "),
-              _vm.more
-                ? _c("div", { staticClass: "row g-3" }, [
-                    _c("div", { staticClass: "input-width" }, [
-                      _c("label", { attrs: { for: "" } }, [_vm._v("Baths")]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.bath,
-                              expression: "form.bath",
-                            },
-                          ],
-                          staticClass: "form-control",
-                          on: {
-                            change: function ($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function (o) {
-                                  return o.selected
-                                })
-                                .map(function (o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "bath",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            },
-                          },
-                        },
-                        [
-                          _c("option", { attrs: { value: "0" } }, [
-                            _vm._v("Any"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1" } }, [
-                            _vm._v("1+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2" } }, [
-                            _vm._v("2+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "3" } }, [
-                            _vm._v("3+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "4" } }, [
-                            _vm._v("4+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "5" } }, [
-                            _vm._v("5+"),
-                          ]),
-                        ]
-                      ),
-                    ]),
+                    }),
                     _vm._v(" "),
-                    _c("div", { staticClass: "input-width" }, [
-                      _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Square Feet"),
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.sqft,
-                              expression: "form.sqft",
-                            },
-                          ],
-                          staticClass: "form-control",
-                          on: {
-                            change: function ($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function (o) {
-                                  return o.selected
-                                })
-                                .map(function (o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "sqft",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            },
-                          },
-                        },
-                        [
-                          _c("option", { attrs: { value: "0" } }, [
-                            _vm._v("Any"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "500" } }, [
-                            _vm._v("500+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1000" } }, [
-                            _vm._v("1000+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "1500" } }, [
-                            _vm._v("1500+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2000" } }, [
-                            _vm._v("2000+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "2500" } }, [
-                            _vm._v("2500+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "5000" } }, [
-                            _vm._v("5000+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "10000" } }, [
-                            _vm._v("10000+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "20000" } }, [
-                            _vm._v("20000+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "25000" } }, [
-                            _vm._v("25000+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "50000" } }, [
-                            _vm._v("50000+"),
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "100000" } }, [
-                            _vm._v("100000+"),
-                          ]),
-                        ]
-                      ),
-                    ]),
+                    _vm._m(0),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-width" }, [
+                    _c("label", { attrs: { for: "" } }),
                     _vm._v(" "),
-                    _c("div", { staticClass: "input-width" }, [
-                      _c("label", { attrs: { for: "" } }, [
-                        _vm._v("Listed Since"),
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.maxPrice,
+                          expression: "form.maxPrice",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        "aria-label": "Last name",
+                        placeholder: "Max",
+                        min: "1",
+                        list: "maxPrices",
+                      },
+                      domProps: { value: _vm.form.maxPrice },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "maxPrice", $event.target.value)
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _vm._m(1),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-width" }, [
+                    _c("label", { attrs: { for: "" } }, [_vm._v("Beds")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.addedFrom,
-                            expression: "form.addedFrom",
+                            value: _vm.form.bedRoom,
+                            expression: "form.bedRoom",
                           },
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "date" },
-                        domProps: { value: _vm.form.addedFrom },
                         on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "addedFrom", $event.target.value)
+                          change: function ($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function (o) {
+                                return o.selected
+                              })
+                              .map(function (o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "bedRoom",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
                           },
                         },
-                      }),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-width" }, [
-                      _c("label", { attrs: { for: "" } }, [_vm._v("Keywords")]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.key,
-                            expression: "form.key",
-                          },
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.form.key },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.form, "key", $event.target.value)
-                          },
-                        },
-                      }),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-width" }, [
-                      _c("label", { attrs: { for: "" } }),
-                      _vm._v(" "),
-                      _c("label", { staticClass: "form-control" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.openHouse,
-                              expression: "form.openHouse",
-                            },
-                          ],
-                          attrs: { type: "checkbox", value: "true" },
-                          domProps: {
-                            checked: Array.isArray(_vm.form.openHouse)
-                              ? _vm._i(_vm.form.openHouse, "true") > -1
-                              : _vm.form.openHouse,
-                          },
-                          on: {
-                            change: function ($event) {
-                              var $$a = _vm.form.openHouse,
-                                $$el = $event.target,
-                                $$c = $$el.checked ? true : false
-                              if (Array.isArray($$a)) {
-                                var $$v = "true",
-                                  $$i = _vm._i($$a, $$v)
-                                if ($$el.checked) {
-                                  $$i < 0 &&
-                                    _vm.$set(
-                                      _vm.form,
-                                      "openHouse",
-                                      $$a.concat([$$v])
-                                    )
-                                } else {
-                                  $$i > -1 &&
-                                    _vm.$set(
-                                      _vm.form,
-                                      "openHouse",
-                                      $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1))
-                                    )
-                                }
-                              } else {
-                                _vm.$set(_vm.form, "openHouse", $$c)
-                              }
-                            },
-                          },
-                        }),
-                        _vm._v(
-                          "\n                                    Open Houses Only"
-                        ),
-                      ]),
-                    ]),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                                col\n                                justify-content-center\n                                d-flex\n                                align-items-end\n                            ",
-                },
-                [
+                      },
+                      [
+                        _c("option", { attrs: { value: "0" } }, [
+                          _vm._v("Any"),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "1" } }, [_vm._v("1+")]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [_vm._v("2+")]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "3" } }, [_vm._v("3+")]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "4" } }, [_vm._v("4+")]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "5" } }, [_vm._v("5+")]),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "button",
+                    "div",
                     {
                       staticClass:
-                        "\n                                    btn btn-theme-color\n                                    input-full-wth\n                                    w-100\n                                ",
-                      attrs: { type: "button" },
-                      on: { click: _vm.searchProperty },
+                        "\n                                        col\n                                        justify-content-center\n                                        d-flex\n                                        align-items-end\n                                    ",
                     },
                     [
-                      _vm._v(
-                        "\n                                Search\n                            "
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "\n                                            btn btn-theme-color\n                                            input-full-wth\n                                            w-100\n                                        ",
+                          attrs: { type: "button" },
+                          on: { click: _vm.moreFilter },
+                        },
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "/assets/images/icons/menu_bar.svg",
+                              alt: "",
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("span", [
+                            !_vm.more
+                              ? _c("span", [_vm._v("more")])
+                              : _c("span", [_vm._v("less")]),
+                          ]),
+                        ]
                       ),
                     ]
                   ),
-                ]
-              ),
+                  _vm._v(" "),
+                  _vm.more
+                    ? _c("div", { staticClass: "row g-3" }, [
+                        _c("div", { staticClass: "input-width" }, [
+                          _c("label", { attrs: { for: "" } }, [
+                            _vm._v("Baths"),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.bath,
+                                  expression: "form.bath",
+                                },
+                              ],
+                              staticClass: "form-control",
+                              on: {
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "bath",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("option", { attrs: { value: "0" } }, [
+                                _vm._v("Any"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "1" } }, [
+                                _vm._v("1+"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "2" } }, [
+                                _vm._v("2+"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "3" } }, [
+                                _vm._v("3+"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "4" } }, [
+                                _vm._v("4+"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "5" } }, [
+                                _vm._v("5+"),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-width" }, [
+                          _c("label", { attrs: { for: "" } }, [
+                            _vm._v("Square Feet"),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.sqft,
+                                  expression: "form.sqft",
+                                },
+                              ],
+                              staticClass: "form-control",
+                              on: {
+                                change: function ($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function (o) {
+                                      return o.selected
+                                    })
+                                    .map(function (o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "sqft",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("option", { attrs: { value: "0" } }, [
+                                _vm._v("Any"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "500" } }, [
+                                _vm._v(
+                                  "\n                                                500+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "1000" } }, [
+                                _vm._v(
+                                  "\n                                                1000+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "1500" } }, [
+                                _vm._v(
+                                  "\n                                                1500+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "2000" } }, [
+                                _vm._v(
+                                  "\n                                                2000+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "2500" } }, [
+                                _vm._v(
+                                  "\n                                                2500+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "5000" } }, [
+                                _vm._v(
+                                  "\n                                                5000+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "10000" } }, [
+                                _vm._v(
+                                  "\n                                                10000+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "20000" } }, [
+                                _vm._v(
+                                  "\n                                                20000+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "25000" } }, [
+                                _vm._v(
+                                  "\n                                                25000+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "50000" } }, [
+                                _vm._v(
+                                  "\n                                                50000+\n                                            "
+                                ),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "100000" } }, [
+                                _vm._v(
+                                  "\n                                                100000+\n                                            "
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-width" }, [
+                          _c("label", { attrs: { for: "" } }, [
+                            _vm._v("Listed Since"),
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.addedFrom,
+                                expression: "form.addedFrom",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "date" },
+                            domProps: { value: _vm.form.addedFrom },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "addedFrom",
+                                  $event.target.value
+                                )
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-width" }, [
+                          _c("label", { attrs: { for: "" } }, [
+                            _vm._v("Keywords"),
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.key,
+                                expression: "form.key",
+                              },
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.form.key },
+                            on: {
+                              input: function ($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "key", $event.target.value)
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-width" }, [
+                          _c("label", { attrs: { for: "" } }),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "form-control" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.openHouse,
+                                  expression: "form.openHouse",
+                                },
+                              ],
+                              attrs: { type: "checkbox", value: "true" },
+                              domProps: {
+                                checked: Array.isArray(_vm.form.openHouse)
+                                  ? _vm._i(_vm.form.openHouse, "true") > -1
+                                  : _vm.form.openHouse,
+                              },
+                              on: {
+                                change: function ($event) {
+                                  var $$a = _vm.form.openHouse,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = "true",
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.form,
+                                          "openHouse",
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.form,
+                                          "openHouse",
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(_vm.form, "openHouse", $$c)
+                                  }
+                                },
+                              },
+                            }),
+                            _vm._v(
+                              "\n                                            Open Houses Only"
+                            ),
+                          ]),
+                        ]),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "\n                                        col\n                                        justify-content-center\n                                        d-flex\n                                        align-items-end\n                                    ",
+                    },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "\n                                            btn btn-theme-color\n                                            input-full-wth\n                                            w-100\n                                        ",
+                          attrs: { type: "button" },
+                          on: { click: _vm.searchProperty },
+                        },
+                        [
+                          _vm._v(
+                            "\n                                        Search\n                                    "
+                          ),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]),
+              ]),
             ]),
           ]),
         ]),
