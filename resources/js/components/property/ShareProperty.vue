@@ -46,7 +46,7 @@
                                 <ShareNetwork
                                     network="facebook"
                                     class="
-                                        btn btn-block btn-outline-primary
+                                        btn btn-block btn-theme-color
                                         w-100
                                         py-3
                                         rounded-0
@@ -56,10 +56,6 @@
                                     :description="`${property.Ad_text}`"
                                     hashtags="therealtyhub.ca,remax"
                                 >
-                                    <i
-                                        class="fa fa-facebook"
-                                        aria-hidden="true"
-                                    ></i>
                                     Share on Facebook
                                 </ShareNetwork>
                             </div>
@@ -67,7 +63,7 @@
                                 <ShareNetwork
                                     network="Email"
                                     class="
-                                        btn btn-block btn-outline-primary
+                                        btn btn-block btn-theme-color
                                         w-100
                                         py-3
                                         rounded-0
@@ -84,8 +80,8 @@
                                     class="btn btn-block w-100 py-3 rounded-0"
                                     :class="
                                         copyText === 'Copied'
-                                            ? 'btn-primary'
-                                            : 'btn-outline-primary'
+                                            ? 'btn-theme-color copied'
+                                            : 'btn-theme-color'
                                     "
                                     @click="
                                         cptxt(
@@ -105,6 +101,7 @@
 </template>
 
 <script>
+import swal from "sweetalert";
 export default {
     data() {
         return {
@@ -140,8 +137,16 @@ export default {
                 document.getSelection().removeAllRanges();
                 document.getSelection().addRange(selected);
                 this.copyText = "Copied";
+                swal({
+                    icon: "success",
+                    text: "Copied to clipboard",
+                });
             } else {
                 this.copyText = "Failed";
+                swal({
+                    icon: "error",
+                    text: "Oops! Something went wrong. Try again.",
+                });
             }
         },
     },

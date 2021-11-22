@@ -68,7 +68,11 @@
             <!-- Property Listing  -->
             <section class="property bg-theme-light">
                 <div class="container p-0">
-                    <h2 class="theme-title">Houses for Sale/Lease</h2>
+                    <h2 class="theme-title">
+                        <span v-if="ifSearched"></span>
+                        <span v-if="!searching">All Property Listings</span>
+                        <span v-else>Results based on your search</span>
+                    </h2>
                     <div v-if="!loadingProperties">
                         <div v-if="properties.length > 0" class="row">
                             <div
@@ -111,7 +115,7 @@
                             </div>
                         </div>
                         <div v-else>
-                            <NoData :text="'No matched property found.'" />
+                            <NoData :text="'filterRes'" />
                         </div>
                     </div>
                     <div v-else class="row">
@@ -138,7 +142,19 @@ export default {
             loadingProperties: true,
             nextPageUrl: null,
             loadingMoreProperties: false,
+
+            searching: false,
         };
+    },
+    computed: {
+        ifSearched() {
+            if (this.form) {
+                if (!!Object.keys(this.form).length) {
+                    this.searching = true;
+                }
+            }
+            return true;
+        },
     },
     mounted() {
         this.getFilteredDataOnLoad();
@@ -150,6 +166,7 @@ export default {
         },
 
         getFilteredDataOnClick(data) {
+            this.searching = true;
             this.getFilteredData(data);
         },
 
