@@ -2894,6 +2894,13 @@ export default {
 
     computed: {
         userLoggedIn() {
+            this.lead.ml_num = this.$route.params.ml_num;
+            if (this.$store.state.auth_user) {
+                (this.lead.name = this.$store.state.auth_user.name),
+                    (this.lead.email = this.$store.state.auth_user.email),
+                    (this.lead.contact = this.$store.state.auth_user.contact);
+            }
+
             return this.$store.state.auth_user;
         },
 

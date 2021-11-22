@@ -5815,6 +5815,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 // create-user
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -9114,6 +9116,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     userLoggedIn: function userLoggedIn() {
+      this.lead.ml_num = this.$route.params.ml_num;
+
+      if (this.$store.state.auth_user) {
+        this.lead.name = this.$store.state.auth_user.name, this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
+      }
+
       return this.$store.state.auth_user;
     },
     getTotalRooms: function getTotalRooms() {
@@ -55194,19 +55202,22 @@ var render = function () {
               ]),
               _vm._v(" "),
               _c(
-                "button",
-                {
-                  staticClass: "btn btn-theme-color w-100 py-2",
-                  attrs: { type: "submit" },
-                },
+                "router-link",
+                { staticClass: "text-light", attrs: { to: "/sign-up" } },
                 [
                   _c(
-                    "router-link",
-                    { staticClass: "text-light", attrs: { to: "/sign-up" } },
-                    [_vm._v("Create Account")]
+                    "button",
+                    {
+                      staticClass: "btn btn-theme-color w-100 py-2",
+                      attrs: { type: "submit" },
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Create Account\n                        "
+                      ),
+                    ]
                   ),
-                ],
-                1
+                ]
               ),
             ],
             1

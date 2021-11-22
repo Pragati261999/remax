@@ -20,7 +20,9 @@
                                     >
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <router-link to="/login" class="active">Log In</router-link>
+                                    <router-link to="/login" class="active"
+                                        >Log In</router-link
+                                    >
                                 </li>
                             </ol>
                         </nav>
@@ -96,14 +98,14 @@
                             recommendations check out more quickly track your
                             orders register
                         </p>
-                        <button
-                            type="submit"
-                            class="btn btn-theme-color w-100 py-2"
-                        >
-                            <router-link to="/sign-up" class="text-light"
-                                >Create Account</router-link
+                        <router-link to="/sign-up" class="text-light">
+                            <button
+                                type="submit"
+                                class="btn btn-theme-color w-100 py-2"
                             >
-                        </button>
+                                Create Account
+                            </button>
+                        </router-link>
                     </div>
                 </div>
             </div>
