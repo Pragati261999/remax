@@ -70,6 +70,9 @@ class PropertyController extends AppBaseController
             ->when(!empty($data['addr']), function ($query) use ($data) {
                 $addrr = $data['addr'];
                 return $query->where('Addr', 'LIKE', "%{$addrr}%")
+                    ->orWhere('Municipality_district', 'LIKE', "%{$addrr}%")
+                    ->orWhere('Community', 'LIKE', "%{$addrr}%")
+                    ->orWhere('Municipality', 'LIKE', "%{$addrr}%")
                     ->orWhere(function ($query) use ($addrr) {
                         $query->where('Ml_num', 'LIKE', "%{$addrr}%");
                     });
