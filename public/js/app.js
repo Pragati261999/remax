@@ -55746,7 +55746,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "container text-center py-3" }, [
         _c("img", {
           staticClass: "img-fluid main-img",
-          attrs: { src: "/assets/images/layouts/404.jpg", alt: "Not Found" },
+          attrs: { src: "/assets/images/layouts/404.png", alt: "Not Found" },
         }),
       ]),
     ])

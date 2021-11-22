@@ -2,7 +2,7 @@
     <div>
         <div class="container text-center py-3">
             <img
-                src="/assets/images/layouts/404.jpg"
+                src="/assets/images/layouts/404.png"
                 class="img-fluid main-img"
                 alt="Not Found"
             />
