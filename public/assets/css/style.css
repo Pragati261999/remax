@@ -358,6 +358,8 @@ table tr td {
     background-color: #2cbdb8;
     bottom: 0;
     left: 0;
+
+    display: none;
 }
 
 .footer,

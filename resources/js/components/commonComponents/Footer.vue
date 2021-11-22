@@ -4,7 +4,9 @@
             <div class="container p-0">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
-                        <h3 class="text-color fw-bold">Remax</h3>
+                        <router-link to="/" class="h3 text-color fw-bold"
+                            >Remax</router-link
+                        >
                         <p>
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry.

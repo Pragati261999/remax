@@ -3286,6 +3286,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -50958,7 +50960,26 @@ var render = function () {
     _c("section", { staticClass: "footer" }, [
       _c("div", { staticClass: "container p-0" }, [
         _c("div", { staticClass: "row" }, [
-          _vm._m(0),
+          _c(
+            "div",
+            { staticClass: "col-lg-4 col-md-4 col-sm-12" },
+            [
+              _c(
+                "router-link",
+                { staticClass: "h3 text-color fw-bold", attrs: { to: "/" } },
+                [_vm._v("Remax")]
+              ),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry.\n                    "
+                ),
+              ]),
+              _vm._v(" "),
+              _vm._m(0),
+            ],
+            1
+          ),
           _vm._v(" "),
           _vm._m(1),
           _vm._v(" "),
@@ -51063,36 +51084,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4 col-md-4 col-sm-12" }, [
-      _c("h3", { staticClass: "text-color fw-bold" }, [_vm._v("Remax")]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "\n                        Lorem Ipsum is simply dummy text of the printing and\n                        typesetting industry.\n                    "
-        ),
+    return _c("ul", { staticClass: "list-unstyled" }, [
+      _c("li", { staticClass: "social-icons" }, [
+        _c("img", {
+          staticClass: "img-fluid m-auto",
+          attrs: { src: "/assets/images/icons/twitter.png", alt: "" },
+        }),
       ]),
       _vm._v(" "),
-      _c("ul", { staticClass: "list-unstyled" }, [
-        _c("li", { staticClass: "social-icons" }, [
-          _c("img", {
-            staticClass: "img-fluid m-auto",
-            attrs: { src: "/assets/images/icons/twitter.png", alt: "" },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "social-icons" }, [
-          _c("img", {
-            staticClass: "img-fluid m-auto",
-            attrs: { src: "/assets/images/icons/google.png", alt: "" },
-          }),
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "social-icons" }, [
-          _c("img", {
-            staticClass: "img-fluid m-auto",
-            attrs: { src: "/assets/images/icons/facebook-logo.png", alt: "" },
-          }),
-        ]),
+      _c("li", { staticClass: "social-icons" }, [
+        _c("img", {
+          staticClass: "img-fluid m-auto",
+          attrs: { src: "/assets/images/icons/google.png", alt: "" },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "social-icons" }, [
+        _c("img", {
+          staticClass: "img-fluid m-auto",
+          attrs: { src: "/assets/images/icons/facebook-logo.png", alt: "" },
+        }),
       ]),
     ])
   },
