@@ -2911,6 +2911,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       "default": ""
     }
   },
+  computed: {
+    locationName: function locationName() {
+      return this.propLocation.charAt(0).toUpperCase() + this.propLocation.slice(1);
+    }
+  },
   mounted: function mounted() {
     this.getAllData();
   },
@@ -50300,7 +50305,7 @@ var render = function () {
         _c("h2", { staticClass: "theme-title" }, [
           _vm._v("\n                Featured Properties\n                "),
           _vm.propLocation
-            ? _c("span", [_vm._v(" in " + _vm._s(_vm.propLocation))])
+            ? _c("span", [_vm._v(" in " + _vm._s(_vm.locationName))])
             : _vm._e(),
         ]),
         _vm._v(" "),
@@ -52316,7 +52321,7 @@ var render = function () {
                     attrs: {
                       id: "map",
                       classname: "form-control",
-                      placeholder: "Please type your address",
+                      placeholder: "Location/MLS",
                       types: "(cities)",
                       country: "ca",
                     },

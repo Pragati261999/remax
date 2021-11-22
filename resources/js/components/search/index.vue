@@ -42,7 +42,7 @@
                                     ref="address"
                                     id="map"
                                     classname="form-control"
-                                    placeholder="Please type your address"
+                                    placeholder="Location/MLS"
                                     v-on:placechanged="getAddressData"
                                     @keyup="getAddressInputData"
                                     types="(cities)"

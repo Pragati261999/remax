@@ -4,7 +4,7 @@
             <div class="container p-0">
                 <h2 class="theme-title">
                     Featured Properties
-                    <span v-if="propLocation"> in {{ propLocation }}</span>
+                    <span v-if="propLocation"> in {{ locationName }}</span>
                 </h2>
                 <div v-if="!loadingProperties">
                     <div v-if="properties.length > 0" class="row">
@@ -53,6 +53,14 @@ export default {
         propLocation: {
             type: String,
             default: "",
+        },
+    },
+    computed: {
+        locationName() {
+            return (
+                this.propLocation.charAt(0).toUpperCase() +
+                this.propLocation.slice(1)
+            );
         },
     },
     mounted() {
