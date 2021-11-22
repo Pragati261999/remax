@@ -299,8 +299,8 @@ table tr td {
 
 .hero-container {
     background-image: url(../images/banners/Banner_image.png);
-    background-size: 100% 70vh;
-    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
     color: #fff;
     height: auto;
     min-height: calc(100vh - 304px);
