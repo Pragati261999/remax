@@ -9,6 +9,21 @@ use Illuminate\Http\Request;
 
 class PropertyController extends AppBaseController
 {
+
+    public function getAllAutocomplete(Request $request)
+    {
+        $key = $request->input('key');
+        $response = Property::where('Ml_num', 'LIKE', "{$key}%")
+            ->orWhere('addr', 'LIKE', "{$key}%")
+            ->select('Ml_num', 'addr')
+            ->get();
+
+        dd("PPP");
+
+        $msg = 'Autocomplete fetched successfully.';
+        return $this->sendResponse($msg, $response);
+    }
+
     public function getProperties(Request $request)
     {
 

@@ -34,6 +34,7 @@ Route::prefix('property')->group(function () {
     Route::get('/properties', [Api\PropertyController::class, 'getProperties']);
     Route::get('/get-details', [Api\PropertyController::class, 'getDetails']);
     Route::post('/search', [Api\PropertyController::class, 'searchProperty']);
+    Route::get('/get-autocomplete', [Api\PropertyController::class, 'getAllAutocomplete']);
 });
 
 // Leads 

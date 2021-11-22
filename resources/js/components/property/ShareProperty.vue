@@ -54,6 +54,7 @@
                                     :url="`http://therealtyhub.ca/property/view/${mid}`"
                                     :title="`therealtyhub.ca - ${property.Addr}`"
                                     :description="`${property.Ad_text}`"
+                                    hashtags="therealtyhub.ca,remax"
                                 >
                                     <i
                                         class="fa fa-facebook"

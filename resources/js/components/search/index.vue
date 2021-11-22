@@ -31,13 +31,24 @@
                         <div class="row g-3">
                             <div class="input-width">
                                 <label for="">Location/MLS#</label>
-                                <input
+                                <!-- <input
                                     v-model="form.addr"
                                     type="text"
                                     class="form-control"
                                     aria-label="First name"
                                     placeholder="Location"
-                                />
+                                /> -->
+                                <vue-google-autocomplete
+                                    ref="address"
+                                    id="map"
+                                    classname="form-control"
+                                    placeholder="Please type your address"
+                                    v-on:placechanged="getAddressData"
+                                    @keyup="getAddressInputData"
+                                    types="(cities)"
+                                    country="ca"
+                                >
+                                </vue-google-autocomplete>
                             </div>
                             <div class="input-width">
                                 <label for="">Property Type</label>
@@ -153,7 +164,7 @@
                                     </select>
                                 </div>
                                 <div class="input-width">
-                                    <label for="">Sqare Feet</label>
+                                    <label for="">Square Feet</label>
                                     <select
                                         v-model="form.sqft"
                                         class="form-control"
@@ -225,7 +236,9 @@
 </template>
 
 <script>
+import VueGoogleAutocomplete from "vue-google-autocomplete";
 export default {
+    components: { VueGoogleAutocomplete },
     props: {
         form: {
             type: Object,
@@ -238,6 +251,14 @@ export default {
         };
     },
     methods: {
+        getAddressData(addressData, placeResultData, id) {
+            this.form.addr = addressData.locality;
+            console.log(this.form.addr);
+        },
+        getAddressInputData() {
+            this.form.addr = event.target.value;
+        },
+
         searchProperty() {
             const self = this;
             if (self.$route.name !== "search-property") {
