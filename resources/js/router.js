@@ -7,6 +7,7 @@ import PropertySearch from "./pages/property/search.vue";
 import Login from "./pages/Login.vue";
 import Signup from "./pages/Signup.vue";
 import UserDashboard from "./pages/user/Dashboard.vue";
+import NotFound from "./pages/notFound/404.vue";
 
 import Blogs from "./pages/Blog.vue";
 
@@ -16,6 +17,11 @@ const router = new VueRouter({
     mode: "history",
     // linkExactActiveClass: "active",
     routes: [
+        {
+            path: "*",
+            name: "404",
+            component: NotFound,
+        },
         {
             path: "/",
             name: "home",
