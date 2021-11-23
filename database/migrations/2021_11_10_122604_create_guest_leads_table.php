@@ -19,6 +19,7 @@ class CreateGuestLeadsTable extends Migration
             $table->text('email')->nullable();
             $table->text('contact')->nullable();
             $table->text('remark')->nullable();
+            $table->enum('is_closed', ['1', '0'])->default('0');
             $table->timestamps();
         });
     }
