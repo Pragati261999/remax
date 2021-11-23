@@ -11,6 +11,11 @@ import NotFound from "./pages/notFound/404.vue";
 
 import Blogs from "./pages/Blog.vue";
 
+import About from "./pages/about/index.vue";
+import Contact from "./pages/contact/index.vue";
+import TermnsOfUses from "./pages/termnsOfUses/index.vue";
+import PrivacyPolicy from "./pages/privacyPolicy/index.vue";
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
@@ -26,6 +31,31 @@ const router = new VueRouter({
             path: "/",
             name: "home",
             component: Home,
+        },
+        {
+            path: "/blog",
+            name: "blog",
+            component: Blogs,
+        },
+        {
+            path: "/about-us",
+            name: "home",
+            component: About,
+        },
+        {
+            path: "/contact-us",
+            name: "home",
+            component: Contact,
+        },
+        {
+            path: "/terms-of-use",
+            name: "home",
+            component: TermnsOfUses,
+        },
+        {
+            path: "/privacy-policy",
+            name: "home",
+            component: PrivacyPolicy,
         },
         {
             path: "/property/view/:ml_num",
@@ -47,11 +77,6 @@ const router = new VueRouter({
             path: "/sign-up",
             name: "sign-up",
             component: Signup,
-        },
-        {
-            path: "/blog",
-            name: "blog",
-            component: Blogs,
         },
         {
             path: "/dashboard/my-account",

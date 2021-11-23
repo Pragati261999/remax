@@ -35,13 +35,25 @@
                 <p class="text-color">{{ property.S_r }}</p>
             </div>
         </div>
+
         <div class="card-body pb-0">
             <div class="card-header">
-                <div class="row">
-                    <div class="col-10 d-flex align-items-center">
-                        <h6 class="mb-0 card-title">${{ property.Lp_dol }}</h6>
-                    </div>
-                    <div class="col-2">
+                <div class="d-flex">
+                    <router-link
+                        :to="{
+                            name: 'view-details',
+                            params: { ml_num: property.Ml_num },
+                        }"
+                        class="d-flex flex-grow-1 align-items-center"
+                    >
+                        <div>
+                            <h6 class="mb-0 card-title">
+                                ${{ property.Lp_dol }}
+                            </h6>
+                        </div>
+                    </router-link>
+                    <div class="text-right pl-2">
+                        <!-- Make fav -->
                         <small
                             @click="markFavourite(property.Ml_num)"
                             role="button"
@@ -71,59 +83,80 @@
                     </div>
                 </div>
             </div>
-            <div class="row pt-2">
-                <div class="col-8">
-                    <p class="mb-0">
-                        {{ property.Addr }}
-                    </p>
+            <router-link
+                :to="{
+                    name: 'view-details',
+                    params: { ml_num: property.Ml_num },
+                }"
+            >
+                <div class="row pt-2">
+                    <div class="col-8">
+                        <p class="mb-0">
+                            {{ property.Addr || "N/A" }}
+                        </p>
+                    </div>
+                </div>
+            </router-link>
+        </div>
+        <router-link
+            :to="{
+                name: 'view-details',
+                params: { ml_num: property.Ml_num },
+            }"
+        >
+            <div class="card-footer">
+                <div class="row ps-3 pe-3 pb-2">
+                    <div class="col-6 p-0">
+                        <ul class="list-unstyled">
+                            <li class="float-start">
+                                <small class="ps-3 card-title fw-normal"
+                                    >MLS® {{ property.Ml_num }}</small
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 p-0">
+                        <ul class="list-unstyled">
+                            <li v-if="property.Bath_tot" class="float-end">
+                                <small class="pe-3"
+                                    ><img
+                                        src="/assets/images/icons/bathTab.png"
+                                        alt=""
+                                        width="16px"
+                                    />
+                                    <span class="count card-title">
+                                        {{
+                                            property.Bath_tot
+                                                ? parseInt(property.Bath_tot)
+                                                : "0"
+                                        }}</span
+                                    >
+                                </small>
+                            </li>
+                            <li v-if="property.Br" class="float-end">
+                                <small class="pe-3"
+                                    ><img
+                                        src="/assets/images/icons/bed.png"
+                                        alt=""
+                                        width="16px"
+                                    />
+                                    <span class="count card-title">
+                                        {{ property.Br }}</span
+                                    >
+                                    <span
+                                        v-if="property.Br_plus"
+                                        class="count card-title"
+                                    >
+                                        +
+                                        {{ property.Br_plus }}</span
+                                    >
+                                </small>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer">
-            <div class="row ps-3 pe-3 pb-2">
-                <div class="col-6 p-0">
-                    <ul class="list-unstyled">
-                        <li class="float-start">
-                            <small class="ps-3 card-title fw-normal"
-                                >MLS® {{ property.Ml_num }}</small
-                            >
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-6 p-0">
-                    <ul class="list-unstyled">
-                        <li class="float-end">
-                            <small class="pe-3"
-                                ><img
-                                    src="/assets/images/icons/bathTab.png"
-                                    alt=""
-                                    width="16px"
-                                />
-                                <span class="count card-title">
-                                    {{
-                                        property.Bath_tot
-                                            ? parseInt(property.Bath_tot)
-                                            : "0"
-                                    }}</span
-                                >
-                            </small>
-                        </li>
-                        <li class="float-end">
-                            <small class="pe-3"
-                                ><img
-                                    src="/assets/images/icons/bed.png"
-                                    alt=""
-                                    width="16px"
-                                />
-                                <span class="count card-title">
-                                    {{ getTotalRooms }}</span
-                                >
-                            </small>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        </router-link>
     </div>
 </template>
 
@@ -142,89 +175,6 @@ export default {
     },
     data() {
         return {};
-    },
-
-    computed: {
-        getTotalRooms() {
-            let count = 0;
-            if (this.property) {
-                if (
-                    this.property.Rm1_wth !== null &&
-                    this.property.Rm1_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm2_wth !== null &&
-                    this.property.Rm2_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm3_wth !== null &&
-                    this.property.Rm3_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm4_wth !== null &&
-                    this.property.Rm4_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm5_wth !== null &&
-                    this.property.Rm5_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm6_wth !== null &&
-                    this.property.Rm6_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm7_wth !== null &&
-                    this.property.Rm7_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm8_wth !== null &&
-                    this.property.Rm8_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm9_wth !== null &&
-                    this.property.Rm9_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm10_wth !== null &&
-                    this.property.Rm10_wt > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm11_wth !== null &&
-                    this.property.Rm11_wt > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm12_wth !== null &&
-                    this.property.Rm12_wt > 0
-                ) {
-                    count++;
-                }
-            }
-
-            return count;
-            // parseInt(property.Rms);
-        },
     },
     methods: {
         markFavourite(ml_num) {

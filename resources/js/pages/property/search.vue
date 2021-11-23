@@ -183,6 +183,7 @@ export default {
                     self.loadingProperties = false;
                 })
                 .catch((err) => {
+                    self.properties = null;
                     self.loadingProperties = false;
                     console.log(err);
                 });

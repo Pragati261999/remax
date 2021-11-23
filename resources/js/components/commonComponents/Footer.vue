@@ -8,52 +8,66 @@
                             >Remax</router-link
                         >
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            Multiple Listing Service® and the associated logos
+                            identify professional services rendered by REALTOR®
+                            members of CREA to effect the purchase, sale and
+                            lease of real estate as part of a cooperative
+                            selling system.
                         </p>
                         <ul class="list-unstyled">
                             <li class="social-icons">
-                                <img
-                                    src="/assets/images/icons/twitter.png"
-                                    class="img-fluid m-auto"
-                                    alt=""
-                                />
+                                <a
+                                    href="https://www.facebook.com/remaxmillenniumrealestate/"
+                                    target="_blank"
+                                    class="w-100 h-100"
+                                >
+                                    <img
+                                        src="/assets/images/icons/facebook-logo.png"
+                                        class="img-fluid m-auto"
+                                        alt=""
+                                    />
+                                </a>
                             </li>
                             <li class="social-icons">
-                                <img
-                                    src="/assets/images/icons/google.png"
-                                    class="img-fluid m-auto"
-                                    alt=""
-                                />
+                                <a
+                                    href="https://twitter.com/MillenniumRemax"
+                                    target="_blank"
+                                    class="w-100 h-100"
+                                >
+                                    <img
+                                        src="/assets/images/icons/twitter.png"
+                                        class="img-fluid m-auto"
+                                        alt=""
+                                    />
+                                </a>
                             </li>
                             <li class="social-icons">
-                                <img
-                                    src="/assets/images/icons/facebook-logo.png"
-                                    class="img-fluid m-auto"
-                                    alt=""
-                                />
+                                <a
+                                    href="https://www.instagram.com/remaxmillennium/"
+                                    target="_blank"
+                                    class="w-100 h-100"
+                                >
+                                    <img
+                                        src="/assets/images/icons/google.png"
+                                        class="img-fluid m-auto"
+                                        alt=""
+                                    />
+                                </a>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-lg-2 col-md-2 col-6">
-                        <ul class="list-unstyled">
-                            <li class="text-secondary fw-bold">About</li>
-                            <li><a href="">Why choose us</a></li>
-                            <li><a href="">Review</a></li>
-                            <li><a href="">Customers</a></li>
-                            <li><a href="">Blog</a></li>
-                            <li><a href="">Career</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-6">
-                        <ul class="list-unstyled">
-                            <li class="text-secondary fw-bold">About</li>
-                            <li><a href="">Why choose us</a></li>
-                            <li><a href="">Review</a></li>
-                            <li><a href="">Customers</a></li>
-                            <li><a href="">Blog</a></li>
-                            <li><a href="">Career</a></li>
-                        </ul>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <h6 class="text-secondary h6 fw-bold">Contact Us</h6>
+                        <p class="small p-0 m-0">
+                            © RE/MAX Millennium Real Estate Brokerage
+                            Independently Owned & Operated
+                        </p>
+                        <p class="small p-0 m-0">
+                            Address: <br />
+                            81 Zenway Boulevard #25, Woodbridge, Ontario L4H 0S5
+                        </p>
+                        <p class="small p-0 m-0">Office: (905) 265-2200</p>
+                        <p class="small p-0 m-0">Fax: (905) 265-2203​</p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <p class="text-secondary fw-bold">Newsletter</p>
@@ -88,6 +102,40 @@
         </section>
 
         <section class="p-0 footer">
+            <div class="col-12 text-center">
+                <span class="text-darker fw-lighter-items">
+                    <u>
+                        <router-link class="text-muted" to="/about-us"
+                            >About</router-link
+                        ></u
+                    >
+                </span>
+                |
+                <span class="text-darker fw-lighter-items">
+                    <u>
+                        <router-link class="text-muted" to="/contact-us"
+                            >Contact</router-link
+                        ></u
+                    >
+                </span>
+                |
+                <span class="text-darker fw-lighter-items">
+                    <u>
+                        <router-link class="text-muted" to="/terms-of-use"
+                            >Copyright/Terms of Use</router-link
+                        ></u
+                    >
+                </span>
+                |
+                <span class="text-darker fw-lighter-items">
+                    <u>
+                        <router-link class="text-muted" to="/privacy-policy"
+                            >Privacy Policy</router-link
+                        ></u
+                    >
+                </span>
+            </div>
+            <br />
             <div class="container">
                 <hr class="m-0" />
             </div>
@@ -97,8 +145,7 @@
         <section class="sub-footer footer py-5">
             <div class="container p-0">
                 <h6 class="text-center text-secondary fw-light">
-                    Copyright ©2021 All rights reserved |
-                    <span class="text-darker fw-lighter-items">Remax</span>
+                    Copyright © 2019 RE/MAX Millennium. All rights reserved.
                 </h6>
             </div>
             <div class="b-t-t">

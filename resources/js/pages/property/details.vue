@@ -111,7 +111,35 @@
                                     </div>
                                     <div class="col-12 py-1">
                                         <ul class="list-unstyled">
-                                            <li class="float-start">
+                                            <li
+                                                v-if="property.Br"
+                                                class="float-start"
+                                            >
+                                                <small class="pe-3"
+                                                    ><img
+                                                        src="/assets/images/icons/bed.png"
+                                                        alt="Washroom"
+                                                        width="24px"
+                                                    />
+                                                    <span
+                                                        class="count card-title"
+                                                        >{{ property.Br }}</span
+                                                    >
+                                                    <span
+                                                        v-if="property.Br_plus"
+                                                        class="count card-title"
+                                                    >
+                                                        +
+                                                        {{
+                                                            property.Br_plus
+                                                        }}</span
+                                                    >
+                                                </small>
+                                            </li>
+                                            <li
+                                                v-if="property.Bath_tot"
+                                                class="float-start"
+                                            >
                                                 <small class="pe-3"
                                                     ><img
                                                         src="/assets/images/icons/bathTab.png"
@@ -130,23 +158,8 @@
                                                 </small>
                                             </li>
                                             <li class="float-start">
-                                                <small class="pe-3"
-                                                    ><img
-                                                        src="/assets/images/icons/bed.png"
-                                                        alt="Washroom"
-                                                        width="24px"
-                                                    />
-                                                    <span
-                                                        class="count card-title"
-                                                        >{{
-                                                            getTotalRooms
-                                                        }}</span
-                                                    >
-                                                </small>
-                                            </li>
-                                            <li class="float-start">
                                                 <small class="pe-3 card-title"
-                                                    >MLS
+                                                    >MLS®
                                                     {{ property.Ml_num }}</small
                                                 >
                                             </li>
@@ -889,7 +902,9 @@
                                 <tr v-if="property.Tour_url">
                                     <th class="p-2">Virtual Tour URL</th>
                                     <td class="p-2">
-                                        <a :href="property.Tour_url"
+                                        <a
+                                            target="_blank"
+                                            :href="property.Tour_url"
                                             >Click To View</a
                                         >
                                     </td>
@@ -987,14 +1002,6 @@
                                 <tr v-if="property.Zoning">
                                     <th class="p-2">Zoning</th>
                                     <td class="p-2">{{ property.Zoning }}</td>
-                                </tr>
-                                <tr v-if="property.Br">
-                                    <th class="p-2">Bedrooms</th>
-                                    <td class="p-2">{{ property.Br }}</td>
-                                </tr>
-                                <tr v-if="property.Br_plus">
-                                    <th class="p-2">Bedrooms +</th>
-                                    <td class="p-2">{{ property.Br_plus }}</td>
                                 </tr>
                                 <tr v-if="property.Bsmt1_out">
                                     <th class="p-2">Basement1</th>
@@ -1207,10 +1214,6 @@
                                 <tr v-if="property.Elevator">
                                     <th class="p-2">Elevator</th>
                                     <td class="p-2">{{ property.Elevator }}</td>
-                                </tr>
-                                <tr v-if="property.Extras">
-                                    <th class="p-2">Extras</th>
-                                    <td class="p-2">{{ property.Extras }}</td>
                                 </tr>
                                 <tr v-if="property.Farm_agri">
                                     <th class="p-2">Farm/Agriculture</th>
@@ -2902,87 +2905,6 @@ export default {
             }
 
             return this.$store.state.auth_user;
-        },
-
-        getTotalRooms() {
-            let count = 0;
-            if (this.property) {
-                if (
-                    this.property.Rm1_wth !== null &&
-                    this.property.Rm1_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm2_wth !== null &&
-                    this.property.Rm2_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm3_wth !== null &&
-                    this.property.Rm3_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm4_wth !== null &&
-                    this.property.Rm4_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm5_wth !== null &&
-                    this.property.Rm5_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm6_wth !== null &&
-                    this.property.Rm6_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm7_wth !== null &&
-                    this.property.Rm7_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm8_wth !== null &&
-                    this.property.Rm8_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm9_wth !== null &&
-                    this.property.Rm9_wth > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm10_wth !== null &&
-                    this.property.Rm10_wt > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm11_wth !== null &&
-                    this.property.Rm11_wt > 0
-                ) {
-                    count++;
-                }
-                if (
-                    this.property.Rm12_wth !== null &&
-                    this.property.Rm12_wt > 0
-                ) {
-                    count++;
-                }
-            }
-
-            return count;
-            // parseInt(property.Rms);
         },
     },
 

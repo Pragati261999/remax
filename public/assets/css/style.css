@@ -295,7 +295,12 @@ table tr td {
     background-color: #b8e8fed1 !important;
 }
 
+.text-right {
+    text-align: right;
+}
+
 /* Temporary Header CSS */
+
 
 .hero-container {
     background-image: url(../images/banners/Banner_image.png);
