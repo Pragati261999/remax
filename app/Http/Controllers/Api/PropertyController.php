@@ -125,7 +125,13 @@ class PropertyController extends AppBaseController
                 return $query->where('Ad_text', 'LIKE', "%{$key_}%");
             })
 
-            // Addr - working
+            // sqft - working
+            ->when($Sqft, function ($query) use ($data) {
+                $Sqft_ = (int) $data['sqft'];
+                return $query->whereRaw('CAST(Sqft AS UNSIGNED) >= ' . $Sqft_);
+            })
+
+            // Addr - Done
             ->when($addr, function ($query) use ($data) {
 
                 $addrr = $data['addr'];
@@ -146,12 +152,6 @@ class PropertyController extends AppBaseController
                     ->select('id')->get();
 
                 return $query->whereIn('id', $id);
-            })
-
-            // sqft - working
-            ->when($Sqft, function ($query) use ($data) {
-                $Sqft_ = (int) $data['sqft'];
-                return $query->where('Sqft', '>=', $Sqft_);
             })
 
             ->orderby('id', 'DESC')
