@@ -49,19 +49,6 @@ class PropertyController extends AppBaseController
     public function searchProperty(Request $request)
     {
 
-        // bedRoom: 2
-        // minPrice: 500
-        // maxPrice: 20000
-        // listedFor: Lease
-        // propertyType: Residential
-        // bath: 2
-        // openHouse: true
-        // addedFrom: 2021-11-26
-        // key: 555
-        // addr: 34
-
-        // sqft: 2500
-
         $data = $request->all();
 
         // vars
@@ -76,45 +63,13 @@ class PropertyController extends AppBaseController
         $key = !empty($data['key']) ? $data['key'] : '';
         $addr = !empty($data['addr']) ? $data['addr'] : '';
 
-
         $Sqft = !empty($data['sqft']) ? (int) $data['sqft'] : '';
 
         $msg = 'Property fetched successfully.';
 
         $response = Property::with('images')
 
-            // ->when(!empty($data['addr']), function ($query) use ($data) {
-            //     $addrr = $data['addr'];
-            //     return $query->where('Addr', 'LIKE', "%{$addrr}%")
-            //         ->orWhere(function ($query) use ($addrr) {
-            //             $query->where('Ml_num', 'LIKE', "%{$addrr}%");
-            //         });
-            // })
-
-            // return $query->where('Addr', 'LIKE', "%{$addrr}%")
-            //         ->orWhere('Municipality_district', 'LIKE', "{$addrr}%")
-            //         ->orWhere('Community', 'LIKE', "{$addrr}%")
-            //         ->orWhere('Municipality', 'LIKE', "{$addrr}%")
-            //         ->orWhere(function ($query) use ($addrr) {
-            //             $query->where('Ml_num', 'LIKE', "%{$addrr}%");
-            //         });
-
-            ->when($addr, function ($query) use ($data) {
-                $addrr = $data['addr'];
-                return $query->where('Addr', 'LIKE', "%{$addrr}%")
-                    ->orWhere(function ($query) use ($addrr) {
-                        $query->where('Ml_num', 'LIKE', "%{$addrr}%");
-                    })
-                    ->orWhere(function ($query) use ($addrr) {
-                        $query->where('Municipality_district', 'LIKE', "{$addrr}%");
-                    })
-                    ->orWhere(function ($query) use ($addrr) {
-                        $query->where('Municipality', 'LIKE', "{$addrr}%");
-                    })
-                    ->orWhere(function ($query) use ($addrr) {
-                        $query->where('Community', 'LIKE', "{$addrr}%");
-                    });
-            })
+            // select * from `properties` where `Br` >= ? and `Lp_dol` >= ? and `Lp_dol` <= ? and `S_r` = ? and `property_type` LIKE ? and `Bath_tot` >= ? and `Patio_ter` not in (?, ?, ?) and `Idx_dt` <= ? and `Ad_text` LIKE ? and `Addr` LIKE ? or (`Ml_num` LIKE ?) or (`Municipality_district` LIKE ?) or (`Municipality` LIKE ?) or (`Community` LIKE ?) and `Sqft` >= ? order by `id` desc
 
             // Bed Rooms -- done
             ->when($bedRoom, function ($query) use ($data) {
@@ -170,14 +125,179 @@ class PropertyController extends AppBaseController
                 return $query->where('Ad_text', 'LIKE', "%{$key_}%");
             })
 
-            // sqft
-            // ->when($Sqft, function ($query) use ($data) {
-            //     $Sqft_ = (int) $data['sqft'];
-            //     return $query->where('Sqft', '>', $Sqft_);
-            // })
+            // Addr - working
+            ->when($addr, function ($query) use ($data) {
+
+                $addrr = $data['addr'];
+
+                $id = Property::where('Addr', 'LIKE', "%{$addrr}%")
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Ml_num', 'LIKE', "%{$addrr}%");
+                    })
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Municipality_district', 'LIKE', "{$addrr}%");
+                    })
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Municipality', 'LIKE', "{$addrr}%");
+                    })
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Community', 'LIKE', "{$addrr}%");
+                    })
+                    ->select('id')->get();
+
+                return $query->whereIn('id', $id);
+            })
+
+            // sqft - working
+            ->when($Sqft, function ($query) use ($data) {
+                $Sqft_ = (int) $data['sqft'];
+                return $query->where('Sqft', '>=', $Sqft_);
+            })
 
             ->orderby('id', 'DESC')
+            // ->toSql();
             ->paginate('15')->withQueryString();
+
+        // $response = $request->all();
+        return $this->sendResponse($msg, $response);
+    }
+
+    public function searchProperty_BCUP2(Request $request)
+    {
+
+        // bedRoom: 2
+        // minPrice: 500
+        // maxPrice: 20000
+        // listedFor: Lease
+        // propertyType: Residential
+        // bath: 2
+        // openHouse: true
+        // addedFrom: 2021-11-26
+        // key: 555
+        // addr: 34
+
+        // sqft: 2500
+
+        $data = $request->all();
+
+        // vars
+        $bedRoom = !empty($data['bedRoom']) ? (int) $data['bedRoom'] : '';
+        $min_price = !empty($data['minPrice']) ? (int) $data['minPrice'] : '';
+        $max_price = !empty($data['maxPrice']) ? (int) $data['maxPrice'] : '';
+        $listedFor = !empty($data['listedFor']) ? $data['listedFor'] : '';
+        $propType = !empty($data['propertyType']) ? $data['propertyType'] : '';
+        $bath = !empty($data['bath']) ? (int) $data['bath'] : '';
+        $openHouse = !empty($data['openHouse']) ? (bool) $data['openHouse'] : '';
+        $addedFrom =  !empty($data['addedFrom']) ? $data['addedFrom'] : '';
+        $key = !empty($data['key']) ? $data['key'] : '';
+        $addr = !empty($data['addr']) ? $data['addr'] : '';
+
+
+        $Sqft = !empty($data['sqft']) ? (int) $data['sqft'] : '';
+
+        $msg = 'Property fetched successfully.';
+
+        $response = Property::with('images')
+
+            // ->when(!empty($data['addr']), function ($query) use ($data) {
+            //     $addrr = $data['addr'];
+            //     return $query->where('Addr', 'LIKE', "%{$addrr}%")
+            //         ->orWhere(function ($query) use ($addrr) {
+            //             $query->where('Ml_num', 'LIKE', "%{$addrr}%");
+            //         });
+            // })
+
+            // return $query->where('Addr', 'LIKE', "%{$addrr}%")
+            //         ->orWhere('Municipality_district', 'LIKE', "{$addrr}%")
+            //         ->orWhere('Community', 'LIKE', "{$addrr}%")
+            //         ->orWhere('Municipality', 'LIKE', "{$addrr}%")
+            //         ->orWhere(function ($query) use ($addrr) {
+            //             $query->where('Ml_num', 'LIKE', "%{$addrr}%");
+            //         });
+
+            // select * from `properties` where `Br` >= ? and `Lp_dol` >= ? and `Lp_dol` <= ? and `S_r` = ? and `property_type` LIKE ? and `Bath_tot` >= ? and `Patio_ter` not in (?, ?, ?) and `Idx_dt` <= ? and `Ad_text` LIKE ? and `Addr` LIKE ? or (`Ml_num` LIKE ?) or (`Municipality_district` LIKE ?) or (`Municipality` LIKE ?) or (`Community` LIKE ?) and `Sqft` >= ? order by `id` desc
+
+            // Bed Rooms -- done
+            ->when($bedRoom, function ($query) use ($data) {
+                $br = (int) $data['bedRoom'];
+                return $query->where('Br', '>=', $br);
+            })
+
+            // Min Price - done
+            ->when($min_price, function ($query) use ($data) {
+                $minp = (float) $data['minPrice'];
+                return $query->where('Lp_dol', '>=', $minp);
+            })
+
+            // Max Price - Done
+            ->when($max_price, function ($query) use ($data) {
+                $mxp = (float) $data['maxPrice'];
+                return $query->where('Lp_dol', '<=', $mxp);
+            })
+
+            // Listed for - Rent or sell - done
+            ->when($listedFor, function ($query) use ($data) {
+                $S_r = $data['listedFor'];
+                return $query->where('S_r', $S_r);
+            })
+
+            // Property type - Done
+            ->when($propType, function ($query) use ($data) {
+                $propertyType = $data['propertyType'];
+                return $query->where('property_type', 'LIKE', "%{$propertyType}%");
+            })
+
+            // bath - Done
+            ->when($bath, function ($query) use ($data) {
+                $bath = (int) $data['bath'];
+                return $query->where('Bath_tot', '>=', $bath);
+            })
+
+            // openHouse - Done
+            ->when($openHouse, function ($query) use ($data) {
+                $openHouse_ = [NULL, 'None', ''];
+                return $query->whereNotIn('Patio_ter', $openHouse_);
+            })
+
+            // addedFrom -- Idx_dt - Done
+            ->when($addedFrom, function ($query) use ($data) {
+                $addedFrom_ = $data['addedFrom'];
+                return $query->where('Idx_dt', '<=', $addedFrom_);
+            })
+
+            // key - Done
+            ->when($key, function ($query) use ($data) {
+                $key_ = $data['key'];
+                return $query->where('Ad_text', 'LIKE', "%{$key_}%");
+            })
+
+            // Addr - working
+            ->when($addr, function ($query) use ($data) {
+                $addrr = $data['addr'];
+                return $query->where('Addr', 'LIKE', "%{$addrr}%")
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Ml_num', 'LIKE', "%{$addrr}%");
+                    })
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Municipality_district', 'LIKE', "{$addrr}%");
+                    })
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Municipality', 'LIKE', "{$addrr}%");
+                    })
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->where('Community', 'LIKE', "{$addrr}%");
+                    });
+            })
+
+            // sqft - working
+            ->when($Sqft, function ($query) use ($data) {
+                $Sqft_ = (int) $data['sqft'];
+                return $query->where('Sqft', '>=', $Sqft_);
+            })
+
+            ->orderby('id', 'DESC')
+            ->toSql();
+        // ->paginate('15')->withQueryString();
 
         // $response = $request->all();
         return $this->sendResponse($msg, $response);
