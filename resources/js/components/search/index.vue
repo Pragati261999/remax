@@ -3,6 +3,7 @@
         <div class="wrapper">
             <div class="tabs">
                 <div class="row">
+                    <!-- Tabs / Prop type -->
                     <div class="col-12">
                         <div class="tab">
                             <input
@@ -31,19 +32,13 @@
                             >
                         </div>
                     </div>
+                    <!-- Tabs / Opotions -->
                     <div class="col-12">
                         <div class="tab w-100">
                             <div class="tab-content d-block">
                                 <div class="row g-3">
                                     <div class="input-width">
                                         <label for="">Location/MLS#</label>
-                                        <!-- <input
-                                    v-model="form.addr"
-                                    type="text"
-                                    class="form-control"
-                                    aria-label="First name"
-                                    placeholder="Location"
-                                /> -->
                                         <vue-google-autocomplete
                                             ref="address"
                                             id="map"
@@ -51,6 +46,7 @@
                                             placeholder="Location/MLS"
                                             v-on:placechanged="getAddressData"
                                             @keyup="getAddressInputData"
+                                            :value="form.addr"
                                             types="(cities)"
                                             country="ca"
                                         >
@@ -291,6 +287,11 @@ export default {
             more: false,
         };
     },
+    computed: {
+        checkFilterApplied() {
+            return 1;
+        },
+    },
     methods: {
         moreFilter() {
             this.more = !this.more;
@@ -327,5 +328,46 @@ export default {
 }
 select:checked {
     color: #5c5c5c;
+}
+
+.tab-switch:checked + .tab-label {
+    position: relative;
+}
+.tab-switch:checked + .tab-label::before {
+    content: "";
+    height: 6px;
+    width: 6px;
+    position: absolute;
+    background: green;
+    display: block;
+    left: 5px;
+    top: 5px;
+    border-radius: 30px;
+    animation: pulse 1s linear infinite;
+}
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(82, 245, 117, 0.8);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
+}
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(82, 245, 117, 0.8);
+        box-shadow: 0 0 0 0 rgba(82, 245, 117, 0.8);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 10px rgba(204, 169, 44, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+        box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
+    }
 }
 </style>
