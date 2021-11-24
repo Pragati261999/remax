@@ -5049,6 +5049,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -5062,28 +5080,30 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  data: function data() {
-    return {
-      more: false
-    };
-  },
   computed: {
     checkFilterApplied: function checkFilterApplied() {
-      return 1;
+      return this.$store.state.filterForm ? 1 : 0;
+    },
+    more: function more() {
+      return this.$store.state.advanceFilterOpened;
     }
   },
   methods: {
+    clearFilter: function clearFilter() {
+      this.$store.commit("clearFilter");
+      window.location.reload();
+    },
     moreFilter: function moreFilter() {
-      this.more = !this.more;
+      this.$store.commit("toggleAdvanceFilter");
     },
     getAddressData: function getAddressData(addressData, placeResultData, id) {
       this.form.addr = addressData.locality;
-      console.log(this.form.addr);
     },
     getAddressInputData: function getAddressInputData() {
       this.form.addr = event.target.value;
     },
     searchProperty: function searchProperty() {
+      this.$store.commit("preventFilter", this.form);
       var self = this;
 
       if (self.$route.name !== "search-property") {
@@ -9283,7 +9303,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_8__["default"].Store({
     auth_token: null,
     auth_user: null,
     favourite: [],
-    recent: []
+    recent: [],
+    filterForm: null,
+    advanceFilterOpened: false
   },
   plugins: [(0,vuex_persistedstate__WEBPACK_IMPORTED_MODULE_0__["default"])()],
   mutations: {
@@ -9327,6 +9349,15 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_8__["default"].Store({
     },
     removeRecent: function removeRecent(state) {
       state.recent = [];
+    },
+    preventFilter: function preventFilter(state, form) {
+      state.filterForm = form;
+    },
+    clearFilter: function clearFilter(state) {
+      state.filterForm = null;
+    },
+    toggleAdvanceFilter: function toggleAdvanceFilter(state) {
+      state.advanceFilterOpened = !state.advanceFilterOpened;
     }
   }
 });
@@ -53746,6 +53777,29 @@ var render = function () {
                       ),
                     ]
                   ),
+                  _vm._v(" "),
+                  _vm.checkFilterApplied
+                    ? _c("div", { staticClass: "row mt-2" }, [
+                        _c("div", { staticClass: "col-12 text-right" }, [
+                          _c("small", [
+                            _c("u", [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "javascript:0;" },
+                                  on: { click: _vm.clearFilter },
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                                    Clear filter\n                                                "
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]),
+                      ])
+                    : _vm._e(),
                 ]),
               ]),
             ]),

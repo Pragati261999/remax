@@ -262,6 +262,24 @@
                                             Search
                                         </button>
                                     </div>
+
+                                    <div
+                                        v-if="checkFilterApplied"
+                                        class="row mt-2"
+                                    >
+                                        <div class="col-12 text-right">
+                                            <small>
+                                                <u>
+                                                    <a
+                                                        @click="clearFilter"
+                                                        href="javascript:0;"
+                                                    >
+                                                        Clear filter
+                                                    </a>
+                                                </u>
+                                            </small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -282,30 +300,33 @@ export default {
             default: () => ({}),
         },
     },
-    data() {
-        return {
-            more: false,
-        };
-    },
     computed: {
         checkFilterApplied() {
-            return 1;
+            return this.$store.state.filterForm ? 1 : 0;
+        },
+        more() {
+            return this.$store.state.advanceFilterOpened;
         },
     },
     methods: {
+        clearFilter() {
+            this.$store.commit("clearFilter");
+            window.location.reload();
+        },
+
         moreFilter() {
-            this.more = !this.more;
+            this.$store.commit("toggleAdvanceFilter");
         },
 
         getAddressData(addressData, placeResultData, id) {
             this.form.addr = addressData.locality;
-            console.log(this.form.addr);
         },
         getAddressInputData() {
             this.form.addr = event.target.value;
         },
 
         searchProperty() {
+            this.$store.commit("preventFilter", this.form);
             const self = this;
             if (self.$route.name !== "search-property") {
                 self.$router.push({

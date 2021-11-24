@@ -162,7 +162,7 @@ class PropertyController extends AppBaseController
         return $this->sendResponse($msg, $response);
     }
 
-    public function searchProperty_BCUP2(Request $request)
+    public function searchProperty_BCUP(Request $request)
     {
 
         // bedRoom: 2
@@ -298,101 +298,6 @@ class PropertyController extends AppBaseController
             ->orderby('id', 'DESC')
             ->toSql();
         // ->paginate('15')->withQueryString();
-
-        // $response = $request->all();
-        return $this->sendResponse($msg, $response);
-    }
-
-    public function searchProperty_BCUP(Request $request)
-    {
-
-        $data = $request->all();
-
-        // vars
-        $bedRoom = !empty($data['bedRoom']) ? (float) $data['bedRoom'] : '';
-        $min_price = !empty($data['minPrice']) ? (float) $data['minPrice'] : '';
-        $max_price = !empty($data['maxPrice']) ? (float) $data['maxPrice'] : '';
-
-        $bath = !empty($data['bath']) ? (float) $data['bath'] : '';
-        $addedFrom =  !empty($data['addedFrom']) ? $data['addedFrom'] : '';
-        $key = !empty($data['key']) ? $data['key'] : '';
-
-        $Sqft = !empty($data['sqft']) ? (float) $data['sqft'] : '';
-        $openHouse = !empty($data['openHouse']) ? $data['openHouse'] : '';
-
-        $msg = 'Property fetched successfully.';
-
-        $response = Property::with('images')
-
-            ->when(!empty($data['addr']), function ($query) use ($data) {
-                $addrr = $data['addr'];
-                return $query->where('Addr', 'LIKE', "%{$addrr}%")
-                    ->orWhere('Municipality_district', 'LIKE', "{$addrr}%")
-                    ->orWhere('Community', 'LIKE', "{$addrr}%")
-                    ->orWhere('Municipality', 'LIKE', "{$addrr}%")
-                    ->orWhere(function ($query) use ($addrr) {
-                        $query->where('Ml_num', 'LIKE', "%{$addrr}%");
-                    });
-            })
-
-            ->when($bedRoom, function ($query) use ($data) {
-                $br = (float) $data['bedRoom'];
-                $col = 'Rm' . $br . '_len';
-                return $query->where($col, '>', 0.00);
-            })
-
-            ->when($min_price, function ($query) use ($data) {
-                $minp = (float) $data['minPrice'];
-                return $query->where('Lp_dol', '>=', $minp);
-            })
-
-            ->when($max_price, function ($query) use ($data) {
-                $mxp = (float) $data['maxPrice'];
-                return $query->where('Lp_dol', '<=', $mxp);
-            })
-
-            ->when(!empty($data['listedFor']), function ($query) use ($data) {
-                $S_r = $data['listedFor'];
-                return $query->where('S_r', $S_r);
-            })
-
-            ->when(!empty($data['propertyType']), function ($query) use ($data) {
-                $propertyType = $data['propertyType'];
-                return $query->where('property_type', 'LIKE', "%{$propertyType}%");
-            })
-
-            // bath
-            ->when($bath, function ($query) use ($data) {
-                $bath = (int) $data['bath'];
-                return $query->where('Bath_tot', '>=', $bath);
-            })
-
-            // sqft
-            // ->when($Sqft, function ($query) use ($data) {
-            //     $Sqft_ = (int) $data['sqft'];
-            //     return $query->where('Sqft', '>', $Sqft_);
-            // })
-
-            // addedFrom -- Idx_dt
-            ->when($addedFrom, function ($query) use ($data) {
-                $addedFrom_ = $data['addedFrom'];
-                return $query->where('Idx_dt', '<=', $addedFrom_);
-            })
-
-            // key
-            ->when($key, function ($query) use ($data) {
-                $key_ = $data['key'];
-                return $query->where('Ad_text', 'LIKE', "%{$key_}%");
-            })
-
-            // openHouse
-            // ->when($openHouse, function ($query) use ($data) {
-            //     $openHouse_ = $data['openHouse'];
-            //     return $query->where('openHouse', 'LIKE', "%{$openHouse_}%");
-            // })
-
-            ->orderby('id', 'DESC')
-            ->paginate('15')->withQueryString();
 
         // $response = $request->all();
         return $this->sendResponse($msg, $response);

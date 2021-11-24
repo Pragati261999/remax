@@ -83,6 +83,8 @@ const store = new Vuex.Store({
         auth_user: null,
         favourite: [],
         recent: [],
+        filterForm: null,
+        advanceFilterOpened: false,
     },
     plugins: [createPersistedState()],
     mutations: {
@@ -92,14 +94,12 @@ const store = new Vuex.Store({
         removeAuthToken(state) {
             state.auth_token = null;
         },
-
         addAuthUser(state, user) {
             state.auth_user = user;
         },
         removeAuthUser(state) {
             state.auth_user = null;
         },
-
         addFavourite(state, ml_num) {
             state.favourite.push(ml_num);
         },
@@ -112,7 +112,6 @@ const store = new Vuex.Store({
         removeBookMark(state) {
             state.favourite = [];
         },
-
         addRecent(state, ml_num) {
             var index = state.recent.indexOf(ml_num);
             if (index < 0) {
@@ -126,6 +125,15 @@ const store = new Vuex.Store({
         },
         removeRecent(state) {
             state.recent = [];
+        },
+        preventFilter(state, form) {
+            state.filterForm = form;
+        },
+        clearFilter(state) {
+            state.filterForm = null;
+        },
+        toggleAdvanceFilter(state) {
+            state.advanceFilterOpened = !state.advanceFilterOpened;
         },
     },
 });
