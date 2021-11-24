@@ -83,7 +83,7 @@ const store = new Vuex.Store({
         auth_user: null,
         favourite: [],
         recent: [],
-        filterForm: null,
+        filterForm: {},
         advanceFilterOpened: false,
     },
     plugins: [createPersistedState()],
@@ -130,7 +130,7 @@ const store = new Vuex.Store({
             state.filterForm = form;
         },
         clearFilter(state) {
-            state.filterForm = null;
+            state.filterForm = {};
         },
         toggleAdvanceFilter(state) {
             state.advanceFilterOpened = !state.advanceFilterOpened;

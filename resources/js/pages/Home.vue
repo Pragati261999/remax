@@ -6,7 +6,7 @@
                 <h6>
                     Easy to buy, sell or rent your property through homeplore.
                 </h6>
-                <property-search></property-search>
+                <property-search :form="form"></property-search>
             </div>
         </section>
 
@@ -649,3 +649,21 @@
         <faq></faq>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            form: {},
+        };
+    },
+    mounted() {
+        this.checkFilterData();
+    },
+    methods: {
+        checkFilterData() {
+            this.form = this.$store.state.filterForm;
+        },
+    },
+};
+</script>

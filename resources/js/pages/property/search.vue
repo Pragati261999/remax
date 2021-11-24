@@ -161,7 +161,8 @@ export default {
     },
     methods: {
         getFilteredDataOnLoad() {
-            this.form = this.$route.params.data;
+            // this.form = this.$route.params.data;
+            this.form = this.$store.state.filterForm;
             this.getFilteredData(this.form);
         },
 

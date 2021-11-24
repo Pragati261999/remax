@@ -302,7 +302,13 @@ export default {
     },
     computed: {
         checkFilterApplied() {
-            return this.$store.state.filterForm ? 1 : 0;
+            if (this.$store.state.filterForm) {
+                if (!!Object.keys(this.$store.state.filterForm).length) {
+                    return true;
+                }
+            } else {
+                return false;
+            }
         },
         more() {
             return this.$store.state.advanceFilterOpened;
