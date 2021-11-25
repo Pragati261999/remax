@@ -3008,6 +3008,7 @@ export default {
             display: block;
             left: 0;
             top: 49px;
+            display: none;
         }
 
         li {
