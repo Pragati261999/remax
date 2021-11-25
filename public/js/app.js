@@ -15844,7 +15844,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-a7d24612] {\r\n    line-height: 28px;\r\n    font-size: 18px;\r\n    letter-spacing: 0.5px;\r\n    margin: 0;\r\n    padding: 0;\r\n    color: #6c757d !important;\r\n    font-weight: 300 !important;\n}\np strong[data-v-a7d24612] {\r\n    font-weight: 600 !important;\r\n    letter-spacing: 2px;\n}\nol li[data-v-a7d24612] {\r\n    padding-left: 20px;\r\n    margin-bottom: 10px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-a7d24612] {\r\n    line-height: 28px;\r\n    font-size: 18px;\r\n    letter-spacing: 0.5px;\r\n    margin: 0;\r\n    padding: 0;\r\n    color: #6c757d !important;\r\n    font-weight: 300 !important;\n}\np strong[data-v-a7d24612] {\r\n    font-weight: 600 !important;\r\n    letter-spacing: 2px;\n}\nol li[data-v-a7d24612] {\r\n    padding-left: 20px;\r\n    margin-bottom: 10px;\n}\n.about-text[data-v-a7d24612] {\r\n    color: #434343;\r\n    font-weight: 500;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64764,7 +64764,39 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12 py-4" }, [
+          _c("div", { staticClass: "outer border p-4 pt-0" }, [
+            _c("div", { staticClass: "row flex-column-reverse flex-lg-row" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-5 pt-4" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "ol-12 align-center" }, [
+                    _c("img", {
+                      directives: [
+                        {
+                          name: "lazy",
+                          rawName: "v-lazy",
+                          value: {
+                            src: "./assets/images/banners/About/about-banner-right.png",
+                          },
+                          expression:
+                            "{\n                                            src: './assets/images/banners/About/about-banner-right.png',\n                                        }",
+                        },
+                      ],
+                      staticClass: "img-fluid",
+                      attrs: { alt: "About Us" },
+                    }),
+                  ]),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -64772,10 +64804,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12 mb-5 py-4" }, [
-          _c("h2", { staticClass: "text-color mt-5" }, [_vm._v("ABOUT US")]),
+    return _c("div", { staticClass: "col-md-7 pt-4" }, [
+      _c("div", { staticClass: "page-title" }, [
+        _c("h3", { staticClass: "text-color fw-bold" }, [
+          _vm._v(
+            "\n                                    The Leading Real Estate Rental\n                                    Marketplace.\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "about-text" }, [
+          _vm._v(
+            "\n                                    RE/MAX Millennium was founded with the\n                                    vision of pursuing the New Era of Real\n                                    Estate; the Digital Era. We believe real\n                                    estate has and always will be a business\n                                    where personal relationships matter. We\n                                    aim to provide clients and agents with\n                                    more exposure, brand value, innovation\n                                    and quality service. Our team is\n                                    committed to providing the highest level\n                                    of representation and top-notch customer\n                                    service for our clients with an in-depth\n                                    understanding of the ever-evolving\n                                    marketplace which sets us apart from the\n                                    rest.\n                                "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "about-text" }, [
+          _vm._v(
+            "\n                                    Hear from us, how we make a difference.\n                                "
+          ),
         ]),
       ]),
     ])

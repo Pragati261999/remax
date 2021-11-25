@@ -33,8 +33,51 @@
         <!-- Breakcrumbs -->
         <div class="container">
             <div class="row">
-                <div class="col-12 mb-5 py-4">
-                    <h2 class="text-color mt-5">ABOUT US</h2>
+                <div class="col-12 py-4">
+                    <div class="outer border p-4 pt-0">
+                        <div class="row flex-column-reverse flex-lg-row">
+                            <div class="col-md-7 pt-4">
+                                <div class="page-title">
+                                    <h3 class="text-color fw-bold">
+                                        The Leading Real Estate Rental
+                                        Marketplace.
+                                    </h3>
+                                    <p class="about-text">
+                                        RE/MAX Millennium was founded with the
+                                        vision of pursuing the New Era of Real
+                                        Estate; the Digital Era. We believe real
+                                        estate has and always will be a business
+                                        where personal relationships matter. We
+                                        aim to provide clients and agents with
+                                        more exposure, brand value, innovation
+                                        and quality service. Our team is
+                                        committed to providing the highest level
+                                        of representation and top-notch customer
+                                        service for our clients with an in-depth
+                                        understanding of the ever-evolving
+                                        marketplace which sets us apart from the
+                                        rest.
+                                    </p>
+                                    <p class="about-text">
+                                        Hear from us, how we make a difference.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-5 pt-4">
+                                <div class="row">
+                                    <div class="ol-12 align-center">
+                                        <img
+                                            v-lazy="{
+                                                src: './assets/images/banners/About/about-banner-right.png',
+                                            }"
+                                            class="img-fluid"
+                                            alt="About Us"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,5 +101,10 @@ p strong {
 ol li {
     padding-left: 20px;
     margin-bottom: 10px;
+}
+
+.about-text {
+    color: #434343;
+    font-weight: 500;
 }
 </style>
