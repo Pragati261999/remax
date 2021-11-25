@@ -25,7 +25,7 @@
                                         >
                                     </li>
                                     <li class="breadcrumb-item">
-                                        <router-link to="/"
+                                        <router-link to="/property/search"
                                             >Properties</router-link
                                         >
                                     </li>
