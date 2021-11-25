@@ -64717,7 +64717,55 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("section", { staticClass: "breadcrumb-section bg-theme-light py-5" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row py-0" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h2", { staticClass: "theme-title text-start" }, [
+              _vm._v("About Us"),
+            ]),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c("ol", { staticClass: "breadcrumb" }, [
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item ps-0" },
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _c("img", {
+                        staticClass: "img-fluid align-middle pb-1",
+                        attrs: {
+                          src: "/assets/images/icons/Mask Group.svg",
+                          width: "14",
+                          alt: "",
+                        },
+                      }),
+                      _vm._v("\n                                    Home"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c("router-link", { attrs: { to: "/about-us" } }, [
+                      _vm._v("About Us"),
+                    ]),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+  ])
 }
 var staticRenderFns = [
   function () {
@@ -64755,7 +64803,55 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("section", { staticClass: "breadcrumb-section bg-theme-light py-5" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row py-0" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h2", { staticClass: "theme-title text-start" }, [
+              _vm._v("Contact Us"),
+            ]),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c("ol", { staticClass: "breadcrumb" }, [
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item ps-0" },
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _c("img", {
+                        staticClass: "img-fluid align-middle pb-1",
+                        attrs: {
+                          src: "/assets/images/icons/Mask Group.svg",
+                          width: "14",
+                          alt: "",
+                        },
+                      }),
+                      _vm._v("\n                                    Home"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item" },
+                  [
+                    _c("router-link", { attrs: { to: "/contact-us" } }, [
+                      _vm._v("Contact Us"),
+                    ]),
+                  ],
+                  1
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+  ])
 }
 var staticRenderFns = [
   function () {
@@ -64765,7 +64861,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-12 mb-5 py-4" }, [
-          _c("h2", { staticClass: "text-color mt-5" }, [_vm._v("CONTACT US")]),
+          _c("h2", { staticClass: "text-color mt-5" }, [_vm._v("Contact US")]),
         ]),
       ]),
     ])
@@ -64832,9 +64928,56 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("section", { staticClass: "breadcrumb-section bg-theme-light py-5" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row py-0" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h2", { staticClass: "theme-title text-start" }, [
+              _vm._v("Privacy Policy"),
+            ]),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c("ol", { staticClass: "breadcrumb" }, [
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item ps-0" },
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _c("img", {
+                        staticClass: "img-fluid align-middle pb-1",
+                        attrs: {
+                          src: "/assets/images/icons/Mask Group.svg",
+                          width: "14",
+                          alt: "",
+                        },
+                      }),
+                      _vm._v("\n                                    Home"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm._m(0),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+  ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "breadcrumb-item" }, [
+      _c("span", [_vm._v("Privacy Policy")]),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -64843,46 +64986,48 @@ var staticRenderFns = [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-12 mb-5 py-4" }, [
           _c("h2", { staticClass: "text-color mt-5 text-uppercase" }, [
-            _vm._v("Privacy Policy"),
+            _vm._v("\n                    Privacy Policy\n                "),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-3" }, [
             _vm._v(
-              "\n                This privacy policy has been compiled to better serve those\n                who are concerned with how their ‘Personally identifiable\n                information’ (PII) is being used online. We understand the\n                power that the Internet holds for changing your life and\n                making things easier for you. These benefits are at risk if\n                people are concerned about their personal privacy. We are\n                committed to providing you with an Internet experience that\n                respects and protects your personal privacy choices and\n                concerns. In general, we gather information about all of our\n                users collectively. We only use such information anonymously\n                and in the aggregate. This information helps us determine\n                what is most beneficial for our users, and how we can\n                continually create a better overall experience for you.\n                Please read our privacy policy carefully to get a clear\n                understanding of how we collect, use, protect or otherwise\n                handle your Personally Identifiable Information in\n                accordance with our website.\n            "
-            ),
-          ]),
-          _vm._v(" "),
-          _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
-            _vm._v("Personal Information"),
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "mt-2" }, [
-            _vm._v(
-              "\n                This website functionality requires/requests users to\n                provide contact information (such as their email address)\n                and personal information (such as their names, address phone\n                numbers, and property details). The user’s contact and\n                personal information is used to contact said user when\n                necessary and requested, but is primarily used to collect\n                personal information necessary to effectively market and to\n                sell the property of sellers, to locate, assess and qualify\n                properties for buyers and to otherwise provide professional\n                services to clients and customers.\n            "
+              "\n                    This privacy policy has been compiled to better serve\n                    those who are concerned with how their ‘Personally\n                    identifiable information’ (PII) is being used online. We\n                    understand the power that the Internet holds for\n                    changing your life and making things easier for you.\n                    These benefits are at risk if people are concerned about\n                    their personal privacy. We are committed to providing\n                    you with an Internet experience that respects and\n                    protects your personal privacy choices and concerns. In\n                    general, we gather information about all of our users\n                    collectively. We only use such information anonymously\n                    and in the aggregate. This information helps us\n                    determine what is most beneficial for our users, and how\n                    we can continually create a better overall experience\n                    for you. Please read our privacy policy carefully to get\n                    a clear understanding of how we collect, use, protect or\n                    otherwise handle your Personally Identifiable\n                    Information in accordance with our website.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
             _vm._v(
-              "\n                Information Collection and Use\n            "
+              "\n                    Personal Information\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                When subscribing to a newsletter or filling out a form, as\n                appropriate, we collect the information you enter, including\n                but not limited to, your name, email address, mailing\n                address, phone number or other details to help you with your\n                experience.\n            "
+              "\n                    This website functionality requires/requests users to\n                    provide contact information (such as their email\n                    address) and personal information (such as their names,\n                    address phone numbers, and property details). The user’s\n                    contact and personal information is used to contact said\n                    user when necessary and requested, but is primarily used\n                    to collect personal information necessary to effectively\n                    market and to sell the property of sellers, to locate,\n                    assess and qualify properties for buyers and to\n                    otherwise provide professional services to clients and\n                    customers.\n                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
+            _vm._v(
+              "\n                    Information Collection and Use\n                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-2" }, [
+            _vm._v(
+              "\n                    When subscribing to a newsletter or filling out a form,\n                    as appropriate, we collect the information you enter,\n                    including but not limited to, your name, email address,\n                    mailing address, phone number or other details to help\n                    you with your experience.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-5" }, [
             _vm._v(
-              "\n                We may use the information we collect from you in the\n                following ways:\n            "
+              "\n                    We may use the information we collect from you in the\n                    following ways:\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n                To personalize user’s experience and to allow us to deliver\n                the type of content and product offerings in which you are\n                most interested.\n            "
+              "\n                    To personalize user’s experience and to allow us to\n                    deliver the type of content and product offerings in\n                    which you are most interested.\n                "
             ),
           ]),
           _vm._v(" "),
@@ -64890,7 +65035,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        To allow us to better service you in responding to\n                        your customer service requests\n                    "
+                  "\n                            To allow us to better service you in responding\n                            to your customer service requests\n                        "
                 ),
               ]),
             ]),
@@ -64898,7 +65043,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        To administer a contest, promotion, survey or other\n                        website feature\n                    "
+                  "\n                            To administer a contest, promotion, survey or\n                            other website feature\n                        "
                 ),
               ]),
             ]),
@@ -64906,7 +65051,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        To send periodic emails regarding your interest for\n                        property listings and services\n                    "
+                  "\n                            To send periodic emails regarding your interest\n                            for property listings and services\n                        "
                 ),
               ]),
             ]),
@@ -64914,19 +65059,19 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "mt-3" }, [
             _vm._v(
-              "\n                This website is the sole owner of the information collected.\n                We will not sell, share, trade or rent this information to\n                others in ways different from what is disclosed in this\n                statement. This website collects information from our users\n                at several different points on our website. We ONLY collect\n                personal information necessary to effectively market and to\n                sell the property of sellers, to locate, assess and qualify\n                properties for buyers and to otherwise provide professional\n                services to clients and customers. We do not sell, trade,\n                transfer, rent or exchange your personal information with\n                anyone. We do not disclose information about your individual\n                visits to this website, or personal information that you\n                provide, such as your name, address, e-mail address,\n                telephone number, etc., to any outside parties, except when\n                we believe the law requires it.\n            "
+              "\n                    This website is the sole owner of the information\n                    collected. We will not sell, share, trade or rent this\n                    information to others in ways different from what is\n                    disclosed in this statement. This website collects\n                    information from our users at several different points\n                    on our website. We ONLY collect personal information\n                    necessary to effectively market and to sell the property\n                    of sellers, to locate, assess and qualify properties for\n                    buyers and to otherwise provide professional services to\n                    clients and customers. We do not sell, trade, transfer,\n                    rent or exchange your personal information with anyone.\n                    We do not disclose information about your individual\n                    visits to this website, or personal information that you\n                    provide, such as your name, address, e-mail address,\n                    telephone number, etc., to any outside parties, except\n                    when we believe the law requires it.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
             _vm._v(
-              "\n                Home Worth / Dream Home / Neighbourhood Buzzer / Free Real\n                Estate Reports\n            "
+              "\n                    Home Worth / Dream Home / Neighbourhood Buzzer / Free\n                    Real Estate Reports\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                Since this website is a Real Estate website, we give you the\n                OPTION of requesting FREE Real Estate Information about real\n                estate properties. Your personal Information is stored on\n                our secure database. We ONLY collect personal information\n                necessary to effectively market and to sell the property of\n                sellers, to locate, assess and qualify properties for buyers\n                and to otherwise provide professional services to clients\n                and customers. We do not sell, trade, transfer, rent or\n                exchange your personal information with anyone.\n            "
+              "\n                    Since this website is a Real Estate website, we give you\n                    the OPTION of requesting FREE Real Estate Information\n                    about real estate properties. Your personal Information\n                    is stored on our secure database. We ONLY collect\n                    personal information necessary to effectively market and\n                    to sell the property of sellers, to locate, assess and\n                    qualify properties for buyers and to otherwise provide\n                    professional services to clients and customers. We do\n                    not sell, trade, transfer, rent or exchange your\n                    personal information with anyone.\n                "
             ),
           ]),
           _vm._v(" "),
@@ -64936,23 +65081,25 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                This website provides an email address link located on the\n                ‘Contact Us’ page so that you may email us directly with any\n                questions or comments you may have. This website reads all\n                messages received and makes efforts to respond promptly. In\n                addition to replying to your comment or inquiry, we may also\n                file your email for future reference regarding improvements\n                to our website or discard the information. Your personal\n                information is not shared, traded, sold, or exchanged with\n                any third parties without your express permission.\n            "
+              "\n                    This website provides an email address link located on\n                    the ‘Contact Us’ page so that you may email us directly\n                    with any questions or comments you may have. This\n                    website reads all messages received and makes efforts to\n                    respond promptly. In addition to replying to your\n                    comment or inquiry, we may also file your email for\n                    future reference regarding improvements to our website\n                    or discard the information. Your personal information is\n                    not shared, traded, sold, or exchanged with any third\n                    parties without your express permission.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
-            _vm._v("Do we use ‘cookies’?"),
+            _vm._v(
+              "\n                    Do we use ‘cookies’?\n                "
+            ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                Yes. Cookies are small files that a website or its service\n                provider transfers to your computer’s hard drive through\n                your Web browser (if you allow) that enables the website’s\n                or service provider’s systems to recognize your browser and\n                capture and remember certain information. They are used to\n                help us understand your preferences based on previous or\n                current website activity, which enables us to provide you\n                with improved services. We also use cookies to help us\n                compile aggregate data about website traffic and website\n                interaction so that we can offer better website experiences\n                and tools in the future.\n            "
+              "\n                    Yes. Cookies are small files that a website or its\n                    service provider transfers to your computer’s hard drive\n                    through your Web browser (if you allow) that enables the\n                    website’s or service provider’s systems to recognize\n                    your browser and capture and remember certain\n                    information. They are used to help us understand your\n                    preferences based on previous or current website\n                    activity, which enables us to provide you with improved\n                    services. We also use cookies to help us compile\n                    aggregate data about website traffic and website\n                    interaction so that we can offer better website\n                    experiences and tools in the future.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
             _vm._v(
-              "\n                This website uses the following cookies:\n            "
+              "\n                    This website uses the following cookies:\n                "
             ),
           ]),
           _vm._v(" "),
@@ -64962,7 +65109,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                This cookie allows us to see information on user website\n                activities including, but not limited to page views, source\n                and time spent on websites. The information is\n                depersonalised and is displayed as numbers, meaning it\n                cannot be tracked back to individuals. This will help to\n                protect your privacy. Using Google Analytics we can see what\n                content is popular on our website, and strive to give you\n                more of the things you enjoy reading and watching.\n            "
+              "\n                    This cookie allows us to see information on user website\n                    activities including, but not limited to page views,\n                    source and time spent on websites. The information is\n                    depersonalised and is displayed as numbers, meaning it\n                    cannot be tracked back to individuals. This will help to\n                    protect your privacy. Using Google Analytics we can see\n                    what content is popular on our website, and strive to\n                    give you more of the things you enjoy reading and\n                    watching.\n                "
             ),
           ]),
           _vm._v(" "),
@@ -64972,81 +65119,61 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                Using Google AdWords code, we are able to see which pages\n                helped lead to contact form submissions. This allows us to\n                make better use of our paid search budget.\n            "
+              "\n                    Using Google AdWords code, we are able to see which\n                    pages helped lead to contact form submissions. This\n                    allows us to make better use of our paid search budget.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n                You can choose to have your computer warn you each time a\n                cookie is being sent, or you can choose to turn off all\n                cookies. You do this through your browser (like Internet\n                Explorer, Google Chrome, Safari, Firefox and other browsers)\n                settings. Each browser is a little different, so look at\n                your browser’s Help menu to learn the correct way to modify\n                your cookies.\n            "
+              "\n                    You can choose to have your computer warn you each time\n                    a cookie is being sent, or you can choose to turn off\n                    all cookies. You do this through your browser (like\n                    Internet Explorer, Google Chrome, Safari, Firefox and\n                    other browsers) settings. Each browser is a little\n                    different, so look at your browser’s Help menu to learn\n                    the correct way to modify your cookies.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-4" }, [
             _vm._v(
-              "\n                If you disable cookies, some features will be disabled,\n                however, it won’t affect the user experience that makes your\n                website experience more efficient. Some of our services may\n                or may not function properly as a result of disabling\n                cookies.\n            "
+              "\n                    If you disable cookies, some features will be disabled,\n                    however, it won’t affect the user experience that makes\n                    your website experience more efficient. Some of our\n                    services may or may not function properly as a result of\n                    disabling cookies.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-4" }, [
             _vm._v(
-              "\n                Google’s advertising requirements can be summed up by\n                Google’s Advertising Principles. They are put in place to\n                provide a positive experience for users. You can find more\n                information here:\n                https://support.google.com/adwordspolicy/answer/1316548?hl=en\n            "
-            ),
-          ]),
-          _vm._v(" "),
-          _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
-            _vm._v("Third Party Disclosure"),
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "mt-2" }, [
-            _vm._v(
-              "\n                We do not sell, trade, or otherwise transfer to outside\n                parties, your personally identifiable information unless we\n                provide you with advance notice. This does not include\n                website hosting partners and other parties who assist us in\n                operating our website, conducting our business, or servicing\n                you, so long as those parties agree to keep this information\n                confidential. We may also release your information when we\n                believe release is appropriate to comply with the law,\n                enforce our website policies, or protect ours or others’\n                rights, property, or safety.\n            "
-            ),
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "mt-2" }, [
-            _vm._v(
-              "\n                However, non-personally identifiable visitor information may\n                be provided to other parties for marketing, advertising, or\n                other uses.\n            "
+              "\n                    Google’s advertising requirements can be summed up by\n                    Google’s Advertising Principles. They are put in place\n                    to provide a positive experience for users. You can find\n                    more information here:\n                    https://support.google.com/adwordspolicy/answer/1316548?hl=en\n                "
             ),
           ]),
           _vm._v(" "),
           _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
             _vm._v(
-              "\n                Canada Anti-Spam Law (CASL)\n            "
+              "\n                    Third Party Disclosure\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                CASL is a law that sets the rules for commercial email,\n                establishes requirements for commercial messages, gives\n                recipients the right to have emails stopped from being sent\n                to them, and spells out tough penalties for violations.\n            "
+              "\n                    We do not sell, trade, or otherwise transfer to outside\n                    parties, your personally identifiable information unless\n                    we provide you with advance notice. This does not\n                    include website hosting partners and other parties who\n                    assist us in operating our website, conducting our\n                    business, or servicing you, so long as those parties\n                    agree to keep this information confidential. We may also\n                    release your information when we believe release is\n                    appropriate to comply with the law, enforce our website\n                    policies, or protect ours or others’ rights, property,\n                    or safety.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
-            _vm._v("We collect your email address in order to:"),
+            _vm._v(
+              "\n                    However, non-personally identifiable visitor information\n                    may be provided to other parties for marketing,\n                    advertising, or other uses.\n                "
+            ),
           ]),
           _vm._v(" "),
-          _c("ul", [
-            _c("li", [
-              _c("p", [
-                _vm._v(
-                  "\n                        Send information, respond to inquiries, and/or other\n                        requests or questions.\n                    "
-                ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("p", [
-                _vm._v(
-                  "\n                        Market to our mailing list or continue to send\n                        emails to our clients after the original transaction\n                        has occurred\n                    "
-                ),
-              ]),
-            ]),
+          _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
+            _vm._v(
+              "\n                    Canada Anti-Spam Law (CASL)\n                "
+            ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                To be in accordance with CASL we agree to the following:\n            "
+              "\n                    CASL is a law that sets the rules for commercial email,\n                    establishes requirements for commercial messages, gives\n                    recipients the right to have emails stopped from being\n                    sent to them, and spells out tough penalties for\n                    violations.\n                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-2" }, [
+            _vm._v(
+              "\n                    We collect your email address in order to:\n                "
             ),
           ]),
           _vm._v(" "),
@@ -65054,7 +65181,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        NOT use false, or misleading subjects or email\n                        addresses\n                    "
+                  "\n                            Send information, respond to inquiries, and/or\n                            other requests or questions.\n                        "
                 ),
               ]),
             ]),
@@ -65062,7 +65189,23 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        Identify the message as an advertisement in some\n                        reasonable way\n                    "
+                  "\n                            Market to our mailing list or continue to send\n                            emails to our clients after the original\n                            transaction has occurred\n                        "
+                ),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mt-2" }, [
+            _vm._v(
+              "\n                    To be in accordance with CASL we agree to the following:\n                "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("ul", [
+            _c("li", [
+              _c("p", [
+                _vm._v(
+                  "\n                            NOT use false, or misleading subjects or email\n                            addresses\n                        "
                 ),
               ]),
             ]),
@@ -65070,7 +65213,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        Include the physical address of our business or\n                        website headquarters\n                    "
+                  "\n                            Identify the message as an advertisement in some\n                            reasonable way\n                        "
                 ),
               ]),
             ]),
@@ -65078,7 +65221,15 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        Monitor third party email marketing services for\n                        compliance, if one is used.\n                    "
+                  "\n                            Include the physical address of our business or\n                            website headquarters\n                        "
+                ),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c("p", [
+                _vm._v(
+                  "\n                            Monitor third party email marketing services for\n                            compliance, if one is used.\n                        "
                 ),
               ]),
             ]),
@@ -65090,7 +65241,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        Allow users to unsubscribe by using the link at the\n                        bottom of each email\n                    "
+                  "\n                            Allow users to unsubscribe by using the link at\n                            the bottom of each email\n                        "
                 ),
               ]),
             ]),
@@ -65102,17 +65253,19 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                This website provides users the opportunity to opt-out from\n                our mailing list from their accounts. To do this, click on\n                our ‘Unsubscribe’ link found on the following pages:\n                Neighborhood Buzzer/Home Worth/Dream Home/FREE Real Estate\n                Reports. You will be automatically removed from our\n                subscription list upon unsubscribing.\n            "
+              "\n                    This website provides users the opportunity to opt-out\n                    from our mailing list from their accounts. To do this,\n                    click on our ‘Unsubscribe’ link found on the following\n                    pages: Neighborhood Buzzer/Home Worth/Dream Home/FREE\n                    Real Estate Reports. You will be automatically removed\n                    from our subscription list upon unsubscribing.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("h5", { staticClass: "mt-5 fw-bold theme-text" }, [
-            _vm._v("Notification of Changes"),
+            _vm._v(
+              "\n                    Notification of Changes\n                "
+            ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                This policy may be revised over time as new features are\n                added to the website. We will post those changes so that you\n                will always know what information we gather, how we might\n                use that information, and whether we will disclose it to\n                anyone. Please check this website for information about\n                revisions to our privacy policy. We will notify you directly\n                if there is a material change in our privacy practices. We\n                will take commercially reasonable measures to obtain written\n                or active e-mail consent from the user, if this website is\n                going to be using the information collected from the user in\n                a manner different from that stated at the time of\n                collection. We will also post the changes in our privacy\n                statement 10 days prior to a change.\n            "
+              "\n                    This policy may be revised over time as new features are\n                    added to the website. We will post those changes so that\n                    you will always know what information we gather, how we\n                    might use that information, and whether we will disclose\n                    it to anyone. Please check this website for information\n                    about revisions to our privacy policy. We will notify\n                    you directly if there is a material change in our\n                    privacy practices. We will take commercially reasonable\n                    measures to obtain written or active e-mail consent from\n                    the user, if this website is going to be using the\n                    information collected from the user in a manner\n                    different from that stated at the time of collection. We\n                    will also post the changes in our privacy statement 10\n                    days prior to a change.\n                "
             ),
           ]),
           _vm._v(" "),
@@ -65122,7 +65275,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                We may disclose personal information when required by law or\n                in the good-faith belief that such action is necessary in\n                order to conform to the edicts of the law or comply with a\n                legal process serviced on our website.\n            "
+              "\n                    We may disclose personal information when required by\n                    law or in the good-faith belief that such action is\n                    necessary in order to conform to the edicts of the law\n                    or comply with a legal process serviced on our website.\n                "
             ),
           ]),
           _vm._v(" "),
@@ -65132,7 +65285,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                If you have any questions regarding our privacy policy\n                please send us an Email(Click Here) and we will be pleased\n                to assist.\n            "
+              "\n                    If you have any questions regarding our privacy policy\n                    please send us an Email(Click Here) and we will be\n                    pleased to assist.\n                "
             ),
           ]),
         ]),
@@ -66886,9 +67039,58 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("section", { staticClass: "breadcrumb-section bg-theme-light py-5" }, [
+      _c("div", { staticClass: "container p-0" }, [
+        _c("div", { staticClass: "row py-0" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h2", { staticClass: "theme-title text-start" }, [
+              _vm._v(
+                "\n                        Terms Of Services\n                    "
+              ),
+            ]),
+            _vm._v(" "),
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c("ol", { staticClass: "breadcrumb" }, [
+                _c(
+                  "li",
+                  { staticClass: "breadcrumb-item ps-0" },
+                  [
+                    _c("router-link", { attrs: { to: "/" } }, [
+                      _c("img", {
+                        staticClass: "img-fluid align-middle pb-1",
+                        attrs: {
+                          src: "/assets/images/icons/Mask Group.svg",
+                          width: "14",
+                          alt: "",
+                        },
+                      }),
+                      _vm._v("\n                                    Home"),
+                    ]),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm._m(0),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+  ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "breadcrumb-item" }, [
+      _c("span", [_vm._v("Terms Of Services")]),
+    ])
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -66902,19 +67104,19 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", { staticClass: "mt-3" }, [
             _vm._v(
-              "\n                Welcome to our website. Please note that any access, use, or\n                participation in this website constitutes an immediate\n                acceptance and agreement to be bound by the terms and\n                provision of this agreement. In addition, the use of\n                particular services provided by this website shall subject\n                the user to any posted guidelines or rules applicable to\n                such services, which may be posted and modified from time to\n                time. All such guidelines or rules are hereby incorporated\n                by reference into the Terms of Service. The use of this\n                website is not recommended and highly discouraged for those\n                in disagreement with any part of the Terms of Service.\n            "
+              "\n                    Welcome to our website. Please note that any access,\n                    use, or participation in this website constitutes an\n                    immediate acceptance and agreement to be bound by the\n                    terms and provision of this agreement. In addition, the\n                    use of particular services provided by this website\n                    shall subject the user to any posted guidelines or rules\n                    applicable to such services, which may be posted and\n                    modified from time to time. All such guidelines or rules\n                    are hereby incorporated by reference into the Terms of\n                    Service. The use of this website is not recommended and\n                    highly discouraged for those in disagreement with any\n                    part of the Terms of Service.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n                From herein, the terms ‘us’ or ‘we’ or ‘our’ will refer to\n                the owner of the website. The terms ‘you’ or ‘your’ will\n                refer to the user or viewer of this website.\n            "
+              "\n                    From herein, the terms ‘us’ or ‘we’ or ‘our’ will refer\n                    to the owner of the website. The terms ‘you’ or ‘your’\n                    will refer to the user or viewer of this website.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-3" }, [
             _vm._v(
-              "\n                The use of this website is subject to the following terms of\n                use:\n            "
+              "\n                    The use of this website is subject to the following\n                    terms of use:\n                "
             ),
           ]),
           _vm._v(" "),
@@ -66922,7 +67124,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        This website and its components are offered for\n                        informational purposes only; neither we nor any\n                        third parties provide any warranty or guarantee as\n                        to the accuracy, timeliness, performance,\n                        completeness or suitability of the information and\n                        materials found or offered on this website for any\n                        particular purpose. We shall not be held responsible\n                        or liable for the accuracy, usefulness or\n                        availability of any information transmitted or made\n                        available via the website, and shall not be\n                        responsible or liable for any error or omissions in\n                        that information. The information in this website is\n                        subject to change without notice.\n                    "
+                  "\n                            This website and its components are offered for\n                            informational purposes only; neither we nor any\n                            third parties provide any warranty or guarantee\n                            as to the accuracy, timeliness, performance,\n                            completeness or suitability of the information\n                            and materials found or offered on this website\n                            for any particular purpose. We shall not be held\n                            responsible or liable for the accuracy,\n                            usefulness or availability of any information\n                            transmitted or made available via the website,\n                            and shall not be responsible or liable for any\n                            error or omissions in that information. The\n                            information in this website is subject to change\n                            without notice.\n                        "
                 ),
               ]),
             ]),
@@ -66930,7 +67132,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        Your use of any information or materials in this\n                        website is entirely at your own risk, for which we\n                        shall not be held liable. It shall be your own\n                        responsibility to ensure that any products, services\n                        or information available through this website meets\n                        your specific requirements.\n                    "
+                  "\n                            Your use of any information or materials in this\n                            website is entirely at your own risk, for which\n                            we shall not be held liable. It shall be your\n                            own responsibility to ensure that any products,\n                            services or information available through this\n                            website meets your specific requirements.\n                        "
                 ),
               ]),
             ]),
@@ -66938,7 +67140,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        This website uses “cookies” to monitor browsing\n                        preferences. Cookies are small pieces of\n                        information, including but not limited to, personal\n                        information stored by your browser on your\n                        computer’s hard drive. Personal information may be\n                        stored by us for use by third parties related to\n                        this website. Personal information includes but is\n                        not limited to, User Name, Password, and E-mail\n                        Address credentials used during registration for\n                        this website.\n                    "
+                  "\n                            This website uses “cookies” to monitor browsing\n                            preferences. Cookies are small pieces of\n                            information, including but not limited to,\n                            personal information stored by your browser on\n                            your computer’s hard drive. Personal information\n                            may be stored by us for use by third parties\n                            related to this website. Personal information\n                            includes but is not limited to, User Name,\n                            Password, and E-mail Address credentials used\n                            during registration for this website.\n                        "
                 ),
               ]),
             ]),
@@ -66946,7 +67148,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        Our website contains registration forms which\n                        require users to provide contact information (first\n                        name, last name, phone number), unique identifiers\n                        (e-mail address), and demographic information\n                        (postal code, city, region). This information will\n                        be stored, used, and shared within our brokerage and\n                        between members of our brokerage to serve your\n                        informational needs.\n                    "
+                  "\n                            Our website contains registration forms which\n                            require users to provide contact information\n                            (first name, last name, phone number), unique\n                            identifiers (e-mail address), and demographic\n                            information (postal code, city, region). This\n                            information will be stored, used, and shared\n                            within our brokerage and between members of our\n                            brokerage to serve your informational needs.\n                        "
                 ),
               ]),
             ]),
@@ -66954,7 +67156,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        This website contains material which is owned by or\n                        licensed to us by InCom Web & e-Marketing Solutions.\n                        This material includes, but is not limited to, the\n                        design, layout, look, appearance, graphics, and\n                        content in this website. Reproduction of said\n                        materials is prohibited other than in accordance\n                        with the copyright notice, which forms part of these\n                        terms and conditions.\n                    "
+                  "\n                            This website contains material which is owned by\n                            or licensed to us by InCom Web & e-Marketing\n                            Solutions. This material includes, but is not\n                            limited to, the design, layout, look,\n                            appearance, graphics, and content in this\n                            website. Reproduction of said materials is\n                            prohibited other than in accordance with the\n                            copyright notice, which forms part of these\n                            terms and conditions.\n                        "
                 ),
               ]),
             ]),
@@ -66962,7 +67164,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        All trademarks reproduced in this website, which are\n                        not the property of, or licensed to the operator,\n                        are acknowledged in the website.\n                    "
+                  "\n                            All trademarks reproduced in this website, which\n                            are not the property of, or licensed to the\n                            operator, are acknowledged in the website.\n                        "
                 ),
               ]),
             ]),
@@ -66970,7 +67172,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        Unauthorized use of this website may give rise to a\n                        claim for damages and/or be a criminal offence.\n                    "
+                  "\n                            Unauthorized use of this website may give rise\n                            to a claim for damages and/or be a criminal\n                            offence.\n                        "
                 ),
               ]),
             ]),
@@ -66978,7 +67180,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        From time to time, this website may also include\n                        links to other website(s) or post(s). These links\n                        are provided for your convenience to provide further\n                        information. They do not signify that we endorse the\n                        website(s) or post(s). We have no responsibility for\n                        the content of the linked website(s) or post(s). We\n                        the right to add, modify, remove all material of the\n                        website in its sole and absolute discretion\n                        including, without limitation, links and posts.\n                    "
+                  "\n                            From time to time, this website may also include\n                            links to other website(s) or post(s). These\n                            links are provided for your convenience to\n                            provide further information. They do not signify\n                            that we endorse the website(s) or post(s). We\n                            have no responsibility for the content of the\n                            linked website(s) or post(s). We the right to\n                            add, modify, remove all material of the website\n                            in its sole and absolute discretion including,\n                            without limitation, links and posts.\n                        "
                 ),
               ]),
             ]),
@@ -66986,7 +67188,7 @@ var staticRenderFns = [
             _c("li", [
               _c("p", [
                 _vm._v(
-                  "\n                        Your use of this website and any dispute arising out\n                        of such use of the website is subject to the laws of\n                        Canada.\n                    "
+                  "\n                            Your use of this website and any dispute arising\n                            out of such use of the website is subject to the\n                            laws of Canada.\n                        "
                 ),
               ]),
             ]),
@@ -66998,47 +67200,47 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n                The information contained on this website is based in whole\n                or in part on information that is provided by members of The\n                Canadian Real Estate Association (CREA), who are responsible\n                for its accuracy. CREA reproduces and distributes this\n                information as a service for its members and assumes no\n                responsibility for its accuracy.\n            "
+              "\n                    The information contained on this website is based in\n                    whole or in part on information that is provided by\n                    members of The Canadian Real Estate Association (CREA),\n                    who are responsible for its accuracy. CREA reproduces\n                    and distributes this information as a service for its\n                    members and assumes no responsibility for its accuracy.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                This website is operated by\n                "
+              "\n                    This website is operated by\n                    "
             ),
             _c("strong", [_vm._v("RE/MAX MILLENNIUM REAL ESTATE Brokerage")]),
             _vm._v(
-              " who\n                is a member of The Canadian Real Estate Association. The\n                listing content on this website is protected by copyright\n                and other laws, and is intended solely for the private,\n                non-commercial use by individuals. Any other reproduction,\n                distribution or use of the content, in whole or in part, is\n                specifically forbidden. The prohibited uses include\n                commercial use, “screen scraping”, “database scraping”, and\n                any other activity intended to collect, store, reorganize or\n                manipulate data on the pages produced by or displayed on\n                this website.\n            "
+              "\n                    who is a member of The Canadian Real Estate Association.\n                    The listing content on this website is protected by\n                    copyright and other laws, and is intended solely for the\n                    private, non-commercial use by individuals. Any other\n                    reproduction, distribution or use of the content, in\n                    whole or in part, is specifically forbidden. The\n                    prohibited uses include commercial use, “screen\n                    scraping”, “database scraping”, and any other activity\n                    intended to collect, store, reorganize or manipulate\n                    data on the pages produced by or displayed on this\n                    website.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                The information contained in this website is for general\n                information purposes only. The information is provided by\n                "
+              "\n                    The information contained in this website is for general\n                    information purposes only. The information is provided\n                    by\n                    "
             ),
             _c("strong", [_vm._v("RE/MAX MILLENNIUM REAL ESTATE Brokerage")]),
             _vm._v(
-              " and\n                while we endeavor to keep the information up to date and\n                correct, we make no representations or warranties of any\n                kind, express or implied, about the completeness, accuracy,\n                reliability, suitability or availability with respect to the\n                website or the information, products, services, or related\n                graphics contained on the website for any purpose. Any\n                reliance you place on such information is therefore strictly\n                at your own risk.\n            "
+              "\n                    and while we endeavor to keep the information up to date\n                    and correct, we make no representations or warranties of\n                    any kind, express or implied, about the completeness,\n                    accuracy, reliability, suitability or availability with\n                    respect to the website or the information, products,\n                    services, or related graphics contained on the website\n                    for any purpose. Any reliance you place on such\n                    information is therefore strictly at your own risk.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                In no event will we be liable for any loss or damage\n                including without limitation, indirect or consequential loss\n                or damage, or any loss or damage whatsoever arising from\n                loss of data or profit, arising out of, or in connection\n                with, the use of this website. Through this website you are\n                able to link to other websites which are not under the\n                control of\n                "
+              "\n                    In no event will we be liable for any loss or damage\n                    including without limitation, indirect or consequential\n                    loss or damage, or any loss or damage whatsoever arising\n                    from loss of data or profit, arising out of, or in\n                    connection with, the use of this website. Through this\n                    website you are able to link to other websites which are\n                    not under the control of\n                    "
             ),
             _c("strong", [_vm._v("RE/MAX MILLENNIUM REAL ESTATE Brokerage")]),
             _vm._v(
-              ". We\n                have no control over the nature, content and availability of\n                those sites. The inclusion of any links does not necessarily\n                imply a recommendation or endorse the views expressed within\n                them.\n            "
+              ". We have no control over the nature, content and\n                    availability of those sites. The inclusion of any links\n                    does not necessarily imply a recommendation or endorse\n                    the views expressed within them.\n                "
             ),
           ]),
           _vm._v(" "),
           _c("p", { staticClass: "mt-2" }, [
             _vm._v(
-              "\n                Every effort is made to keep the website up and running\n                smoothly. However,\n                "
+              "\n                    Every effort is made to keep the website up and running\n                    smoothly. However,\n                    "
             ),
             _c("strong", [_vm._v("RE/MAX MILLENNIUM REAL ESTATE Brokerage")]),
             _vm._v(
-              "\n                takes no responsibility for, and will not be liable for, the\n                website being temporarily unavailable due to technical\n                issues beyond our control. Last Edited on 2016-01-21\n            "
+              "\n                    takes no responsibility for, and will not be liable for,\n                    the website being temporarily unavailable due to\n                    technical issues beyond our control. Last Edited on\n                    2016-01-21\n                "
             ),
           ]),
         ]),

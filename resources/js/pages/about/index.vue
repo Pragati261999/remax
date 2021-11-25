@@ -1,8 +1,41 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 mb-5 py-4">
-                <h2 class="text-color mt-5">ABOUT US</h2>
+    <div>
+        <!-- Breakcrumbs -->
+        <section class="breadcrumb-section bg-theme-light py-5">
+            <div class="container p-0">
+                <div class="row py-0">
+                    <div class="col-12">
+                        <h2 class="theme-title text-start">About Us</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item ps-0">
+                                    <router-link to="/"
+                                        ><img
+                                            src="/assets/images/icons/Mask Group.svg"
+                                            width="14"
+                                            class="img-fluid align-middle pb-1"
+                                            alt=""
+                                        />
+                                        Home</router-link
+                                    >
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <router-link to="/about-us"
+                                        >About Us</router-link
+                                    >
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Breakcrumbs -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-5 py-4">
+                    <h2 class="text-color mt-5">ABOUT US</h2>
+                </div>
             </div>
         </div>
     </div>
