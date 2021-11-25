@@ -3018,6 +3018,7 @@ export default {
                 padding: 13px 20px;
                 transition: all ease 0.4s;
                 font-weight: 600;
+                white-space: nowrap;
 
                 &:hover {
                     background: rgba(3, 38, 70, 0.3);
