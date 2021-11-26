@@ -68,6 +68,18 @@
                         </p>
                         <p class="small p-0 m-0">Office: (905) 265-2200</p>
                         <p class="small p-0 m-0">Fax: (905) 265-2203​</p>
+
+                        <h6 class="text-secondary h6 fw-bold mt-2">
+                            OUR HOURS
+                        </h6>
+
+                        <p class="small p-0 m-0">
+                            Monday to Friday 9:00AM – 8:00 PM
+                        </p>
+                        <p class="small p-0 m-0">
+                            Saturday 10:00 AM – 5:00 PM​
+                        </p>
+                        <p class="small p-0 m-0">Sunday 10:00 AM – 4:00PM​</p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <p class="text-secondary fw-bold">Newsletter</p>
@@ -96,46 +108,66 @@
                             </button>
                             <span v-html="rSubscribeEmail"></span>
                         </form>
+                        <br />
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h6
+                                    class="
+                                        text-secondary text-start
+                                        h6
+                                        fw-bold
+                                        mt-2
+                                    "
+                                >
+                                    Quick Links
+                                </h6>
+                                <span class="text-darker fw-lighter-items">
+                                    <u>
+                                        <router-link
+                                            class="text-muted"
+                                            to="/about-us"
+                                            >About</router-link
+                                        ></u
+                                    >
+                                </span>
+                                |
+                                <span class="text-darker fw-lighter-items">
+                                    <u>
+                                        <router-link
+                                            class="text-muted"
+                                            to="/contact-us"
+                                            >Contact</router-link
+                                        ></u
+                                    >
+                                </span>
+                                |
+                                <span class="text-darker fw-lighter-items">
+                                    <u>
+                                        <router-link
+                                            class="text-muted"
+                                            to="/terms-of-use"
+                                            >Copyright/Terms of Use</router-link
+                                        ></u
+                                    >
+                                </span>
+                                |
+                                <span class="text-darker fw-lighter-items">
+                                    <u>
+                                        <router-link
+                                            class="text-muted"
+                                            to="/privacy-policy"
+                                            >Privacy Policy</router-link
+                                        ></u
+                                    >
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="p-0 footer">
-            <div class="col-12 text-center">
-                <span class="text-darker fw-lighter-items">
-                    <u>
-                        <router-link class="text-muted" to="/about-us"
-                            >About</router-link
-                        ></u
-                    >
-                </span>
-                |
-                <span class="text-darker fw-lighter-items">
-                    <u>
-                        <router-link class="text-muted" to="/contact-us"
-                            >Contact</router-link
-                        ></u
-                    >
-                </span>
-                |
-                <span class="text-darker fw-lighter-items">
-                    <u>
-                        <router-link class="text-muted" to="/terms-of-use"
-                            >Copyright/Terms of Use</router-link
-                        ></u
-                    >
-                </span>
-                |
-                <span class="text-darker fw-lighter-items">
-                    <u>
-                        <router-link class="text-muted" to="/privacy-policy"
-                            >Privacy Policy</router-link
-                        ></u
-                    >
-                </span>
-            </div>
-            <br />
             <div class="container">
                 <hr class="m-0" />
             </div>

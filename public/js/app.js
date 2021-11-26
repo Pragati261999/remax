@@ -3335,6 +3335,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -15868,7 +15900,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-6fe3cbec] {\r\n    line-height: 28px;\r\n    font-size: 18px;\r\n    letter-spacing: 0.5px;\r\n    margin: 0;\r\n    padding: 0;\r\n    color: #6c757d !important;\r\n    font-weight: 300 !important;\n}\np strong[data-v-6fe3cbec] {\r\n    font-weight: 600 !important;\r\n    letter-spacing: 2px;\n}\nol li[data-v-6fe3cbec] {\r\n    padding-left: 20px;\r\n    margin-bottom: 10px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.sm-box[data-v-6fe3cbec] {\r\n    border: 1px solid #d0d0d0;\r\n    padding: 12px;\r\n    border-radius: 8px;\r\n    background: #f5f5f5;\n}\np[data-v-6fe3cbec] {\r\n    line-height: 28px;\r\n    font-size: 18px;\r\n    letter-spacing: 0.5px;\r\n    margin: 0;\r\n    padding: 0;\r\n    color: #6c757d !important;\r\n    font-weight: 300 !important;\n}\np strong[data-v-6fe3cbec] {\r\n    font-weight: 600 !important;\r\n    letter-spacing: 2px;\n}\nol li[data-v-6fe3cbec] {\r\n    padding-left: 20px;\r\n    margin-bottom: 10px;\n}\n.social-icon[data-v-6fe3cbec] {\r\n    color: #032646;\n}\n.social-icon i[data-v-6fe3cbec] {\r\n    font-size: 28px;\r\n    display: inline-block;\r\n    margin: 10px 10px 0 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52960,74 +52992,105 @@ var render = function () {
                 }),
               ]
             ),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-12 text-center" }, [
+                _c(
+                  "h6",
+                  {
+                    staticClass:
+                      "\n                                    text-secondary text-start\n                                    h6\n                                    fw-bold\n                                    mt-2\n                                ",
+                  },
+                  [
+                    _vm._v(
+                      "\n                                Quick Links\n                            "
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-darker fw-lighter-items" }, [
+                  _c(
+                    "u",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "text-muted",
+                          attrs: { to: "/about-us" },
+                        },
+                        [_vm._v("About")]
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(
+                  "\n                            |\n                            "
+                ),
+                _c("span", { staticClass: "text-darker fw-lighter-items" }, [
+                  _c(
+                    "u",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "text-muted",
+                          attrs: { to: "/contact-us" },
+                        },
+                        [_vm._v("Contact")]
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(
+                  "\n                            |\n                            "
+                ),
+                _c("span", { staticClass: "text-darker fw-lighter-items" }, [
+                  _c(
+                    "u",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "text-muted",
+                          attrs: { to: "/terms-of-use" },
+                        },
+                        [_vm._v("Copyright/Terms of Use")]
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+                _vm._v(
+                  "\n                            |\n                            "
+                ),
+                _c("span", { staticClass: "text-darker fw-lighter-items" }, [
+                  _c(
+                    "u",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "text-muted",
+                          attrs: { to: "/privacy-policy" },
+                        },
+                        [_vm._v("Privacy Policy")]
+                      ),
+                    ],
+                    1
+                  ),
+                ]),
+              ]),
+            ]),
           ]),
         ]),
       ]),
     ]),
     _vm._v(" "),
-    _c("section", { staticClass: "p-0 footer" }, [
-      _c("div", { staticClass: "col-12 text-center" }, [
-        _c("span", { staticClass: "text-darker fw-lighter-items" }, [
-          _c(
-            "u",
-            [
-              _c(
-                "router-link",
-                { staticClass: "text-muted", attrs: { to: "/about-us" } },
-                [_vm._v("About")]
-              ),
-            ],
-            1
-          ),
-        ]),
-        _vm._v("\n            |\n            "),
-        _c("span", { staticClass: "text-darker fw-lighter-items" }, [
-          _c(
-            "u",
-            [
-              _c(
-                "router-link",
-                { staticClass: "text-muted", attrs: { to: "/contact-us" } },
-                [_vm._v("Contact")]
-              ),
-            ],
-            1
-          ),
-        ]),
-        _vm._v("\n            |\n            "),
-        _c("span", { staticClass: "text-darker fw-lighter-items" }, [
-          _c(
-            "u",
-            [
-              _c(
-                "router-link",
-                { staticClass: "text-muted", attrs: { to: "/terms-of-use" } },
-                [_vm._v("Copyright/Terms of Use")]
-              ),
-            ],
-            1
-          ),
-        ]),
-        _vm._v("\n            |\n            "),
-        _c("span", { staticClass: "text-darker fw-lighter-items" }, [
-          _c(
-            "u",
-            [
-              _c(
-                "router-link",
-                { staticClass: "text-muted", attrs: { to: "/privacy-policy" } },
-                [_vm._v("Privacy Policy")]
-              ),
-            ],
-            1
-          ),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _vm._m(2),
-    ]),
+    _vm._m(2),
     _vm._v(" "),
     _c("section", { staticClass: "sub-footer footer py-5" }, [
       _vm._m(3),
@@ -53139,14 +53202,36 @@ var staticRenderFns = [
       _c("p", { staticClass: "small p-0 m-0" }, [
         _vm._v("Fax: (905) 265-2203​"),
       ]),
+      _vm._v(" "),
+      _c("h6", { staticClass: "text-secondary h6 fw-bold mt-2" }, [
+        _vm._v("\n                        OUR HOURS\n                    "),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "small p-0 m-0" }, [
+        _vm._v(
+          "\n                        Monday to Friday 9:00AM – 8:00 PM\n                    "
+        ),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "small p-0 m-0" }, [
+        _vm._v(
+          "\n                        Saturday 10:00 AM – 5:00 PM​\n                    "
+        ),
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "small p-0 m-0" }, [
+        _vm._v("Sunday 10:00 AM – 4:00PM​"),
+      ]),
     ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("hr", { staticClass: "m-0" }),
+    return _c("section", { staticClass: "p-0 footer" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("hr", { staticClass: "m-0" }),
+      ]),
     ])
   },
   function () {
@@ -65653,7 +65738,145 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c("div", { staticClass: "bg-light" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12 py-5" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "content" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-1" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "\n                                                col-lg-4 col-md-6 col-sm-6\n                                                mt-4\n                                            ",
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "\n                                                    d-flex\n                                                    align-items-center\n                                                    sm-box\n                                                ",
+                            },
+                            [
+                              _c("div", { staticClass: "icons pe-3" }, [
+                                _c("img", {
+                                  directives: [
+                                    {
+                                      name: "lazy",
+                                      rawName: "v-lazy",
+                                      value: {
+                                        src: "./assets/images/icons/contact/home.png",
+                                      },
+                                      expression:
+                                        "{\n                                                            src: './assets/images/icons/contact/home.png',\n                                                        }",
+                                    },
+                                  ],
+                                  staticClass: "about-icon",
+                                  attrs: { alt: "ICON" },
+                                }),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(1),
+                            ]
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "\n                                                col-lg-4 col-md-6 col-sm-6\n                                                mt-4\n                                            ",
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "\n                                                    d-flex\n                                                    align-items-center\n                                                    sm-box\n                                                ",
+                            },
+                            [
+                              _c("div", { staticClass: "icons pe-3" }, [
+                                _c("img", {
+                                  directives: [
+                                    {
+                                      name: "lazy",
+                                      rawName: "v-lazy",
+                                      value: {
+                                        src: "./assets/images/icons/contact/contact.png",
+                                      },
+                                      expression:
+                                        "{\n                                                            src: './assets/images/icons/contact/contact.png',\n                                                        }",
+                                    },
+                                  ],
+                                  staticClass: "about-icon",
+                                  attrs: { alt: "ICON" },
+                                }),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(2),
+                            ]
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "\n                                                col-lg-4 col-md-6 col-sm-6\n                                                mt-4\n                                            ",
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "\n                                                    d-flex\n                                                    align-items-center\n                                                    sm-box\n                                                ",
+                            },
+                            [
+                              _c("div", { staticClass: "icons pe-3" }, [
+                                _c("img", {
+                                  directives: [
+                                    {
+                                      name: "lazy",
+                                      rawName: "v-lazy",
+                                      value: {
+                                        src: "./assets/images/icons/contact/message.png",
+                                      },
+                                      expression:
+                                        "{\n                                                            src: './assets/images/icons/contact/message.png',\n                                                        }",
+                                    },
+                                  ],
+                                  staticClass: "about-icon",
+                                  attrs: { alt: "ICON" },
+                                }),
+                              ]),
+                              _vm._v(" "),
+                              _vm._m(3),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-1" }),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(4),
   ])
 }
 var staticRenderFns = [
@@ -65661,12 +65884,176 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12 mb-5 py-4" }, [
-          _c("h2", { staticClass: "text-color mt-5" }, [_vm._v("Contact US")]),
+    return _c("div", { staticClass: "head text-center" }, [
+      _c("h2", { staticClass: "text-color fw-bold text-uppercase" }, [
+        _vm._v(
+          "\n                                We're always eager to hear from you!\n                            "
+        ),
+      ]),
+      _vm._v(" "),
+      _c("span", [
+        _vm._v(
+          "\n                                We provide sale and lease of real estate as\n                                part of a cooperative selling system.\n                            "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "\n                                                            h6\n                                                            text-color\n                                                            m-0\n                                                            p-0\n                                                        ",
+        },
+        [
+          _vm._v(
+            "\n                                                        ADDRESS\n                                                    "
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-muted" }, [
+        _vm._v(
+          "\n                                                        81 Zenway Boulevard\n                                                        #25 Woodbridge,\n                                                        Ontario L4H 0S5\n                                                        Canada\n                                                    "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "\n                                                            h6\n                                                            text-color\n                                                            m-0\n                                                            p-0\n                                                        ",
+        },
+        [
+          _vm._v(
+            "\n                                                        CONTACT US\n                                                    "
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-muted" }, [
+        _c("span", [
+          _vm._v(
+            "Office: (905)\n                                                            265-2200\n                                                        "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("span", [
+          _vm._v(
+            "Fax: (905)\n                                                            265-2203"
+          ),
         ]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "\n                                                            h6\n                                                            text-color\n                                                            m-0\n                                                            p-0\n                                                        ",
+        },
+        [
+          _vm._v(
+            "\n                                                        FOLLOW US\n                                                    "
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c("span", { staticClass: "text-muted" }, [
+        _c(
+          "a",
+          {
+            staticClass:
+              "\n                                                                social-icon\n                                                            ",
+            attrs: { href: "#" },
+          },
+          [
+            _c("i", {
+              staticClass:
+                "\n                                                                    fab\n                                                                    fa-facebook\n                                                                ",
+            }),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "\n                                                                social-icon\n                                                            ",
+            attrs: { href: "#" },
+          },
+          [
+            _c("i", {
+              staticClass:
+                "\n                                                                    fab\n                                                                    fa-twitter\n                                                                ",
+            }),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "\n                                                                social-icon\n                                                            ",
+            attrs: { href: "#" },
+          },
+          [
+            _c("i", {
+              staticClass:
+                "\n                                                                    fab\n                                                                    fa-instagram\n                                                                ",
+            }),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass:
+              "\n                                                                social-icon\n                                                            ",
+            attrs: { href: "#" },
+          },
+          [
+            _c("i", {
+              staticClass:
+                "\n                                                                    fab\n                                                                    fa-youtube\n                                                                ",
+            }),
+          ]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "iframe" }, [
+      _c("iframe", {
+        staticStyle: { border: "0" },
+        attrs: {
+          src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2880.820525916818!2d-79.62704548428827!3d43.776584252460985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b24cad9d9dda3%3A0xc4e46c71c1d31227!2s81%20Zenway%20Blvd%2C%20Woodbridge%2C%20ON%20L4H%200S5%2C%20Canada!5e0!3m2!1sen!2sin!4v1637925709966!5m2!1sen!2sin",
+          width: "100%",
+          height: "450",
+          allowfullscreen: "",
+          loading: "lazy",
+        },
+      }),
     ])
   },
 ]
