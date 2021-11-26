@@ -251,7 +251,7 @@
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2880.820525916818!2d-79.62704548428827!3d43.776584252460985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b24cad9d9dda3%3A0xc4e46c71c1d31227!2s81%20Zenway%20Blvd%2C%20Woodbridge%2C%20ON%20L4H%200S5%2C%20Canada!5e0!3m2!1sen!2sin!4v1637925709966!5m2!1sen!2sin"
                 width="100%"
-                height="450"
+                height="460"
                 style="border: 0"
                 allowfullscreen=""
                 loading="lazy"
