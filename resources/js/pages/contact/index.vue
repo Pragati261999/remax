@@ -355,6 +355,11 @@
     background: #f5f5f5;
 }
 
+.sm-box img {
+    height: 95px;
+    width: 95px;
+}
+
 p {
     line-height: 28px;
     font-size: 18px;
