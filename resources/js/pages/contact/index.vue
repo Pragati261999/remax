@@ -257,6 +257,93 @@
                 loading="lazy"
             ></iframe>
         </div>
+
+        <div class="bg-light">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 py-5">
+                            <div class="head text-center">
+                                <h2 class="text-color fw-bold text-uppercase">
+                                    Send Us Your Query
+                                </h2>
+                                <span>
+                                    We are 24x7 open, Feel free to write.
+                                </span>
+                            </div>
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form class="row form-outer">
+                                                    <div class="col-sm-6 mt-4">
+                                                        <label>Name *</label>
+                                                        <input
+                                                            type="text"
+                                                            class="
+                                                                form-control
+                                                                rounded-0
+                                                                py-3
+                                                            "
+                                                            placeholder="Enter your name"
+                                                        />
+                                                    </div>
+                                                    <div class="col-sm-6 mt-4">
+                                                        <label>Email * </label>
+                                                        <input
+                                                            type="text"
+                                                            class="
+                                                                form-control
+                                                                rounded-0
+                                                                py-3
+                                                            "
+                                                            placeholder="Enter your email"
+                                                        />
+                                                    </div>
+                                                    <div class="col-sm-12 mt-4">
+                                                        <label>Message *</label>
+                                                        <textarea
+                                                            class="
+                                                                form-control
+                                                                rounded-0
+                                                            "
+                                                            rows="6"
+                                                            placeholder="Your message..."
+                                                        ></textarea>
+                                                    </div>
+                                                    <div
+                                                        class="
+                                                            col-12
+                                                            mt-3
+                                                            text-end
+                                                        "
+                                                    >
+                                                        <button
+                                                            class="
+                                                                btn
+                                                                btn-theme-color
+                                                                py-3
+                                                                px-5
+                                                                rounded-0
+                                                            "
+                                                        >
+                                                            Send
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

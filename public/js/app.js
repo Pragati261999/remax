@@ -65877,6 +65877,8 @@ var render = function () {
     ]),
     _vm._v(" "),
     _vm._m(4),
+    _vm._v(" "),
+    _vm._m(5),
   ])
 }
 var staticRenderFns = [
@@ -66054,6 +66056,111 @@ var staticRenderFns = [
           loading: "lazy",
         },
       }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-light" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12 py-5" }, [
+              _c("div", { staticClass: "head text-center" }, [
+                _c("h2", { staticClass: "text-color fw-bold text-uppercase" }, [
+                  _vm._v(
+                    "\n                                Send Us Your Query\n                            "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "\n                                We are 24x7 open, Feel free to write.\n                            "
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "content" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-1" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-12" }, [
+                        _c("form", { staticClass: "row form-outer" }, [
+                          _c("div", { staticClass: "col-sm-6 mt-4" }, [
+                            _c("label", [_vm._v("Name *")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticClass:
+                                "\n                                                            form-control\n                                                            rounded-0\n                                                            py-3\n                                                        ",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Enter your name",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-6 mt-4" }, [
+                            _c("label", [_vm._v("Email * ")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticClass:
+                                "\n                                                            form-control\n                                                            rounded-0\n                                                            py-3\n                                                        ",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Enter your email",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-12 mt-4" }, [
+                            _c("label", [_vm._v("Message *")]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              staticClass:
+                                "\n                                                            form-control\n                                                            rounded-0\n                                                        ",
+                              attrs: {
+                                rows: "6",
+                                placeholder: "Your message...",
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "\n                                                        col-12\n                                                        mt-3\n                                                        text-end\n                                                    ",
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "\n                                                            btn\n                                                            btn-theme-color\n                                                            py-3\n                                                            px-5\n                                                            rounded-0\n                                                        ",
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                                        Send\n                                                    "
+                                  ),
+                                ]
+                              ),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-1" }),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
     ])
   },
 ]
