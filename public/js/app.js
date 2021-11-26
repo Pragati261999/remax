@@ -15844,7 +15844,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\np[data-v-a7d24612] {\r\n    line-height: 28px;\r\n    font-size: 18px;\r\n    letter-spacing: 0.5px;\r\n    margin: 0;\r\n    padding: 0;\r\n    color: #6c757d !important;\r\n    font-weight: 300 !important;\n}\np strong[data-v-a7d24612] {\r\n    font-weight: 600 !important;\r\n    letter-spacing: 2px;\n}\nol li[data-v-a7d24612] {\r\n    padding-left: 20px;\r\n    margin-bottom: 10px;\n}\n.about-text[data-v-a7d24612] {\r\n    color: #434343;\r\n    font-weight: 500;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.team-card[data-v-a7d24612] {\r\n    border: 1px solid #d0d0d0;\r\n    padding: 12px;\r\n    border-radius: 8px;\r\n    background: #f5f5f5;\n}\n.team-card .name[data-v-a7d24612] {\r\n    margin-top: 10px;\n}\n.img-fluid img[data-v-a7d24612] {\r\n    width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    border-radius: 5px;\r\n    box-shadow: 0 0 0 1px #ddd;\n}\np[data-v-a7d24612] {\r\n    line-height: 28px;\r\n    font-size: 18px;\r\n    letter-spacing: 0.5px;\r\n    margin: 0;\r\n    padding: 0;\r\n    color: #6c757d !important;\r\n    font-weight: 300 !important;\n}\np strong[data-v-a7d24612] {\r\n    font-weight: 600 !important;\r\n    letter-spacing: 2px;\n}\n.about-banner[data-v-a7d24612] {\r\n    max-height: 450px;\r\n    width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.about-icon[data-v-a7d24612] {\r\n    height: 70px;\r\n    width: 70px;\n}\n.about-card[data-v-a7d24612] {\r\n    transition: all ease 0.3s;\r\n    cursor: pointer;\n}\n.about-card[data-v-a7d24612]:hover {\r\n    border-color: #032646 !important;\n}\n.about-card[data-v-a7d24612] {\r\n    transition: all ease 0.3s;\r\n    cursor: pointer;\n}\n.about-card .card-img[data-v-a7d24612] {\r\n    display: block;\r\n    height: 100px;\r\n    width: 100px;\r\n    margin: 10px auto;\n}\n.about-card .card-img[data-v-a7d24612] {\r\n    display: block;\r\n    height: 100px;\r\n    width: 100px;\r\n    margin: 10px auto;\n}\n.about-card .card-img.hover[data-v-a7d24612] {\r\n    display: none;\n}\n.about-card:hover .card-img.hover[data-v-a7d24612] {\r\n    display: block;\n}\n.about-card:hover .card-img.not-hover[data-v-a7d24612] {\r\n    display: none;\n}\n.card-text[data-v-a7d24612] {\r\n    font-size: 15px;\r\n    line-height: 25px;\r\n    margin-top: 15px;\r\n    padding: 0px 25px;\n}\n.accordion-button[data-v-a7d24612]:not(.collapsed) {\r\n    color: #fff !important;\r\n    background: rgba(3, 38, 70, 0.6) !important;\n}\n.accordion-button[data-v-a7d24612]:not(.collapsed)::after {\r\n    transform: rotate(-180deg) translateY(-6px);\r\n    color: #ffffff;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64764,33 +64764,247 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12 py-4" }, [
-          _c("div", { staticClass: "outer border p-4 pt-0" }, [
-            _c("div", { staticClass: "row flex-column-reverse flex-lg-row" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-5 pt-4" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "ol-12 align-center" }, [
-                    _c("img", {
-                      directives: [
-                        {
-                          name: "lazy",
-                          rawName: "v-lazy",
-                          value: {
-                            src: "./assets/images/banners/About/about-banner-right.png",
-                          },
-                          expression:
-                            "{\n                                            src: './assets/images/banners/About/about-banner-right.png',\n                                        }",
-                        },
-                      ],
-                      staticClass: "img-fluid",
-                      attrs: { alt: "About Us" },
-                    }),
+    _c("div", {}, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12 py-5" }, [
+              _c("div", { staticClass: "outer border p-4 pt-0" }, [
+                _c(
+                  "div",
+                  { staticClass: "row flex-column-reverse flex-lg-row" },
+                  [
+                    _c("div", { staticClass: "col-md-7 pt-4" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "bottom" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "\n                                                    col-lg-4\n                                                    col-md-6\n                                                    col-sm-6\n                                                    col-6\n                                                    mt-4\n                                                ",
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "\n                                                        d-flex\n                                                        align-items-center\n                                                    ",
+                                },
+                                [
+                                  _c("div", { staticClass: "icons pe-3" }, [
+                                    _c("img", {
+                                      directives: [
+                                        {
+                                          name: "lazy",
+                                          rawName: "v-lazy",
+                                          value: {
+                                            src: "./assets/images/icons/About/users.png",
+                                          },
+                                          expression:
+                                            "{\n                                                                src: './assets/images/icons/About/users.png',\n                                                            }",
+                                        },
+                                      ],
+                                      staticClass:
+                                        "\n                                                                about-icon\n                                                            ",
+                                      attrs: { alt: "ICON" },
+                                    }),
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(2),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "\n                                                    col-lg-4\n                                                    col-md-6\n                                                    col-sm-6\n                                                    col-6\n                                                    mt-4\n                                                ",
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "\n                                                        d-flex\n                                                        align-items-center\n                                                    ",
+                                },
+                                [
+                                  _c("div", { staticClass: "icons pe-3" }, [
+                                    _c("img", {
+                                      directives: [
+                                        {
+                                          name: "lazy",
+                                          rawName: "v-lazy",
+                                          value: {
+                                            src: "./assets/images/icons/About/properties.png",
+                                          },
+                                          expression:
+                                            "{\n                                                                src: './assets/images/icons/About/properties.png',\n                                                            }",
+                                        },
+                                      ],
+                                      staticClass:
+                                        "\n                                                                about-icon\n                                                            ",
+                                      attrs: { alt: "ICON" },
+                                    }),
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(3),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "\n                                                    col-lg-4\n                                                    col-md-6\n                                                    col-sm-6\n                                                    col-6\n                                                    mt-4\n                                                ",
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "\n                                                        d-flex\n                                                        align-items-center\n                                                    ",
+                                },
+                                [
+                                  _c("div", { staticClass: "icons pe-3" }, [
+                                    _c("img", {
+                                      directives: [
+                                        {
+                                          name: "lazy",
+                                          rawName: "v-lazy",
+                                          value: {
+                                            src: "./assets/images/icons/About/savings.png",
+                                          },
+                                          expression:
+                                            "{\n                                                                src: './assets/images/icons/About/savings.png',\n                                                            }",
+                                        },
+                                      ],
+                                      staticClass:
+                                        "\n                                                                about-icon\n                                                            ",
+                                      attrs: { alt: "ICON" },
+                                    }),
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._m(4),
+                                ]
+                              ),
+                            ]
+                          ),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-5 pt-4" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-12 align-center" }, [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value: {
+                                  src: "./assets/images/banners/About/about-banner-right.png",
+                                },
+                                expression:
+                                  "{\n                                                    src: './assets/images/banners/About/about-banner-right.png',\n                                                }",
+                              },
+                            ],
+                            staticClass:
+                              "\n                                                    img-fluid\n                                                    about-banner\n                                                ",
+                            attrs: { alt: "About Us" },
+                          }),
+                        ]),
+                      ]),
+                    ]),
+                  ]
+                ),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _vm._m(5),
+    _vm._v(" "),
+    _vm._m(6),
+    _vm._v(" "),
+    _c("div", { staticClass: "bg-white border-top" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "col-12 py-5" }, [
+            _vm._m(7),
+            _vm._v(" "),
+            _c("div", { staticClass: "content mt-4" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-lg-3 col-md-1" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6 col-md-10" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("div", { staticClass: "team-card" }, [
+                        _c("div", { staticClass: "img-fluid" }, [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value: {
+                                  src: "./assets/images/Team/sunil.jpg",
+                                },
+                                expression:
+                                  "{\n                                                        src: './assets/images/Team/sunil.jpg',\n                                                    }",
+                              },
+                            ],
+                            attrs: { alt: "Sunil" },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _vm._m(9),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "social" }),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c("div", { staticClass: "team-card" }, [
+                        _c("div", { staticClass: "img-fluid" }, [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value: {
+                                  src: "./assets/images/Team/ron.jpg",
+                                },
+                                expression:
+                                  "{\n                                                        src: './assets/images/Team/ron.jpg',\n                                                    }",
+                              },
+                            ],
+                            attrs: { alt: "Sunil" },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(10),
+                        _vm._v(" "),
+                        _vm._m(11),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "social" }),
+                      ]),
+                    ]),
                   ]),
                 ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-3 col-md-1" }),
               ]),
             ]),
           ]),
@@ -64804,26 +65018,569 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-7 pt-4" }, [
-      _c("div", { staticClass: "page-title" }, [
-        _c("h3", { staticClass: "text-color fw-bold" }, [
+    return _c("div", { staticClass: "page-title" }, [
+      _c(
+        "h2",
+        {
+          staticClass:
+            "\n                                                text-color\n                                                fw-bold\n                                                text-uppercase\n                                            ",
+        },
+        [
           _vm._v(
-            "\n                                    The Leading Real Estate Rental\n                                    Marketplace.\n                                "
+            "\n                                            The Leading Real Estate Rental\n                                            Marketplace.\n                                        "
           ),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c("br"),
+      _vm._v(" "),
+      _c("p", { staticClass: "about-text" }, [
+        _vm._v(
+          "\n                                            RE/MAX Millennium was founded\n                                            with the vision of pursuing the\n                                            New Era of Real Estate; the\n                                            Digital Era. We believe real\n                                            estate has and always will be a\n                                            business where personal\n                                            relationships matter. We aim to\n                                            provide clients and agents with\n                                            more exposure, brand value,\n                                            innovation and quality service.\n                                            Our team is committed to\n                                            providing the highest level of\n                                            representation and top-notch\n                                            customer service for our clients\n                                            with an in-depth understanding\n                                            of the ever-evolving marketplace\n                                            which sets us apart from the\n                                            rest.\n                                        "
+        ),
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("p", { staticClass: "about-text" }, [
+        _vm._v(
+          "\n                                            Hear from us, how we make a\n                                            difference.\n                                        "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "\n                                                                h6\n                                                                text-color\n                                                                m-0\n                                                                p-0\n                                                            ",
+        },
+        [
+          _vm._v(
+            "\n                                                            $89 Million s\n                                                        "
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass:
+            "\n                                                                text-muted\n                                                            ",
+        },
+        [
+          _vm._v(
+            "\n                                                            lorem ipsum\n                                                        "
+          ),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "\n                                                                h6\n                                                                text-color\n                                                                m-0\n                                                                p-0\n                                                            ",
+        },
+        [
+          _vm._v(
+            "\n                                                            $89 Million s\n                                                        "
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass:
+            "\n                                                                text-muted\n                                                            ",
+        },
+        [
+          _vm._v(
+            "\n                                                            lorem ipsum\n                                                        "
+          ),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "content" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "\n                                                                h6\n                                                                text-color\n                                                                m-0\n                                                                p-0\n                                                            ",
+        },
+        [
+          _vm._v(
+            "\n                                                            $89 Million s\n                                                        "
+          ),
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass:
+            "\n                                                                text-muted\n                                                            ",
+        },
+        [
+          _vm._v(
+            "\n                                                            lorem ipsum\n                                                        "
+          ),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-theme-light" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12 py-5" }, [
+              _c("div", { staticClass: "head text-center" }, [
+                _c("h2", { staticClass: "text-color fw-bold" }, [
+                  _vm._v(
+                    "\n                                WHAT WE ARE KNOWN FOR\n                            "
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "We provide full service at every\n                                step."
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "content" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-4 text-center mt-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "\n                                            border\n                                            about-card\n                                            rounded rounded-3\n                                            p-4\n                                        ",
+                      },
+                      [
+                        _c("div", { staticClass: "img center" }, [
+                          _c("img", {
+                            staticClass: "card-img not-hover",
+                            attrs: {
+                              src: "assets/images/icons/About/h.png",
+                              alt: "ICON",
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticClass: "card-img hover",
+                            attrs: {
+                              src: "assets/images/icons/About/h1.png",
+                              alt: "ICON",
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", { staticClass: "text-color mt-3" }, [
+                          _vm._v(
+                            "\n                                            Brand Power\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-color card-text" }, [
+                          _vm._v(
+                            "\n                                            With 94.8% brand awareness you\n                                            will close as many deals as fast\n                                            as they come your way. Our\n                                            support staff are the best in\n                                            the business to ensure that you\n                                            are always ahead of your\n                                            competition.\n                                        "
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4 text-center mt-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "\n                                            border\n                                            about-card\n                                            rounded rounded-3\n                                            p-4\n                                        ",
+                      },
+                      [
+                        _c("div", { staticClass: "img center" }, [
+                          _c("img", {
+                            staticClass: "card-img not-hover",
+                            attrs: {
+                              src: "assets/images/icons/About/p.png",
+                              alt: "ICON",
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticClass: "card-img hover",
+                            attrs: {
+                              src: "assets/images/icons/About/p1.png",
+                              alt: "ICON",
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", { staticClass: "text-color mt-3" }, [
+                          _vm._v(
+                            "\n                                            Leading Marketing & Technology\n                                            Services\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-color card-text" }, [
+                          _vm._v(
+                            "\n                                            Our approach to marketing is to\n                                            plan, produce and promote. This\n                                            makes us the leading real estate\n                                            brokerage to offer exceptional\n                                            marketing strategies and support\n                                            in the industry.\n                                        "
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4 text-center mt-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "\n                                            border\n                                            about-card\n                                            rounded rounded-3\n                                            p-4\n                                        ",
+                      },
+                      [
+                        _c("div", { staticClass: "img center" }, [
+                          _c("img", {
+                            staticClass: "card-img not-hover",
+                            attrs: {
+                              src: "assets/images/icons/About/c.png",
+                              alt: "ICON",
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("img", {
+                            staticClass: "card-img hover",
+                            attrs: {
+                              src: "assets/images/icons/About/c1.png",
+                              alt: "ICON",
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("h6", { staticClass: "text-color mt-3" }, [
+                          _vm._v(
+                            "\n                                            Hollistic Experience\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-color card-text" }, [
+                          _vm._v(
+                            "\n                                            With one-on-one coaching\n                                            sessions from the best in the\n                                            industry, access to dozens of\n                                            step-by-step video tutorials,\n                                            and a chance to register for\n                                            EXCLUSIVE RE/MAX courses we\n                                            remain committed to your\n                                            success.\n                                        "
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "col-12 py-5" }, [
+        _c("div", { staticClass: "head text-center" }, [
+          _c("h2", { staticClass: "text-color fw-bold" }, [
+            _vm._v("WHAT WE STAND FOR"),
+          ]),
+          _vm._v(" "),
+          _c("span", [_vm._v("We provide full support at every step.")]),
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "about-text" }, [
-          _vm._v(
-            "\n                                    RE/MAX Millennium was founded with the\n                                    vision of pursuing the New Era of Real\n                                    Estate; the Digital Era. We believe real\n                                    estate has and always will be a business\n                                    where personal relationships matter. We\n                                    aim to provide clients and agents with\n                                    more exposure, brand value, innovation\n                                    and quality service. Our team is\n                                    committed to providing the highest level\n                                    of representation and top-notch customer\n                                    service for our clients with an in-depth\n                                    understanding of the ever-evolving\n                                    marketplace which sets us apart from the\n                                    rest.\n                                "
-          ),
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "about-text" }, [
-          _vm._v(
-            "\n                                    Hear from us, how we make a difference.\n                                "
+        _c("div", { staticClass: "content mt-4" }, [
+          _c(
+            "div",
+            {
+              staticClass: "accordion",
+              attrs: { id: "accordionPanelsStayOpenExample" },
+            },
+            [
+              _c("div", { staticClass: "accordion-item" }, [
+                _c(
+                  "h2",
+                  {
+                    staticClass: "accordion-header",
+                    attrs: { id: "panelsStayOpen-headingOne" },
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "accordion-button",
+                        attrs: {
+                          type: "button",
+                          "data-bs-toggle": "collapse",
+                          "data-bs-target": "#panelsStayOpen-collapseOne",
+                          "aria-expanded": "true",
+                          "aria-controls": "panelsStayOpen-collapseOne",
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                                Collaboration\n                            "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "accordion-collapse collapse show",
+                    attrs: {
+                      id: "panelsStayOpen-collapseOne",
+                      "aria-labelledby": "panelsStayOpen-headingOne",
+                    },
+                  },
+                  [
+                    _c("div", { staticClass: "accordion-body" }, [
+                      _vm._v(
+                        "\n                                Teamwork is the fuel by which we realize our\n                                goals together. By fostering a creative\n                                atmosphere and leveraging team member\n                                strengths, we are able to direct individual\n                                accomplishments. We equip our brokers with\n                                the best technology and training available\n                                to help them excel in the real estate\n                                industry.\n                            "
+                      ),
+                    ]),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "accordion-item" }, [
+                _c(
+                  "h2",
+                  {
+                    staticClass: "accordion-header",
+                    attrs: { id: "panelsStayOpen-headingTwo" },
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "accordion-button collapsed",
+                        attrs: {
+                          type: "button",
+                          "data-bs-toggle": "collapse",
+                          "data-bs-target": "#panelsStayOpen-collapseTwo",
+                          "aria-expanded": "false",
+                          "aria-controls": "panelsStayOpen-collapseTwo",
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                                Culture\n                            "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "accordion-collapse collapse",
+                    attrs: {
+                      id: "panelsStayOpen-collapseTwo",
+                      "aria-labelledby": "panelsStayOpen-headingTwo",
+                    },
+                  },
+                  [
+                    _c("div", { staticClass: "accordion-body" }, [
+                      _vm._v(
+                        "\n                                ​Action speaks louder than words. At RE/MAX\n                                Millennium we have developed a culture of\n                                collaboration and innovation that enables\n                                agents to learn and grow through training\n                                and mentor-ship, we continue to help agents\n                                maximise their earning potential, build\n                                their skills, and fill their sales pipeline.\n                            "
+                      ),
+                    ]),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "accordion-item" }, [
+                _c(
+                  "h2",
+                  {
+                    staticClass: "accordion-header",
+                    attrs: { id: "panelsStayOpen-headingThree" },
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "accordion-button collapsed",
+                        attrs: {
+                          type: "button",
+                          "data-bs-toggle": "collapse",
+                          "data-bs-target": "#panelsStayOpen-collapseThree",
+                          "aria-expanded": "false",
+                          "aria-controls": "panelsStayOpen-collapseThree",
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                                Training\n                            "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "accordion-collapse collapse",
+                    attrs: {
+                      id: "panelsStayOpen-collapseThree",
+                      "aria-labelledby": "panelsStayOpen-headingThree",
+                    },
+                  },
+                  [
+                    _c("div", { staticClass: "accordion-body" }, [
+                      _vm._v(
+                        "\n                                We inspire one another to hustle everyday to\n                                achieve our personal and professional goals.\n                            "
+                      ),
+                    ]),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "accordion-item" }, [
+                _c(
+                  "h2",
+                  {
+                    staticClass: "accordion-header",
+                    attrs: { id: "panelsStayOpen-headingFour" },
+                  },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "accordion-button collapsed",
+                        attrs: {
+                          type: "button",
+                          "data-bs-toggle": "collapse",
+                          "data-bs-target": "#panelsStayOpen-collapseFour",
+                          "aria-expanded": "false",
+                          "aria-controls": "panelsStayOpen-collapseFour",
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                                Marketing\n                            "
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "accordion-collapse collapse",
+                    attrs: {
+                      id: "panelsStayOpen-collapseFour",
+                      "aria-labelledby": "panelsStayOpen-headingFour",
+                    },
+                  },
+                  [
+                    _c("div", { staticClass: "accordion-body" }, [
+                      _vm._v(
+                        "\n                                We provide our brokers with one-on-one\n                                coaching, targeted toward their specific\n                                goals and needs at each phase of their\n                                career. We make sure our brokers get the\n                                right resources to improve their personal\n                                brand, minimize their costs and boost their\n                                sales.\n                            "
+                      ),
+                    ]),
+                  ]
+                ),
+              ]),
+            ]
           ),
         ]),
       ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "head text-center" }, [
+      _c("h2", { staticClass: "text-color fw-bold text-uppercase" }, [
+        _vm._v(
+          "\n                            LEADING OUR WAY\n                        "
+        ),
+      ]),
+      _vm._v(" "),
+      _c("span", [
+        _vm._v(
+          "\n                            We understand that for both clients as well as\n                            agents buying or selling a home is more than\n                            just a transaction, it requires a level of trust\n                            and understanding, which comes down to the\n                            morals and values that our friendly, reliable\n                            and determined staff uphold. Working with RE/MAX\n                            Millennium means less work, fret and risk. Your\n                            real estate transaction is one of the largest\n                            and most important events in your life. Let us\n                            take care of it with the attention and\n                            experience that is necessary.\n                        "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "name text-center" }, [
+      _c("span", { staticClass: "text-color h4" }, [
+        _vm._v(
+          "\n                                                    SUNIL SALLY\n                                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "des text-center" }, [
+      _c("span", [_vm._v("BROKER / OWNER")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "name text-center" }, [
+      _c("span", { staticClass: "text-color h4" }, [
+        _vm._v(
+          "\n                                                    RON SALLY\n                                                "
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "des text-center" }, [
+      _c("span", [_vm._v("BROKER OF RECORD")]),
     ])
   },
 ]
