@@ -65068,7 +65068,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                                            $89 Million s\n                                                        "
+            "\n                                                            80,123\n                                                        "
           ),
         ]
       ),
@@ -65081,7 +65081,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                                            lorem ipsum\n                                                        "
+            "\n                                                            Customers to\n                                                            date\n                                                        "
           ),
         ]
       ),
@@ -65100,7 +65100,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                                            $89 Million s\n                                                        "
+            "\n                                                            $74 Billion\n                                                        "
           ),
         ]
       ),
@@ -65113,7 +65113,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                                            lorem ipsum\n                                                        "
+            "\n                                                            In home sales\n                                                        "
           ),
         ]
       ),
@@ -65132,7 +65132,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                                            $89 Million s\n                                                        "
+            "\n                                                            $468 Million\n                                                        "
           ),
         ]
       ),
@@ -65145,7 +65145,7 @@ var staticRenderFns = [
         },
         [
           _vm._v(
-            "\n                                                            lorem ipsum\n                                                        "
+            "\n                                                            In savings\n                                                        "
           ),
         ]
       ),

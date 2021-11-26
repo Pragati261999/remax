@@ -119,14 +119,15 @@
                                                                     p-0
                                                                 "
                                                             >
-                                                                $89 Million s
+                                                                80,123
                                                             </div>
                                                             <span
                                                                 class="
                                                                     text-muted
                                                                 "
                                                             >
-                                                                lorem ipsum
+                                                                Customers to
+                                                                date
                                                             </span>
                                                         </div>
                                                     </div>
@@ -166,14 +167,14 @@
                                                                     p-0
                                                                 "
                                                             >
-                                                                $89 Million s
+                                                                $74 Billion
                                                             </div>
                                                             <span
                                                                 class="
                                                                     text-muted
                                                                 "
                                                             >
-                                                                lorem ipsum
+                                                                In home sales
                                                             </span>
                                                         </div>
                                                     </div>
@@ -213,14 +214,14 @@
                                                                     p-0
                                                                 "
                                                             >
-                                                                $89 Million s
+                                                                $468 Million
                                                             </div>
                                                             <span
                                                                 class="
                                                                     text-muted
                                                                 "
                                                             >
-                                                                lorem ipsum
+                                                                In savings
                                                             </span>
                                                         </div>
                                                     </div>
