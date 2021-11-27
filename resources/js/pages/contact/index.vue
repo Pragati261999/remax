@@ -272,7 +272,7 @@
                                     Send Us Your Query
                                 </h2>
                                 <span>
-                                    We are 24x7 open, Feel free to write.
+                                    We are open 24x7, Feel free to write.
                                 </span>
                             </div>
                             <div class="content">

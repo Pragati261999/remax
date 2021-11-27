@@ -66829,7 +66829,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("span", [
         _vm._v(
-          "\n                                We are 24x7 open, Feel free to write.\n                            "
+          "\n                                We are open 24x7, Feel free to write.\n                            "
         ),
       ]),
     ])
