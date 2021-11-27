@@ -9843,7 +9843,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 self.rForm = "Please wait...";
                 self.rFormClass = "text-muted";
                 _context.next = 7;
-                return axios.post("/api/user/contact/", self.form).then(function (res) {
+                return axios.post("/api/user/contact", self.form).then(function (res) {
                   self.sForm = false;
                   self.form = {};
                   self.rForm = res.data.message;

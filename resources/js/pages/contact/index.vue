@@ -460,7 +460,7 @@ export default {
             self.rForm = "Please wait...";
             self.rFormClass = "text-muted";
             await axios
-                .post("/api/user/contact/", self.form)
+                .post("/api/user/contact", self.form)
                 .then((res) => {
                     self.sForm = false;
                     self.form = {};
