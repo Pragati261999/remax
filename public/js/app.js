@@ -9354,6 +9354,520 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/contact/index.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/contact/index.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/commonComponents/Loader.vue */ "./resources/js/components/commonComponents/Loader.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Loader: _components_commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      form: {
+        name: "",
+        email: "",
+        contact: "",
+        message: ""
+      },
+      eForm: null,
+      sForm: false,
+      rForm: "",
+      rFormClass: ""
+    };
+  },
+  mounted: function mounted() {
+    this.checkUser();
+  },
+  methods: {
+    checkUser: function checkUser() {
+      if (this.$store.state.auth_user) {
+        this.form.name = this.$store.state.auth_user.name;
+        this.form.email = this.$store.state.auth_user.email;
+        this.form.contact = this.$store.state.auth_user.contact;
+      }
+    },
+    saveContact: function saveContact() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var self;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                self = _this;
+                self.sForm = true;
+                self.eForm = {};
+                self.rForm = "Please wait...";
+                self.rFormClass = "text-muted";
+                _context.next = 7;
+                return axios.post("/api/user/contact/", self.form).then(function (res) {
+                  self.sForm = false;
+                  self.form = {};
+                  self.rForm = res.data.message;
+                  self.rFormClass = "text-success";
+                })["catch"](function (err) {
+                  self.sForm = false;
+                  self.eForm = err.response.data.error;
+                  self.rForm = err.response.data.message;
+                  self.rFormClass = "text-danger";
+                });
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/property/details.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/property/details.vue?vue&type=script&lang=js& ***!
@@ -50959,17 +51473,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _index_vue_vue_type_template_id_6fe3cbec_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=6fe3cbec&scoped=true& */ "./resources/js/pages/contact/index.vue?vue&type=template&id=6fe3cbec&scoped=true&");
-/* harmony import */ var _index_vue_vue_type_style_index_0_id_6fe3cbec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=style&index=0&id=6fe3cbec&scoped=true&lang=css& */ "./resources/js/pages/contact/index.vue?vue&type=style&index=0&id=6fe3cbec&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./resources/js/pages/contact/index.vue?vue&type=script&lang=js&");
+/* harmony import */ var _index_vue_vue_type_style_index_0_id_6fe3cbec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.vue?vue&type=style&index=0&id=6fe3cbec&scoped=true&lang=css& */ "./resources/js/pages/contact/index.vue?vue&type=style&index=0&id=6fe3cbec&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 ;
 
 
 /* normalize component */
 
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  script,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _index_vue_vue_type_template_id_6fe3cbec_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
   _index_vue_vue_type_template_id_6fe3cbec_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -51475,6 +51991,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Signup.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/Signup.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Signup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/contact/index.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/pages/contact/index.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/pages/contact/index.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -65878,7 +66410,221 @@ var render = function () {
     _vm._v(" "),
     _vm._m(4),
     _vm._v(" "),
-    _vm._m(5),
+    _c("div", { staticClass: "bg-light" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12 py-5" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "content" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-1" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-10" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-12" }, [
+                        _c(
+                          "form",
+                          {
+                            staticClass: "row form-outer",
+                            on: {
+                              submit: function ($event) {
+                                $event.preventDefault()
+                                return _vm.saveContact.apply(null, arguments)
+                              },
+                            },
+                          },
+                          [
+                            _c("div", { staticClass: "col-sm-6 mt-4" }, [
+                              _c("label", [_vm._v("Name *")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.name,
+                                    expression: "form.name",
+                                  },
+                                ],
+                                staticClass:
+                                  "\n                                                            form-control\n                                                            rounded-0\n                                                            py-3\n                                                        ",
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Enter your name",
+                                },
+                                domProps: { value: _vm.form.name },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm.eForm && _vm.eForm.name
+                                ? _c("span", {
+                                    staticClass:
+                                      "\n                                                            fw-light\n                                                            small\n                                                            text-danger\n                                                        ",
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.eForm.name.toString()
+                                      ),
+                                    },
+                                  })
+                                : _vm._e(),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-6 mt-4" }, [
+                              _c("label", [_vm._v("Email * ")]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.email,
+                                    expression: "form.email",
+                                  },
+                                ],
+                                staticClass:
+                                  "\n                                                            form-control\n                                                            rounded-0\n                                                            py-3\n                                                        ",
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Enter your email",
+                                },
+                                domProps: { value: _vm.form.email },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "email",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm.eForm && _vm.eForm.email
+                                ? _c("span", {
+                                    staticClass:
+                                      "\n                                                            fw-light\n                                                            small\n                                                            text-danger\n                                                        ",
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.eForm.email.toString()
+                                      ),
+                                    },
+                                  })
+                                : _vm._e(),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-12 mt-4" }, [
+                              _c("label", [_vm._v("Message *")]),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.message,
+                                    expression:
+                                      "\n                                                            form.message\n                                                        ",
+                                  },
+                                ],
+                                staticClass:
+                                  "\n                                                            form-control\n                                                            rounded-0\n                                                        ",
+                                attrs: {
+                                  rows: "6",
+                                  placeholder: "Your message...",
+                                },
+                                domProps: { value: _vm.form.message },
+                                on: {
+                                  input: function ($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "message",
+                                      $event.target.value
+                                    )
+                                  },
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm.eForm && _vm.eForm.message
+                                ? _c("span", {
+                                    staticClass:
+                                      "\n                                                            fw-light\n                                                            small\n                                                            text-danger\n                                                        ",
+                                    domProps: {
+                                      textContent: _vm._s(
+                                        _vm.eForm.message.toString()
+                                      ),
+                                    },
+                                  })
+                                : _vm._e(),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "\n                                                        col-12\n                                                        mt-3\n                                                        text-end\n                                                    ",
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "\n                                                            btn\n                                                            btn-theme-color\n                                                            py-3\n                                                            px-5\n                                                            rounded-0\n                                                        ",
+                                    attrs: { disabled: _vm.sForm },
+                                  },
+                                  [
+                                    !_vm.sForm
+                                      ? _c("span", [_vm._v("Save")])
+                                      : _c("span", [_vm._v("Saving...")]),
+                                  ]
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "\n                                                        col-12\n                                                        mt-2\n                                                        text-end\n                                                    ",
+                              },
+                              [
+                                _c("span", {
+                                  class: _vm.rFormClass,
+                                  domProps: { textContent: _vm._s(_vm.rForm) },
+                                }),
+                              ]
+                            ),
+                          ]
+                        ),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-1" }),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
   ])
 }
 var staticRenderFns = [
@@ -65984,7 +66730,10 @@ var staticRenderFns = [
           {
             staticClass:
               "\n                                                                social-icon\n                                                            ",
-            attrs: { href: "#" },
+            attrs: {
+              href: "https://www.facebook.com/remaxmillenniumrealestate/",
+              target: "_blank",
+            },
           },
           [
             _c("i", {
@@ -65999,7 +66748,10 @@ var staticRenderFns = [
           {
             staticClass:
               "\n                                                                social-icon\n                                                            ",
-            attrs: { href: "#" },
+            attrs: {
+              href: "https://www.facebook.com/remaxmillenniumrealestate/",
+              target: "_blank",
+            },
           },
           [
             _c("i", {
@@ -66014,7 +66766,10 @@ var staticRenderFns = [
           {
             staticClass:
               "\n                                                                social-icon\n                                                            ",
-            attrs: { href: "#" },
+            attrs: {
+              href: "https://www.instagram.com/remaxmillennium/",
+              target: "_blank",
+            },
           },
           [
             _c("i", {
@@ -66029,7 +66784,10 @@ var staticRenderFns = [
           {
             staticClass:
               "\n                                                                social-icon\n                                                            ",
-            attrs: { href: "#" },
+            attrs: {
+              href: "https://www.youtube.com/channel/UCDBISvKl8ipeM1dFFKOAH4w",
+              target: "_blank",
+            },
           },
           [
             _c("i", {
@@ -66062,104 +66820,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bg-light" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12 py-5" }, [
-              _c("div", { staticClass: "head text-center" }, [
-                _c("h2", { staticClass: "text-color fw-bold text-uppercase" }, [
-                  _vm._v(
-                    "\n                                Send Us Your Query\n                            "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("span", [
-                  _vm._v(
-                    "\n                                We are 24x7 open, Feel free to write.\n                            "
-                  ),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "content" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-1" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-10" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-12" }, [
-                        _c("form", { staticClass: "row form-outer" }, [
-                          _c("div", { staticClass: "col-sm-6 mt-4" }, [
-                            _c("label", [_vm._v("Name *")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              staticClass:
-                                "\n                                                            form-control\n                                                            rounded-0\n                                                            py-3\n                                                        ",
-                              attrs: {
-                                type: "text",
-                                placeholder: "Enter your name",
-                              },
-                            }),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-sm-6 mt-4" }, [
-                            _c("label", [_vm._v("Email * ")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              staticClass:
-                                "\n                                                            form-control\n                                                            rounded-0\n                                                            py-3\n                                                        ",
-                              attrs: {
-                                type: "text",
-                                placeholder: "Enter your email",
-                              },
-                            }),
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-sm-12 mt-4" }, [
-                            _c("label", [_vm._v("Message *")]),
-                            _vm._v(" "),
-                            _c("textarea", {
-                              staticClass:
-                                "\n                                                            form-control\n                                                            rounded-0\n                                                        ",
-                              attrs: {
-                                rows: "6",
-                                placeholder: "Your message...",
-                              },
-                            }),
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "\n                                                        col-12\n                                                        mt-3\n                                                        text-end\n                                                    ",
-                            },
-                            [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "\n                                                            btn\n                                                            btn-theme-color\n                                                            py-3\n                                                            px-5\n                                                            rounded-0\n                                                        ",
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                                        Send\n                                                    "
-                                  ),
-                                ]
-                              ),
-                            ]
-                          ),
-                        ]),
-                      ]),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-1" }),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
+    return _c("div", { staticClass: "head text-center" }, [
+      _c("h2", { staticClass: "text-color fw-bold text-uppercase" }, [
+        _vm._v(
+          "\n                                Send Us Your Query\n                            "
+        ),
+      ]),
+      _vm._v(" "),
+      _c("span", [
+        _vm._v(
+          "\n                                We are 24x7 open, Feel free to write.\n                            "
+        ),
       ]),
     ])
   },

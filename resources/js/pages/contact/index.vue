@@ -184,7 +184,8 @@
                                                                 class="
                                                                     social-icon
                                                                 "
-                                                                href="#"
+                                                                href="https://www.facebook.com/remaxmillenniumrealestate/"
+                                                                target="_blank"
                                                             >
                                                                 <i
                                                                     class="
@@ -197,7 +198,8 @@
                                                                 class="
                                                                     social-icon
                                                                 "
-                                                                href="#"
+                                                                href="https://www.facebook.com/remaxmillenniumrealestate/"
+                                                                target="_blank"
                                                             >
                                                                 <i
                                                                     class="
@@ -210,7 +212,8 @@
                                                                 class="
                                                                     social-icon
                                                                 "
-                                                                href="#"
+                                                                href="https://www.instagram.com/remaxmillennium/"
+                                                                target="_blank"
                                                             >
                                                                 <i
                                                                     class="
@@ -223,7 +226,8 @@
                                                                 class="
                                                                     social-icon
                                                                 "
-                                                                href="#"
+                                                                href="https://www.youtube.com/channel/UCDBISvKl8ipeM1dFFKOAH4w"
+                                                                target="_blank"
                                                             >
                                                                 <i
                                                                     class="
@@ -277,10 +281,16 @@
                                     <div class="col-md-10">
                                         <div class="row">
                                             <div class="col-12">
-                                                <form class="row form-outer">
+                                                <form
+                                                    @submit.prevent="
+                                                        saveContact
+                                                    "
+                                                    class="row form-outer"
+                                                >
                                                     <div class="col-sm-6 mt-4">
                                                         <label>Name *</label>
                                                         <input
+                                                            v-model="form.name"
                                                             type="text"
                                                             class="
                                                                 form-control
@@ -289,10 +299,25 @@
                                                             "
                                                             placeholder="Enter your name"
                                                         />
+                                                        <span
+                                                            class="
+                                                                fw-light
+                                                                small
+                                                                text-danger
+                                                            "
+                                                            v-if="
+                                                                eForm &&
+                                                                eForm.name
+                                                            "
+                                                            v-text="
+                                                                eForm.name.toString()
+                                                            "
+                                                        ></span>
                                                     </div>
                                                     <div class="col-sm-6 mt-4">
                                                         <label>Email * </label>
                                                         <input
+                                                            v-model="form.email"
                                                             type="text"
                                                             class="
                                                                 form-control
@@ -301,10 +326,27 @@
                                                             "
                                                             placeholder="Enter your email"
                                                         />
+                                                        <span
+                                                            class="
+                                                                fw-light
+                                                                small
+                                                                text-danger
+                                                            "
+                                                            v-if="
+                                                                eForm &&
+                                                                eForm.email
+                                                            "
+                                                            v-text="
+                                                                eForm.email.toString()
+                                                            "
+                                                        ></span>
                                                     </div>
                                                     <div class="col-sm-12 mt-4">
                                                         <label>Message *</label>
                                                         <textarea
+                                                            v-model="
+                                                                form.message
+                                                            "
                                                             class="
                                                                 form-control
                                                                 rounded-0
@@ -312,6 +354,20 @@
                                                             rows="6"
                                                             placeholder="Your message..."
                                                         ></textarea>
+                                                        <span
+                                                            class="
+                                                                fw-light
+                                                                small
+                                                                text-danger
+                                                            "
+                                                            v-if="
+                                                                eForm &&
+                                                                eForm.message
+                                                            "
+                                                            v-text="
+                                                                eForm.message.toString()
+                                                            "
+                                                        ></span>
                                                     </div>
                                                     <div
                                                         class="
@@ -328,9 +384,28 @@
                                                                 px-5
                                                                 rounded-0
                                                             "
+                                                            :disabled="sForm"
                                                         >
-                                                            Send
+                                                            <span v-if="!sForm"
+                                                                >Save</span
+                                                            >
+                                                            <span v-else
+                                                                >Saving...</span
+                                                            >
                                                         </button>
+                                                    </div>
+                                                    <div
+                                                        class="
+                                                            col-12
+                                                            mt-2
+                                                            text-end
+                                                        "
+                                                    >
+                                                        <span
+                                                            :class="rFormClass"
+                                                            v-text="rForm"
+                                                        >
+                                                        </span>
                                                     </div>
                                                 </form>
                                             </div>
@@ -346,6 +421,63 @@
         </div>
     </div>
 </template>
+
+<script>
+import Loader from "../../components/commonComponents/Loader.vue";
+export default {
+    components: { Loader },
+    data() {
+        return {
+            form: {
+                name: "",
+                email: "",
+                contact: "",
+                message: "",
+            },
+            eForm: null,
+            sForm: false,
+
+            rForm: "",
+            rFormClass: "",
+        };
+    },
+    mounted() {
+        this.checkUser();
+    },
+    methods: {
+        checkUser() {
+            if (this.$store.state.auth_user) {
+                this.form.name = this.$store.state.auth_user.name;
+                this.form.email = this.$store.state.auth_user.email;
+                this.form.contact = this.$store.state.auth_user.contact;
+            }
+        },
+
+        async saveContact() {
+            const self = this;
+            self.sForm = true;
+            self.eForm = {};
+            self.rForm = "Please wait...";
+            self.rFormClass = "text-muted";
+            await axios
+                .post("/api/user/contact/", self.form)
+                .then((res) => {
+                    self.sForm = false;
+                    self.form = {};
+                    self.rForm = res.data.message;
+                    self.rFormClass = "text-success";
+                })
+                .catch((err) => {
+                    self.sForm = false;
+
+                    self.eForm = err.response.data.error;
+                    self.rForm = err.response.data.message;
+                    self.rFormClass = "text-danger";
+                });
+        },
+    },
+};
+</script>
 
 <style scoped>
 .sm-box {

@@ -12,6 +12,9 @@ use App\Http\Controllers\Api;
 Route::prefix('user')->group(function () {
     Route::post('/register', [Api\UserController::class, 'register']);
     Route::post('/login', [Api\UserController::class, 'login']);
+
+    // Save contact - contact
+    Route::post('/contact', [Api\ContactController::class, 'store']);
 });
 
 // User dashboard
