@@ -3,93 +3,83 @@
         <div class="mt-5 c-tabs">
             <ul class="c-tab-outer">
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 1 ? '' : (activeTab = 1)"
                         class="text-color"
                         :class="activeTab == 1 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Property</a
+                        >Property</span
                     >
                 </li>
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 2 ? '' : (activeTab = 2)"
                         class="text-color"
                         :class="activeTab == 2 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Inside</a
+                        >Inside</span
                     >
                 </li>
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 3 ? '' : (activeTab = 3)"
                         class="text-color"
                         :class="activeTab == 3 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Building</a
+                        >Building</span
                     >
                 </li>
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 4 ? '' : (activeTab = 4)"
                         class="text-color"
                         :class="activeTab == 4 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Parking</a
+                        >Parking</span
                     >
                 </li>
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 5 ? '' : (activeTab = 5)"
                         class="text-color"
                         :class="activeTab == 5 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Fees</a
+                        >Fees</span
                     >
                 </li>
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 8 ? '' : (activeTab = 8)"
                         class="text-color"
                         :class="activeTab == 8 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Land</a
+                        >Land</span
                     >
                 </li>
                 <li v-if="property.Rms">
-                    <a
+                    <span
                         @click="activeTab == 9 ? '' : (activeTab = 9)"
                         class="text-color"
                         :class="activeTab == 9 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Rooms</a
+                        >Rooms</span
                     >
                 </li>
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 10 ? '' : (activeTab = 10)"
                         class="text-color"
                         :class="activeTab == 10 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Water Feature</a
+                        >Water Feature</span
                     >
                 </li>
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 11 ? '' : (activeTab = 11)"
                         class="text-color"
                         :class="activeTab == 11 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Extras</a
+                        >Extras</span
                     >
                 </li>
                 <li>
-                    <a
+                    <span
                         @click="activeTab == 12 ? '' : (activeTab = 12)"
                         class="text-color"
                         :class="activeTab == 12 ? 'active' : ''"
-                        href="javascript:0;"
-                        >Virtual Tour URL</a
+                        >Virtual Tour URL</span
                     >
                 </li>
             </ul>
@@ -3014,12 +3004,13 @@ export default {
         li {
             display: inline-block;
             height: 50px;
-            a {
+            span {
                 display: inline-block;
                 padding: 13px 20px;
                 transition: all ease 0.4s;
                 font-weight: 600;
                 white-space: nowrap;
+                cursor: pointer;
 
                 &:hover {
                     background: rgba(3, 38, 70, 0.3);

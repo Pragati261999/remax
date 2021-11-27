@@ -46,7 +46,7 @@
                 <!-- Breakcrumbs -->
 
                 <!-- slider -->
-                <div v-if="property.images">
+                <div v-if="property.images && property.images.length > 0">
                     <Carousel
                         :autoplay="true"
                         :centerMode="true"
@@ -63,7 +63,7 @@
                             :key="img.property_ml_num + '_' + img.id"
                         >
                             <div
-                                v-if="img.image"
+                                v-if="img"
                                 class="
                                     carousel-outer
                                     border
@@ -846,6 +846,12 @@ export default {
             }
 
             return this.$store.state.auth_user;
+        },
+    },
+
+    watch: {
+        $route(to, from) {
+            this.getAllData();
         },
     },
 

@@ -26,26 +26,7 @@
                             class="collapse navbar-collapse right-menu"
                             id="navbarSupportedContent"
                         >
-                            <form class="d-flex me-auto search-bar">
-                                <div class="input-group bg-white input-bar">
-                                    <button class="btn bg-transparent p-0">
-                                        <img
-                                            src="/assets/images/icons/search.png"
-                                            alt=""
-                                        />
-                                    </button>
-                                    <input
-                                        type="text"
-                                        class="
-                                            form-control
-                                            border-0
-                                            bg-transparent
-                                        "
-                                        aria-label="Search"
-                                        aria-describedby="search-bar"
-                                    />
-                                </div>
-                            </form>
+                            <master-search />
                             <ul class="navbar-nav mb-2 mb-lg-0">
                                 <li class="nav-item">
                                     <router-link
@@ -181,7 +162,11 @@
 </template>
 
 <script>
+import MasterSearch from "../master/search.vue";
 export default {
+    components: {
+        MasterSearch,
+    },
     computed: {
         user() {
             return this.$store.state.auth_user;

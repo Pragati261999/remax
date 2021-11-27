@@ -12,9 +12,6 @@ use App\Http\Controllers\Api;
 Route::prefix('user')->group(function () {
     Route::post('/register', [Api\UserController::class, 'register']);
     Route::post('/login', [Api\UserController::class, 'login']);
-
-    // Save contact - contact
-    Route::post('/contact', [Api\ContactController::class, 'store']);
 });
 
 // User dashboard
@@ -49,6 +46,12 @@ Route::prefix('lead')->group(function () {
 Route::prefix('newsletter')->group(function () {
     Route::post('/subscribe', [Api\NewsLetterController::class, 'save']);
 });
+
+// Save contact - contact
+Route::post('/user/contact', [Api\ContactController::class, 'store']);
+
+// Master search - using key
+Route::get('/search', [Api\MasterSearchController::class, 'search']);
 
 Route::get('/', function () {
     dd('Welcome to remax.');
