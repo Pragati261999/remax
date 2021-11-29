@@ -20,6 +20,9 @@ Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/', [Api\UserController::class, 'profile']);
     Route::post('/update-profile', [Api\UserController::class, 'update']);
 
+    // Change password
+    Route::post('/setting/update-password', [Api\UserController::class, 'updatePassword']);
+
     // Lead
     Route::post('/save-lead', [Api\LeadController::class, 'saveLead']);
     // Bookmark / favourite / Save

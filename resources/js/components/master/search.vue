@@ -84,6 +84,35 @@
                         </a>
                     </div>
                 </div>
+                <div v-if="pages && pages.length > 0" class="wrapper-outer">
+                    <div class="list-heading">
+                        <span> PAGES </span>
+                    </div>
+                    <div v-if="pages.length > 0" class="list-content">
+                        <a
+                            @click="gotolink(`${obj.url}`)"
+                            v-for="(obj, index) in pages"
+                            :key="index + 'pages'"
+                            target="_blank"
+                            class="search-result d-flex"
+                        >
+                            <div class="icon">
+                                <img
+                                    src="/assets/images/icons/search.png"
+                                    alt=""
+                                />
+                            </div>
+                            <div class="content flex-grow-1">
+                                <div class="title">
+                                    {{ obj.title.toUpperCase() }}
+                                </div>
+                                <div class="address d-flex">
+                                    <span>PAGE</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
@@ -99,6 +128,7 @@ export default {
             masterSearchOpen: false,
             location: null,
             listing: null,
+            pages: null,
             searching: false,
         };
     },
@@ -125,6 +155,7 @@ export default {
                         self.masterSearchOpen = res.data.data.dataFound;
                         self.listing = res.data.data.listing;
                         self.location = res.data.data.location;
+                        self.pages = res.data.data.pages;
                     })
                     .catch((err) => {
                         console.log("err in search:", err);

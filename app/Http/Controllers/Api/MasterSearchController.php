@@ -36,10 +36,74 @@ class MasterSearchController extends AppBaseController
             ->orWhere('Municipality', 'LIKE', "{$key}%")
             ->orWhere('Community', 'LIKE', "{$key}%")
             ->orderby('id', 'DESC')
-            ->take(4)
+            ->take(5)
             ->get();
 
-        if (count($loc) > 0 || count($list) > 0) {
+
+        $pages = [
+            [
+                'key' => 'about, about us, team, our team',
+                'url' => '/about-us',
+                'title' => 'About Us'
+            ],
+            [
+                'key' => 'contact, contact us, send message, email, location, map, google map',
+                'url' => '/contact-us',
+                'title' => 'Contact Us'
+            ],
+            [
+                'key' => 'TERMS OF SERVICE, teams and conditions, Disclaimer, MILLENNIUM REAL ESTATE Brokerage',
+                'url' => '/terms-of-use',
+                'title' => 'TERMS OF SERVICE'
+            ],
+            [
+                'key' => 'PRIVACY POLICY, Personal Information, Information Collection and Use, Home Worth / Dream Home / Neighbourhood Buzzer / Free Real Estate Reports',
+                'url' => '/privacy-policy',
+                'title' => 'PRIVACY POLICY'
+            ],
+            [
+                'key' => 'All Property Listings, properties, list',
+                'url' => '/property/search',
+                'title' => 'All Properties'
+            ],
+            [
+                'key' => 'Blog, posts, our posts, news, related',
+                'url' => '/blog',
+                'title' => 'Blog'
+            ],
+            [
+                'key' => 'Bookmarked Properties, saved Properties',
+                'url' => '/dashboard/bookmarks',
+                'title' => 'Bookmarked'
+            ],
+            [
+                'key' => 'notifications, replies, new',
+                'url' => '/dashboard/notifications',
+                'title' => 'notifications'
+            ],
+            [
+                'key' => 'Recent Visited Properties',
+                'url' => '/dashboard/recent-visited',
+                'title' => 'Recently Visited'
+            ],
+            [
+                'key' => 'User Profile, My Profile, update password, change password, my informaion, dashboard',
+                'url' => '/dashboard/my-account',
+                'title' => 'User Profile'
+            ]
+        ];
+
+        $pageLink = [];
+
+        $fk = strtolower($key);
+        foreach ($pages as $page) {
+            $k = strtolower($page['key']);
+            if (strpos($k, $fk) !== false) {
+                $pageLink[] = $page;
+            }
+        }
+
+        if (count($loc) > 0 || count($list) > 0 || count($pageLink) > 0) {
             $isFound = true;
         }
 
@@ -47,6 +111,7 @@ class MasterSearchController extends AppBaseController
             'dataFound' => $isFound, //false
             'location' => $loc,
             'listing' => $list,
+            'pages' => $pageLink,
         ];
 
         return $this->sendResponse('Your query has been saved. We will contact you very soon.', $data);

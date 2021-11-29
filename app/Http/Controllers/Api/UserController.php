@@ -121,6 +121,29 @@ class UserController extends AppBaseController
         }
     }
 
+    public function updatePassword(Request $request)
+    {
+        // dd($request->contact);
+        $validator = Validator::make($request->all(), [
+            'old' => 'required|current_password:sanctum',
+            'newPassword' => 'bail|required|min:6|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            $message = "Validation error.";
+            $this->sendError($message, $error, 422);
+        }
+
+        $validated = $validator->validated();
+
+        $id = auth()->user()->id;
+
+        User::where(['id' => $id])->update(['password' => bcrypt($request->newPassword)]);
+
+        return $this->sendResponse('User data updated successfully', []);
+    }
+
     public function profile(Request $request)
     {
         return $request->user();
