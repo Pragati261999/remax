@@ -20,9 +20,7 @@
                                     >
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <router-link to="/login" class="active"
-                                        >Log In</router-link
-                                    >
+                                    <span class="active">Forget password</span>
                                 </li>
                             </ol>
                         </nav>
@@ -45,58 +43,51 @@
                         />
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 px-5">
-                        <form @submit.prevent="login()">
+                        <form @submit.prevent="forgetPassword">
+                            <fieldset class="mb-4">
+                                <span>
+                                    We will send a password reset link to your
+                                    email address. Please check your inbox and
+                                    follow the step.
+                                    <br />
+                                    If you did not get an email. It can take a
+                                    few minutes, or you can check your spam
+                                    folder and mark as not a spam.
+                                </span>
+                                <br />
+                            </fieldset>
                             <fieldset class="mb-4">
                                 <input
+                                    v-model="form.email"
                                     type="text"
-                                    @keyup.prevent="errors.email = ''"
                                     class="form-control"
-                                    v-model="userData.email"
-                                    placeholder="Email Address*"
+                                    placeholder="Enter your email"
                                 />
-                                <small
+                                <span
                                     class="text-danger"
-                                    v-if="errors.email"
-                                    >{{ errors.email.toString() }}</small
-                                >
+                                    v-if="eForm && eForm.email"
+                                    v-text="eForm.email.toString()"
+                                ></span>
                             </fieldset>
-                            <fieldset class="mb-4">
-                                <input
-                                    type="password"
-                                    @keyup.prevent="errors.password = ''"
-                                    class="form-control"
-                                    v-model="userData.password"
-                                    placeholder="Create Password*"
-                                />
-                                <small
-                                    class="text-danger"
-                                    v-if="errors.password"
-                                    >{{ errors.password.toString() }}</small
-                                >
-                            </fieldset>
-                            <small
-                                :class="success.color"
-                                class="text-success"
-                                v-if="success.message"
-                                >{{ success.message }}</small
-                            >
                             <button
+                                :disabled="sForm"
                                 type="submit"
                                 class="btn btn-theme-color w-100 py-2"
                             >
-                                Log In
+                                <span v-if="!sForm">Send Reset Link</span>
+                                <span v-else>Sending...</span>
                             </button>
+                            <span :class="rFormClass" v-text="rForm"></span>
                         </form>
                         <router-link
-                            to="/forget-password"
+                            to="/login"
                             class="text-dark fw-light my-2 text-center fp"
-                            >Forget Password</router-link
+                            >Back to Login</router-link
                         >
                         <h4 class="theme-title">DON'T HAVE AN ACCOUNT?</h4>
                         <p class="text-center">
-                            Add items to your wishlistget personalised
-                            recommendations check out more quickly track your
-                            orders register
+                            Click to create an account and create a new account
+                            to get full access of properties
                         </p>
                         <router-link to="/sign-up" class="text-light">
                             <button
@@ -118,18 +109,13 @@
 export default {
     data() {
         return {
-            success: {
-                message: "",
-                color: "",
-            },
-            userData: {
+            form: {
                 email: "",
-                password: "",
             },
-            errors: {
-                email: "",
-                password: "",
-            },
+            eForm: null,
+            sForm: false,
+            rForm: "",
+            rFormClass: "",
         };
     },
     mounted() {
@@ -141,33 +127,26 @@ export default {
                 this.$router.push("/dashboard/my-account");
             }
         },
-        async login() {
-            const user = this.userData;
+        async forgetPassword() {
+            const self = this;
+            self.sForm = true;
+            self.eForm = null;
+            self.rForm = "Please wait...";
+            self.rFormClass = "text-muted";
+
             await axios
-                .post("/api/user/login", user)
-                .then((response) => {
-                    this.success.message = response.data.message;
-                    const f = response.data.data.favourites;
-
-                    f.forEach((fv) => {
-                        this.$store.commit("addFavourite", fv.ml_num);
-                    });
-
-                    this.success.color = "text-success";
-                    const token = response.data.data.token;
-                    const user = response.data.data.user;
-                    this.$store.commit("addAuthToken", token);
-                    this.$store.commit("addAuthUser", user);
-                    this.$router.push("/dashboard/my-account");
+                .post("/api/user/send-reset-password-link", self.form)
+                .then((res) => {
+                    self.sForm = false;
+                    self.form = { email: "" };
+                    self.rForm = res.data.message;
+                    self.rFormClass = "text-success";
                 })
                 .catch((err) => {
-                    const errorData = err.response.data;
-                    this.errors.email = errorData.error.email;
-                    this.errors.password = errorData.error.password;
-                    if (errorData.success == false) {
-                        this.success.message = errorData.message;
-                        this.success.color = "text-danger";
-                    }
+                    self.sForm = false;
+                    self.eForm = err.response.data.errors;
+                    self.rForm = "";
+                    self.rFormClass = "text-danger";
                 });
         },
     },

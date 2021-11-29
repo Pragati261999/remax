@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
+use App\Mail\ForgetPassword;
 use App\Models\Favourite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends AppBaseController
 {
@@ -147,5 +149,43 @@ class UserController extends AppBaseController
     public function profile(Request $request)
     {
         return $request->user();
+    }
+
+    public function sendResetPasswordLink(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            $message = "Validation error.";
+            $this->sendError($message, $error, 422);
+        }
+
+        $validator->validated();
+
+        // ===================
+
+
+        // Check in DB if not create one if exists email - remove and create
+
+
+
+
+        $key = md5(microtime() . rand());
+
+        $data = [
+            'subject' => "Forgot Password | therealtyhub.ca",
+            'url' => 'therealtyhub.ca/reset-password?key=' . $key,
+        ];
+
+        // Send email with reset password link
+        Mail::to($request->email)->send(new ForgetPassword($data));
+
+
+        // ===================
+
+        return $this->sendResponse('Password reset link sent to your email.', []);
     }
 }

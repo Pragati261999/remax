@@ -12,6 +12,9 @@ use App\Http\Controllers\Api;
 Route::prefix('user')->group(function () {
     Route::post('/register', [Api\UserController::class, 'register']);
     Route::post('/login', [Api\UserController::class, 'login']);
+
+    // /send-reset-password-link
+    Route::post('/send-reset-password-link', [Api\UserController::class, 'sendResetPasswordLink']);
 });
 
 // User dashboard
