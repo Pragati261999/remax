@@ -148,6 +148,10 @@ export default {
                     self.form = {};
                     self.rForm = res.data.message;
                     self.rFormClass = "text-success";
+
+                    setTimeout(() => {
+                        self.$router.push("/login");
+                    }, 2000);
                 })
                 .catch((err) => {
                     self.sForm = false;

@@ -10609,6 +10609,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   self.form = {};
                   self.rForm = res.data.message;
                   self.rFormClass = "text-success";
+                  setTimeout(function () {
+                    self.$router.push("/login");
+                  }, 2000);
                 })["catch"](function (err) {
                   self.sForm = false;
                   self.eForm = err.response.data.errors;
