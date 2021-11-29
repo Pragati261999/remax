@@ -6,6 +6,8 @@ import PropertyDetails from "./pages/property/details.vue";
 import PropertySearch from "./pages/property/search.vue";
 import Login from "./pages/Login.vue";
 import ForgetPassword from "./pages/password/forget.vue";
+import ResetPassword from "./pages/password/reset.vue";
+
 import Signup from "./pages/Signup.vue";
 import UserDashboard from "./pages/user/Dashboard.vue";
 import NotFound from "./pages/notFound/404.vue";
@@ -78,6 +80,11 @@ const router = new VueRouter({
             path: "/forget-password",
             name: "forget-password",
             component: ForgetPassword,
+        },
+        {
+            path: "/reset-password",
+            name: "reset-password",
+            component: ResetPassword,
         },
         {
             path: "/sign-up",

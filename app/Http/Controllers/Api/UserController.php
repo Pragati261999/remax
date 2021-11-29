@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Mail\ForgetPassword;
 use App\Models\Favourite;
+use App\Models\ForgotPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -167,25 +168,64 @@ class UserController extends AppBaseController
 
         // ===================
 
-
         // Check in DB if not create one if exists email - remove and create
-
-
-
-
         $key = md5(microtime() . rand());
+
+        ForgotPassword::where(['email' => $request->email])->delete();
+
+        ForgotPassword::create([
+            'email' => $request->email,
+            'key' => $key
+        ]);
 
         $data = [
             'subject' => "Forgot Password | therealtyhub.ca",
-            'url' => 'therealtyhub.ca/reset-password?key=' . $key,
+            'url' => 'http://therealtyhub.ca/reset-password?key=' . $key . '&email=' . $request->email
         ];
 
         // Send email with reset password link
         Mail::to($request->email)->send(new ForgetPassword($data));
-
-
         // ===================
 
-        return $this->sendResponse('Password reset link sent to your email.', []);
+        return $this->sendResponse('Password reset link sent to your email. Please check your inbox.', []);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'newPassword' => 'bail|required|min:6|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            $message = "Validation error.";
+            $this->sendError($message, $error, 422);
+        }
+
+        $validator->validated();
+
+        $v = ForgotPassword::where([
+            'key' => $request->key,
+            'email' => $request->email
+        ])->first();
+
+        if (!is_null($v)) {
+
+            User::where([
+                'email' => $request->email
+            ])->update([
+                'password' => bcrypt($request->newPassword),
+            ]);
+
+            ForgotPassword::where([
+                'email' => $request->email
+            ])->delete();
+
+            return $this->sendResponse('Password changed successfully. You can login now', $v);
+        } else {
+            return $this->sendError("Looks like the link has expired or is invalid. Try to reserd link again.", null, 422);
+        }
+        // ===================
+
     }
 }

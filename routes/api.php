@@ -15,6 +15,7 @@ Route::prefix('user')->group(function () {
 
     // /send-reset-password-link
     Route::post('/send-reset-password-link', [Api\UserController::class, 'sendResetPasswordLink']);
+    Route::post('/reset-password', [Api\UserController::class, 'resetPassword']);
 });
 
 // User dashboard
