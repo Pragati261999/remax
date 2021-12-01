@@ -223,7 +223,7 @@ class UserController extends AppBaseController
 
             return $this->sendResponse('Password changed successfully. You can login now', $v);
         } else {
-            return $this->sendError("Looks like the link has expired or is invalid. Try to reserd link again.", null, 422);
+            return $this->sendError("Looks like the link has expired or is invalid. Try to resend link again.", null, 422);
         }
         // ===================
 
