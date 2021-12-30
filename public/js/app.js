@@ -3367,6 +3367,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3436,6 +3441,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -54510,11 +54519,19 @@ var render = function () {
             [
               _c(
                 "router-link",
-                { staticClass: "h3 text-color fw-bold", attrs: { to: "/" } },
-                [_vm._v("Remax")]
+                { staticClass: "text-color fw-bold", attrs: { to: "/" } },
+                [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/images/logo/logo.svg",
+                      alt: "Casamania",
+                      width: "150",
+                    },
+                  }),
+                ]
               ),
               _vm._v(" "),
-              _c("p", [
+              _c("p", { staticClass: "pt-2" }, [
                 _vm._v(
                   "\n                        Multiple Listing Service® and the associated logos\n                        identify professional services rendered by REALTOR®\n                        members of CREA to effect the purchase, sale and\n                        lease of real estate as part of a cooperative\n                        selling system.\n                    "
                 ),
@@ -54699,7 +54716,15 @@ var render = function () {
     _vm._m(2),
     _vm._v(" "),
     _c("section", { staticClass: "sub-footer footer py-5" }, [
-      _vm._m(3),
+      _c("div", { staticClass: "container p-0" }, [
+        _c("h6", { staticClass: "text-center text-secondary fw-light" }, [
+          _vm._v(
+            "\n                Copyright © " +
+              _vm._s(new Date().getFullYear()) +
+              " CASAMANIA. All\n                rights reserved casamania.ca.\n            "
+          ),
+        ]),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "b-t-t" }, [
         _c(
@@ -54840,18 +54865,6 @@ var staticRenderFns = [
       ]),
     ])
   },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container p-0" }, [
-      _c("h6", { staticClass: "text-center text-secondary fw-light" }, [
-        _vm._v(
-          "\n                Copyright © 2019 RE/MAX Millennium. All rights reserved.\n            "
-        ),
-      ]),
-    ])
-  },
 ]
 render._withStripped = true
 
@@ -54876,245 +54889,241 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("header", { class: _vm.$route.path == "/" ? "home-header" : "" }, [
-      _c("div", { staticClass: "container p-0" }, [
-        _c("nav", { staticClass: "navbar navbar-expand-lg" }, [
-          _c(
-            "div",
-            { staticClass: "container-fluid p-0" },
-            [
-              _c(
-                "router-link",
-                { staticClass: "navbar-brand me-5", attrs: { to: "/" } },
-                [_c("h2", [_vm._v("Remax")])]
-              ),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse navbar-collapse right-menu",
-                  attrs: { id: "navbarSupportedContent" },
-                },
-                [
-                  _c("master-search"),
-                  _vm._v(" "),
-                  _c("ul", { staticClass: "navbar-nav mb-2 mb-lg-0" }, [
-                    _c(
-                      "li",
-                      { staticClass: "nav-item" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link active",
-                            attrs: { "aria-current": "home", to: "/" },
-                          },
-                          [_vm._v("Home")]
-                        ),
-                      ],
-                      1
-                    ),
+    _c(
+      "header",
+      { class: _vm.$route.path == "/" ? "home-header py-2" : "py-2" },
+      [
+        _c("div", { staticClass: "container p-0" }, [
+          _c("nav", { staticClass: "navbar navbar-expand-lg" }, [
+            _c(
+              "div",
+              { staticClass: "container-fluid p-0" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "navbar-brand me-5", attrs: { to: "/" } },
+                  [
+                    _c("img", {
+                      attrs: {
+                        src: "/assets/images/logo/logo.svg",
+                        alt: "Casamania",
+                        width: "150",
+                      },
+                    }),
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "collapse navbar-collapse right-menu",
+                    attrs: { id: "navbarSupportedContent" },
+                  },
+                  [
+                    _c("master-search"),
                     _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "nav-item" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: {
-                              "aria-current": "properties",
-                              to: { name: "search-property" },
+                    _c("ul", { staticClass: "navbar-nav mb-2 mb-lg-0" }, [
+                      _c(
+                        "li",
+                        { staticClass: "nav-item" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link active",
+                              attrs: { "aria-current": "home", to: "/" },
                             },
-                          },
-                          [_vm._v("Properties")]
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "nav-item" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { "aria-current": "blog", to: "/blog" },
-                          },
-                          [_vm._v("Blog")]
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "nav-item p-0" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass:
-                              "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
-                            attrs: {
-                              "aria-current": "favourate",
-                              to: "/dashboard/bookmarks",
-                            },
-                          },
-                          [
-                            _c("img", {
-                              staticClass: "mobile-m-v-hidden",
+                            [_vm._v("Home")]
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "nav-item" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "nav-link",
                               attrs: {
-                                src: "/assets/images/icons/bookmark.svg",
-                                alt: "Bookmarks",
+                                "aria-current": "properties",
+                                to: { name: "search-property" },
                               },
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mobile-m-v" }, [
-                              _vm._v("Bookmark"),
-                            ]),
-                          ]
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      { staticClass: "nav-item me-3" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass:
-                              "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
-                            attrs: {
-                              "aria-current": "favourate",
-                              to: "/dashboard/notifications",
                             },
-                          },
-                          [
-                            _c("img", {
-                              staticClass: "mobile-m-v-hidden",
+                            [_vm._v("Properties")]
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "nav-item p-0" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass:
+                                "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
                               attrs: {
-                                src: "/assets/images/icons/alarm.svg",
-                                alt: "Notification",
+                                "aria-current": "favourate",
+                                to: "/dashboard/bookmarks",
                               },
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mobile-m-v" }, [
-                              _vm._v(
-                                "\n                                        Notifications\n                                    "
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item" }, [
-                      !_vm.$store.state.auth_token
-                        ? _c(
-                            "div",
+                            },
                             [
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass: "text-light",
-                                  attrs: { to: "/login" },
+                              _c("img", {
+                                staticClass: "mobile-m-v-hidden",
+                                attrs: {
+                                  src: "/assets/images/icons/bookmark.svg",
+                                  alt: "Bookmarks",
                                 },
-                                [
-                                  _c("button", [
-                                    _c("img", {
-                                      attrs: {
-                                        src: "/assets/images/icons/refer.svg",
-                                        alt: "",
-                                      },
-                                    }),
-                                    _vm._v(
-                                      "Sign in\n                                        "
-                                    ),
-                                  ]),
-                                ]
-                              ),
-                            ],
-                            1
-                          )
-                        : _c("div", [
-                            _c("div", { staticClass: "dropdown" }, [
-                              _vm._m(1),
+                              }),
                               _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "\n                                                dropdown-menu\n                                                dropdown-menu-right\n                                            ",
-                                  attrs: { "aria-labelledby": "userDDBtn" },
+                              _c("div", { staticClass: "mobile-m-v" }, [
+                                _vm._v("Bookmark"),
+                              ]),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        { staticClass: "nav-item me-3" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass:
+                                "\n                                        nav-link\n                                        t\n                                        header-icons\n                                        text-decoration-none\n                                    ",
+                              attrs: {
+                                "aria-current": "favourate",
+                                to: "/dashboard/notifications",
+                              },
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "mobile-m-v-hidden",
+                                attrs: {
+                                  src: "/assets/images/icons/alarm.svg",
+                                  alt: "Notification",
                                 },
-                                [
-                                  _c(
-                                    "div",
-                                    { staticClass: "dropdown-header" },
-                                    [
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mobile-m-v" }, [
+                                _vm._v(
+                                  "\n                                        Notifications\n                                    "
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "nav-item" }, [
+                        !_vm.$store.state.auth_token
+                          ? _c(
+                              "div",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "text-light",
+                                    attrs: { to: "/login" },
+                                  },
+                                  [
+                                    _c("button", [
+                                      _c("img", {
+                                        attrs: {
+                                          src: "/assets/images/icons/refer.svg",
+                                          alt: "",
+                                        },
+                                      }),
                                       _vm._v(
-                                        "\n                                                Hi, " +
-                                          _vm._s(_vm.user.name) +
-                                          "\n                                            "
+                                        "Sign in\n                                        "
                                       ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", {
-                                    staticClass: "dropdown-divider",
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "router-link",
-                                    {
-                                      staticClass: "dropdown-item",
-                                      attrs: {
-                                        to: "/dashboard/my-account",
-                                        role: "button",
-                                        "aria-hidden": "true",
+                                    ]),
+                                  ]
+                                ),
+                              ],
+                              1
+                            )
+                          : _c("div", [
+                              _c("div", { staticClass: "dropdown" }, [
+                                _vm._m(1),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "\n                                                dropdown-menu\n                                                dropdown-menu-right\n                                            ",
+                                    attrs: { "aria-labelledby": "userDDBtn" },
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "dropdown-header" },
+                                      [
+                                        _vm._v(
+                                          "\n                                                Hi, " +
+                                            _vm._s(_vm.user.name) +
+                                            "\n                                            "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", {
+                                      staticClass: "dropdown-divider",
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "dropdown-item",
+                                        attrs: {
+                                          to: "/dashboard/my-account",
+                                          role: "button",
+                                          "aria-hidden": "true",
+                                        },
                                       },
-                                    },
-                                    [_vm._v("Dashboard")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "dropdown-item",
-                                      attrs: {
-                                        role: "button",
-                                        "aria-hidden": "true",
+                                      [_vm._v("Dashboard")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "dropdown-item",
+                                        attrs: {
+                                          role: "button",
+                                          "aria-hidden": "true",
+                                        },
+                                        on: { click: _vm.logout },
                                       },
-                                      on: { click: _vm.logout },
-                                    },
-                                    [_vm._v("Logout")]
-                                  ),
-                                ],
-                                1
-                              ),
+                                      [_vm._v("Logout")]
+                                    ),
+                                  ],
+                                  1
+                                ),
+                              ]),
                             ]),
-                          ]),
+                      ]),
                     ]),
-                  ]),
-                ],
-                1
-              ),
-            ],
-            1
-          ),
+                  ],
+                  1
+                ),
+              ],
+              1
+            ),
+          ]),
         ]),
-      ]),
-    ]),
+      ]
+    ),
   ])
 }
 var staticRenderFns = [
@@ -67240,11 +67249,15 @@ var staticRenderFns = [
     return _c("div", { staticClass: "content" }, [
       _c("br"),
       _vm._v(" "),
-      _c("p", { staticClass: "about-text" }, [
-        _vm._v(
-          "\n                                            RE/MAX Millennium was founded\n                                            with the vision of pursuing the\n                                            New Era of Real Estate; the\n                                            Digital Era. We believe real\n                                            estate has and always will be a\n                                            business where personal\n                                            relationships matter. We aim to\n                                            provide clients and agents with\n                                            more exposure, brand value,\n                                            innovation and quality service.\n                                            Our team is committed to\n                                            providing the highest level of\n                                            representation and top-notch\n                                            customer service for our clients\n                                            with an in-depth understanding\n                                            of the ever-evolving marketplace\n                                            which sets us apart from the\n                                            rest.\n                                        "
-        ),
-      ]),
+      _c(
+        "p",
+        { staticClass: "about-text", staticStyle: { "font-size": "14px" } },
+        [
+          _vm._v(
+            "\n                                            Casamania is a one stop solution\n                                            for all homebuyers, sellers or\n                                            families looking for leasing\n                                            options. Our user-friendly\n                                            platform makes finding your\n                                            dream property easy and\n                                            enjoyable. Owned and operated by\n                                            the RE/MAX Millennium Real\n                                            Estate, Casamania provides\n                                            up-to-date and reliable\n                                            information. RE/MAX Millennium\n                                            Real Estate is an Independent\n                                            Owned & Operated Brokerage with\n                                            the vision of pursuing the New\n                                            Era of Real Estate; the Digital\n                                            Era. We believe real estate has\n                                            and always will be a business\n                                            where personal relationships\n                                            matter. We aim to provide\n                                            clients and agents with more\n                                            exposure, brand value,\n                                            innovation and quality service.\n                                            Our team is committed to\n                                            providing the highest level of\n                                            representation and top-notch\n                                            customer service for our clients\n                                            with an in-depth understanding\n                                            of the ever-evolving marketplace\n                                            which sets us apart from the\n                                            rest.\n                                        "
+          ),
+        ]
+      ),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),

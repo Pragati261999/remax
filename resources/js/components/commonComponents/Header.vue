@@ -1,11 +1,15 @@
 <template>
     <div>
-        <header :class="$route.path == '/' ? 'home-header' : ''">
+        <header :class="$route.path == '/' ? 'home-header py-2' : 'py-2'">
             <div class="container p-0">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container-fluid p-0">
                         <router-link class="navbar-brand me-5" to="/">
-                            <h2>Remax</h2>
+                            <img
+                                src="/assets/images/logo/logo.svg"
+                                alt="Casamania"
+                                width="150"
+                            />
                         </router-link>
                         <button
                             class="navbar-toggler"
@@ -44,14 +48,14 @@
                                         >Properties</router-link
                                     >
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <router-link
                                         class="nav-link"
                                         aria-current="blog"
                                         to="/blog"
                                         >Blog</router-link
                                     >
-                                </li>
+                                </li> -->
                                 <li class="nav-item p-0">
                                     <router-link
                                         class="

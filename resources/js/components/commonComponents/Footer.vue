@@ -4,10 +4,14 @@
             <div class="container p-0">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
-                        <router-link to="/" class="h3 text-color fw-bold"
-                            >Remax</router-link
-                        >
-                        <p>
+                        <router-link to="/" class="text-color fw-bold">
+                            <img
+                                src="/assets/images/logo/logo.svg"
+                                alt="Casamania"
+                                width="150"
+                            />
+                        </router-link>
+                        <p class="pt-2">
                             Multiple Listing Service® and the associated logos
                             identify professional services rendered by REALTOR®
                             members of CREA to effect the purchase, sale and
@@ -177,7 +181,8 @@
         <section class="sub-footer footer py-5">
             <div class="container p-0">
                 <h6 class="text-center text-secondary fw-light">
-                    Copyright © 2019 RE/MAX Millennium. All rights reserved.
+                    Copyright © {{ new Date().getFullYear() }} CASAMANIA. All
+                    rights reserved casamania.ca.
                 </h6>
             </div>
             <div class="b-t-t">

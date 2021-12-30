@@ -56,16 +56,31 @@
                                         </div>
                                         <div class="content">
                                             <br />
-                                            <p class="about-text">
-                                                RE/MAX Millennium was founded
-                                                with the vision of pursuing the
-                                                New Era of Real Estate; the
-                                                Digital Era. We believe real
-                                                estate has and always will be a
-                                                business where personal
-                                                relationships matter. We aim to
-                                                provide clients and agents with
-                                                more exposure, brand value,
+                                            <p
+                                                class="about-text"
+                                                style="font-size: 14px"
+                                            >
+                                                Casamania is a one stop solution
+                                                for all homebuyers, sellers or
+                                                families looking for leasing
+                                                options. Our user-friendly
+                                                platform makes finding your
+                                                dream property easy and
+                                                enjoyable. Owned and operated by
+                                                the RE/MAX Millennium Real
+                                                Estate, Casamania provides
+                                                up-to-date and reliable
+                                                information. RE/MAX Millennium
+                                                Real Estate is an Independent
+                                                Owned & Operated Brokerage with
+                                                the vision of pursuing the New
+                                                Era of Real Estate; the Digital
+                                                Era. We believe real estate has
+                                                and always will be a business
+                                                where personal relationships
+                                                matter. We aim to provide
+                                                clients and agents with more
+                                                exposure, brand value,
                                                 innovation and quality service.
                                                 Our team is committed to
                                                 providing the highest level of
