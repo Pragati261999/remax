@@ -70,7 +70,7 @@
             </div>
         </section>
 
-        <section class="market-report bg-theme-light">
+        <section v-if="0" class="market-report bg-theme-light">
             <div class="container p-0">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -646,7 +646,7 @@
             </div>
         </section>
 
-        <faq></faq>
+        <faq v-if="0"></faq>
     </div>
 </template>
 

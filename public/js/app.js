@@ -65432,9 +65432,11 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(1),
+       false
+        ? 0
+        : _vm._e(),
       _vm._v(" "),
-      _c("faq"),
+       false ? 0 : _vm._e(),
     ],
     1
   )
@@ -65458,850 +65460,840 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "market-report bg-theme-light" }, [
-      _c("div", { staticClass: "container p-0" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12" }, [
-            _c("h2", { staticClass: "text-color fw-bold pb-2" }, [
-              _vm._v(
-                "\n                        Market Report and states\n                    "
-              ),
+    return _c("div", { staticClass: "container p-0" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12" }, [
+          _c("h2", { staticClass: "text-color fw-bold pb-2" }, [
+            _vm._v(
+              "\n                        Market Report and states\n                    "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "img-fluid my-4",
+            attrs: {
+              src: "/assets/images/cards/pexels-burst-373912 1.png",
+              width: "450px",
+              alt: "",
+            },
+          }),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-color fw-bold py-4" }, [
+            _vm._v(
+              "\n                        June Market State\n                    "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-color me-5 small" }, [
+            _vm._v(
+              "\n                        June home sales were up compared to last year, but\n                        remained below the March 2021 peak and were lower\n                        than the number of transactions reported for May\n                        2021, consistent with the regular seasonal trend.\n                        The average selling price in June increased by\n                        double digits compared to last year as well, but the\n                        annual rate of increase moderated compared to the\n                        previous three months.\n                    "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-color me-5 small" }, [
+            _vm._v(
+              "\n                        Greater Toronto Area REALTORS@reported 11,106 sales\n                        through TRREB'S MLS System in June 2021-up by 28.5\n                        per cent compared to June 2020. Looking at the GTA\n                        as a whole, year-over-year sales growth was\n                        strongest in the condominium apartment segment, both\n                        in the City of Toronto and some of the surrounding\n                        suburbs. On a monthover-month basis, both actual and\n                        seasonally adjusted sales continued to trend lower\n                        in June.\n                    "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-color me-5 small" }, [
+            _vm._v(
+              '\n                        "We have seen market activity transition from a\n                        record pace to a robust pace over the last three\n                        months. While this could provide some relief for\n                        home buyers in the near term, a resumption of\n                        population growth based on immigration is only\n                        months away. While the primary focus of policymakers\n                        has been artificially curbing demand, the only\n                        longterm solution to affordability is increasing\n                        supply to accommodate perpetual housing needs in a\n                        growing region," said TRREB President Kevin Crigger.\n                    '
+            ),
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-color me-5 small" }, [
+            _vm._v(
+              "\n                        in all major market segments, year-over-year growth\n                        in sales well outpaced growth in new listings over\n                        the same period, pointing to the continuation of\n                        tight market conditions characterized by competition\n                        between buyers and strong price growth. On a\n                        month-over-month basis. both actual and seasonally\n                        adjusted average prices edged lower in June.\n                    "
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12 bstart" }, [
+          _c("h3", { staticClass: "text-color fw-bold" }, [
+            _vm._v("June Market State"),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-6 pe-0" }, [
+              _c("div", { staticClass: "bg-theme text-light p-2 rounded-3" }, [
+                _vm._v(
+                  "\n                                Graph\n                            "
+                ),
+              ]),
             ]),
             _vm._v(" "),
-            _c("img", {
-              staticClass: "img-fluid my-4",
-              attrs: {
-                src: "/assets/images/cards/pexels-burst-373912 1.png",
-                width: "450px",
-                alt: "",
-              },
-            }),
-            _vm._v(" "),
-            _c("h3", { staticClass: "text-color fw-bold py-4" }, [
-              _vm._v(
-                "\n                        June Market State\n                    "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-color me-5 small" }, [
-              _vm._v(
-                "\n                        June home sales were up compared to last year, but\n                        remained below the March 2021 peak and were lower\n                        than the number of transactions reported for May\n                        2021, consistent with the regular seasonal trend.\n                        The average selling price in June increased by\n                        double digits compared to last year as well, but the\n                        annual rate of increase moderated compared to the\n                        previous three months.\n                    "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-color me-5 small" }, [
-              _vm._v(
-                "\n                        Greater Toronto Area REALTORS@reported 11,106 sales\n                        through TRREB'S MLS System in June 2021-up by 28.5\n                        per cent compared to June 2020. Looking at the GTA\n                        as a whole, year-over-year sales growth was\n                        strongest in the condominium apartment segment, both\n                        in the City of Toronto and some of the surrounding\n                        suburbs. On a monthover-month basis, both actual and\n                        seasonally adjusted sales continued to trend lower\n                        in June.\n                    "
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-color me-5 small" }, [
-              _vm._v(
-                '\n                        "We have seen market activity transition from a\n                        record pace to a robust pace over the last three\n                        months. While this could provide some relief for\n                        home buyers in the near term, a resumption of\n                        population growth based on immigration is only\n                        months away. While the primary focus of policymakers\n                        has been artificially curbing demand, the only\n                        longterm solution to affordability is increasing\n                        supply to accommodate perpetual housing needs in a\n                        growing region," said TRREB President Kevin Crigger.\n                    '
-              ),
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-color me-5 small" }, [
-              _vm._v(
-                "\n                        in all major market segments, year-over-year growth\n                        in sales well outpaced growth in new listings over\n                        the same period, pointing to the continuation of\n                        tight market conditions characterized by competition\n                        between buyers and strong price growth. On a\n                        month-over-month basis. both actual and seasonally\n                        adjusted average prices edged lower in June.\n                    "
-              ),
+            _c("div", { staticClass: "col-6 pe-0" }, [
+              _c("div", { staticClass: "bg-theme text-light p-2 rounded-3" }, [
+                _vm._v(
+                  "\n                                Graph\n                            "
+                ),
+              ]),
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12 bstart" }, [
-            _c("h3", { staticClass: "text-color fw-bold" }, [
-              _vm._v("June Market State"),
-            ]),
+          _c("div", { staticClass: "row py-4" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "\n                                col-4\n                                pe-0\n                                ps-3\n                                d-flex\n                                align-items-center\n                                justify-content-center\n                            ",
+              },
+              [
+                _c("ul", { staticClass: "list-unstyled me-auto" }, [
+                  _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "fw-bold" }, [
+                    _vm._v("Semi-Detached"),
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
+                ]),
+              ]
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-6 pe-0" }, [
+            _c("div", { staticClass: "col-8 p-0" }, [
+              _c("div", [
                 _c(
-                  "div",
-                  { staticClass: "bg-theme text-light p-2 rounded-3" },
+                  "table",
+                  { staticClass: "table table-responsive rounded-2" },
                   [
-                    _vm._v(
-                      "\n                                Graph\n                            "
-                    ),
+                    _c("tr", [
+                      _c(
+                        "th",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
+                          attrs: { colspan: "3" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            Sales\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "th",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
+                          attrs: { colspan: "3" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            Average Price\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", { staticClass: "table-row-theme" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            85\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            78\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            77\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            81\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            85\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            78\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            77\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            81\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            85\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            78\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            77\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            81\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            85\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            78\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            77\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            81\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
                   ]
                 ),
               ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-6 pe-0" }, [
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row py-4" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "\n                                col-4\n                                pe-0\n                                ps-3\n                                d-flex\n                                align-items-center\n                                justify-content-center\n                            ",
+              },
+              [
+                _c("ul", { staticClass: "list-unstyled me-auto" }, [
+                  _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "fw-bold" }, [
+                    _vm._v("Semi-Detached"),
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-8 p-0" }, [
+              _c("div", [
                 _c(
-                  "div",
-                  { staticClass: "bg-theme text-light p-2 rounded-3" },
+                  "table",
+                  { staticClass: "table table-responsive rounded-2" },
                   [
-                    _vm._v(
-                      "\n                                Graph\n                            "
-                    ),
+                    _c("tr", [
+                      _c(
+                        "th",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
+                          attrs: { colspan: "3" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            Sales\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "th",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
+                          attrs: { colspan: "3" },
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            Average Price\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", { staticClass: "table-row-theme" }, [
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            85\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            78\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            77\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            81\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            85\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            78\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            77\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            81\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            85\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            78\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            77\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            81\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            85\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            78\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            82\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            77\n                                        "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
+                          staticClass:
+                            "\n                                                border border-1\n                                                text-center\n                                            ",
+                        },
+                        [
+                          _vm._v(
+                            "\n                                            81\n                                        "
+                          ),
+                        ]
+                      ),
+                    ]),
                   ]
                 ),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row py-4" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                                col-4\n                                pe-0\n                                ps-3\n                                d-flex\n                                align-items-center\n                                justify-content-center\n                            ",
-                },
-                [
-                  _c("ul", { staticClass: "list-unstyled me-auto" }, [
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [
-                      _vm._v("Semi-Detached"),
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-8 p-0" }, [
-                _c("div", [
-                  _c(
-                    "table",
-                    { staticClass: "table table-responsive rounded-2" },
-                    [
-                      _c("tr", [
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
-                            attrs: { colspan: "3" },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            Sales\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
-                            attrs: { colspan: "3" },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            Average Price\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", { staticClass: "table-row-theme" }, [
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row py-4" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "\n                                col-4\n                                pe-0\n                                ps-3\n                                d-flex\n                                align-items-center\n                                justify-content-center\n                            ",
-                },
-                [
-                  _c("ul", { staticClass: "list-unstyled me-auto" }, [
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Detached")]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [
-                      _vm._v("Semi-Detached"),
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Townhouse")]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "fw-bold" }, [_vm._v("Condo Apt")]),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-8 p-0" }, [
-                _c("div", [
-                  _c(
-                    "table",
-                    { staticClass: "table table-responsive rounded-2" },
-                    [
-                      _c("tr", [
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
-                            attrs: { colspan: "3" },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            Sales\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                                fw-lighter-items\n                                            ",
-                            attrs: { colspan: "3" },
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            Average Price\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", { staticClass: "table-row-theme" }, [
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            85\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            78\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            82\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            77\n                                        "
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass:
-                              "\n                                                border border-1\n                                                text-center\n                                            ",
-                          },
-                          [
-                            _vm._v(
-                              "\n                                            81\n                                        "
-                            ),
-                          ]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
               ]),
             ]),
           ]),
