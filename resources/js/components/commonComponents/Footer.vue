@@ -50,12 +50,25 @@
                                     href="https://www.instagram.com/remaxmillennium/"
                                     target="_blank"
                                     class="w-100 h-100"
+                                    style="color: white; font-size: 18px"
                                 >
-                                    <img
-                                        src="/assets/images/icons/google.png"
-                                        class="img-fluid m-auto"
-                                        alt=""
-                                    />
+                                    <i
+                                        class="fab fa-instagram"
+                                        aria-hidden="true"
+                                    ></i>
+                                </a>
+                            </li>
+                            <li class="social-icons">
+                                <a
+                                    href="https://www.youtube.com/channel/UCDBISvKl8ipeM1dFFKOAH4w"
+                                    target="_blank"
+                                    class="w-100 h-100"
+                                    style="color: white; font-size: 18px"
+                                >
+                                    <i
+                                        class="fab fa-youtube"
+                                        aria-hidden="true"
+                                    ></i>
                                 </a>
                             </li>
                         </ul>

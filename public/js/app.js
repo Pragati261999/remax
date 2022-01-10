@@ -3372,6 +3372,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -54788,15 +54801,36 @@ var staticRenderFns = [
           "a",
           {
             staticClass: "w-100 h-100",
+            staticStyle: { color: "white", "font-size": "18px" },
             attrs: {
               href: "https://www.instagram.com/remaxmillennium/",
               target: "_blank",
             },
           },
           [
-            _c("img", {
-              staticClass: "img-fluid m-auto",
-              attrs: { src: "/assets/images/icons/google.png", alt: "" },
+            _c("i", {
+              staticClass: "fab fa-instagram",
+              attrs: { "aria-hidden": "true" },
+            }),
+          ]
+        ),
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "social-icons" }, [
+        _c(
+          "a",
+          {
+            staticClass: "w-100 h-100",
+            staticStyle: { color: "white", "font-size": "18px" },
+            attrs: {
+              href: "https://www.youtube.com/channel/UCDBISvKl8ipeM1dFFKOAH4w",
+              target: "_blank",
+            },
+          },
+          [
+            _c("i", {
+              staticClass: "fab fa-youtube",
+              attrs: { "aria-hidden": "true" },
             }),
           ]
         ),
@@ -65379,58 +65413,9 @@ var render = function () {
       _vm._v(" "),
       _c("property-listing", { attrs: { "prop-location": "Brampton" } }),
       _vm._v(" "),
-      _c("section", { staticClass: "tips bg-theme pe-0" }, [
-        _c("div", { staticClass: "container-fluid pe-0" }, [
-          _c("div", { staticClass: "row pe-0 me-0" }, [
-            _c(
-              "div",
-              { staticClass: "col-lg-5 col-md-5 col-sm-12 ps-0 pe-5 m-auto" },
-              [
-                _c("h1", { staticClass: "text-light fw-bold" }, [
-                  _vm._v(
-                    "\n                        7 tips to got approved for a mortgage\n                    "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-light small" }, [
-                  _vm._v(
-                    "\n                        If you're looking to dive into homeownership, it's\n                        important to be prepared at every step. Besides\n                        tracking interest rates and hunting for the perfect\n                        home, applying for a mortgage is the biggest step in\n                        the process. While it might seem stressful, it can\n                        be made much easier if you get your financial\n                        affairs in order ahead of time. Here are 7 ways to\n                        help get your mortgage application approved.\n                    "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-light small" }, [
-                  _vm._v(
-                    "\n                        1. Check your credit score\n                    "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-light small" }, [
-                  _vm._v(
-                    "\n                        In Canada, credit scores run from 300 to 900 across\n                        five categories: Poor, Fair, Good, Very Good, and\n                        Excellent. The exact categories vary based on which\n                        credit bureau is being used, but the process is\n                        essentially the same. Your credit score is a\n                        snapshot of your overall financial health, so it's\n                        important that you know what yours is.\n                    "
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "router-link",
-                  {
-                    staticClass:
-                      "\n                            btn\n                            bg-white\n                            text-color\n                            fw-bolder\n                            btn-rounded\n                        ",
-                    attrs: { to: "/blog" },
-                  },
-                  [
-                    _vm._v(
-                      "\n                        Learn more\n                    "
-                    ),
-                  ]
-                ),
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(0),
-          ]),
-        ]),
-      ]),
+       false
+        ? 0
+        : _vm._e(),
       _vm._v(" "),
        false
         ? 0

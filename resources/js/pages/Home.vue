@@ -17,7 +17,7 @@
         <!-- Brampton -->
         <property-listing :prop-location="'Brampton'"></property-listing>
 
-        <section class="tips bg-theme pe-0">
+        <section v-if="0" class="tips bg-theme pe-0">
             <div class="container-fluid pe-0">
                 <div class="row pe-0 me-0">
                     <div class="col-lg-5 col-md-5 col-sm-12 ps-0 pe-5 m-auto">
