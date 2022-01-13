@@ -18,7 +18,7 @@
                 />
                 <img
                     v-else
-                    src="/assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg"
+                    src="/assets/images/cards/photo-coming-soon.png"
                     class="card-img-top"
                     alt="Not Found"
                 />

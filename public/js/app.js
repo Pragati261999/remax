@@ -11488,6 +11488,54 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -56918,7 +56966,7 @@ var render = function () {
                 : _c("img", {
                     staticClass: "card-img-top",
                     attrs: {
-                      src: "/assets/images/cards/e18b5e8d0dd16ff8b5f0a909ee27e764.jpeg",
+                      src: "/assets/images/cards/photo-coming-soon.png",
                       alt: "Not Found",
                     },
                   }),
@@ -69408,36 +69456,91 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm.property.images && _vm.property.images.length > 0
-                    ? _c(
-                        "div",
-                        [
-                          _c(
-                            "Carousel",
-                            {
-                              attrs: {
-                                autoplay: true,
-                                centerMode: true,
-                                paginationEnabled: false,
-                                perPageCustom: [
-                                  [500, 1],
-                                  [768, 2],
-                                  [992, 3],
-                                  [1199, 4],
-                                ],
+                  _c("div", [
+                    _vm.property.images && _vm.property.images.length > 0
+                      ? _c(
+                          "div",
+                          [
+                            _c(
+                              "Carousel",
+                              {
+                                attrs: {
+                                  autoplay: true,
+                                  centerMode: true,
+                                  paginationEnabled: false,
+                                  perPageCustom: [
+                                    [500, 1],
+                                    [768, 2],
+                                    [992, 3],
+                                    [1199, 4],
+                                  ],
+                                },
                               },
-                            },
-                            _vm._l(_vm.property.images, function (img) {
-                              return _c(
-                                "Slide",
-                                { key: img.property_ml_num + "_" + img.id },
-                                [
-                                  img
+                              _vm._l(_vm.property.images, function (img) {
+                                return _c(
+                                  "Slide",
+                                  { key: img.property_ml_num + "_" + img.id },
+                                  [
+                                    img
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "\n                                    carousel-outer\n                                    border\n                                    bg-light\n                                    text-center\n                                    craousel-image-outer\n                                ",
+                                          },
+                                          [
+                                            _c("img", {
+                                              directives: [
+                                                {
+                                                  name: "lazy",
+                                                  rawName: "v-lazy",
+                                                  value: {
+                                                    src: img.image,
+                                                  },
+                                                  expression:
+                                                    "{\n                                        src: img.image,\n                                    }",
+                                                },
+                                              ],
+                                              staticClass: "crouse-image",
+                                              attrs: { alt: "Not Found" },
+                                            }),
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                  ]
+                                )
+                              }),
+                              1
+                            ),
+                          ],
+                          1
+                        )
+                      : _c(
+                          "div",
+                          [
+                            _c(
+                              "Carousel",
+                              {
+                                attrs: {
+                                  autoplay: true,
+                                  centerMode: true,
+                                  paginationEnabled: false,
+                                  perPageCustom: [
+                                    [500, 1],
+                                    [768, 2],
+                                    [992, 3],
+                                    [1199, 4],
+                                  ],
+                                },
+                              },
+                              _vm._l(10, function (i) {
+                                return _c("Slide", { key: i + "_" + i }, [
+                                  i
                                     ? _c(
                                         "div",
                                         {
                                           staticClass:
-                                            "\n                                carousel-outer\n                                border\n                                bg-light\n                                text-center\n                                craousel-image-outer\n                            ",
+                                            "\n                                    carousel-outer\n                                    border\n                                    bg-light\n                                    text-center\n                                    craousel-image-outer\n                                ",
                                         },
                                         [
                                           _c("img", {
@@ -69446,10 +69549,10 @@ var render = function () {
                                                 name: "lazy",
                                                 rawName: "v-lazy",
                                                 value: {
-                                                  src: img.image,
+                                                  src: "/assets/images/cards/photo-coming-soon.png",
                                                 },
                                                 expression:
-                                                  "{\n                                    src: img.image,\n                                }",
+                                                  "{\n                                        src: '/assets/images/cards/photo-coming-soon.png',\n                                    }",
                                               },
                                             ],
                                             staticClass: "crouse-image",
@@ -69458,15 +69561,14 @@ var render = function () {
                                         ]
                                       )
                                     : _vm._e(),
-                                ]
-                              )
-                            }),
-                            1
-                          ),
-                        ],
-                        1
-                      )
-                    : _vm._e(),
+                                ])
+                              }),
+                              1
+                            ),
+                          ],
+                          1
+                        ),
+                  ]),
                   _vm._v(" "),
                   _c("section", { staticClass: "bg-theme-light pt-0" }, [
                     _c("div", { staticClass: "container p-0" }, [
@@ -70142,13 +70244,21 @@ var render = function () {
                         [
                           _c("div", { staticClass: "row" }, [
                             _c("div", { staticClass: "col-md-6 ps-0 mt-5" }, [
-                              _c("img", {
-                                staticClass: "middle-banner-image",
-                                attrs: {
-                                  src: _vm.property.images[0].image,
-                                  alt: "Not Found",
-                                },
-                              }),
+                              _vm.property.images.length > 0
+                                ? _c("img", {
+                                    staticClass: "middle-banner-image",
+                                    attrs: {
+                                      src: _vm.property.images[0].image,
+                                      alt: "Not Found",
+                                    },
+                                  })
+                                : _c("img", {
+                                    staticClass: "middle-banner-image",
+                                    attrs: {
+                                      src: "/assets/images/cards/photo-coming-soon.png",
+                                      alt: "Not Found",
+                                    },
+                                  }),
                             ]),
                             _vm._v(" "),
                             _c(
@@ -70604,24 +70714,29 @@ var render = function () {
                                 ]
                               ),
                               _vm._v(" "),
-                              _vm.property.images
-                                ? _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "col-lg-6 pe-0 mt-5 right-image",
-                                    },
-                                    [
-                                      _c("img", {
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "col-lg-6 pe-0 mt-5 right-image",
+                                },
+                                [
+                                  _vm.property.images.length > 0
+                                    ? _c("img", {
                                         staticClass: "middle-banner-image",
                                         attrs: {
                                           src: _vm.property.images[0].image,
                                           alt: "Not Found",
                                         },
+                                      })
+                                    : _c("img", {
+                                        staticClass: "middle-banner-image",
+                                        attrs: {
+                                          src: "/assets/images/cards/photo-coming-soon.png",
+                                          alt: "Not Found",
+                                        },
                                       }),
-                                    ]
-                                  )
-                                : _vm._e(),
+                                ]
+                              ),
                             ]
                           ),
                         ]

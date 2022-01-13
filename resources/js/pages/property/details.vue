@@ -46,42 +46,78 @@
                 <!-- Breakcrumbs -->
 
                 <!-- slider -->
-                <div v-if="property.images && property.images.length > 0">
-                    <Carousel
-                        :autoplay="true"
-                        :centerMode="true"
-                        :paginationEnabled="false"
-                        :perPageCustom="[
-                            [500, 1],
-                            [768, 2],
-                            [992, 3],
-                            [1199, 4],
-                        ]"
-                    >
-                        <Slide
-                            v-for="img in property.images"
-                            :key="img.property_ml_num + '_' + img.id"
+                <div>
+                    <div v-if="property.images && property.images.length > 0">
+                        <Carousel
+                            :autoplay="true"
+                            :centerMode="true"
+                            :paginationEnabled="false"
+                            :perPageCustom="[
+                                [500, 1],
+                                [768, 2],
+                                [992, 3],
+                                [1199, 4],
+                            ]"
                         >
-                            <div
-                                v-if="img"
-                                class="
-                                    carousel-outer
-                                    border
-                                    bg-light
-                                    text-center
-                                    craousel-image-outer
-                                "
+                            <Slide
+                                v-for="img in property.images"
+                                :key="img.property_ml_num + '_' + img.id"
                             >
-                                <img
-                                    v-lazy="{
-                                        src: img.image,
-                                    }"
-                                    alt="Not Found"
-                                    class="crouse-image"
-                                />
-                            </div>
-                        </Slide>
-                    </Carousel>
+                                <div
+                                    v-if="img"
+                                    class="
+                                        carousel-outer
+                                        border
+                                        bg-light
+                                        text-center
+                                        craousel-image-outer
+                                    "
+                                >
+                                    <img
+                                        v-lazy="{
+                                            src: img.image,
+                                        }"
+                                        alt="Not Found"
+                                        class="crouse-image"
+                                    />
+                                </div>
+                            </Slide>
+                        </Carousel>
+                    </div>
+                    <div v-else>
+                        <Carousel
+                            :autoplay="true"
+                            :centerMode="true"
+                            :paginationEnabled="false"
+                            :perPageCustom="[
+                                [500, 1],
+                                [768, 2],
+                                [992, 3],
+                                [1199, 4],
+                            ]"
+                        >
+                            <Slide v-for="i in 10" :key="i + '_' + i">
+                                <div
+                                    v-if="i"
+                                    class="
+                                        carousel-outer
+                                        border
+                                        bg-light
+                                        text-center
+                                        craousel-image-outer
+                                    "
+                                >
+                                    <img
+                                        v-lazy="{
+                                            src: '/assets/images/cards/photo-coming-soon.png',
+                                        }"
+                                        alt="Not Found"
+                                        class="crouse-image"
+                                    />
+                                </div>
+                            </Slide>
+                        </Carousel>
+                    </div>
                 </div>
                 <!-- slider -->
 
@@ -531,7 +567,14 @@
                     <div class="row">
                         <div class="col-md-6 ps-0 mt-5">
                             <img
+                                v-if="property.images.length > 0"
                                 :src="property.images[0].image"
+                                alt="Not Found"
+                                class="middle-banner-image"
+                            />
+                            <img
+                                v-else
+                                src="/assets/images/cards/photo-coming-soon.png"
                                 alt="Not Found"
                                 class="middle-banner-image"
                             />
@@ -641,6 +684,7 @@
                         {{ property.Addr }}
                     </p>
                 </div>
+
                 <div v-if="userLoggedIn" class="container-fluid p-0 mb-0">
                     <iframe
                         :src="
@@ -773,12 +817,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div
-                            v-if="property.images"
-                            class="col-lg-6 pe-0 mt-5 right-image"
-                        >
+                        <div class="col-lg-6 pe-0 mt-5 right-image">
                             <img
+                                v-if="property.images.length > 0"
                                 :src="property.images[0].image"
+                                alt="Not Found"
+                                class="middle-banner-image"
+                            />
+                            <img
+                                v-else
+                                src="/assets/images/cards/photo-coming-soon.png"
                                 alt="Not Found"
                                 class="middle-banner-image"
                             />
