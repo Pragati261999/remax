@@ -194,8 +194,8 @@
         <section class="sub-footer footer py-5">
             <div class="container p-0">
                 <h6 class="text-center text-secondary fw-light">
-                    Copyright © {{ new Date().getFullYear() }} CASAMANIA. All
-                    rights reserved casamania.ca.
+                    Copyright © {{ new Date().getFullYear() }} RE/MAX
+                    Millennium. All rights reserved RE/MAX Millennium.
                 </h6>
             </div>
             <div class="b-t-t">

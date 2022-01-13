@@ -54734,7 +54734,7 @@ var render = function () {
           _vm._v(
             "\n                Copyright © " +
               _vm._s(new Date().getFullYear()) +
-              " CASAMANIA. All\n                rights reserved casamania.ca.\n            "
+              " RE/MAX\n                Millennium. All rights reserved RE/MAX Millennium.\n            "
           ),
         ]),
       ]),
