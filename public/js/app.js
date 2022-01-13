@@ -11908,6 +11908,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -11922,6 +11950,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loadingProperties: true,
       nextPageUrl: null,
       loadingMoreProperties: false,
+      currentPage: 0,
+      totalPage: 0,
+      showing: 0,
+      total: 0,
       searching: false
     };
   },
@@ -11967,6 +11999,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   self.properties = res.data.data.data;
                   self.nextPageUrl = res.data.data.next_page_url;
                   self.loadingProperties = false;
+                  self.currentPage = res.data.data.current_page;
+                  self.totalPage = res.data.data.last_page;
+                  self.showing = res.data.data.to;
+                  self.total = res.data.data.total;
                 })["catch"](function (err) {
                   self.properties = null;
                   self.loadingProperties = false;
@@ -12007,8 +12043,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                           case 2:
                             self.nextPageUrl = res.data.data.next_page_url;
                             self.loadingMoreProperties = false;
+                            self.currentPage = res.data.data.current_page;
+                            self.totalPage = res.data.data.last_page;
+                            self.showing = res.data.data.to;
+                            self.total = res.data.data.total;
 
-                          case 4:
+                          case 8:
                           case "end":
                             return _context2.stop();
                         }
@@ -71041,17 +71081,87 @@ var render = function () {
                       "div",
                       { staticClass: "row" },
                       [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "page-length mt-3",
+                            staticStyle: { "font-size": "13px" },
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "d-flex justify-content-between" },
+                              [
+                                _c("div", { staticClass: "counter" }, [
+                                  _vm._v(
+                                    "\n                                    Showing " +
+                                      _vm._s(_vm.showing) +
+                                      " of " +
+                                      _vm._s(_vm.total) +
+                                      "\n                                "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "page" }, [
+                                  _vm._v(
+                                    "\n                                    Page " +
+                                      _vm._s(_vm.currentPage) +
+                                      " of\n                                    " +
+                                      _vm._s(_vm.totalPage) +
+                                      "\n                                "
+                                  ),
+                                ]),
+                              ]
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
                         _vm._l(_vm.properties, function (property) {
                           return _c(
                             "div",
                             {
                               key: property.Ml_num,
-                              staticClass: "col-lg-4 col-md-6 col-sm-12 mt-5",
+                              staticClass: "col-lg-4 col-md-6 col-sm-12 mt-4",
                             },
                             [_c("PropCard", { attrs: { property: property } })],
                             1
                           )
                         }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "page-length mt-3",
+                            staticStyle: { "font-size": "13px" },
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "d-flex justify-content-between" },
+                              [
+                                _c("div", { staticClass: "counter" }, [
+                                  _vm._v(
+                                    "\n                                    Showing " +
+                                      _vm._s(_vm.showing) +
+                                      " of " +
+                                      _vm._s(_vm.total) +
+                                      "\n                                "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "page" }, [
+                                  _vm._v(
+                                    "\n                                    Page " +
+                                      _vm._s(_vm.currentPage) +
+                                      " of\n                                    " +
+                                      _vm._s(_vm.totalPage) +
+                                      "\n                                "
+                                  ),
+                                ]),
+                              ]
+                            ),
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("div", [
                           !_vm.loadingMoreProperties

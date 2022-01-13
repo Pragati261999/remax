@@ -76,11 +76,39 @@
                     <div v-if="!loadingProperties">
                         <div v-if="properties.length > 0" class="row">
                             <div
+                                class="page-length mt-3"
+                                style="font-size: 13px"
+                            >
+                                <div class="d-flex justify-content-between">
+                                    <div class="counter">
+                                        Showing {{ showing }} of {{ total }}
+                                    </div>
+                                    <div class="page">
+                                        Page {{ currentPage }} of
+                                        {{ totalPage }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div
                                 v-for="property in properties"
                                 :key="property.Ml_num"
-                                class="col-lg-4 col-md-6 col-sm-12 mt-5"
+                                class="col-lg-4 col-md-6 col-sm-12 mt-4"
                             >
                                 <PropCard :property="property" />
+                            </div>
+                            <div
+                                class="page-length mt-3"
+                                style="font-size: 13px"
+                            >
+                                <div class="d-flex justify-content-between">
+                                    <div class="counter">
+                                        Showing {{ showing }} of {{ total }}
+                                    </div>
+                                    <div class="page">
+                                        Page {{ currentPage }} of
+                                        {{ totalPage }}
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <div v-if="!loadingMoreProperties">
@@ -143,6 +171,11 @@ export default {
             nextPageUrl: null,
             loadingMoreProperties: false,
 
+            currentPage: 0,
+            totalPage: 0,
+            showing: 0,
+            total: 0,
+
             searching: false,
         };
     },
@@ -182,6 +215,11 @@ export default {
                     self.properties = res.data.data.data;
                     self.nextPageUrl = res.data.data.next_page_url;
                     self.loadingProperties = false;
+
+                    self.currentPage = res.data.data.current_page;
+                    self.totalPage = res.data.data.last_page;
+                    self.showing = res.data.data.to;
+                    self.total = res.data.data.total;
                 })
                 .catch((err) => {
                     self.properties = null;
@@ -201,6 +239,11 @@ export default {
                     await self.updateProperties(res.data.data.data);
                     self.nextPageUrl = res.data.data.next_page_url;
                     self.loadingMoreProperties = false;
+
+                    self.currentPage = res.data.data.current_page;
+                    self.totalPage = res.data.data.last_page;
+                    self.showing = res.data.data.to;
+                    self.total = res.data.data.total;
                 })
                 .catch((err) => {
                     self.loadingMoreProperties = false;
