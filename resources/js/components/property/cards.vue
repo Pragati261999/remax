@@ -106,17 +106,28 @@
         >
             <div class="card-footer">
                 <div class="row ps-3 pe-3 pb-2">
-                    <div class="col-6 p-0">
+                    <div class="col-8 p-0">
                         <ul class="list-unstyled">
                             <li class="float-start">
                                 <small class="ps-3 card-title fw-normal"
                                     >MLS® {{ property.Ml_num }}</small
                                 >
+                                <small
+                                    class="
+                                        d-block
+                                        ps-3
+                                        card-title
+                                        fw-normal
+                                        single-line
+                                    "
+                                >
+                                    {{ property.Rltr }}
+                                </small>
                             </li>
                         </ul>
                     </div>
-                    <div class="col-6 p-0">
-                        <ul class="list-unstyled">
+                    <div class="col-4 p-0">
+                        <ul class="list-unstyled pt-2">
                             <li v-if="property.Bath_tot" class="float-end">
                                 <small class="pe-3"
                                     ><img

@@ -5147,6 +5147,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -57154,18 +57165,33 @@ var render = function () {
         [
           _c("div", { staticClass: "card-footer" }, [
             _c("div", { staticClass: "row ps-3 pe-3 pb-2" }, [
-              _c("div", { staticClass: "col-6 p-0" }, [
+              _c("div", { staticClass: "col-8 p-0" }, [
                 _c("ul", { staticClass: "list-unstyled" }, [
                   _c("li", { staticClass: "float-start" }, [
                     _c("small", { staticClass: "ps-3 card-title fw-normal" }, [
                       _vm._v("MLS® " + _vm._s(_vm.property.Ml_num)),
                     ]),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass:
+                          "\n                                    d-block\n                                    ps-3\n                                    card-title\n                                    fw-normal\n                                    single-line\n                                ",
+                      },
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.property.Rltr) +
+                            "\n                            "
+                        ),
+                      ]
+                    ),
                   ]),
                 ]),
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-6 p-0" }, [
-                _c("ul", { staticClass: "list-unstyled" }, [
+              _c("div", { staticClass: "col-4 p-0" }, [
+                _c("ul", { staticClass: "list-unstyled pt-2" }, [
                   _vm.property.Bath_tot
                     ? _c("li", { staticClass: "float-end" }, [
                         _c("small", { staticClass: "pe-3" }, [

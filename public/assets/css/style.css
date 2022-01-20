@@ -45,6 +45,13 @@ a {
     margin: 0 auto; */
 }
 
+.single-line {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .bstart {
     border-left: 2px solid #a0a1a1;
 }
