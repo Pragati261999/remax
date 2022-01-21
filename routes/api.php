@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api;
+use App\Http\Controllers\NovaApi;
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -60,6 +62,25 @@ Route::post('/user/contact', [Api\ContactController::class, 'store']);
 // Master search - using key
 Route::get('/search', [Api\MasterSearchController::class, 'search']);
 
+
+
+/*
+* NOVA API - Will use these APIs for Nova CRM
+* These all APIs will required a Sanctum token (excepted Auth Login)
+* Developer: Synch Soft Technology : Ajay Kumar
+*/
+
+// Nova APIs
+Route::prefix('crm')->group(function () {
+    Route::post('/login', [NovaApi\AuthController::class, 'login']);
+});
+
+Route::prefix('crm')->middleware(['auth:sanctum'])->group(function () {
+    Route::post('/logout', [NovaApi\AuthController::class, 'logout']);
+});
+
+
+// Default -- API
 Route::get('/', function () {
     dd('Welcome to remax.');
 });
