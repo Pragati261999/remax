@@ -5158,6 +5158,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5210,6 +5216,9 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
       }
+    },
+    numberWithCommas: function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   }
 });
@@ -10697,6 +10706,16 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -57075,9 +57094,15 @@ var render = function () {
                       _c("h6", { staticClass: "mb-0 card-title" }, [
                         _vm._v(
                           "\n                            $" +
-                            _vm._s(_vm.property.Lp_dol) +
-                            "\n                        "
+                            _vm._s(
+                              _vm.property.Lp_dol.toLocaleString("en-ca", {
+                                minimumFractionDigits: 0,
+                              })
+                            )
                         ),
+                        _vm.property.S_r === "Lease"
+                          ? _c("span", [_vm._v("/mo")])
+                          : _vm._e(),
                       ]),
                     ]),
                   ]
@@ -69666,9 +69691,18 @@ var render = function () {
                                 [
                                   _vm._v(
                                     "\n                                        $" +
-                                      _vm._s(_vm.property.Lp_dol) +
-                                      "\n                                    "
+                                      _vm._s(
+                                        _vm.property.Lp_dol.toLocaleString(
+                                          "en-ca",
+                                          {
+                                            minimumFractionDigits: 0,
+                                          }
+                                        )
+                                      )
                                   ),
+                                  _vm.property.S_r === "Lease"
+                                    ? _c("span", [_vm._v("/mo")])
+                                    : _vm._e(),
                                 ]
                               ),
                               _vm._v(" "),

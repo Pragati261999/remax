@@ -137,7 +137,17 @@
                                     </div>
                                     <div class="col-5 pt-0 text-end">
                                         <h4 class="text-color fw-bold mb-1">
-                                            ${{ property.Lp_dol }}
+                                            ${{
+                                                property.Lp_dol.toLocaleString(
+                                                    "en-ca",
+                                                    {
+                                                        minimumFractionDigits: 0,
+                                                    }
+                                                )
+                                            }}<span
+                                                v-if="property.S_r === 'Lease'"
+                                                >/mo</span
+                                            >
                                         </h4>
                                         <div class="badge">
                                             <p class="text-color">

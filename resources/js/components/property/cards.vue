@@ -48,7 +48,13 @@
                     >
                         <div>
                             <h6 class="mb-0 card-title">
-                                ${{ property.Lp_dol }}
+                                ${{
+                                    property.Lp_dol.toLocaleString("en-ca", {
+                                        minimumFractionDigits: 0,
+                                    })
+                                }}<span v-if="property.S_r === 'Lease'"
+                                    >/mo</span
+                                >
                             </h6>
                         </div>
                     </router-link>
@@ -225,6 +231,10 @@ export default {
                     }
                 });
             }
+        },
+
+        numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
     },
 };
