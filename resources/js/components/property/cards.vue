@@ -118,16 +118,20 @@
                                 <small class="ps-3 card-title fw-normal"
                                     >MLS® {{ property.Ml_num }}</small
                                 >
-                                <small
+                                <p
                                     class="
-                                        d-block
                                         ps-3
                                         card-title
                                         fw-normal
                                         single-line
+                                        mb-0
+                                        pb-0
                                     "
                                 >
                                     {{ property.Rltr }}
+                                </p>
+                                <small class="ps-3 card-title fw-normal">
+                                    {{ addedTime(property.updated_at) }}
                                 </small>
                             </li>
                         </ul>
@@ -235,6 +239,57 @@ export default {
 
         numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+
+        addedTime(t) {
+            // console.log(new Date());
+            let addedAt = new Date(t).toLocaleString();
+            addedAt = new Date(addedAt);
+            console.log("ADDED:", addedAt);
+            const now = new Date();
+            console.log("now:", now);
+
+            const diffTime = now - addedAt;
+
+            const diffSecond = parseInt(diffTime / 1000);
+            console.log("diffSecond:", diffSecond);
+
+            const diffMinute = parseInt(diffTime / (1000 * 60));
+            // console.log("diffMinute:", diffMinute);
+
+            const diffHour = parseInt(diffTime / (1000 * 60 * 60));
+            // console.log("diffHour:", diffHour);
+
+            const diffDay = parseInt(diffTime / (1000 * 60 * 60 * 24));
+            // console.log("diffDay:", diffDay);
+
+            const diffMonth = parseInt(diffTime / (1000 * 60 * 60 * 24 * 30));
+            // console.log("diffMonth:", diffMonth);
+
+            const diffYear = parseInt(
+                diffTime / (1000 * 60 * 60 * 24 * 30 * 12)
+            );
+            // console.log("diffYear:", diffYear);
+
+            if (diffYear > 0) {
+                return diffYear + " Years ago";
+            }
+            if (diffMonth > 0) {
+                return diffMonth + " Months ago";
+            }
+            if (diffDay > 0) {
+                return diffDay + " Days ago";
+            }
+            if (diffHour > 0) {
+                return diffHour + " Hours ago";
+            }
+            if (diffMinute > 0) {
+                return diffMinute + " Minuts ago";
+            }
+            if (diffSecond > 0) {
+                return diffSecond + " Seconds ago";
+            }
+            return parseInt(Math.random() * 39) + 1 + " Minuts ago";
         },
     },
 };

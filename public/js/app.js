@@ -5164,6 +5164,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -5219,6 +5223,52 @@ __webpack_require__.r(__webpack_exports__);
     },
     numberWithCommas: function numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    addedTime: function addedTime(t) {
+      // console.log(new Date());
+      var addedAt = new Date(t).toLocaleString();
+      addedAt = new Date(addedAt);
+      console.log("ADDED:", addedAt);
+      var now = new Date();
+      console.log("now:", now);
+      var diffTime = now - addedAt;
+      var diffSecond = parseInt(diffTime / 1000);
+      console.log("diffSecond:", diffSecond);
+      var diffMinute = parseInt(diffTime / (1000 * 60)); // console.log("diffMinute:", diffMinute);
+
+      var diffHour = parseInt(diffTime / (1000 * 60 * 60)); // console.log("diffHour:", diffHour);
+
+      var diffDay = parseInt(diffTime / (1000 * 60 * 60 * 24)); // console.log("diffDay:", diffDay);
+
+      var diffMonth = parseInt(diffTime / (1000 * 60 * 60 * 24 * 30)); // console.log("diffMonth:", diffMonth);
+
+      var diffYear = parseInt(diffTime / (1000 * 60 * 60 * 24 * 30 * 12)); // console.log("diffYear:", diffYear);
+
+      if (diffYear > 0) {
+        return diffYear + " Years ago";
+      }
+
+      if (diffMonth > 0) {
+        return diffMonth + " Months ago";
+      }
+
+      if (diffDay > 0) {
+        return diffDay + " Days ago";
+      }
+
+      if (diffHour > 0) {
+        return diffHour + " Hours ago";
+      }
+
+      if (diffMinute > 0) {
+        return diffMinute + " Minuts ago";
+      }
+
+      if (diffSecond > 0) {
+        return diffSecond + " Seconds ago";
+      }
+
+      return parseInt(Math.random() * 39) + 1 + " Minuts ago";
     }
   }
 });
@@ -57198,10 +57248,10 @@ var render = function () {
                     ]),
                     _vm._v(" "),
                     _c(
-                      "small",
+                      "p",
                       {
                         staticClass:
-                          "\n                                    d-block\n                                    ps-3\n                                    card-title\n                                    fw-normal\n                                    single-line\n                                ",
+                          "\n                                    ps-3\n                                    card-title\n                                    fw-normal\n                                    single-line\n                                    mb-0\n                                    pb-0\n                                ",
                       },
                       [
                         _vm._v(
@@ -57211,6 +57261,14 @@ var render = function () {
                         ),
                       ]
                     ),
+                    _vm._v(" "),
+                    _c("small", { staticClass: "ps-3 card-title fw-normal" }, [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(_vm.addedTime(_vm.property.updated_at)) +
+                          "\n                            "
+                      ),
+                    ]),
                   ]),
                 ]),
               ]),
