@@ -109,7 +109,7 @@
                                 >
                                     <img
                                         v-lazy="{
-                                            src: '/assets/images/cards/photo-coming-soon.png',
+                                            src: '/assets/images/cards/missing_media.jpg',
                                         }"
                                         alt="Not Found"
                                         class="crouse-image"
@@ -584,7 +584,7 @@
                             />
                             <img
                                 v-else
-                                src="/assets/images/cards/photo-coming-soon.png"
+                                src="/assets/images/cards/missing_media.jpg"
                                 alt="Not Found"
                                 class="middle-banner-image"
                             />
@@ -836,7 +836,7 @@
                             />
                             <img
                                 v-else
-                                src="/assets/images/cards/photo-coming-soon.png"
+                                src="/assets/images/cards/missing_media.jpg"
                                 alt="Not Found"
                                 class="middle-banner-image"
                             />

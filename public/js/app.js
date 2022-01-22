@@ -57036,7 +57036,7 @@ var render = function () {
                 : _c("img", {
                     staticClass: "card-img-top",
                     attrs: {
-                      src: "/assets/images/cards/photo-coming-soon.png",
+                      src: "/assets/images/cards/missing_media.jpg",
                       alt: "Not Found",
                     },
                   }),
@@ -69640,10 +69640,10 @@ var render = function () {
                                                 name: "lazy",
                                                 rawName: "v-lazy",
                                                 value: {
-                                                  src: "/assets/images/cards/photo-coming-soon.png",
+                                                  src: "/assets/images/cards/missing_media.jpg",
                                                 },
                                                 expression:
-                                                  "{\n                                        src: '/assets/images/cards/photo-coming-soon.png',\n                                    }",
+                                                  "{\n                                        src: '/assets/images/cards/missing_media.jpg',\n                                    }",
                                               },
                                             ],
                                             staticClass: "crouse-image",
@@ -70355,7 +70355,7 @@ var render = function () {
                                 : _c("img", {
                                     staticClass: "middle-banner-image",
                                     attrs: {
-                                      src: "/assets/images/cards/photo-coming-soon.png",
+                                      src: "/assets/images/cards/missing_media.jpg",
                                       alt: "Not Found",
                                     },
                                   }),
@@ -70831,7 +70831,7 @@ var render = function () {
                                     : _c("img", {
                                         staticClass: "middle-banner-image",
                                         attrs: {
-                                          src: "/assets/images/cards/photo-coming-soon.png",
+                                          src: "/assets/images/cards/missing_media.jpg",
                                           alt: "Not Found",
                                         },
                                       }),
