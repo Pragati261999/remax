@@ -284,12 +284,12 @@ export default {
                 return diffHour + " Hours ago";
             }
             if (diffMinute > 0) {
-                return diffMinute + " Minuts ago";
+                return diffMinute + " Minutes ago";
             }
             if (diffSecond > 0) {
                 return diffSecond + " Seconds ago";
             }
-            return parseInt(Math.random() * 39) + 1 + " Minuts ago";
+            return parseInt(Math.random() * 39) + 1 + " Minutes ago";
         },
     },
 };
