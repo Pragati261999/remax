@@ -5261,14 +5261,14 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (diffMinute > 0) {
-        return diffMinute + " Minuts ago";
+        return diffMinute + " Minutes ago";
       }
 
       if (diffSecond > 0) {
         return diffSecond + " Seconds ago";
       }
 
-      return parseInt(Math.random() * 39) + 1 + " Minuts ago";
+      return parseInt(Math.random() * 39) + 1 + " Minutes ago";
     }
   }
 });
@@ -11632,11 +11632,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       lead: {
         user_id: null,
-        ml_num: null,
         name: "",
         email: "",
         contact: "",
-        remark: ""
+        remark: "",
+        // 23 Jan 2021
+        Ml_num: "",
+        tags: ""
       },
       sLead: false,
       rLead: "",
@@ -11652,8 +11654,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     userLoggedIn: function userLoggedIn() {
-      this.lead.ml_num = this.$route.params.ml_num;
-
       if (this.$store.state.auth_user) {
         this.lead.name = this.$store.state.auth_user.name, this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
       }
@@ -11687,12 +11687,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.lead.user_id = _this.$store.state.auth_user.id;
                 }
 
+                _this.lead.Ml_num = _this.$route.params.ml_num;
+                _this.lead.tags = "".concat(_this.property.Municipality, ",").concat(_this.property.property_type);
                 self = _this;
                 self.sLead = true;
                 self.rLead = "<span class='text-muted'>Sending...</span>";
                 self.leadError = {};
                 token = _this.$store.state.auth_token;
-                _context.next = 9;
+                _context.next = 11;
                 return axios.post(url, self.lead, {
                   headers: {
                     Authorization: "Bearer ".concat(token)
@@ -11709,7 +11711,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   self.leadError = err.response.data.error;
                 });
 
-              case 9:
+              case 11:
               case "end":
                 return _context.stop();
             }

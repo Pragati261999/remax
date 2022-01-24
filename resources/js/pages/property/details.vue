@@ -875,11 +875,14 @@ export default {
         return {
             lead: {
                 user_id: null,
-                ml_num: null,
                 name: "",
                 email: "",
                 contact: "",
                 remark: "",
+
+                // 23 Jan 2021
+                Ml_num: "",
+                tags: "",
             },
             sLead: false,
             rLead: "",
@@ -896,7 +899,6 @@ export default {
 
     computed: {
         userLoggedIn() {
-            this.lead.ml_num = this.$route.params.ml_num;
             if (this.$store.state.auth_user) {
                 (this.lead.name = this.$store.state.auth_user.name),
                     (this.lead.email = this.$store.state.auth_user.email),
@@ -926,6 +928,8 @@ export default {
                 url = `/api/user/save-lead`;
                 this.lead.user_id = this.$store.state.auth_user.id;
             }
+            this.lead.Ml_num = this.$route.params.ml_num;
+            this.lead.tags = `${this.property.Municipality},${this.property.property_type}`;
             const self = this;
 
             self.sLead = true;

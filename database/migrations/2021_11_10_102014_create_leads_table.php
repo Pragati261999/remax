@@ -21,6 +21,13 @@ class CreateLeadsTable extends Migration
             $table->text('contact')->nullable();
             $table->text('remark')->nullable();
             $table->enum('is_closed', ['1', '0'])->default('0');
+
+            // 24 Jan  added - Tags, Source, Stage and Ml_num
+            $table->text('Ml_num')->nullable();
+            $table->text('tags')->nullable();
+            $table->text('source')->default('casamania website');
+            $table->text('stage')->default('New Lead');
+
             $table->timestamps();
         });
     }

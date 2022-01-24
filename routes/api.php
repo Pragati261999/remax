@@ -72,11 +72,15 @@ Route::get('/search', [Api\MasterSearchController::class, 'search']);
 
 // Nova APIs
 Route::prefix('crm')->group(function () {
+    // nova Login
     Route::post('/login', [NovaApi\AuthController::class, 'login']);
 });
-
 Route::prefix('crm')->middleware(['auth:sanctum'])->group(function () {
+    // nova Logout
     Route::post('/logout', [NovaApi\AuthController::class, 'logout']);
+
+    // Nova Getting all leads as people
+    Route::get('/people/all', [NovaApi\LeadController::class, 'people']);
 });
 
 

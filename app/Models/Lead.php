@@ -14,6 +14,10 @@ class Lead extends Model
         'name',
         'email',
         'contact',
-        'remark'
+        'remark',
+        'Ml_num',
+        'tags',
+        'source',
+        'stage'
     ];
 }
