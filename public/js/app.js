@@ -8649,6 +8649,12 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.$emit("clicked", self.form);
       }
+    },
+    searchPropertyViaCategory: function searchPropertyViaCategory() {
+      var self = this;
+      setTimeout(function () {
+        self.searchProperty();
+      }, 500);
     }
   }
 });
@@ -64422,7 +64428,7 @@ var render = function () {
                 {
                   staticClass: "tab-label",
                   attrs: { for: "forSale" },
-                  on: { click: _vm.searchProperty },
+                  on: { click: _vm.searchPropertyViaCategory },
                 },
                 [_vm._v("Buy")]
               ),
@@ -64461,7 +64467,7 @@ var render = function () {
                 {
                   staticClass: "tab-label",
                   attrs: { for: "for_lease" },
-                  on: { click: _vm.searchProperty },
+                  on: { click: _vm.searchPropertyViaCategory },
                 },
                 [_vm._v("Rent")]
               ),

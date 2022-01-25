@@ -18,7 +18,7 @@
                             <label
                                 for="forSale"
                                 class="tab-label"
-                                @click="searchProperty"
+                                @click="searchPropertyViaCategory"
                                 >Buy</label
                             >
                         </div>
@@ -35,7 +35,7 @@
                             <label
                                 for="for_lease"
                                 class="tab-label"
-                                @click="searchProperty"
+                                @click="searchPropertyViaCategory"
                                 >Rent</label
                             >
                         </div>
@@ -372,6 +372,13 @@ export default {
             } else {
                 this.$emit("clicked", self.form);
             }
+        },
+
+        searchPropertyViaCategory() {
+            const self = this;
+            setTimeout(() => {
+                self.searchProperty();
+            }, 500);
         },
     },
 };
