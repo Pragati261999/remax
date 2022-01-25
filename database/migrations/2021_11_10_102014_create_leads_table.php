@@ -17,6 +17,7 @@ class CreateLeadsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->text('name')->nullable();
+            $table->text('last_name')->nullable();
             $table->text('email')->nullable();
             $table->text('contact')->nullable();
             $table->text('remark')->nullable();

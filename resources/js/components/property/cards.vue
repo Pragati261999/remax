@@ -114,7 +114,7 @@
                 <div class="row ps-3 pe-3 pb-2">
                     <div class="col-8 p-0">
                         <ul class="list-unstyled">
-                            <li class="float-start">
+                            <li class="">
                                 <small class="ps-3 card-title fw-normal"
                                     >MLS® {{ property.Ml_num }}</small
                                 >
@@ -137,7 +137,7 @@
                         </ul>
                     </div>
                     <div class="col-4 p-0">
-                        <ul class="list-unstyled pt-2">
+                        <ul class="list-unstyled pt-4">
                             <li v-if="property.Bath_tot" class="float-end">
                                 <small class="pe-3"
                                     ><img
@@ -307,5 +307,12 @@ export default {
 }
 .share-btn > a:hover {
     cursor: pointer;
+}
+
+.single-line {
+    display: block !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>

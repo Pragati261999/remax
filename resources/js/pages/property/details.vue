@@ -212,21 +212,33 @@
                                         </ul>
                                     </div>
                                     <div class="col-12 mt-2">
-                                        <span
-                                            class="
-                                                border
-                                                px-4
-                                                text-color
-                                                property-badge
-                                            "
-                                        >
-                                            {{
-                                                property.property_type.replace(
-                                                    "Property",
-                                                    " Property"
-                                                )
-                                            }}
-                                        </span>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <span
+                                                    class="
+                                                        border
+                                                        px-4
+                                                        text-color
+                                                        property-badge
+                                                    "
+                                                >
+                                                    {{
+                                                        property.property_type.replace(
+                                                            "Property",
+                                                            " Property"
+                                                        )
+                                                    }}
+                                                </span>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <p class="ps-1 mt-3 mb-0 pb-0">
+                                                    <i
+                                                        class="fas fa-map-signs"
+                                                    ></i>
+                                                    {{ property.Zoning }}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-12 pb-3 pt-2">
                                         <ul class="list-unstyled">
@@ -727,23 +739,51 @@
                                     <div class="row">
                                         <div class="col-md-10 mt-2">
                                             <form @submit.prevent="saveLaed">
-                                                <fieldset class="my-3">
-                                                    <input
-                                                        v-model="lead.name"
-                                                        type="text"
-                                                        aria-label="Full name"
-                                                        placeholder="Full name"
-                                                        class="form-control"
-                                                    />
-                                                    <small
-                                                        v-if="leadError.name"
-                                                        class="text-danger"
-                                                    >
-                                                        {{
-                                                            leadError.name.toString()
-                                                        }}</small
-                                                    >
-                                                </fieldset>
+                                                <div class="row">
+                                                    <div class="col-6 pe-0">
+                                                        <fieldset class="my-3">
+                                                            <input
+                                                                v-model="
+                                                                    lead.name
+                                                                "
+                                                                type="text"
+                                                                aria-label="First name"
+                                                                placeholder="First name"
+                                                                class="
+                                                                    form-control
+                                                                "
+                                                            />
+                                                            <small
+                                                                v-if="
+                                                                    leadError.name
+                                                                "
+                                                                class="
+                                                                    text-danger
+                                                                "
+                                                            >
+                                                                {{
+                                                                    leadError.name.toString()
+                                                                }}</small
+                                                            >
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-6 ps-0">
+                                                        <fieldset class="my-3">
+                                                            <input
+                                                                v-model="
+                                                                    lead.last_name
+                                                                "
+                                                                type="text"
+                                                                aria-label="Last name"
+                                                                placeholder="Last name"
+                                                                class="
+                                                                    form-control
+                                                                "
+                                                            />
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+
                                                 <fieldset class="my-3">
                                                     <input
                                                         v-model="lead.email"
@@ -900,8 +940,8 @@ export default {
     computed: {
         userLoggedIn() {
             if (this.$store.state.auth_user) {
-                (this.lead.name = this.$store.state.auth_user.name),
-                    (this.lead.email = this.$store.state.auth_user.email),
+                // (this.lead.name = this.$store.state.auth_user.name),
+                (this.lead.email = this.$store.state.auth_user.email),
                     (this.lead.contact = this.$store.state.auth_user.contact);
             }
 
@@ -930,6 +970,9 @@ export default {
             }
             this.lead.Ml_num = this.$route.params.ml_num;
             this.lead.tags = `${this.property.Municipality},${this.property.property_type}`;
+
+            // Creating first name last name
+
             const self = this;
 
             self.sLead = true;
@@ -965,8 +1008,8 @@ export default {
         updateIfLoggedIN() {
             this.lead.ml_num = this.$route.params.ml_num;
             if (this.$store.state.auth_user) {
-                (this.lead.name = this.$store.state.auth_user.name),
-                    (this.lead.email = this.$store.state.auth_user.email),
+                // (this.lead.name = this.$store.state.auth_user.name),
+                (this.lead.email = this.$store.state.auth_user.email),
                     (this.lead.contact = this.$store.state.auth_user.contact);
             }
         },

@@ -12,6 +12,7 @@ class Lead extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'last_name',
         'email',
         'contact',
         'remark',

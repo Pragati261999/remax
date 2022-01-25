@@ -5,9 +5,9 @@
 /public/sync-rets/
 public/sync-rets
 public/sync-rets/
-public/css/app.css
-public/js/app.js
-public/js/app.js.LICENSE.txt
+/public/css/app.css
+/public/js/app.js
+/public/js/app.js.LICENSE.txt
 /storage/*.key
 /vendor
 .env

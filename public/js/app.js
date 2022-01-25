@@ -8566,6 +8566,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -11616,6 +11644,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11655,7 +11723,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     userLoggedIn: function userLoggedIn() {
       if (this.$store.state.auth_user) {
-        this.lead.name = this.$store.state.auth_user.name, this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
+        // (this.lead.name = this.$store.state.auth_user.name),
+        this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
       }
 
       return this.$store.state.auth_user;
@@ -11688,7 +11757,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }
 
                 _this.lead.Ml_num = _this.$route.params.ml_num;
-                _this.lead.tags = "".concat(_this.property.Municipality, ",").concat(_this.property.property_type);
+                _this.lead.tags = "".concat(_this.property.Municipality, ",").concat(_this.property.property_type); // Creating first name last name
+
                 self = _this;
                 self.sLead = true;
                 self.rLead = "<span class='text-muted'>Sending...</span>";
@@ -11723,7 +11793,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.lead.ml_num = this.$route.params.ml_num;
 
       if (this.$store.state.auth_user) {
-        this.lead.name = this.$store.state.auth_user.name, this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
+        // (this.lead.name = this.$store.state.auth_user.name),
+        this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
       }
     },
     getAllData: function getAllData() {
@@ -17323,7 +17394,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bookmark-image[data-v-84216d98] {\r\n    height: 20px !important;\n}\n.share-btn > a[data-v-84216d98] {\r\n    border: 1px solid #ccc;\r\n    padding: 5px;\r\n    font-size: 12px;\r\n    font-family: Verdana, Arial;\n}\n.share-btn > a[data-v-84216d98]:hover {\r\n    cursor: pointer;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bookmark-image[data-v-84216d98] {\r\n    height: 20px !important;\n}\n.share-btn > a[data-v-84216d98] {\r\n    border: 1px solid #ccc;\r\n    padding: 5px;\r\n    font-size: 12px;\r\n    font-family: Verdana, Arial;\n}\n.share-btn > a[data-v-84216d98]:hover {\r\n    cursor: pointer;\n}\n.single-line[data-v-84216d98] {\r\n    display: block !important;\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -57244,7 +57315,7 @@ var render = function () {
             _c("div", { staticClass: "row ps-3 pe-3 pb-2" }, [
               _c("div", { staticClass: "col-8 p-0" }, [
                 _c("ul", { staticClass: "list-unstyled" }, [
-                  _c("li", { staticClass: "float-start" }, [
+                  _c("li", {}, [
                     _c("small", { staticClass: "ps-3 card-title fw-normal" }, [
                       _vm._v("MLS® " + _vm._s(_vm.property.Ml_num)),
                     ]),
@@ -57276,7 +57347,7 @@ var render = function () {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-4 p-0" }, [
-                _c("ul", { staticClass: "list-unstyled pt-2" }, [
+                _c("ul", { staticClass: "list-unstyled pt-4" }, [
                   _vm.property.Bath_tot
                     ? _c("li", { staticClass: "float-end" }, [
                         _c("small", { staticClass: "pe-3" }, [
@@ -64348,7 +64419,11 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "label",
-                { staticClass: "tab-label", attrs: { for: "forSale" } },
+                {
+                  staticClass: "tab-label",
+                  attrs: { for: "forSale" },
+                  on: { click: _vm.searchProperty },
+                },
                 [_vm._v("Buy")]
               ),
             ]),
@@ -64383,7 +64458,11 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "label",
-                { staticClass: "tab-label", attrs: { for: "for_lease" } },
+                {
+                  staticClass: "tab-label",
+                  attrs: { for: "for_lease" },
+                  on: { click: _vm.searchProperty },
+                },
                 [_vm._v("Rent")]
               ),
             ]),
@@ -64468,20 +64547,66 @@ var render = function () {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "Residential" } }, [
+                        _c("option", { attrs: { value: "type=Residential" } }, [
                           _vm._v(
                             "\n                                            Residential\n                                        "
                           ),
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "Commercial" } }, [
+                        _c("option", { attrs: { value: "type=Commercial" } }, [
                           _vm._v(
                             "\n                                            Commercial\n                                        "
                           ),
                         ]),
                         _vm._v(" "),
-                        _c("option", { attrs: { value: "Condo" } }, [
-                          _vm._v("Condo"),
+                        _c("option", { attrs: { value: "type=Condo" } }, [
+                          _vm._v(
+                            "\n                                            Condo\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "zonig=townhouse" } }, [
+                          _vm._v(
+                            "\n                                            townhouse\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "zonig=single family" } },
+                          [
+                            _vm._v(
+                              "\n                                            single family\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "zonig=vacant land" } },
+                          [
+                            _vm._v(
+                              "\n                                            vacant land\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "zonig=office" } }, [
+                          _vm._v(
+                            "\n                                            office\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "zonig=industrial" } }, [
+                          _vm._v(
+                            "\n                                            industrial\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "zonig=apartment" } }, [
+                          _vm._v(
+                            "\n                                            apartment\n                                        "
+                          ),
                         ]),
                       ]
                     ),
@@ -69859,25 +69984,46 @@ var render = function () {
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-12 mt-2" }, [
-                              _c(
-                                "span",
-                                {
-                                  staticClass:
-                                    "\n                                            border\n                                            px-4\n                                            text-color\n                                            property-badge\n                                        ",
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(
-                                        _vm.property.property_type.replace(
-                                          "Property",
-                                          " Property"
-                                        )
-                                      ) +
-                                      "\n                                    "
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-sm-12" }, [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "\n                                                    border\n                                                    px-4\n                                                    text-color\n                                                    property-badge\n                                                ",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(
+                                            _vm.property.property_type.replace(
+                                              "Property",
+                                              " Property"
+                                            )
+                                          ) +
+                                          "\n                                            "
+                                      ),
+                                    ]
                                   ),
-                                ]
-                              ),
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "col-sm-12" }, [
+                                  _c(
+                                    "p",
+                                    { staticClass: "ps-1 mt-3 mb-0 pb-0" },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-map-signs",
+                                      }),
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(_vm.property.Zoning) +
+                                          "\n                                            "
+                                      ),
+                                    ]
+                                  ),
+                                ]),
+                              ]),
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "col-12 pb-3 pt-2" }, [
@@ -70550,69 +70696,162 @@ var render = function () {
                                                 },
                                                 [
                                                   _c(
-                                                    "fieldset",
-                                                    { staticClass: "my-3" },
+                                                    "div",
+                                                    { staticClass: "row" },
                                                     [
-                                                      _c("input", {
-                                                        directives: [
-                                                          {
-                                                            name: "model",
-                                                            rawName: "v-model",
-                                                            value:
-                                                              _vm.lead.name,
-                                                            expression:
-                                                              "lead.name",
-                                                          },
-                                                        ],
-                                                        staticClass:
-                                                          "form-control",
-                                                        attrs: {
-                                                          type: "text",
-                                                          "aria-label":
-                                                            "Full name",
-                                                          placeholder:
-                                                            "Full name",
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-6 pe-0",
                                                         },
-                                                        domProps: {
-                                                          value: _vm.lead.name,
-                                                        },
-                                                        on: {
-                                                          input: function (
-                                                            $event
-                                                          ) {
-                                                            if (
-                                                              $event.target
-                                                                .composing
-                                                            ) {
-                                                              return
-                                                            }
-                                                            _vm.$set(
-                                                              _vm.lead,
-                                                              "name",
-                                                              $event.target
-                                                                .value
-                                                            )
-                                                          },
-                                                        },
-                                                      }),
-                                                      _vm._v(" "),
-                                                      _vm.leadError.name
-                                                        ? _c(
-                                                            "small",
+                                                        [
+                                                          _c(
+                                                            "fieldset",
                                                             {
                                                               staticClass:
-                                                                "text-danger",
+                                                                "my-3",
                                                             },
                                                             [
-                                                              _vm._v(
-                                                                "\n                                                    " +
-                                                                  _vm._s(
-                                                                    _vm.leadError.name.toString()
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm.lead
+                                                                        .name,
+                                                                    expression:
+                                                                      "\n                                                                lead.name\n                                                            ",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "\n                                                                form-control\n                                                            ",
+                                                                attrs: {
+                                                                  type: "text",
+                                                                  "aria-label":
+                                                                    "First name",
+                                                                  placeholder:
+                                                                    "First name",
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    _vm.lead
+                                                                      .name,
+                                                                },
+                                                                on: {
+                                                                  input:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      if (
+                                                                        $event
+                                                                          .target
+                                                                          .composing
+                                                                      ) {
+                                                                        return
+                                                                      }
+                                                                      _vm.$set(
+                                                                        _vm.lead,
+                                                                        "name",
+                                                                        $event
+                                                                          .target
+                                                                          .value
+                                                                      )
+                                                                    },
+                                                                },
+                                                              }),
+                                                              _vm._v(" "),
+                                                              _vm.leadError.name
+                                                                ? _c(
+                                                                    "small",
+                                                                    {
+                                                                      staticClass:
+                                                                        "\n                                                                text-danger\n                                                            ",
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                            " +
+                                                                          _vm._s(
+                                                                            _vm.leadError.name.toString()
+                                                                          )
+                                                                      ),
+                                                                    ]
                                                                   )
-                                                              ),
+                                                                : _vm._e(),
                                                             ]
-                                                          )
-                                                        : _vm._e(),
+                                                          ),
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass:
+                                                            "col-6 ps-0",
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "fieldset",
+                                                            {
+                                                              staticClass:
+                                                                "my-3",
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name: "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm.lead
+                                                                        .last_name,
+                                                                    expression:
+                                                                      "\n                                                                lead.last_name\n                                                            ",
+                                                                  },
+                                                                ],
+                                                                staticClass:
+                                                                  "\n                                                                form-control\n                                                            ",
+                                                                attrs: {
+                                                                  type: "text",
+                                                                  "aria-label":
+                                                                    "Last name",
+                                                                  placeholder:
+                                                                    "Last name",
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    _vm.lead
+                                                                      .last_name,
+                                                                },
+                                                                on: {
+                                                                  input:
+                                                                    function (
+                                                                      $event
+                                                                    ) {
+                                                                      if (
+                                                                        $event
+                                                                          .target
+                                                                          .composing
+                                                                      ) {
+                                                                        return
+                                                                      }
+                                                                      _vm.$set(
+                                                                        _vm.lead,
+                                                                        "last_name",
+                                                                        $event
+                                                                          .target
+                                                                          .value
+                                                                      )
+                                                                    },
+                                                                },
+                                                              }),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      ),
                                                     ]
                                                   ),
                                                   _vm._v(" "),

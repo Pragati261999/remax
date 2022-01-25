@@ -65,6 +65,23 @@ class PropertyController extends AppBaseController
 
         $Sqft = !empty($data['sqft']) ? (int) $data['sqft'] : '';
 
+        // Condition of Zoning and Type = $propType
+        $propTypeKey = '';
+        $propTypeValue = '';
+        $propZoningKey = '';
+        $propZoningValue = '';
+        if ($propType) {
+            $ty = explode("=", $propType);
+            if ($ty[0] == 'type') {
+                $propTypeKey = $ty[0];
+                $propTypeValue = $ty[1];
+            }
+            if ($ty[0] == 'zonig') {
+                $propZoningKey = $ty[0];
+                $propZoningValue = $ty[1];
+            }
+        }
+
         $msg = 'Property fetched successfully.';
 
         $response = Property::with('images')
@@ -96,9 +113,13 @@ class PropertyController extends AppBaseController
             })
 
             // Property type - Done
-            ->when($propType, function ($query) use ($data) {
-                $propertyType = $data['propertyType'];
-                return $query->where('property_type', 'LIKE', "%{$propertyType}%");
+            ->when($propTypeKey, function ($query) use ($propTypeValue) {
+                return $query->where('property_type', 'LIKE', "%{$propTypeValue}%");
+            })
+
+            // Zoning type - Done
+            ->when($propZoningKey, function ($query) use ($propZoningValue) {
+                return $query->where('Zoning', 'LIKE', "%{$propZoningValue}%");
             })
 
             // bath - Done

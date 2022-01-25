@@ -15,7 +15,12 @@
                                 :checked="form.listedFor == 'Sale'"
                                 v-model="form.listedFor"
                             />
-                            <label for="forSale" class="tab-label">Buy</label>
+                            <label
+                                for="forSale"
+                                class="tab-label"
+                                @click="searchProperty"
+                                >Buy</label
+                            >
                         </div>
                         <div class="tab">
                             <input
@@ -27,7 +32,10 @@
                                 :checked="form.listedFor == 'Lease'"
                                 v-model="form.listedFor"
                             />
-                            <label for="for_lease" class="tab-label"
+                            <label
+                                for="for_lease"
+                                class="tab-label"
+                                @click="searchProperty"
                                 >Rent</label
                             >
                         </div>
@@ -61,13 +69,33 @@
                                             <option value="" disabled selected>
                                                 Select Property Type
                                             </option>
-                                            <option value="Residential">
+                                            <option value="type=Residential">
                                                 Residential
                                             </option>
-                                            <option value="Commercial">
+                                            <option value="type=Commercial">
                                                 Commercial
                                             </option>
-                                            <option value="Condo">Condo</option>
+                                            <option value="type=Condo">
+                                                Condo
+                                            </option>
+                                            <option value="zonig=townhouse">
+                                                townhouse
+                                            </option>
+                                            <option value="zonig=single family">
+                                                single family
+                                            </option>
+                                            <option value="zonig=vacant land">
+                                                vacant land
+                                            </option>
+                                            <option value="zonig=office">
+                                                office
+                                            </option>
+                                            <option value="zonig=industrial">
+                                                industrial
+                                            </option>
+                                            <option value="zonig=apartment">
+                                                apartment
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="input-width">
