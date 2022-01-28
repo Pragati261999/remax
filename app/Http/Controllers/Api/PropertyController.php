@@ -356,11 +356,11 @@ class PropertyController extends AppBaseController
             'ml_num' => $request->ml_num
         ];
         $exists = RecentVisited::where($data)->exists();
-        if (!$exists) {
-            RecentVisited::create($data);
-            return $this->sendResponse("Added to your recent list.", ['action' => 'added recent', 'ml_num' => $request->ml_num]);
+        if ($exists) {
+            RecentVisited::where($data)->delete();
         }
-        return $this->sendResponse("Already in your recent list.", ['action' => 'already added', 'ml_num' => $request->ml_num]);
+        RecentVisited::create($data);
+        return $this->sendResponse("Added to your recent list.", ['action' => 'added recent', 'ml_num' => $request->ml_num]);
     }
 
     public function getFavourite(Request $request)
