@@ -2890,6 +2890,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -3078,6 +3080,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // create-user
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -3088,9 +3104,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       userData: {
         name: "",
+        last_name: "",
         contact: "",
         email: "",
-        password: ""
+        password: "",
+        mlnum: ""
       },
       errors: {
         name: "",
@@ -3115,8 +3133,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.errors.contact = "";
                 _this.errors.email = "";
                 _this.errors.password = "";
+                _this.userData.mlnum = _this.$route.params.ml_num;
                 user = _this.userData;
-                _context.next = 7;
+                console.log(user);
+                _context.next = 9;
                 return axios.post("/api/user/register", user).then(function (response) {
                   _this.success.message = response.data.message;
                   _this.success.color = "text-success";
@@ -3139,7 +3159,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 7:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -4005,6 +4025,25 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9775,6 +9814,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // create-user
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -9785,6 +9841,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       userData: {
         name: "",
+        last_name: "",
         contact: "",
         email: "",
         password: ""
@@ -11690,6 +11747,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -11718,13 +11778,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       rLead: "",
       leadError: {},
       property: null,
-      loadingProperty: true
+      loadingProperty: true,
+      recent: {}
     };
   },
   mounted: function mounted() {
     this.getAllData();
     this.updateIfLoggedIN();
-    this.addToRecent();
   },
   computed: {
     userLoggedIn: function userLoggedIn() {
@@ -11733,7 +11793,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
       }
 
+      this.addToRecent();
       return this.$store.state.auth_user;
+    },
+    recentVisited: function recentVisited() {
+      return this.$store.state.recent;
     }
   },
   watch: {
@@ -11745,32 +11809,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     addToRecent: function addToRecent() {
       var ml = this.$route.params.ml_num;
       this.$store.commit("addRecent", ml);
+      this.saveRecent();
     },
-    saveLaed: function saveLaed() {
+    saveRecent: function saveRecent() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var url, self, token;
+        var token, self;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                url = "/api/lead/new-guest"; // Check a user is logged in or not.
-
-                if (_this.$store.state.auth_user) {
-                  url = "/api/user/save-lead";
-                  _this.lead.user_id = _this.$store.state.auth_user.id;
+                if (!_this.$store.state.auth_user) {
+                  _context.next = 7;
+                  break;
                 }
 
-                _this.lead.Ml_num = _this.$route.params.ml_num;
-                _this.lead.tags = "".concat(_this.property.Municipality, ",").concat(_this.property.property_type); // Creating first name last name
-
+                _this.recent.user_id = _this.$store.state.auth_user.id;
+                _this.recent.ml_num = _this.$route.params.ml_num;
+                token = _this.$store.state.auth_token;
                 self = _this;
+                _context.next = 7;
+                return axios.post("/api/user/save-recent", self.recent, {
+                  headers: {
+                    Authorization: "Bearer ".concat(token)
+                  }
+                });
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    saveLaed: function saveLaed() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var url, self, token;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                url = "/api/lead/new-guest"; // Check a user is logged in or not.
+
+                if (_this2.$store.state.auth_user) {
+                  url = "/api/user/save-lead";
+                  _this2.lead.user_id = _this2.$store.state.auth_user.id;
+                }
+
+                _this2.lead.Ml_num = _this2.$route.params.ml_num;
+                _this2.lead.tags = "".concat(_this2.property.Municipality, ",").concat(_this2.property.property_type); // Creating first name last name
+
+                self = _this2;
                 self.sLead = true;
                 self.rLead = "<span class='text-muted'>Sending...</span>";
                 self.leadError = {};
-                token = _this.$store.state.auth_token;
-                _context.next = 11;
+                token = _this2.$store.state.auth_token;
+                _context2.next = 11;
                 return axios.post(url, self.lead, {
                   headers: {
                     Authorization: "Bearer ".concat(token)
@@ -11789,10 +11887,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 11:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     },
     updateIfLoggedIN: function updateIfLoggedIN() {
@@ -11804,17 +11902,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     getAllData: function getAllData() {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var self;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                self = _this2;
+                self = _this3;
                 self.loadingProperty = true;
-                _context2.next = 4;
+                _context3.next = 4;
                 return axios.get("/api/property/get-details?id=".concat(self.$route.params.ml_num)).then(function (res) {
                   self.property = res.data.data[0]; // Update remark field
 
@@ -11828,31 +11926,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 4:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     },
     markFavourite: function markFavourite(ml_num) {
-      var _this3 = this;
+      var _this4 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         var self, token;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 // check user is logged in
-                self = _this3;
+                self = _this4;
 
-                if (!_this3.$store.state.auth_token) {
-                  _context3.next = 7;
+                if (!_this4.$store.state.auth_token) {
+                  _context4.next = 7;
                   break;
                 }
 
-                token = _this3.$store.state.auth_token;
-                _context3.next = 5;
+                token = _this4.$store.state.auth_token;
+                _context4.next = 5;
                 return axios.post("/api/user/property/manage/favourite-property", {
                   ml_num: ml_num
                 }, {
@@ -11882,7 +11980,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 5:
-                _context3.next = 8;
+                _context4.next = 8;
                 break;
 
               case 7:
@@ -11898,10 +11996,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 8:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     scrollToBookShowing: function scrollToBookShowing() {
@@ -54528,7 +54626,21 @@ var render = function () {
                 : _c("div", [_c("no-data")], 1),
             ])
           : _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "p-5 text-center" }, [_c("loader")], 1),
+              _c(
+                "div",
+                { staticClass: "p-5 text-center" },
+                [
+                  _c("loader", {
+                    attrs: {
+                      text:
+                        "Loading Featured Properties in " +
+                        _vm.propLocation +
+                        "...",
+                    },
+                  }),
+                ],
+                1
+              ),
             ]),
       ]),
     ]),
@@ -54571,38 +54683,68 @@ var render = function () {
           },
         },
         [
-          _c("fieldset", { staticClass: "mb-4" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.userData.name,
-                  expression: "userData.name",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Full name*" },
-              domProps: { value: _vm.userData.name },
-              on: {
-                keyup: function ($event) {
-                  $event.preventDefault()
-                  _vm.errors.name = ""
-                },
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.userData, "name", $event.target.value)
-                },
-              },
-            }),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-6" }, [
+              _c("fieldset", { staticClass: "mb-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userData.name,
+                      expression: "userData.name",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "First name*" },
+                  domProps: { value: _vm.userData.name },
+                  on: {
+                    keyup: function ($event) {
+                      $event.preventDefault()
+                      _vm.errors.name = ""
+                    },
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userData, "name", $event.target.value)
+                    },
+                  },
+                }),
+                _vm._v(" "),
+                _vm.errors.name
+                  ? _c("small", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.name.toString())),
+                    ])
+                  : _vm._e(),
+              ]),
+            ]),
             _vm._v(" "),
-            _vm.errors.name
-              ? _c("small", { staticClass: "text-danger" }, [
-                  _vm._v(_vm._s(_vm.errors.name.toString())),
-                ])
-              : _vm._e(),
+            _c("div", { staticClass: "col-6" }, [
+              _c("fieldset", { staticClass: "mb-4" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userData.last_name,
+                      expression: "userData.last_name",
+                    },
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Last name" },
+                  domProps: { value: _vm.userData.last_name },
+                  on: {
+                    input: function ($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userData, "last_name", $event.target.value)
+                    },
+                  },
+                }),
+              ]),
+            ]),
           ]),
           _vm._v(" "),
           _c("fieldset", { staticClass: "mb-4" }, [
@@ -56165,6 +56307,45 @@ var render = function () {
                           {
                             name: "model",
                             rawName: "v-model",
+                            value: _vm.userDetails.last_name,
+                            expression: "userDetails.last_name",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        class: _vm.isEdit != true ? "active" : "",
+                        attrs: {
+                          type: "text",
+                          name: "LastName",
+                          placeholder: "Last Name",
+                        },
+                        domProps: { value: _vm.userDetails.last_name },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.userDetails,
+                              "last_name",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("fieldset", { staticClass: "my-3" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-lg-10 col-md-9 col-sm-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
                             value: _vm.userDetails.contact,
                             expression: "userDetails.contact",
                           },
@@ -56232,7 +56413,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _vm._m(2),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c(
@@ -56439,7 +56620,7 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _vm._m(3),
+      _vm._m(4),
     ]),
   ])
 }
@@ -56449,7 +56630,15 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-2 col-md-3 col-sm-3 pe-0" }, [
-      _c("label", { staticClass: "text-color" }, [_vm._v("Name:")]),
+      _c("label", { staticClass: "text-color" }, [_vm._v("First Name:")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-2 col-md-3 col-sm-3 pe-0" }, [
+      _c("label", { staticClass: "text-color" }, [_vm._v("Last Name:")]),
     ])
   },
   function () {
@@ -57021,11 +57210,10 @@ var render = function () {
                             "\n                                    btn btn-block btn-theme-color\n                                    w-100\n                                    py-3\n                                    rounded-0\n                                ",
                           attrs: {
                             network: "facebook",
-                            url:
-                              "http://therealtyhub.ca/property/view/" + _vm.mid,
-                            title: "therealtyhub.ca - " + _vm.property.Addr,
+                            url: "http://casamania.ca/property/view/" + _vm.mid,
+                            title: "casamania.ca - " + _vm.property.Addr,
                             description: "" + _vm.property.Ad_text,
-                            hashtags: "therealtyhub.ca,remax",
+                            hashtags: "casamania.ca,remax",
                           },
                         },
                         [
@@ -57049,9 +57237,8 @@ var render = function () {
                             "\n                                    btn btn-block btn-theme-color\n                                    w-100\n                                    py-3\n                                    rounded-0\n                                ",
                           attrs: {
                             network: "Email",
-                            url:
-                              "http://therealtyhub.ca/property/view/" + _vm.mid,
-                            title: "therealtyhub.ca - " + _vm.property.Addr,
+                            url: "http://casamania.ca/property/view/" + _vm.mid,
+                            title: "casamania.ca - " + _vm.property.Addr,
                             description: "" + _vm.property.Ad_text,
                           },
                         },
@@ -57077,7 +57264,7 @@ var render = function () {
                         on: {
                           click: function ($event) {
                             return _vm.cptxt(
-                              "http://therealtyhub.ca/property/view/" + _vm.mid
+                              "http://casamania.ca/property/view/" + _vm.mid
                             )
                           },
                         },
@@ -65739,7 +65926,7 @@ var render = function () {
       _vm._v(" "),
       _c("property-listing", { attrs: { "prop-location": "Toronto" } }),
       _vm._v(" "),
-      _c("property-listing", { attrs: { "prop-location": "mississauga" } }),
+      _c("property-listing", { attrs: { "prop-location": "Mississauga" } }),
       _vm._v(" "),
       _c("property-listing", { attrs: { "prop-location": "Brampton" } }),
       _vm._v(" "),
@@ -66910,38 +67097,72 @@ var render = function () {
                 },
               },
               [
-                _c("fieldset", { staticClass: "mb-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.userData.name,
-                        expression: "userData.name",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Full name*" },
-                    domProps: { value: _vm.userData.name },
-                    on: {
-                      keyup: function ($event) {
-                        $event.preventDefault()
-                        _vm.errors.name = ""
-                      },
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.userData, "name", $event.target.value)
-                      },
-                    },
-                  }),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-6 pe-0" }, [
+                    _c("fieldset", { staticClass: "mb-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userData.name,
+                            expression: "userData.name",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "First name*" },
+                        domProps: { value: _vm.userData.name },
+                        on: {
+                          keyup: function ($event) {
+                            $event.preventDefault()
+                            _vm.errors.name = ""
+                          },
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.userData, "name", $event.target.value)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.name
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.name.toString())),
+                          ])
+                        : _vm._e(),
+                    ]),
+                  ]),
                   _vm._v(" "),
-                  _vm.errors.name
-                    ? _c("small", { staticClass: "text-danger" }, [
-                        _vm._v(_vm._s(_vm.errors.name.toString())),
-                      ])
-                    : _vm._e(),
+                  _c("div", { staticClass: "col-6 ps-0" }, [
+                    _c("fieldset", { staticClass: "mb-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userData.last_name,
+                            expression: "userData.last_name",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "Last name" },
+                        domProps: { value: _vm.userData.last_name },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.userData,
+                              "last_name",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
                 ]),
                 _vm._v(" "),
                 _c("fieldset", { staticClass: "mb-4" }, [
@@ -70013,22 +70234,24 @@ var render = function () {
                                   ),
                                 ]),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "col-sm-12" }, [
-                                  _c(
-                                    "p",
-                                    { staticClass: "ps-1 mt-3 mb-0 pb-0" },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-map-signs",
-                                      }),
-                                      _vm._v(
-                                        "\n                                                " +
-                                          _vm._s(_vm.property.Zoning) +
-                                          "\n                                            "
+                                _vm.property.Zoning
+                                  ? _c("div", { staticClass: "col-sm-12" }, [
+                                      _c(
+                                        "p",
+                                        { staticClass: "ps-1 mt-3 mb-0 pb-0" },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-map-signs",
+                                          }),
+                                          _vm._v(
+                                            "\n                                                " +
+                                              _vm._s(_vm.property.Zoning) +
+                                              "\n                                            "
+                                          ),
+                                        ]
                                       ),
-                                    ]
-                                  ),
-                                ]),
+                                    ])
+                                  : _vm._e(),
                               ]),
                             ]),
                             _vm._v(" "),

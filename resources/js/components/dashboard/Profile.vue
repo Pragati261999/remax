@@ -29,7 +29,9 @@
                         <fieldset class="my-3">
                             <div class="row">
                                 <div class="col-lg-2 col-md-3 col-sm-3 pe-0">
-                                    <label class="text-color">Name:</label>
+                                    <label class="text-color"
+                                        >First Name:</label
+                                    >
                                 </div>
                                 <div class="col-lg-10 col-md-9 col-sm-9">
                                     <input
@@ -46,6 +48,23 @@
                                         v-if="errors.name"
                                         >{{ errors.name.toString() }}</small
                                     >
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="my-3">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-sm-3 pe-0">
+                                    <label class="text-color">Last Name:</label>
+                                </div>
+                                <div class="col-lg-10 col-md-9 col-sm-9">
+                                    <input
+                                        class="form-control"
+                                        type="text"
+                                        name="LastName"
+                                        :class="isEdit != true ? 'active' : ''"
+                                        placeholder="Last Name"
+                                        v-model="userDetails.last_name"
+                                    />
                                 </div>
                             </div>
                         </fieldset>

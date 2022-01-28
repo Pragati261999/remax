@@ -11,8 +11,12 @@ class GuestLead extends Model
 
     protected $fillable = [
         'name',
+        'last_name',
         'email',
         'contact',
-        'remark'
+        'remark',
+        'Ml_num',
+        'tags',
+        'source',
     ];
 }

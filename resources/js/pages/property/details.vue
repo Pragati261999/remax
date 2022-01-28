@@ -230,7 +230,10 @@
                                                     }}
                                                 </span>
                                             </div>
-                                            <div class="col-sm-12">
+                                            <div
+                                                v-if="property.Zoning"
+                                                class="col-sm-12"
+                                            >
                                                 <p class="ps-1 mt-3 mb-0 pb-0">
                                                     <i
                                                         class="fas fa-map-signs"
@@ -929,12 +932,13 @@ export default {
             leadError: {},
             property: null,
             loadingProperty: true,
+
+            recent: {},
         };
     },
     mounted() {
         this.getAllData();
         this.updateIfLoggedIN();
-        this.addToRecent();
     },
 
     computed: {
@@ -944,8 +948,12 @@ export default {
                 (this.lead.email = this.$store.state.auth_user.email),
                     (this.lead.contact = this.$store.state.auth_user.contact);
             }
-
+            this.addToRecent();
             return this.$store.state.auth_user;
+        },
+
+        recentVisited() {
+            return this.$store.state.recent;
         },
     },
 
@@ -959,6 +967,19 @@ export default {
         addToRecent() {
             const ml = this.$route.params.ml_num;
             this.$store.commit("addRecent", ml);
+            this.saveRecent();
+        },
+
+        async saveRecent() {
+            if (this.$store.state.auth_user) {
+                this.recent.user_id = this.$store.state.auth_user.id;
+                this.recent.ml_num = this.$route.params.ml_num;
+                const token = this.$store.state.auth_token;
+                const self = this;
+                await axios.post("/api/user/save-recent", self.recent, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+            }
         },
 
         async saveLaed() {
@@ -1013,6 +1034,7 @@ export default {
                     (this.lead.contact = this.$store.state.auth_user.contact);
             }
         },
+
         async getAllData() {
             const self = this;
             self.loadingProperty = true;

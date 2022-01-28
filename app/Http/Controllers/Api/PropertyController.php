@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Favourite;
 use App\Models\Property;
+use App\Models\RecentVisited;
 use Illuminate\Http\Request;
 
 class PropertyController extends AppBaseController
@@ -345,6 +346,23 @@ class PropertyController extends AppBaseController
         Favourite::create($data);
         return $this->sendResponse("Added to your favourite list.", ['action' => 'added', 'ml_num' => $request->ml_num]);
     }
+
+    // saveRecent // working
+    public function saveRecent(Request $request)
+    {
+        $userId = auth()->user()->id;
+        $data = [
+            'user_id' => $userId,
+            'ml_num' => $request->ml_num
+        ];
+        $exists = RecentVisited::where($data)->exists();
+        if (!$exists) {
+            RecentVisited::create($data);
+            return $this->sendResponse("Added to your recent list.", ['action' => 'added recent', 'ml_num' => $request->ml_num]);
+        }
+        return $this->sendResponse("Already in your recent list.", ['action' => 'already added', 'ml_num' => $request->ml_num]);
+    }
+
     public function getFavourite(Request $request)
     {
         // return $this->sendResponse('Bookmark Property successfully', []);

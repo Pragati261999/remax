@@ -51,10 +51,10 @@
                                         py-3
                                         rounded-0
                                     "
-                                    :url="`http://therealtyhub.ca/property/view/${mid}`"
-                                    :title="`therealtyhub.ca - ${property.Addr}`"
+                                    :url="`http://casamania.ca/property/view/${mid}`"
+                                    :title="`casamania.ca - ${property.Addr}`"
                                     :description="`${property.Ad_text}`"
-                                    hashtags="therealtyhub.ca,remax"
+                                    hashtags="casamania.ca,remax"
                                 >
                                     Share on Facebook
                                 </ShareNetwork>
@@ -68,8 +68,8 @@
                                         py-3
                                         rounded-0
                                     "
-                                    :url="`http://therealtyhub.ca/property/view/${mid}`"
-                                    :title="`therealtyhub.ca - ${property.Addr}`"
+                                    :url="`http://casamania.ca/property/view/${mid}`"
+                                    :title="`casamania.ca - ${property.Addr}`"
                                     :description="`${property.Ad_text}`"
                                 >
                                     Share on Email
@@ -85,7 +85,7 @@
                                     "
                                     @click="
                                         cptxt(
-                                            `http://therealtyhub.ca/property/view/${mid}`
+                                            `http://casamania.ca/property/view/${mid}`
                                         )
                                     "
                                 >

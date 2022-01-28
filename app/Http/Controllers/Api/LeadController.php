@@ -47,7 +47,7 @@ class LeadController extends AppBaseController
             return $this->sendError($message, $error, 403);
         }
 
-        Lead::create($request->all());
+        GuestLead::create($request->all());
         return $this->sendResponse('Your query has been saved. We will contact you very soon.', []);
     }
 

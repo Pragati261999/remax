@@ -31,6 +31,8 @@ Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
 
     // Lead
     Route::post('/save-lead', [Api\LeadController::class, 'saveLead']);
+    // save-recent
+    Route::post('/save-recent', [Api\PropertyController::class, 'saveRecent']);
     // Bookmark / favourite / Save
     Route::post('/property/manage/favourite-property', [Api\PropertyController::class, 'saveFavourite']);
     // Bookmark / favourite / Get

@@ -69,7 +69,7 @@
                                        <table class="image_block" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0">
                                           <tr>
                                              <td style="width:100%;padding-right:0;padding-left:0">
-                                                <div align="center" style="line-height:10px"><a href="http://therealtyhub.ca" target="_blank" style="outline:0" 
+                                                <div align="center" style="line-height:10px"><a href="http://casamania.ca" target="_blank" style="outline:0" 
                                                    tabindex="-1"><img class="big" src="{{URL::asset('/assets/images/icons/email-icons/forgot-password-header.png')}}" style="display:block;height:auto;border:0;width:640px;max-width:100%" width="640" alt="Image of lock &amp; key." title="Image of lock &amp; key."></a></div>
                                              </td>
                                           </tr>
@@ -221,7 +221,7 @@
                                                       <p 
                                                          style="margin:0;font-size:14px;text-align:center"><span style="color:#95979c;font-size:12px">Copyright © 2019 RE/MAX Millennium</span></p>
                                                       <p style="margin:0;font-size:14px;text-align:center"><span style="color:#95979c;font-size:12px">All rights reserved.</span></p>
-                                                      <p style="margin:0;font-size:14px;text-align:center"><span style="color:#95979c;font-size:12px"><a href="http://therealtyhub.ca" target="_blank" style="text-decoration:underline;color:#fff" rel="noopener">Visit Us</a></span>
+                                                      <p style="margin:0;font-size:14px;text-align:center"><span style="color:#95979c;font-size:12px"><a href="http://casamania.ca" target="_blank" style="text-decoration:underline;color:#fff" rel="noopener">Visit Us</a></span>
                                                       </p>
                                                    </div>
                                                 </div>

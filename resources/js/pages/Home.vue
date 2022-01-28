@@ -13,7 +13,7 @@
         <!-- Toronto -->
         <property-listing :prop-location="'Toronto'"></property-listing>
         <!-- mississauga -->
-        <property-listing :prop-location="'mississauga'"></property-listing>
+        <property-listing :prop-location="'Mississauga'"></property-listing>
         <!-- Brampton -->
         <property-listing :prop-location="'Brampton'"></property-listing>
 

@@ -29,7 +29,9 @@
                 </div>
                 <div v-else class="row">
                     <div class="p-5 text-center">
-                        <loader />
+                        <loader
+                            :text="`Loading Featured Properties in ${propLocation}...`"
+                        />
                     </div>
                 </div>
             </div>

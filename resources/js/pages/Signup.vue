@@ -44,18 +44,35 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 px-5">
                         <form @submit.prevent="registerUser()" method="post">
-                            <fieldset class="mb-4">
-                                <input
-                                    type="text"
-                                    @keyup.prevent="errors.name = ''"
-                                    class="form-control"
-                                    v-model="userData.name"
-                                    placeholder="Full name*"
-                                />
-                                <small class="text-danger" v-if="errors.name">{{
-                                    errors.name.toString()
-                                }}</small>
-                            </fieldset>
+                            <div class="row">
+                                <div class="col-6 pe-0">
+                                    <fieldset class="mb-4">
+                                        <input
+                                            type="text"
+                                            @keyup.prevent="errors.name = ''"
+                                            class="form-control"
+                                            v-model="userData.name"
+                                            placeholder="First name*"
+                                        />
+                                        <small
+                                            class="text-danger"
+                                            v-if="errors.name"
+                                            >{{ errors.name.toString() }}</small
+                                        >
+                                    </fieldset>
+                                </div>
+                                <div class="col-6 ps-0">
+                                    <fieldset class="mb-4">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            v-model="userData.last_name"
+                                            placeholder="Last name"
+                                        />
+                                    </fieldset>
+                                </div>
+                            </div>
+
                             <fieldset class="mb-4">
                                 <input
                                     type="text"
@@ -212,6 +229,7 @@ export default {
             },
             userData: {
                 name: "",
+                last_name: "",
                 contact: "",
                 email: "",
                 password: "",

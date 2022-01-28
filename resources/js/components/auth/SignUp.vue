@@ -2,18 +2,32 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <form @submit.prevent="registerUser()" method="post">
-                <fieldset class="mb-4">
-                    <input
-                        type="text"
-                        @keyup.prevent="errors.name = ''"
-                        class="form-control"
-                        v-model="userData.name"
-                        placeholder="Full name*"
-                    />
-                    <small class="text-danger" v-if="errors.name">{{
-                        errors.name.toString()
-                    }}</small>
-                </fieldset>
+                <div class="row">
+                    <div class="col-6">
+                        <fieldset class="mb-4">
+                            <input
+                                type="text"
+                                @keyup.prevent="errors.name = ''"
+                                class="form-control"
+                                v-model="userData.name"
+                                placeholder="First name*"
+                            />
+                            <small class="text-danger" v-if="errors.name">{{
+                                errors.name.toString()
+                            }}</small>
+                        </fieldset>
+                    </div>
+                    <div class="col-6">
+                        <fieldset class="mb-4">
+                            <input
+                                type="text"
+                                class="form-control"
+                                v-model="userData.last_name"
+                                placeholder="Last name"
+                            />
+                        </fieldset>
+                    </div>
+                </div>
                 <fieldset class="mb-4">
                     <input
                         type="text"
@@ -115,9 +129,11 @@ export default {
             },
             userData: {
                 name: "",
+                last_name: "",
                 contact: "",
                 email: "",
                 password: "",
+                mlnum: "",
             },
             errors: {
                 name: "",
@@ -134,8 +150,9 @@ export default {
             this.errors.contact = "";
             this.errors.email = "";
             this.errors.password = "";
-
+            this.userData.mlnum = this.$route.params.ml_num;
             const user = this.userData;
+            console.log(user);
             await axios
                 .post("/api/user/register", user)
                 .then((response) => {

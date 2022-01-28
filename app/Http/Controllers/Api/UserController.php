@@ -19,10 +19,10 @@ class UserController extends AppBaseController
         $validator = Validator::make(
             $request->all(),
             [
-                'name' => 'required|string|max:255',
-                'contact' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|string|min:6'
+                'email' => 'bail|required|email|unique:users',
+                'name' => 'bail|required|string|max:255',
+                'contact' => 'bail|required',
+                'password' => 'bail|required|string|min:6'
             ]
         );
 
@@ -33,11 +33,11 @@ class UserController extends AppBaseController
         }
 
         $validated = $validator->validated();
-
         // dd($validated);
 
         $user = User::create([
             'name' => $validated['name'],
+            'last_name' => $request->input('last_name'),
             'contact' => $validated['contact'],
             'email' => $validated['email'],
             'password' => bcrypt($request->password),
@@ -116,7 +116,7 @@ class UserController extends AppBaseController
         $id = auth()->user()->id;
         // dd($id);
         if ($validated) {
-            $u = User::where(['id' => $id])->update(['name' => $request->name, 'contact' => $request->contact]);
+            $u = User::where(['id' => $id])->update(['name' => $request->name, 'last_name' => $request->last_name, 'contact' => $request->contact]);
             $u = User::where(['id' => $id])->first();
             return $this->sendResponse('User data updated successfully', $u);
         } else {
@@ -179,8 +179,8 @@ class UserController extends AppBaseController
         ]);
 
         $data = [
-            'subject' => "Forgot Password | therealtyhub.ca",
-            'url' => 'http://therealtyhub.ca/reset-password?key=' . $key . '&email=' . $request->email
+            'subject' => "Forgot Password | casamania.ca",
+            'url' => 'http://casamania.ca/reset-password?key=' . $key . '&email=' . $request->email
         ];
 
         // Send email with reset password link
