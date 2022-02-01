@@ -20,6 +20,7 @@ Route::prefix('user')->group(function () {
     Route::post('/reset-password', [Api\UserController::class, 'resetPassword']);
 });
 
+
 // User dashboard
 Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [Api\UserController::class, 'logout']);

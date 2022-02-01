@@ -43,4 +43,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function recentLead()
+    {
+        return $this->hasOne('App\Models\Lead', 'user_id', 'id')->orderBy('id', "desc");
+    }
 }

@@ -83,7 +83,12 @@
                             <button
                                 type="submit"
                                 class="btn btn-theme-color w-100 py-2"
+                                :disabled="logginIn"
                             >
+                                <i
+                                    v-if="logginIn"
+                                    class="fa fa-spinner fa-spin"
+                                ></i>
                                 Log In
                             </button>
                         </form>
@@ -92,11 +97,12 @@
                             class="text-dark fw-light my-2 text-center fp"
                             >Forget Password</router-link
                         >
-                        <h4 class="theme-title">DON'T HAVE AN ACCOUNT?</h4>
+                        <auth-start />
+                        <!-- <h6 class="theme-title mt-2">DON'T HAVE AN ACCOUNT?</h6>
                         <p class="text-center">
                             Add items to your wishlistget personalised
                             recommendations check out more quickly track your
-                            orders register
+                            orders register.
                         </p>
                         <router-link to="/sign-up" class="text-light">
                             <button
@@ -105,7 +111,14 @@
                             >
                                 Create Account
                             </button>
-                        </router-link>
+                        </router-link> -->
+                        <hr class="fw-bold" />
+                        <h6 class="text-center text-secondary mt-4 mb-3">
+                            Don't Have an Account?
+                            <router-link to="/sign-up" class="text-color"
+                                ><u>Create Account</u></router-link
+                            >
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -114,8 +127,11 @@
     </div>
 </template>
 <script>
-// create-user
+import AuthStart from "../components/auth/Social.vue";
 export default {
+    components: {
+        AuthStart,
+    },
     data() {
         return {
             success: {
@@ -130,6 +146,7 @@ export default {
                 email: "",
                 password: "",
             },
+            logginIn: false,
         };
     },
     mounted() {
@@ -143,6 +160,7 @@ export default {
         },
         async login() {
             const user = this.userData;
+            this.logginIn = true;
             await axios
                 .post("/api/user/login", user)
                 .then((response) => {
@@ -152,7 +170,7 @@ export default {
                     f.forEach((fv) => {
                         this.$store.commit("addFavourite", fv.ml_num);
                     });
-
+                    this.logginIn = false;
                     this.success.color = "text-success";
                     const token = response.data.data.token;
                     const user = response.data.data.user;
@@ -161,6 +179,7 @@ export default {
                     this.$router.push("/dashboard/my-account");
                 })
                 .catch((err) => {
+                    this.logginIn = false;
                     const errorData = err.response.data;
                     this.errors.email = errorData.error.email;
                     this.errors.password = errorData.error.password;

@@ -245,14 +245,14 @@ export default {
             // console.log(new Date());
             let addedAt = new Date(t).toLocaleString();
             addedAt = new Date(addedAt);
-            console.log("ADDED:", addedAt);
+            // console.log("ADDED:", addedAt);
             const now = new Date();
-            console.log("now:", now);
+            // console.log("now:", now);
 
             const diffTime = now - addedAt;
 
             const diffSecond = parseInt(diffTime / 1000);
-            console.log("diffSecond:", diffSecond);
+            // console.log("diffSecond:", diffSecond);
 
             const diffMinute = parseInt(diffTime / (1000 * 60));
             // console.log("diffMinute:", diffMinute);

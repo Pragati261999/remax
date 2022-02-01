@@ -124,58 +124,24 @@
                             <button
                                 type="submit"
                                 class="btn btn-theme-color w-100 py-2"
+                                :disabled="logginIn"
                             >
+                                <i
+                                    v-if="logginIn"
+                                    class="fa fa-spinner fa-spin"
+                                ></i>
                                 Sign Up
                             </button>
                         </form>
-                        <h6 class="text-dark text-center my-4 divider">OR</h6>
-                        <h5 class="text-center text-secondary my-3">
-                            Sign up with
-                        </h5>
-                        <ul class="list-unstyled text-center">
-                            <li class="social-icon">
-                                <img
-                                    src="assets/images/icons/socials/fb.png"
-                                    alt="facebook"
-                                    class="img-fluid"
-                                    style="background-color: #4867aa"
-                                />
-                            </li>
-                            <li class="social-icon">
-                                <img
-                                    src="assets/images/icons/socials/twitter.png"
-                                    alt="twitter"
-                                    class="img-fluid"
-                                    style="
-                                        background-color: #56d7fe;
-                                        padding: 2px;
-                                    "
-                                />
-                            </li>
-                            <li class="social-icon">
-                                <img
-                                    src="assets/images/icons/socials/google.png"
-                                    alt="google"
-                                    class="img-fluid"
-                                    style="background-color: #dc4e41"
-                                />
-                            </li>
-                            <li class="social-icon">
-                                <img
-                                    src="assets/images/icons/socials/linkedIn.png"
-                                    alt="linkedIn"
-                                    class="img-fluid"
-                                    style="background-color: #1675b9"
-                                />
-                            </li>
-                        </ul>
+                        <br />
+                        <auth-start />
                         <hr class="fw-bold" />
-                        <h5 class="text-center text-secondary mt-4 mb-3">
+                        <h6 class="text-center text-secondary mt-4 mb-3">
                             Already a member?
                             <router-link to="/login" class="text-color"
-                                >Login here</router-link
+                                ><u>Login here</u></router-link
                             >
-                        </h5>
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -219,8 +185,11 @@
 }
 </style>
 <script>
-// create-user
+import AuthStart from "../components/auth/Social.vue";
 export default {
+    components: {
+        AuthStart,
+    },
     data() {
         return {
             success: {
@@ -240,6 +209,7 @@ export default {
                 email: "",
                 password: "",
             },
+            logginIn: false,
         };
     },
     mounted() {
@@ -256,11 +226,12 @@ export default {
             this.errors.contact = "";
             this.errors.email = "";
             this.errors.password = "";
-
+            this.logginIn = true;
             const user = this.userData;
             await axios
                 .post("/api/user/register", user)
                 .then((response) => {
+                    this.logginIn = false;
                     this.success.message = response.data.message;
                     this.success.color = "text-success";
                     const token = response.data.data.token;
@@ -270,6 +241,7 @@ export default {
                     this.$router.push("/dashboard/my-account");
                 })
                 .catch((err) => {
+                    this.logginIn = false;
                     const errorData = err.response.data;
                     this.errors.name = errorData.error.name;
                     this.errors.contact = errorData.error.contact;

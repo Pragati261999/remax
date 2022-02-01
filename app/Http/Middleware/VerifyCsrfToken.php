@@ -13,5 +13,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        '/sociallogin/google', '/sociallogin/facebook', '/sociallogin/github', '/sociallogin/twitter', '/sociallogin/vkontakte'
     ];
 }

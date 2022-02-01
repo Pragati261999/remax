@@ -10,8 +10,7 @@ class LeadController extends AppBaseController
 {
     public function people(Request $request)
     {
-
-        $data = user::where(['role' => 'user'])->paginate(10)->withQueryString();
+        $data = User::has('recentLead')->with('recentLead')->where(['role' => 'user'])->orderBy('id', 'desc')->paginate(10)->withQueryString();
         return $this->sendResponse("People fetched successfully", $data);
     }
 }
