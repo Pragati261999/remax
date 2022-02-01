@@ -84,6 +84,9 @@ Route::prefix('crm')->middleware(['auth:sanctum'])->group(function () {
 
     // Nova Getting all leads as people
     Route::get('/people/all', [NovaApi\LeadController::class, 'people']);
+
+    // Adding new people 
+    Route::post('/people/new', [NovaApi\LeadController::class, 'create']);
 });
 
 
