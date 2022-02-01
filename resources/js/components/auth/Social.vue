@@ -9,8 +9,12 @@
                     alt="facebook"
                     class="img-fluid"
                     style="background-color: #4867aa"
-                    @click="AuthProvider('facebook')"
                 />
+                <!-- <fb:login-button
+                    scope="public_profile,email"
+                    onlogin="checkLoginState();"
+                >
+                </fb:login-button> -->
             </li>
             <li class="social-icon">
                 <img
@@ -36,40 +40,6 @@
 export default {
     data() {
         return {};
-    },
-    methods: {
-        async AuthProvider(provider) {
-            var self = this;
-
-            // await axios
-            //     .post(`/api/sociallogin/${provider}`)
-            //     .then((res) => {
-            //         console.log(res);
-            //     })
-            //     .catch((err) => {
-            //         console.log(err);
-            //     });
-
-            // this.$auth
-            //     .authenticate(provider)
-            //     .then((response) => {
-            //         self.SocialLogin(provider, response);
-            //     })
-            //     .catch((err) => {
-            //         console.log({ err: err });
-            //     });
-        },
-
-        // SocialLogin(provider, response) {
-        //     this.$http
-        //         .post("/sociallogin/" + provider, response)
-        //         .then((response) => {
-        //             console.log(response.data);
-        //         })
-        //         .catch((err) => {
-        //             console.log({ err: err });
-        //         });
-        // },
     },
 };
 </script>
