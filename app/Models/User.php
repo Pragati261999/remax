@@ -48,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Lead', 'user_id', 'id')->orderBy('id', "desc");
     }
+
+    public function inquiredProperty()
+    {
+        return $this->hasMany('App\Models\Lead', 'user_id', 'id')->orderBy('id', "desc");
+    }
+
+    public function activity()
+    {
+        return $this->hasMany('App\Models\RecentVisited', 'user_id', 'id')->orderBy('id', "desc");
+    }
 }

@@ -44,4 +44,26 @@ class LeadController extends AppBaseController
 
         return $this->sendResponse("People added successfully.", []);
     }
+
+    public function getPeopleWithUserId($id)
+    {
+
+        $exists = User::where(['id' => $id])->exists();
+
+        if ($exists) {
+
+            $data = User::with('recentLead')
+                ->with(['inquiredProperty.propertyDetails' => function ($query) {
+                    $query->select('id', 'Ml_num', 'Addr');
+                }])
+                ->with(['activity.propertyDetails' => function ($query) {
+                    $query->select('id', 'Ml_num', 'Addr');
+                }])
+                ->where(['id' => $id])->first();
+
+            return $this->sendResponse("People details fetched successfully.", $data);
+        }
+
+        return $this->sendError("No user found in database.", "", 404);
+    }
 }

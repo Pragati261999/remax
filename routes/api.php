@@ -87,6 +87,9 @@ Route::prefix('crm')->middleware(['auth:sanctum'])->group(function () {
 
     // Adding new people 
     Route::post('/people/new', [NovaApi\LeadController::class, 'create']);
+
+    // Getting a people details
+    Route::get('/people/get-details/{id}', [NovaApi\LeadController::class, 'getPeopleWithUserId']);
 });
 
 

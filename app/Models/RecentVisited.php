@@ -13,4 +13,9 @@ class RecentVisited extends Model
         'user_id',
         'ml_num'
     ];
+    // propertyDetails
+    public function propertyDetails()
+    {
+        return $this->hasOne('App\Models\Property', 'Ml_num', 'ml_num');
+    }
 }

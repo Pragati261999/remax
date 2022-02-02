@@ -21,4 +21,10 @@ class Lead extends Model
         'source',
         'stage'
     ];
+
+    // propertyDetails
+    public function propertyDetails()
+    {
+        return $this->hasOne('App\Models\Property', 'Ml_num', 'Ml_num');
+    }
 }
