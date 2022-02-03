@@ -84,6 +84,12 @@
                                             <option value="zonig=single family">
                                                 single family
                                             </option>
+                                            <option value="zonig=detached">
+                                                detached
+                                            </option>
+                                            <option value="zonig=semi-detached">
+                                                semi-detached
+                                            </option>
                                             <option value="zonig=vacant land">
                                                 vacant land
                                             </option>

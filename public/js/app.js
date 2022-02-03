@@ -8690,6 +8690,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -65038,6 +65044,22 @@ var render = function () {
                           [
                             _vm._v(
                               "\n                                            single family\n                                        "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "zonig=detached" } }, [
+                          _vm._v(
+                            "\n                                            detached\n                                        "
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          { attrs: { value: "zonig=semi-detached" } },
+                          [
+                            _vm._v(
+                              "\n                                            semi-detached\n                                        "
                             ),
                           ]
                         ),
