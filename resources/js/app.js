@@ -135,6 +135,9 @@ const store = new Vuex.Store({
         toggleAdvanceFilter(state) {
             state.advanceFilterOpened = !state.advanceFilterOpened;
         },
+        UpdateUserAvatar(state, avatar) {
+            state.auth_user.avatar = avatar;
+        },
     },
 });
 

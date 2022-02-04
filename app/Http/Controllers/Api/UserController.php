@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
+// S3
+use Aws\S3\S3Client;
+use Aws\S3\Exception\S3Exception;
+
 class UserController extends AppBaseController
 {
     public function register(Request $request)
@@ -116,12 +120,79 @@ class UserController extends AppBaseController
         $id = auth()->user()->id;
         // dd($id);
         if ($validated) {
-            $u = User::where(['id' => $id])->update(['name' => $request->name, 'last_name' => $request->last_name, 'contact' => $request->contact]);
+            $u = User::where(['id' => $id])->update([
+                'name' => $request->name,
+                'last_name' => $request->last_name,
+                'contact' => $request->contact,
+                'address' => $request->address,
+                'google_link' => $request->google_link,
+                'facebook_link' => $request->facebook_link,
+                'instagram_link' => $request->instagram_link,
+            ]);
             $u = User::where(['id' => $id])->first();
             return $this->sendResponse('User data updated successfully', $u);
         } else {
             return $this->sendError('Error', "We are not update your details");
         }
+    }
+
+    public function updateAvatar(Request $request)
+    {
+        // dd($request->file('avatar'));
+
+        // Now pass the input and rules into the validator
+        $validator = Validator::make($request->all(), [
+            'avatar' => 'mimes:jpeg,jpg,png,gif|required|max:10000'
+        ]);
+
+        if ($validator->fails()) {
+            $error = $validator->errors();
+            $message = "Please select an valid image.";
+            return $this->sendError($message, $error, 422);
+        } else {
+
+            $s3 = new S3Client([
+                'version' => 'latest',
+                'region'  => env('AWS_DEFAULT_REGION'),
+                'credentials' => [
+                    'key'    => env('AWS_ACCESS_KEY_ID'),
+                    'secret' => env('AWS_SECRET_ACCESS_KEY')
+                ]
+            ]);
+
+            $bucket = env('AWS_BUCKET');
+
+            $imageName = time() . '.' . $request->avatar->extension();
+
+            $img_data = file_get_contents($request->avatar);
+
+            $id = auth()->user()->id;
+
+            $imagePath =  'user-avatar/USER_ID_' . $id . '/' . $imageName;
+
+            try {
+                // Upload data.
+                $result = $s3->putObject([
+                    'Bucket' => $bucket,
+                    'Key'    => $imagePath,
+                    'Body'   => $img_data,
+                    'ACL'    => 'public-read'
+                ]);
+
+                $uploadedUrl = $result['ObjectURL'];
+
+                $u = User::where(['id' => $id])->update([
+                    'avatar' => $uploadedUrl,
+                ]);
+                $u = User::where(['id' => $id])->first();
+                return $this->sendResponse('User profile image updated successfully', $u);
+            } catch (S3Exception $e) {
+
+                $error = "Sorry! Unable to update your profile image. Please try again,";
+                $message = "Sorry! Unable to update your profile image. Please try again,";
+                return $this->sendError($message, $error, 422);
+            }
+        };
     }
 
     public function updatePassword(Request $request)

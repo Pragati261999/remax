@@ -23,6 +23,12 @@ class CreateUsersTable extends Migration
             $table->text('social_uid')->nullable();
             $table->string('password')->nullable();
 
+            $table->string('google_link')->nullable();
+            $table->string('facebook_link')->nullable();
+            $table->string('instagram_link')->nullable();
+            $table->string('address')->nullable();
+            $table->string('avatar')->nullable();
+
             $table->text('role')->default('user');
             $table->string('registered_by')->default('Self');
 

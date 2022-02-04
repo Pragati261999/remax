@@ -23,6 +23,14 @@ class User extends Authenticatable
         'email',
         'contact',
         'password',
+        'google_link',
+        'facebook_link',
+        'instagram_link',
+        'address',
+        'avatar',
+        'role',
+        'is_deleted',
+        'social_uid',
     ];
 
     /**

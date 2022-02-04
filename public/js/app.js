@@ -4314,8 +4314,157 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Loader: _commonComponents_Loader_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   computed: {
     userDetails: function userDetails() {
       return this.$store.state.auth_user;
@@ -4332,7 +4481,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       updating: false,
       errors: {
         name: "",
-        contact: ""
+        contact: "",
+        google_link: "",
+        facebook_link: "",
+        instagram_link: "",
+        address: ""
       },
       // Update password data
       form: {
@@ -4343,26 +4496,68 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       eForm: null,
       sForm: false,
       rForm: "",
-      rFormClass: ""
+      rFormClass: "",
+      // Update Profile image
+      updatingAvatar: false,
+      avatarError: ""
     };
   },
   methods: {
-    updatePassword: function updatePassword() {
+    changeAvatar: function changeAvatar(e) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var self, token;
+        var self, file, avatar, authToken;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 self = _this;
+                file = e.target.files[0];
+                avatar = new FormData();
+                avatar.append("avatar", file);
+                self.updatingAvatar = true;
+                self.avatarError = "";
+                authToken = _this.$store.state.auth_token;
+                _context.next = 9;
+                return axios.post("/api/user/update-user-avatar", avatar, {
+                  headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: "Bearer ".concat(authToken)
+                  }
+                }).then(function (res) {
+                  self.updatingAvatar = false;
+                  self.$store.commit("UpdateUserAvatar", res.data.data.avatar);
+                })["catch"](function (err) {
+                  self.avatarError = err.response.data.message;
+                  console.log(err.response);
+                  self.updatingAvatar = false;
+                });
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    updatePassword: function updatePassword() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var self, token;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                self = _this2;
                 self.sForm = true;
                 self.eForm = {};
                 self.rForm = "Please wait...";
                 self.rFormClass = "text-muted";
-                token = _this.$store.state.auth_token;
-                _context.next = 8;
+                token = _this2.$store.state.auth_token;
+                _context2.next = 8;
                 return axios.post("/api/user/setting/update-password", self.form, {
                   headers: {
                     Authorization: "Bearer ".concat(token)
@@ -4382,32 +4577,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 8:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     },
     logout: function logout() {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var token;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                token = _this2.$store.state.auth_token;
+                token = _this3.$store.state.auth_token;
 
-                _this2.$store.commit("removeAuthToken");
+                _this3.$store.commit("removeAuthToken");
 
-                _this2.$store.commit("removeAuthUser");
+                _this3.$store.commit("removeAuthUser");
 
-                _this2.$store.commit("removeBookMark");
+                _this3.$store.commit("removeBookMark");
 
-                _this2.$router.push("/login");
+                _this3.$router.push("/login");
 
-                _context2.next = 7;
+                _context3.next = 7;
                 return axios.post("/api/user/logout", {
                   headers: {
                     Authorization: "Bearer ".concat(token)
@@ -4416,43 +4611,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 7:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     },
     update: function update() {
-      var _this3 = this;
+      var _this4 = this;
 
-      this.updating = true;
-      var token = this.$store.state.auth_token;
-      axios.post("/api/user/update-profile", this.userDetails, {
-        headers: {
-          Authorization: "Bearer ".concat(token)
-        }
-      }).then(function (response) {
-        _this3.updating = false;
-        _this3.isEdit = false;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var token;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.updating = true;
+                token = _this4.$store.state.auth_token;
+                console.log(token);
+                _context4.next = 5;
+                return axios.post("/api/user/update-profile", _this4.userDetails, {
+                  headers: {
+                    Authorization: "Bearer ".concat(token)
+                  }
+                }).then(function (response) {
+                  _this4.updating = false;
+                  _this4.isEdit = false;
 
-        _this3.$store.commit("addAuthUser", response.data.data);
+                  _this4.$store.commit("addAuthUser", response.data.data);
 
-        _this3.success.message = response.data.message;
-        _this3.success.color = "text-success";
-        setTimeout(function () {
-          _this3.success.color = "d-none";
-        }, 1000);
-      })["catch"](function (error) {
-        _this3.updating = false;
-        var errorDisplay = error.response.data.errors;
-        _this3.errors.name = errorDisplay.name;
-        _this3.errors.contact = errorDisplay.contact;
-        _this3.success.message = response.data.message;
-        _this3.success.color = "text-danger";
-        setTimeout(function () {
-          _this3.success.color = "d-none";
-        }, 1000);
-      });
+                  _this4.success.message = response.data.message;
+                  _this4.success.color = "text-success";
+                  setTimeout(function () {
+                    _this4.success.color = "d-none";
+                  }, 1000);
+                })["catch"](function (error) {
+                  _this4.updating = false;
+                  var errorDisplay = error.response.data.errors;
+                  _this4.errors.name = errorDisplay.name;
+                  _this4.errors.contact = errorDisplay.contact;
+                  _this4.errors.google_link = errorDisplay.google_link;
+                  _this4.errors.facebook_link = errorDisplay.facebook_link;
+                  _this4.errors.instagram_link = errorDisplay.instagram_link;
+                  _this4.errors.address = errorDisplay.address;
+                  _this4.success.message = response.data.message;
+                  _this4.success.address = response.data.address;
+                  _this4.success.color = "text-danger";
+                  setTimeout(function () {
+                    _this4.success.color = "d-none";
+                  }, 1000);
+                });
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
     }
   }
 });
@@ -12733,6 +12949,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_8__["default"].Store({
     },
     toggleAdvanceFilter: function toggleAdvanceFilter(state) {
       state.advanceFilterOpened = !state.advanceFilterOpened;
+    },
+    UpdateUserAvatar: function UpdateUserAvatar(state, avatar) {
+      state.auth_user.avatar = avatar;
     }
   }
 });
@@ -17532,7 +17751,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nlabel[data-v-8f04895a] {\r\n    padding: 0.375rem 0;\n}\ninput[data-v-8f04895a] {\r\n    padding: 0.375rem 0.75rem;\n}\n.active[data-v-8f04895a] {\r\n    border: 0;\r\n    background-color: transparent;\r\n    padding: 0.375rem 0;\r\n    opacity: 1;\r\n    pointer-events: none;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.file-avatar[data-v-8f04895a] {\r\n    height: 0px;\r\n    width: 0px;\r\n    position: absolute;\r\n    top: -200vh;\n}\n.user-avatar[data-v-8f04895a] {\r\n    height: auto;\r\n    width: auto;\r\n    max-width: 200px;\r\n    max-height: 200px;\r\n    border: 2px solid rgb(63, 62, 62);\r\n    border-radius: 200px;\n}\nlabel[data-v-8f04895a] {\r\n    padding: 0.375rem 0;\n}\ninput[data-v-8f04895a] {\r\n    padding: 0.375rem 0.75rem;\n}\n.active[data-v-8f04895a] {\r\n    border: 0;\r\n    background-color: transparent;\r\n    padding: 0.375rem 0;\r\n    opacity: 1;\r\n    pointer-events: none;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -56464,6 +56683,83 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row w-100" }, [
+      _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12" }, [
+        _c(
+          "div",
+          { staticClass: "w-100 h-100 d-flex justify-content-center" },
+          [
+            !_vm.updatingAvatar
+              ? _c("div", { staticClass: "text-center pb-3" }, [
+                  _vm.userDetails.avatar
+                    ? _c("div", [
+                        _c("img", {
+                          directives: [
+                            {
+                              name: "lazy",
+                              rawName: "v-lazy",
+                              value: {
+                                src: _vm.userDetails.avatar,
+                              },
+                              expression:
+                                "{\n                                src: userDetails.avatar,\n                            }",
+                            },
+                          ],
+                          staticClass: "img-fluid user-avatar",
+                          attrs: { alt: _vm.userDetails.name },
+                        }),
+                      ])
+                    : _c("div", [
+                        _c("img", {
+                          staticClass: "img-fluid user-avatar",
+                          attrs: {
+                            src: "/../../assets/images/avatar/useravtar.png",
+                            alt: "NOT UPDATED",
+                          },
+                        }),
+                      ]),
+                  _vm._v(" "),
+                  _c("div", [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "btn btn-theme-color mt-3 px-4",
+                        attrs: { for: "user-avatar" },
+                      },
+                      [
+                        _c("input", {
+                          staticClass: "file-avatar",
+                          attrs: { type: "file", id: "user-avatar" },
+                          on: { change: _vm.changeAvatar },
+                        }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("Change Image")]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "text-danger",
+                      domProps: { textContent: _vm._s(_vm.avatarError) },
+                    }),
+                  ]),
+                ])
+              : _c(
+                  "div",
+                  { staticClass: "pt-5 pb-3" },
+                  [
+                    _c("loader", {
+                      attrs: {
+                        text: "Validating and updating profile image...",
+                      },
+                    }),
+                  ],
+                  1
+                ),
+          ]
+        ),
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "col-lg-6 col-md-6 col-sm-12 px-4 notify-col" },
@@ -56473,7 +56769,7 @@ var render = function () {
               "div",
               { staticClass: "col-12 d-flex justify-content-between" },
               [
-                _c("h3", { staticClass: "text-color fw-bold" }, [
+                _c("h5", { staticClass: "text-color fw-bold" }, [
                   _vm._v("User Profile"),
                 ]),
                 _vm._v(" "),
@@ -56495,17 +56791,32 @@ var render = function () {
                     },
                   },
                   [
-                    _vm._v(
-                      "\n                        Edit\n                        "
-                    ),
-                    _c("img", {
-                      staticClass: "img-fluid",
-                      staticStyle: { width: "16px", "padding-bottom": "6px" },
-                      attrs: {
-                        src: "/../../assets/images/icons/edit.png",
-                        alt: "",
-                      },
-                    }),
+                    !_vm.isEdit
+                      ? _c("span", [
+                          _vm._v(
+                            "\n                            Edit\n                            "
+                          ),
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            staticStyle: {
+                              width: "16px",
+                              "padding-bottom": "6px",
+                            },
+                            attrs: {
+                              src: "/../../assets/images/icons/edit.png",
+                              alt: "",
+                            },
+                          }),
+                        ])
+                      : _c("span", [
+                          _vm._v(
+                            "\n                            Close\n                            "
+                          ),
+                          _c("i", {
+                            staticClass: "fa fa-times",
+                            attrs: { "aria-hidden": "true" },
+                          }),
+                        ]),
                   ]
                 ),
               ]
@@ -56526,7 +56837,7 @@ var render = function () {
                   _c("div", { staticClass: "row" }, [
                     _vm._m(0),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-10 col-md-9 col-sm-9" }, [
+                    _c("div", { staticClass: "col-sm-9" }, [
                       _c("input", {
                         directives: [
                           {
@@ -56575,7 +56886,7 @@ var render = function () {
                   _c("div", { staticClass: "row" }, [
                     _vm._m(1),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-10 col-md-9 col-sm-9" }, [
+                    _c("div", { staticClass: "col-sm-9" }, [
                       _c("input", {
                         directives: [
                           {
@@ -56614,7 +56925,7 @@ var render = function () {
                   _c("div", { staticClass: "row" }, [
                     _vm._m(2),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-lg-10 col-md-9 col-sm-9" }, [
+                    _c("div", { staticClass: "col-sm-9" }, [
                       _c("input", {
                         directives: [
                           {
@@ -56659,6 +56970,204 @@ var render = function () {
                   ]),
                 ]),
                 _vm._v(" "),
+                _c("fieldset", { staticClass: "my-3" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(3),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userDetails.google_link,
+                            expression: "userDetails.google_link",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        class: _vm.isEdit != true ? "active" : "",
+                        attrs: {
+                          type: "text",
+                          name: "google_link",
+                          placeholder: "update google_link",
+                        },
+                        domProps: { value: _vm.userDetails.google_link },
+                        on: {
+                          keyup: function ($event) {
+                            $event.preventDefault()
+                            _vm.errors.google_link = ""
+                          },
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.userDetails,
+                              "google_link",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.google_link
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.google_link.toString())),
+                          ])
+                        : _vm._e(),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("fieldset", { staticClass: "my-3" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userDetails.facebook_link,
+                            expression: "userDetails.facebook_link",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        class: _vm.isEdit != true ? "active" : "",
+                        attrs: {
+                          type: "text",
+                          name: "facebook_link",
+                          placeholder: "update facebook_link",
+                        },
+                        domProps: { value: _vm.userDetails.facebook_link },
+                        on: {
+                          keyup: function ($event) {
+                            $event.preventDefault()
+                            _vm.errors.facebook_link = ""
+                          },
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.userDetails,
+                              "facebook_link",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.facebook_link
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.facebook_link.toString())),
+                          ])
+                        : _vm._e(),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("fieldset", { staticClass: "my-3" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userDetails.instagram_link,
+                            expression: "userDetails.instagram_link",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        class: _vm.isEdit != true ? "active" : "",
+                        attrs: {
+                          type: "text",
+                          name: "instagram_link",
+                          placeholder: "update instagram_link",
+                        },
+                        domProps: { value: _vm.userDetails.instagram_link },
+                        on: {
+                          keyup: function ($event) {
+                            $event.preventDefault()
+                            _vm.errors.instagram_link = ""
+                          },
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.userDetails,
+                              "instagram_link",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.instagram_link
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.instagram_link.toString())
+                            ),
+                          ])
+                        : _vm._e(),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("fieldset", { staticClass: "my-3" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.userDetails.address,
+                            expression: "userDetails.address",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        class: _vm.isEdit != true ? "active" : "",
+                        attrs: {
+                          type: "text",
+                          name: "address",
+                          placeholder: "update address",
+                        },
+                        domProps: { value: _vm.userDetails.address },
+                        on: {
+                          keyup: function ($event) {
+                            $event.preventDefault()
+                            _vm.errors.address = ""
+                          },
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.userDetails,
+                              "address",
+                              $event.target.value
+                            )
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.address
+                        ? _c("small", { staticClass: "text-danger" }, [
+                            _vm._v(_vm._s(_vm.errors.address.toString())),
+                          ])
+                        : _vm._e(),
+                    ]),
+                  ]),
+                ]),
+                _vm._v(" "),
                 _vm.isEdit != false
                   ? _c("fieldset", { staticClass: "my-3 float-end" }, [
                       _c("button", { staticClass: "btn btn-theme-color" }, [
@@ -56687,7 +57196,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _vm._m(3),
+            _vm._m(7),
             _vm._v(" "),
             _c("div", { staticClass: "col-12" }, [
               _c(
@@ -56893,8 +57402,6 @@ var render = function () {
           ]),
         ]
       ),
-      _vm._v(" "),
-      _vm._m(4),
     ]),
   ])
 }
@@ -56903,7 +57410,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-2 col-md-3 col-sm-3 pe-0" }, [
+    return _c("div", { staticClass: "col-sm-3 pe-0" }, [
       _c("label", { staticClass: "text-color" }, [_vm._v("First Name:")]),
     ])
   },
@@ -56911,7 +57418,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-2 col-md-3 col-sm-3 pe-0" }, [
+    return _c("div", { staticClass: "col-sm-3 pe-0" }, [
       _c("label", { staticClass: "text-color" }, [_vm._v("Last Name:")]),
     ])
   },
@@ -56919,7 +57426,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-2 col-md-3 col-sm-3 pe-0" }, [
+    return _c("div", { staticClass: "col-sm-3 pe-0" }, [
       _c("label", { staticClass: "text-color" }, [_vm._v("Contact:")]),
     ])
   },
@@ -56927,19 +57434,39 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [_c("hr")])
+    return _c("div", { staticClass: "col-sm-3 pe-0" }, [
+      _c("label", { staticClass: "text-color" }, [_vm._v("Google Link:")]),
+    ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6 col-md-6 col-sm-12" }, [
-      _c("img", {
-        staticClass: "img-responsive img-fluid",
-        staticStyle: { transform: "rotateY(180deg)" },
-        attrs: { src: "/../../assets/images/icons/login.png", alt: "" },
-      }),
+    return _c("div", { staticClass: "col-sm-3 pe-0" }, [
+      _c("label", { staticClass: "text-color" }, [_vm._v("Facebook Link:")]),
     ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-3 pe-0" }, [
+      _c("label", { staticClass: "text-color" }, [_vm._v("Instagram Link:")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-3 pe-0" }, [
+      _c("label", { staticClass: "text-color" }, [_vm._v("Address:")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [_c("hr")])
   },
 ]
 render._withStripped = true

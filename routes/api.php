@@ -26,6 +26,8 @@ Route::prefix('user')->middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [Api\UserController::class, 'logout']);
     Route::get('/', [Api\UserController::class, 'profile']);
     Route::post('/update-profile', [Api\UserController::class, 'update']);
+    // Update avatar
+    Route::post('/update-user-avatar', [Api\UserController::class, 'updateAvatar']);
 
     // Change password
     Route::post('/setting/update-password', [Api\UserController::class, 'updatePassword']);
