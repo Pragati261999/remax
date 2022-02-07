@@ -944,8 +944,10 @@ export default {
     computed: {
         userLoggedIn() {
             if (this.$store.state.auth_user) {
-                // (this.lead.name = this.$store.state.auth_user.name),
-                (this.lead.email = this.$store.state.auth_user.email),
+                (this.lead.name = this.$store.state.auth_user.name),
+                    (this.lead.last_name =
+                        this.$store.state.auth_user.last_name),
+                    (this.lead.email = this.$store.state.auth_user.email),
                     (this.lead.contact = this.$store.state.auth_user.contact);
             }
             this.addToRecent();

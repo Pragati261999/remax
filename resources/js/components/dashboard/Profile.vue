@@ -155,7 +155,7 @@
                             <div class="row">
                                 <div class="col-sm-3 pe-0">
                                     <label class="text-color"
-                                        >Google Link:</label
+                                        >Google Mail:</label
                                     >
                                 </div>
                                 <div class="col-sm-9">

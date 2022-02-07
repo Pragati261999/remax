@@ -12063,8 +12063,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     userLoggedIn: function userLoggedIn() {
       if (this.$store.state.auth_user) {
-        // (this.lead.name = this.$store.state.auth_user.name),
-        this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
+        this.lead.name = this.$store.state.auth_user.name, this.lead.last_name = this.$store.state.auth_user.last_name, this.lead.email = this.$store.state.auth_user.email, this.lead.contact = this.$store.state.auth_user.contact;
       }
 
       this.addToRecent();
@@ -57435,7 +57434,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-3 pe-0" }, [
-      _c("label", { staticClass: "text-color" }, [_vm._v("Google Link:")]),
+      _c("label", { staticClass: "text-color" }, [_vm._v("Google Mail:")]),
     ])
   },
   function () {
