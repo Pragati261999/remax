@@ -11,6 +11,19 @@ use Illuminate\Http\Request;
 class PropertyController extends AppBaseController
 {
 
+    // USING IN CARD
+    // Addr
+    // images - With
+    // Ad_text
+    // Ml_num
+    // S_r
+    // Lp_dol
+    // Rltr
+    // updated_at
+    // Bath_tot
+    // Br
+    // Br_plus
+
     public function getAllAutocomplete(Request $request)
     {
         $key = $request->input('key');
@@ -25,20 +38,33 @@ class PropertyController extends AppBaseController
         return $this->sendResponse($msg, $response);
     }
 
+    // For card data
     public function getProperties(Request $request)
     {
 
         $addrr = $request->input('property-location');
         $msg = 'Property fetched successfully.';
-        $response = Property::where('Municipality', 'LIKE', "%{$addrr}%")
+        $response = Property::select(
+            'id',
+            'Ml_num',
+            'Addr',
+            'Ad_text',
+            'S_r',
+            'Lp_dol',
+            'Rltr',
+            'updated_at',
+            'Bath_tot',
+            'Br',
+            'Br_plus'
+        )->has('hasImage')->with('images')->where('Municipality', 'LIKE', "%{$addrr}%")
             ->orWhere('Municipality_district', 'LIKE', "%{$addrr}%")
             ->orWhere('Community', 'LIKE', "%{$addrr}%")
-            ->with('images')
             ->orderby('id', 'DESC')
             ->paginate('9');
         return $this->sendResponse($msg, $response);
     }
 
+    // Only for full details
     public function getDetails(Request $request)
     {
         $Ml_num = $request->input('id');
@@ -47,6 +73,7 @@ class PropertyController extends AppBaseController
         return $this->sendResponse($msg, $response);
     }
 
+    // Search for card
     public function searchProperty(Request $request)
     {
 
@@ -85,7 +112,19 @@ class PropertyController extends AppBaseController
 
         $msg = 'Property fetched successfully.';
 
-        $response = Property::with('images')
+        $response = Property::select(
+            'id',
+            'Ml_num',
+            'Addr',
+            'Ad_text',
+            'S_r',
+            'Lp_dol',
+            'Rltr',
+            'updated_at',
+            'Bath_tot',
+            'Br',
+            'Br_plus'
+        )->with('images')
 
             // select * from `properties` where `Br` >= ? and `Lp_dol` >= ? and `Lp_dol` <= ? and `S_r` = ? and `property_type` LIKE ? and `Bath_tot` >= ? and `Patio_ter` not in (?, ?, ?) and `Idx_dt` <= ? and `Ad_text` LIKE ? and `Addr` LIKE ? or (`Ml_num` LIKE ?) or (`Municipality_district` LIKE ?) or (`Municipality` LIKE ?) or (`Community` LIKE ?) and `Sqft` >= ? order by `id` desc
 
@@ -184,6 +223,7 @@ class PropertyController extends AppBaseController
         return $this->sendResponse($msg, $response);
     }
 
+    // For card - bcup
     public function searchProperty_BCUP(Request $request)
     {
 
@@ -347,7 +387,7 @@ class PropertyController extends AppBaseController
         return $this->sendResponse("Added to your favourite list.", ['action' => 'added', 'ml_num' => $request->ml_num]);
     }
 
-    // saveRecent // working
+    // saveRecent
     public function saveRecent(Request $request)
     {
         $userId = auth()->user()->id;
@@ -363,20 +403,47 @@ class PropertyController extends AppBaseController
         return $this->sendResponse("Added to your recent list.", ['action' => 'added recent', 'ml_num' => $request->ml_num]);
     }
 
+    // for card only
     public function getFavourite(Request $request)
     {
         // return $this->sendResponse('Bookmark Property successfully', []);
         $userId = auth()->user()->id;
         $f_id =  Favourite::where(['user_id' => $userId])->get('ml_num');
         // echo count($f_id);
-        $response = Property::whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
+        $response = Property::select(
+            'id',
+            'Ml_num',
+            'Addr',
+            'Ad_text',
+            'S_r',
+            'Lp_dol',
+            'Rltr',
+            'updated_at',
+            'Bath_tot',
+            'Br',
+            'Br_plus'
+        )->whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
         return $this->sendResponse('Bookmark Property successfully', $response);
     }
+
+    // For cards only
     public function getRecent(Request $request)
     {
         $f_id = $request->ml_num;
         // echo count($f_id);
-        $response = Property::whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
+        $response = Property::select(
+            'id',
+            'Ml_num',
+            'Addr',
+            'Ad_text',
+            'S_r',
+            'Lp_dol',
+            'Rltr',
+            'updated_at',
+            'Bath_tot',
+            'Br',
+            'Br_plus'
+        )->whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
         return $this->sendResponse('Bookmark Property successfully', $response);
     }
 }

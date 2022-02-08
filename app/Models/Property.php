@@ -397,4 +397,9 @@ class Property extends Model
     {
         return $this->hasMany('App\Models\PropertyImage', 'property_ml_num', 'Ml_num');
     }
+
+    public function hasImage()
+    {
+        return $this->hasOne('App\Models\PropertyImage', 'property_ml_num', 'Ml_num');
+    }
 }
