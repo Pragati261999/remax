@@ -154,9 +154,7 @@
                         <fieldset class="my-3">
                             <div class="row">
                                 <div class="col-sm-3 pe-0">
-                                    <label class="text-color"
-                                        >Google Mail:</label
-                                    >
+                                    <label class="text-color">Gmail:</label>
                                 </div>
                                 <div class="col-sm-9">
                                     <input
