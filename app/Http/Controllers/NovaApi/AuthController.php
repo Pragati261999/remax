@@ -20,7 +20,7 @@ class AuthController extends AppBaseController
 
         if ($validator->fails()) {
             $error = $validator->errors();
-            $message = "Please fill all required fields.";
+            $message = "Invalid Credentials.";
             return $this->sendError($message, $error, 401);
         }
 
