@@ -24,7 +24,7 @@ class AuthController extends AppBaseController
             return $this->sendError($message, $error, 401);
         }
 
-        $attr = $request->all();
+        $attr = ['email' => $request->email, 'password' => $request->password];
 
         if (!Auth::attempt($attr)) {
             return $this->sendError('Wrong Credentials.', '', 401);

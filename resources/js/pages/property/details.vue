@@ -360,7 +360,7 @@
                                             {{ property.Extras }}
                                         </span>
                                     </span>
-                                    <span v-else class="dummy-blir-text">
+                                    <span v-else class="dummy-blur-text">
                                         Lorem ipsum dolor sit amet consectetur
                                         adipisicing elit. Nobis doloribus
                                         tempore quod impedit ipsam hic corrupti
@@ -1125,7 +1125,7 @@ export default {
 </script>
 
 <style scoped>
-.dummy-blir-text {
+.dummy-blur-text {
     filter: blur(4px);
 }
 .badge {

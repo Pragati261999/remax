@@ -73,7 +73,7 @@ class UserController extends AppBaseController
             return $this->sendError($message, $error, 401);
         }
 
-        $attr = $request->all();
+        $attr = ['email' => $request->email, 'password' => $request->password];
 
         if (!Auth::attempt($attr)) {
             return $this->sendError('Credentials not match', '', 401);
