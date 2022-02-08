@@ -44,19 +44,7 @@ class PropertyController extends AppBaseController
 
         $addrr = $request->input('property-location');
         $msg = 'Property fetched successfully.';
-        $response = Property::has('hasImage')->with('images')->select(
-            'id',
-            'Ml_num',
-            'Addr',
-            'Ad_text',
-            'S_r',
-            'Lp_dol',
-            'Rltr',
-            'updated_at',
-            'Bath_tot',
-            'Br',
-            'Br_plus'
-        )->where('Municipality', 'LIKE', "%{$addrr}%")
+        $response = Property::with('images')->where('Municipality', 'LIKE', "%{$addrr}%")
             ->orWhere('Municipality_district', 'LIKE', "%{$addrr}%")
             ->orWhere('Community', 'LIKE', "%{$addrr}%")
             ->orderby('id', 'DESC')
@@ -112,19 +100,7 @@ class PropertyController extends AppBaseController
 
         $msg = 'Property fetched successfully.';
 
-        $response = Property::select(
-            'id',
-            'Ml_num',
-            'Addr',
-            'Ad_text',
-            'S_r',
-            'Lp_dol',
-            'Rltr',
-            'updated_at',
-            'Bath_tot',
-            'Br',
-            'Br_plus'
-        )->with('images')
+        $response = Property::with('images')
 
             // select * from `properties` where `Br` >= ? and `Lp_dol` >= ? and `Lp_dol` <= ? and `S_r` = ? and `property_type` LIKE ? and `Bath_tot` >= ? and `Patio_ter` not in (?, ?, ?) and `Idx_dt` <= ? and `Ad_text` LIKE ? and `Addr` LIKE ? or (`Ml_num` LIKE ?) or (`Municipality_district` LIKE ?) or (`Municipality` LIKE ?) or (`Community` LIKE ?) and `Sqft` >= ? order by `id` desc
 
@@ -410,19 +386,7 @@ class PropertyController extends AppBaseController
         $userId = auth()->user()->id;
         $f_id =  Favourite::where(['user_id' => $userId])->get('ml_num');
         // echo count($f_id);
-        $response = Property::select(
-            'id',
-            'Ml_num',
-            'Addr',
-            'Ad_text',
-            'S_r',
-            'Lp_dol',
-            'Rltr',
-            'updated_at',
-            'Bath_tot',
-            'Br',
-            'Br_plus'
-        )->whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
+        $response = Property::whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
         return $this->sendResponse('Bookmark Property successfully', $response);
     }
 
@@ -431,19 +395,7 @@ class PropertyController extends AppBaseController
     {
         $f_id = $request->ml_num;
         // echo count($f_id);
-        $response = Property::select(
-            'id',
-            'Ml_num',
-            'Addr',
-            'Ad_text',
-            'S_r',
-            'Lp_dol',
-            'Rltr',
-            'updated_at',
-            'Bath_tot',
-            'Br',
-            'Br_plus'
-        )->whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
+        $response = Property::whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
         return $this->sendResponse('Bookmark Property successfully', $response);
     }
 }

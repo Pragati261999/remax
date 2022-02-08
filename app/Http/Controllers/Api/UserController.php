@@ -318,6 +318,6 @@ class UserController extends AppBaseController
         // Send email with reset password link
         Mail::to('ajaybelduha@gmail.com')->send(new TestMail($data));
 
-        return "Mail send success Running CRON on: " . now();
+        echo "Mail send success Running CRON on: " . now();
     }
 }
