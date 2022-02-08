@@ -311,7 +311,6 @@ class UserController extends AppBaseController
     public function sendTestMail(Request $request)
     {
 
-
         $data = [
             'subject' => "CRON Mail | casamania.ca",
         ];
@@ -319,6 +318,6 @@ class UserController extends AppBaseController
         // Send email with reset password link
         Mail::to('ajaybelduha@gmail.com')->send(new TestMail($data));
 
-        return "Mail send success Running CRON on: " . now();;
+        return "Mail send success Running CRON on: " . now();
     }
 }
