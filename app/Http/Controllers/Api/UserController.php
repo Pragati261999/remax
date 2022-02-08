@@ -75,6 +75,11 @@ class UserController extends AppBaseController
 
         $attr = ['email' => $request->email, 'password' => $request->password];
 
+        $exists = User::where(['email' => $request->email])->exists();
+        if (!$exists) {
+            return $this->sendError('Email does not exists. Please register.', '', 401);
+        }
+
         if (!Auth::attempt($attr)) {
             return $this->sendError('Credentials not match', '', 401);
         }
