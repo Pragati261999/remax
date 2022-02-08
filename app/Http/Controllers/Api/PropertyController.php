@@ -44,7 +44,7 @@ class PropertyController extends AppBaseController
 
         $addrr = $request->input('property-location');
         $msg = 'Property fetched successfully.';
-        $response = Property::select(
+        $response = Property::has('hasImage')->with('images')->select(
             'id',
             'Ml_num',
             'Addr',
@@ -56,7 +56,7 @@ class PropertyController extends AppBaseController
             'Bath_tot',
             'Br',
             'Br_plus'
-        )->has('hasImage')->with('images')->where('Municipality', 'LIKE', "%{$addrr}%")
+        )->where('Municipality', 'LIKE', "%{$addrr}%")
             ->orWhere('Municipality_district', 'LIKE', "%{$addrr}%")
             ->orWhere('Community', 'LIKE', "%{$addrr}%")
             ->orderby('id', 'DESC')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\AppBaseController;
 use App\Mail\ForgetPassword;
+use App\Mail\TestMail;
 use App\Models\Favourite;
 use App\Models\ForgotPassword;
 use Illuminate\Http\Request;
@@ -303,5 +304,21 @@ class UserController extends AppBaseController
         }
         // ===================
 
+    }
+
+
+    // sendTestMail 
+    public function sendTestMail(Request $request)
+    {
+
+
+        $data = [
+            'subject' => "CRON Mail | casamania.ca",
+        ];
+
+        // Send email with reset password link
+        Mail::to('ajaybelduha@gmail.com')->send(new TestMail($data));
+
+        return "Mail send success Running CRON on: " . now();;
     }
 }

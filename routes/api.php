@@ -95,6 +95,9 @@ Route::prefix('crm')->middleware(['auth:sanctum'])->group(function () {
 });
 
 
+// testing route 
+Route::get('/send-test-mail', [Api\UserController::class, 'sendTestMail']);
+
 // Default -- API
 Route::get('/', function () {
     dd('Welcome to remax.');
