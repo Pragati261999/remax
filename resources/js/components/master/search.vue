@@ -6,6 +6,7 @@
             </button>
             <input
                 v-model="key"
+                @blur="masterSearchClose"
                 type="text"
                 class="form-control border-0 bg-transparent"
                 aria-label="Search"
@@ -133,6 +134,12 @@ export default {
         };
     },
     methods: {
+        masterSearchClose() {
+            const self = this;
+            setTimeout(() => {
+                self.masterSearchOpen = false;
+            }, 500);
+        },
         gotolink(link) {
             this.key = "";
             this.masterSearchOpen = false;

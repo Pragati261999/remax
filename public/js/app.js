@@ -5048,6 +5048,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -5064,6 +5065,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    masterSearchClose: function masterSearchClose() {
+      var self = this;
+      setTimeout(function () {
+        self.masterSearchOpen = false;
+      }, 500);
+    },
     gotolink: function gotolink(link) {
       this.key = "";
       this.masterSearchOpen = false;
@@ -57657,6 +57664,7 @@ var render = function () {
           },
           domProps: { value: _vm.key },
           on: {
+            blur: _vm.masterSearchClose,
             input: [
               function ($event) {
                 if ($event.target.composing) {
