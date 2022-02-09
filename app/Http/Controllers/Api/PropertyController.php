@@ -11,19 +11,6 @@ use Illuminate\Http\Request;
 class PropertyController extends AppBaseController
 {
 
-    // USING IN CARD
-    // Addr
-    // images - With
-    // Ad_text
-    // Ml_num
-    // S_r
-    // Lp_dol
-    // Rltr
-    // updated_at
-    // Bath_tot
-    // Br
-    // Br_plus
-
     public function getAllAutocomplete(Request $request)
     {
         $key = $request->input('key');
@@ -44,10 +31,32 @@ class PropertyController extends AppBaseController
 
         $addrr = $request->input('property-location');
         $msg = 'Property fetched successfully.';
-        $response = Property::with('images')->where('Municipality', 'LIKE', "%{$addrr}%")
-            ->orWhere('Municipality_district', 'LIKE', "%{$addrr}%")
-            ->orWhere('Community', 'LIKE', "%{$addrr}%")
+        $response = Property::has('image')
+            ->with('images')
+            ->where('Municipality', 'LIKE', "%{$addrr}%")
+            ->when($addrr, function ($query) use ($addrr) {
+                $id = Property::where('Community', 'LIKE', "%{$addrr}%")
+                    ->orWhere(function ($query) use ($addrr) {
+                        $query->orWhere('Municipality_district', 'LIKE', "%{$addrr}%");
+                    })
+                    ->select('id')->get();
+                return $query->whereIn('id', $id);
+            })
+            ->select(
+                'id',
+                'Ml_num',
+                'Addr',
+                'Ad_text',
+                'S_r',
+                'Lp_dol',
+                'Rltr',
+                'updated_at',
+                'Bath_tot',
+                'Br',
+                'Br_plus'
+            )
             ->orderby('id', 'DESC')
+            // ->toSql();
             ->paginate('9');
         return $this->sendResponse($msg, $response);
     }
@@ -190,7 +199,19 @@ class PropertyController extends AppBaseController
 
                 return $query->whereIn('id', $id);
             })
-
+            ->select(
+                'id',
+                'Ml_num',
+                'Addr',
+                'Ad_text',
+                'S_r',
+                'Lp_dol',
+                'Rltr',
+                'updated_at',
+                'Bath_tot',
+                'Br',
+                'Br_plus'
+            )
             ->orderby('id', 'DESC')
             // ->toSql();
             ->paginate('15')->withQueryString();
@@ -199,22 +220,9 @@ class PropertyController extends AppBaseController
         return $this->sendResponse($msg, $response);
     }
 
-    // For card - bcup
+    // Search for card
     public function searchProperty_BCUP(Request $request)
     {
-
-        // bedRoom: 2
-        // minPrice: 500
-        // maxPrice: 20000
-        // listedFor: Lease
-        // propertyType: Residential
-        // bath: 2
-        // openHouse: true
-        // addedFrom: 2021-11-26
-        // key: 555
-        // addr: 34
-
-        // sqft: 2500
 
         $data = $request->all();
 
@@ -230,28 +238,28 @@ class PropertyController extends AppBaseController
         $key = !empty($data['key']) ? $data['key'] : '';
         $addr = !empty($data['addr']) ? $data['addr'] : '';
 
-
         $Sqft = !empty($data['sqft']) ? (int) $data['sqft'] : '';
+
+        // Condition of Zoning and Type = $propType
+        $propTypeKey = '';
+        $propTypeValue = '';
+        $propZoningKey = '';
+        $propZoningValue = '';
+        if ($propType) {
+            $ty = explode("=", $propType);
+            if ($ty[0] == 'type') {
+                $propTypeKey = $ty[0];
+                $propTypeValue = $ty[1];
+            }
+            if ($ty[0] == 'zonig') {
+                $propZoningKey = $ty[0];
+                $propZoningValue = $ty[1];
+            }
+        }
 
         $msg = 'Property fetched successfully.';
 
         $response = Property::with('images')
-
-            // ->when(!empty($data['addr']), function ($query) use ($data) {
-            //     $addrr = $data['addr'];
-            //     return $query->where('Addr', 'LIKE', "%{$addrr}%")
-            //         ->orWhere(function ($query) use ($addrr) {
-            //             $query->where('Ml_num', 'LIKE', "%{$addrr}%");
-            //         });
-            // })
-
-            // return $query->where('Addr', 'LIKE', "%{$addrr}%")
-            //         ->orWhere('Municipality_district', 'LIKE', "{$addrr}%")
-            //         ->orWhere('Community', 'LIKE', "{$addrr}%")
-            //         ->orWhere('Municipality', 'LIKE', "{$addrr}%")
-            //         ->orWhere(function ($query) use ($addrr) {
-            //             $query->where('Ml_num', 'LIKE', "%{$addrr}%");
-            //         });
 
             // select * from `properties` where `Br` >= ? and `Lp_dol` >= ? and `Lp_dol` <= ? and `S_r` = ? and `property_type` LIKE ? and `Bath_tot` >= ? and `Patio_ter` not in (?, ?, ?) and `Idx_dt` <= ? and `Ad_text` LIKE ? and `Addr` LIKE ? or (`Ml_num` LIKE ?) or (`Municipality_district` LIKE ?) or (`Municipality` LIKE ?) or (`Community` LIKE ?) and `Sqft` >= ? order by `id` desc
 
@@ -280,9 +288,13 @@ class PropertyController extends AppBaseController
             })
 
             // Property type - Done
-            ->when($propType, function ($query) use ($data) {
-                $propertyType = $data['propertyType'];
-                return $query->where('property_type', 'LIKE', "%{$propertyType}%");
+            ->when($propTypeKey, function ($query) use ($propTypeValue) {
+                return $query->where('property_type', 'LIKE', "%{$propTypeValue}%");
+            })
+
+            // Zoning type - Done
+            ->when($propZoningKey, function ($query) use ($propZoningValue) {
+                return $query->where('Zoning', 'LIKE', "%{$propZoningValue}%");
             })
 
             // bath - Done
@@ -309,10 +321,18 @@ class PropertyController extends AppBaseController
                 return $query->where('Ad_text', 'LIKE', "%{$key_}%");
             })
 
-            // Addr - working
+            // sqft - working
+            ->when($Sqft, function ($query) use ($data) {
+                $Sqft_ = (int) $data['sqft'];
+                return $query->whereRaw('CAST(Sqft AS UNSIGNED) >= ' . $Sqft_);
+            })
+
+            // Addr - Done
             ->when($addr, function ($query) use ($data) {
+
                 $addrr = $data['addr'];
-                return $query->where('Addr', 'LIKE', "%{$addrr}%")
+
+                $id = Property::where('Addr', 'LIKE', "%{$addrr}%")
                     ->orWhere(function ($query) use ($addrr) {
                         $query->where('Ml_num', 'LIKE', "%{$addrr}%");
                     })
@@ -324,18 +344,15 @@ class PropertyController extends AppBaseController
                     })
                     ->orWhere(function ($query) use ($addrr) {
                         $query->where('Community', 'LIKE', "{$addrr}%");
-                    });
-            })
+                    })
+                    ->select('id')->get();
 
-            // sqft - working
-            ->when($Sqft, function ($query) use ($data) {
-                $Sqft_ = (int) $data['sqft'];
-                return $query->where('Sqft', '>=', $Sqft_);
+                return $query->whereIn('id', $id);
             })
 
             ->orderby('id', 'DESC')
-            ->toSql();
-        // ->paginate('15')->withQueryString();
+            // ->toSql();
+            ->paginate('15')->withQueryString();
 
         // $response = $request->all();
         return $this->sendResponse($msg, $response);
@@ -386,7 +403,19 @@ class PropertyController extends AppBaseController
         $userId = auth()->user()->id;
         $f_id =  Favourite::where(['user_id' => $userId])->get('ml_num');
         // echo count($f_id);
-        $response = Property::whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
+        $response = Property::whereIn('ml_num', $f_id)->with('images')->select(
+            'id',
+            'Ml_num',
+            'Addr',
+            'Ad_text',
+            'S_r',
+            'Lp_dol',
+            'Rltr',
+            'updated_at',
+            'Bath_tot',
+            'Br',
+            'Br_plus'
+        )->orderby('id', 'DESC')->paginate('3');
         return $this->sendResponse('Bookmark Property successfully', $response);
     }
 
@@ -395,7 +424,19 @@ class PropertyController extends AppBaseController
     {
         $f_id = $request->ml_num;
         // echo count($f_id);
-        $response = Property::whereIn('ml_num', $f_id)->with('images')->orderby('id', 'DESC')->paginate('3');
+        $response = Property::whereIn('ml_num', $f_id)->with('images')->select(
+            'id',
+            'Ml_num',
+            'Addr',
+            'Ad_text',
+            'S_r',
+            'Lp_dol',
+            'Rltr',
+            'updated_at',
+            'Bath_tot',
+            'Br',
+            'Br_plus'
+        )->orderby('id', 'DESC')->paginate('3');
         return $this->sendResponse('Bookmark Property successfully', $response);
     }
 }

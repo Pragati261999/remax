@@ -9647,18 +9647,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      form: {}
+      form: {},
+      tr: false,
+      br: false,
+      ms: false
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.checkFilterData();
+    setTimeout(function () {
+      _this.tr = true;
+
+      _this.getMs();
+    }, 1000);
   },
   methods: {
     checkFilterData: function checkFilterData() {
       this.form = this.$store.state.filterForm;
+    },
+    getMs: function getMs() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.ms = true;
+
+        _this2.getBr();
+      }, 1000);
+    },
+    getBr: function getBr() {
+      var _this3 = this;
+
+      setTimeout(function () {
+        _this3.br = true;
+      }, 1000);
     }
   }
 });
@@ -66746,11 +66781,17 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c("property-listing", { attrs: { "prop-location": "Toronto" } }),
+      _vm.tr
+        ? _c("property-listing", { attrs: { "prop-location": "Toronto" } })
+        : _vm._e(),
       _vm._v(" "),
-      _c("property-listing", { attrs: { "prop-location": "Mississauga" } }),
+      _vm.ms
+        ? _c("property-listing", { attrs: { "prop-location": "Mississauga" } })
+        : _vm._e(),
       _vm._v(" "),
-      _c("property-listing", { attrs: { "prop-location": "Brampton" } }),
+      _vm.br
+        ? _c("property-listing", { attrs: { "prop-location": "Brampton" } })
+        : _vm._e(),
       _vm._v(" "),
        false
         ? 0

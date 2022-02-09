@@ -398,6 +398,11 @@ class Property extends Model
         return $this->hasMany('App\Models\PropertyImage', 'property_ml_num', 'Ml_num');
     }
 
+    public function image()
+    {
+        return $this->hasOne('App\Models\PropertyImage', 'property_ml_num', 'Ml_num')->orderby('id', 'desc');
+    }
+
     public function hasImage()
     {
         return $this->hasOne('App\Models\PropertyImage', 'property_ml_num', 'Ml_num');

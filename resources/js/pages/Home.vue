@@ -11,11 +11,20 @@
         </section>
 
         <!-- Toronto -->
-        <property-listing :prop-location="'Toronto'"></property-listing>
+        <property-listing
+            v-if="tr"
+            :prop-location="'Toronto'"
+        ></property-listing>
         <!-- mississauga -->
-        <property-listing :prop-location="'Mississauga'"></property-listing>
+        <property-listing
+            v-if="ms"
+            :prop-location="'Mississauga'"
+        ></property-listing>
         <!-- Brampton -->
-        <property-listing :prop-location="'Brampton'"></property-listing>
+        <property-listing
+            v-if="br"
+            :prop-location="'Brampton'"
+        ></property-listing>
 
         <section v-if="0" class="tips bg-theme pe-0">
             <div class="container-fluid pe-0">
@@ -655,14 +664,32 @@ export default {
     data() {
         return {
             form: {},
+            tr: false,
+            br: false,
+            ms: false,
         };
     },
     mounted() {
         this.checkFilterData();
+        setTimeout(() => {
+            this.tr = true;
+            this.getMs();
+        }, 1000);
     },
     methods: {
         checkFilterData() {
             this.form = this.$store.state.filterForm;
+        },
+        getMs() {
+            setTimeout(() => {
+                this.ms = true;
+                this.getBr();
+            }, 1000);
+        },
+        getBr() {
+            setTimeout(() => {
+                this.br = true;
+            }, 1000);
         },
     },
 };
