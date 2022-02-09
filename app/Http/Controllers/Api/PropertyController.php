@@ -34,29 +34,7 @@ class PropertyController extends AppBaseController
         $response = Property::has('image')
             ->with('images')
             ->where('Municipality', 'LIKE', "%{$addrr}%")
-            // ->when($addrr, function ($query) use ($addrr) {
-            //     $id = Property::where('Community', 'LIKE', "%{$addrr}%")
-            //         ->orWhere(function ($query) use ($addrr) {
-            //             $query->orWhere('Municipality_district', 'LIKE', "%{$addrr}%");
-            //         })
-            //         ->select('id')->get();
-            //     return $query->whereIn('id', $id);
-            // })
-            ->select(
-                'id',
-                'Ml_num',
-                'Addr',
-                'Ad_text',
-                'S_r',
-                'Lp_dol',
-                'Rltr',
-                'updated_at',
-                'Bath_tot',
-                'Br',
-                'Br_plus'
-            )
             ->orderby('id', 'DESC')
-            // ->toSql();
             ->paginate('9');
         return $this->sendResponse($msg, $response);
     }
@@ -109,9 +87,9 @@ class PropertyController extends AppBaseController
 
         $msg = 'Property fetched successfully.';
 
+        // select * from `properties` where `Br` >= ? and `Lp_dol` >= ? and `Lp_dol` <= ? and `S_r` = ? and `property_type` LIKE ? and `Bath_tot` >= ? and `Patio_ter` not in (?, ?, ?) and `Idx_dt` <= ? and `Ad_text` LIKE ? and `Addr` LIKE ? or (`Ml_num` LIKE ?) or (`Municipality_district` LIKE ?) or (`Municipality` LIKE ?) or (`Community` LIKE ?) and `Sqft` >= ? order by `id` desc
         $response = Property::with('images')
 
-            // select * from `properties` where `Br` >= ? and `Lp_dol` >= ? and `Lp_dol` <= ? and `S_r` = ? and `property_type` LIKE ? and `Bath_tot` >= ? and `Patio_ter` not in (?, ?, ?) and `Idx_dt` <= ? and `Ad_text` LIKE ? and `Addr` LIKE ? or (`Ml_num` LIKE ?) or (`Municipality_district` LIKE ?) or (`Municipality` LIKE ?) or (`Community` LIKE ?) and `Sqft` >= ? order by `id` desc
 
             // Bed Rooms -- done
             ->when($bedRoom, function ($query) use ($data) {
