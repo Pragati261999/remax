@@ -34,14 +34,14 @@ class PropertyController extends AppBaseController
         $response = Property::has('image')
             ->with('images')
             ->where('Municipality', 'LIKE', "%{$addrr}%")
-            ->when($addrr, function ($query) use ($addrr) {
-                $id = Property::where('Community', 'LIKE', "%{$addrr}%")
-                    ->orWhere(function ($query) use ($addrr) {
-                        $query->orWhere('Municipality_district', 'LIKE', "%{$addrr}%");
-                    })
-                    ->select('id')->get();
-                return $query->whereIn('id', $id);
-            })
+            // ->when($addrr, function ($query) use ($addrr) {
+            //     $id = Property::where('Community', 'LIKE', "%{$addrr}%")
+            //         ->orWhere(function ($query) use ($addrr) {
+            //             $query->orWhere('Municipality_district', 'LIKE', "%{$addrr}%");
+            //         })
+            //         ->select('id')->get();
+            //     return $query->whereIn('id', $id);
+            // })
             ->select(
                 'id',
                 'Ml_num',
