@@ -3,7 +3,7 @@
         <section class="property bg-theme-light">
             <div class="container p-0">
                 <h2 class="theme-title">
-                    Featured Properties
+                    Just Listed Properties
                     <span v-if="propLocation"> in {{ locationName }}</span>
                 </h2>
                 <div v-if="!loadingProperties">
@@ -17,6 +17,7 @@
                         </div>
                         <div class="mt-4 text-center">
                             <router-link
+                                style="border-radius: 1.25rem;"
                                 class="btn btn-theme-color px-5"
                                 :to="{ name: 'search-property' }"
                                 >View All</router-link
@@ -34,6 +35,8 @@
                         />
                     </div>
                 </div>
+                
+
             </div>
         </section>
     </div>

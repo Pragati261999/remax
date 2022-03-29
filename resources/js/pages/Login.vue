@@ -38,13 +38,19 @@
             <div class="container p-0">
                 <div class="row py-3">
                     <div class="col-lg-6 col-md-6 col-sm-none">
-                        <img
+                        <!-- <img
                             src="assets/images/icons/login.png"
+                            alt=""
+                            class="img-fluid"
+                        /> -->
+                        <img
+                            src="assets/images/icons/login1.png"
                             alt=""
                             class="img-fluid"
                         />
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 px-5">
+                    <div class="col-lg-6 col-md-6 col-sm-12 px-5" style="background-img:url('assets/images/icons/login1.png')">
+                        <!-- <img src="assets/images/icons/login.png" alt=""> -->
                         <form @submit.prevent="login()">
                             <fieldset class="mb-4">
                                 <input

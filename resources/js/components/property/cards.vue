@@ -29,7 +29,8 @@
                 :data-target="`#shareModal${property.Ml_num}`"
                 class="star"
             >
-                <img src="/assets/images/icons/share.png" alt="" />
+                <img src="/assets/images/icons/Group 34.png" alt="" />
+
             </div>
             <div class="badge">
                 <p class="text-color">{{ property.S_r }}</p>
@@ -58,8 +59,8 @@
                             </h6>
                         </div>
                     </router-link>
-                    <div class="text-right pl-2">
-                        <!-- Make fav -->
+                    <!-- <div class="text-right pl-2">
+                        <!-- Make fav
                         <small
                             @click="markFavourite(property.Ml_num)"
                             role="button"
@@ -86,7 +87,7 @@
                                 />
                             </span>
                         </small>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <router-link

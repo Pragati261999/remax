@@ -70,7 +70,7 @@
                     v-if="success.message"
                     >{{ success.message }}</small
                 >
-                <button type="submit" class="btn btn-theme-color w-100 py-2">
+                <button type="submit" class="btn btn-theme-color w-100 py-2" style="background-color:#1AA8E9">
                     Sign Up
                 </button>
             </form>

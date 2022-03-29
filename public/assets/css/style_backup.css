@@ -162,23 +162,22 @@ section {
     position: absolute;
     bottom: 15px;
     left: 15px;
-    background-color: #00C6F2;
+    background-color: #9ffdd4;
     padding: 4px;
     width: 4.5rem;
     height: 1.8rem;
     line-height: 1.3rem;
-    /* border-radius: 4px; */
-    border-radius: 1.25rem;
+    border-radius: 4px;
 }
 
 .card-title {
-    color: #042647;
+    color: #032646;
     font-weight: 600;
 }
 
 .card p {
     font-size: 12px;
-    color: #000000;
+    color: #5c5c5c;
 }
 
 .card ul li small {
@@ -201,8 +200,7 @@ header {
 }
 
 .btn-rounded {
-    /* border-radius: 35px !important; */
-    border-radius: 1.25rem;
+    border-radius: 35px !important;
     padding: 4px 25px !important;
 }
 
@@ -284,7 +282,7 @@ table tr td {
 }
 
 .home-header button {
-    background-color: #00C6F2;
+    background-color: #93b3c9;
     color: #fff !important;
 }
 
